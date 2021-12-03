@@ -1,0 +1,23 @@
+<ng-container>
+
+  <div class="scroll-container scrollable-list-wp">
+    <div
+      infinite-scroll
+      [infiniteScrollThrottle]="50"
+      [infiniteScrollDistance]="scrollDistance"
+      (scrolled)="onScrollDown()"
+      [infiniteScrollDisabled]="isBlockInfinityScroll"
+      [fromRoot]="true"
+      [infiniteScrollContainer]="'.scroll-container'"
+    >
+      <div class="modal-list" *ngFor="let data of listData; trackBy: trackById">
+          <app-vote-user-list-item
+            [userInfo]="data">
+          </app-vote-user-list-item>
+      </div>
+
+      <app-spinner [showSpinner]="isLoading" [text]="'Loading more profiles...'"></app-spinner>
+    </div>
+  </div>
+
+</ng-container>

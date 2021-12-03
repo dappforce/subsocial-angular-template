@@ -1,0 +1,24 @@
+<div class="comment-input-wp">
+  <div class="avatar-wp">
+    <app-avatar [size]="36" [src]="avatarUrl"></app-avatar>
+  </div>
+
+  <div class="input-wp">
+    <div class="text-area-wp">
+      <div
+        #textarea
+        contenteditable="true"
+        (input)="onInputChange($event)"
+        (focus)="onFocus()"
+        (focusout)="onFocusOut()"
+        class="text-area-input">
+      </div>
+      <span *ngIf="isShowPlaceholder" class="placeholder">{{ isReply? 'Add a reply' : 'Add a comment...' }}</span>
+    </div>
+    <ng-container *ngIf="showSendButton">
+      <div class="send-btn-wp">
+        <app-send-button [isDisabled]="disabledButton"></app-send-button>
+      </div>
+    </ng-container>
+  </div>
+</div>

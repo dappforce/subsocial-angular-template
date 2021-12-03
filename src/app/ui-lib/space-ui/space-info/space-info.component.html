@@ -1,0 +1,33 @@
+<app-avatar [src]="avatarSrc"
+            [size]="itemType === 'list' ? 40 : 46"
+            [name]="spaceName"
+            [jdentityValue]="spaceId"
+></app-avatar>
+
+<app-column [margin]="'0 0 0 8px'" [h]="'space-between'">
+
+  <app-title [text]="spaceName"
+             [type]="itemType === 'list' ? 'small' : 'medium'"
+             [link]="'/' + link"
+  ></app-title>
+
+  <app-row [ngClass]="[itemType, 'info']">
+
+    <span [style.margin-right]="itemType === 'single' ? '12px' : '4px'">
+      <span class="count">{{postsCount | numeral}}</span>
+      <span>{{postsCount | pluralize:  'Post'}}</span>
+    </span>
+
+    <span  *ngIf="itemType === 'list'" class="dot">·</span>
+
+    <a (click)="onOpenModal()">
+      <span class="count">{{followersCount | numeral}}</span>
+      <span>{{followersCount | pluralize: 'Follower'}}</span>
+    </a>
+
+  </app-row>
+
+</app-column>
+
+
+

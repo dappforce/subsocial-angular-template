@@ -1,0 +1,64 @@
+.modal-wp {
+  padding: 16px;
+
+  h2 {
+    line-height: 0;
+  }
+
+  .modal-body-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .modal-header-qr {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: -10px;
+  }
+
+  .close-btn {
+    margin-right: -5px;
+  }
+
+  .address-wp {
+    display: flex;
+
+    .address-text {
+      font-weight: 500;
+      font-size: 14px;
+      word-break: break-all;
+      text-align: center;
+    }
+  }
+
+  .button-wp {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 16px;
+
+    button {
+      width: 100%;
+      font-size: 17px;
+    }
+
+    button[mat-stroked-button] {
+      color: #EB2F96;
+    }
+
+    button[mat-flat-button] {
+
+      mat-icon {
+        width: 16px;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  .mat-stroked-button {
+    border: 1px solid #EB2F96 !important;
+
+  }
+}

@@ -1,0 +1,10 @@
+<div [ngClass]="[size, type]" class="tokens-wp">
+  <mat-icon *ngIf="showIcon"
+            svgIcon="coin-icon"
+            [style.margin]="iconMargin"
+  ></mat-icon>
+  <span class="strong">{{dividedTokens[0]}}</span>
+  <span>.</span>
+  <span>{{dividedTokens[1]}}</span>
+  <span class="strong">SUB</span>
+</div>

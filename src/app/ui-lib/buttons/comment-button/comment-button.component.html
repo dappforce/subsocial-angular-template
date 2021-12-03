@@ -1,0 +1,9 @@
+<app-icon-button [buttonSize]="32"
+                 [iconSize]="22"
+                 [iconName]="'comment-icon'"
+                 (click)="onClick.emit()"
+></app-icon-button>
+
+<span [ngClass]="['action-panel-label']"
+      *ngIf="!isShowLabel && count > 0"
+>{{ count }}</span>

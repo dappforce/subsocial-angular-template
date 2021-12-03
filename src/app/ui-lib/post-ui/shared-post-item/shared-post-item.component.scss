@@ -1,0 +1,28 @@
+.shared-post-item-wp {
+  .post-main-wp {
+    .post-data {
+      width: 100%;
+    }
+  }
+
+  .post-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+  }
+
+  .action-panel-wp {
+    margin-top: 7px;
+  }
+}
+
+.mat-card {
+  padding-bottom: 7px;
+}
+
+@media only screen and (max-width: 768px) {
+  .post-main-wp {
+    flex-direction: column;
+  }
+}

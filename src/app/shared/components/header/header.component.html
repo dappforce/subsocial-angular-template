@@ -1,0 +1,23 @@
+<header>
+  <div class="header-wp">
+    <div class="header-line">
+      <div>
+        <button mat-icon-button class="menu-button">
+          <mat-icon svgIcon="menu-icon"></mat-icon>
+        </button>
+        <app-title type="large" [link]="'/'" [text]="appName"></app-title>
+      </div>
+      <app-profile-button></app-profile-button>
+    </div>
+  </div>
+
+  <ng-container>
+    <div class="header-tabs-wp">
+      <app-tabs
+        [tabLinks]="navService.tabLinks"
+        (tabClick)="onTabLinkClick($event)"
+        [activeLink]="(navService.activeTab$ | async)!">
+      </app-tabs>
+    </div>
+  </ng-container>
+</header>

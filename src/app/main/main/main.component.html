@@ -1,0 +1,12 @@
+<ng-container *ngIf="(navService.activeTab$ | async)?.tabName === 'posts'">
+  <ng-container *ngIf="postIds.length > 0">
+    <app-post-list [ids]="postIds"></app-post-list>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="(navService.activeTab$ | async)?.tabName  === 'spaces'">
+  <ng-container *ngIf="spaceIds.length > 0">
+    <app-space-list [ids]="spaceIds"></app-space-list>
+  </ng-container>
+</ng-container>
+

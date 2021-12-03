@@ -1,0 +1,159 @@
+.modal-header {
+  position: relative;
+  text-align: center;
+
+  .header-title {
+    color: #A0A0A0;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.modal-wp {
+  padding: 16px;
+  padding-bottom: 0;
+}
+
+.close-btn {
+  position: absolute;
+  right: -5px;
+  top: -6px;
+}
+
+.ext-not-found {
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  span {
+    white-space: nowrap;
+  }
+
+
+  p {
+    font-size: 17px;
+    line-height: 125%;
+    text-align: center;
+
+    a {
+      padding-right: 4px;
+    }
+  }
+
+  .link-wp {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+
+    a {
+      color: #262626;
+      font-weight: 500;
+      font-size: 17px;
+      border: 1px solid #D9D9D9;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 24px;
+
+      &:hover {
+        transition: background-color 300ms;
+        background-color: #f3f3f3;
+      }
+
+      img {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .footer-not-ext-wp {
+    font-size: 14px;
+    margin-top: 20px;
+    padding: 4px 0 21px;
+
+    span {
+      color: #8C8C8C;
+    }
+  }
+}
+
+.account-not-found {
+  p {
+    font-size: 17px;
+    padding: 21px 28px;
+    text-align: center;
+    white-space: pre;
+    background: #FFFAD5;
+    border-radius: 5px;
+  };
+
+}
+
+.footer-wp {
+  display: flex;
+  justify-content: center;
+  padding: 4px 0 21px;
+  color: #A0A0A0;
+  font-weight: 500;
+  font-size: 14px;
+  a {
+    padding: 0 16px;
+
+    &:first-child {
+      border-right: 1px solid #EEECEC;
+    }
+  }
+}
+
+.link{
+  color: #EB2F96;
+  font-weight: 500;
+}
+
+.unauthorized {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &>span {
+    padding: 8px 0 5px;
+    font-size: 17px;
+  }
+
+  .account-list {
+    width: 400px;
+    margin-bottom: 20px;
+    max-height: 244px;
+    overflow-y: auto;
+    margin-right: -4px;
+
+    .account-item {
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid #EEECEC;
+      padding: 8px 0 5px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f6f6f6;
+      }
+
+      .account-info-wp {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-left: 16px;
+        padding-right: 4px;
+
+        .name {
+          display: block;
+          padding-bottom: 3px;
+          font-weight: 500;
+          font-size: 17px;
+        }
+      }
+    }
+  }
+}

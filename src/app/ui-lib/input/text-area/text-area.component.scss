@@ -1,0 +1,11 @@
+textarea{
+  line-height: 24px;
+  letter-spacing: 0.15px;
+
+}
+
+textarea.mat-input-element {
+  resize: none !important;
+  overflow-y: visible;
+}
+

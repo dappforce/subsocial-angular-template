@@ -1,0 +1,30 @@
+<div class="profile-info-wp">
+  <app-avatar
+    [src]="avatarSrc"
+    [size]="type === 'small' ? 40 : 46"
+    [name]="profileName || (address | addressHidden )"
+    [jdentityValue]="address"
+  ></app-avatar>
+  <div>
+    <div class="profile-name-wp">
+      <app-title
+        [text]="profileName || (address | addressHidden)"
+        [type]="'medium'"
+        [link]="'/accounts/' + address"
+      >
+      </app-title>
+    </div>
+
+    <div class="profile-stats-wp" [ngClass]="type">
+      <span (click)="openConnectionDialog('following')">
+        <strong class="count">{{followingCount | numeral}}</strong>
+        <span>{{'Following'}}</span>
+      </span>
+      <span (click)="openConnectionDialog('followers')">
+        <strong class="count">{{followersCount | numeral}}</strong>
+        <span>{{followersCount | pluralize: 'Follower'}}</span>
+      </span>
+    </div>
+
+  </div>
+</div>

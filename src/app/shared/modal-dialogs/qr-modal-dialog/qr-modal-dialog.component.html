@@ -1,0 +1,30 @@
+<div class="modal-wp">
+  <div class="modal-header-qr">
+    <h2 class="title-medium">Account address</h2>
+    <app-close-button class="close-btn" (onClose)="dialogRef.close()"></app-close-button>
+  </div>
+  <div class="modal-body-qr">
+    <qrcode [qrdata]="data"
+            [width]="256"
+            [errorCorrectionLevel]="'M'">
+    </qrcode>
+    <div class="address-wp">
+      <span class="address-text">{{data}}</span>
+    </div>
+
+  </div>
+
+  <div class="button-wp">
+    <button mat-stroked-button (click)="dialogRef.close()">Close</button>
+    <button
+      mat-flat-button
+      [cdkCopyToClipboard]="data"
+      (click)="onCopy()"
+      color="primary">
+      <mat-icon svgIcon="copy-white-icon"></mat-icon>
+      <span>Copy</span>
+    </button>
+  </div>
+
+
+</div>

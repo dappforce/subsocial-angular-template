@@ -1,0 +1,28 @@
+.tag {
+  display: inline-flex;
+  padding: 6px 12px;
+  margin-right: 8px;
+  margin-top: 8px;
+  color: rgba(0, 0, 0, 0.6);
+  background: rgba(33, 33, 33, 0.08);
+  border-radius: 16px;
+  letter-spacing: 0.25px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.small {
+  font-size: 12px;
+}
+
+.medium {
+  font-size: 14px;
+}
+
+.large {
+  font-size: 17px;
+}
+
+.huge {
+  font-size: 20px;
+}

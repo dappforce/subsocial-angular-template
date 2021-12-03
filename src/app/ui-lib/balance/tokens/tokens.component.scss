@@ -1,0 +1,37 @@
+.tokens-wp {
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.38);
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    width: 20px;
+    margin-right: 6px;
+  }
+
+  &>span:last-child {
+    margin-left: 4px;
+  }
+}
+
+.small {
+  font-size: 14px;
+}
+
+.medium {
+  font-size: 17px;
+}
+
+.secondary {
+  .strong{
+    color: #222222;
+    font-weight: 500;
+  }
+}
+
+.primary {
+  .strong{
+    color: rgba(0, 0, 0, 0.38);
+    font-weight: 400;
+  }
+}

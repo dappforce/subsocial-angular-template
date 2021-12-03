@@ -1,0 +1,31 @@
+<app-icon-button *ngIf="!isActive"
+                 [iconSize]="22"
+                 [buttonSize]="32"
+                 [iconName]="'downvote-default-icon'"
+                 (click)="setIsActive(true)"
+></app-icon-button>
+
+<app-icon-button *ngIf="isActive"
+                 [iconSize]="22"
+                 [buttonSize]="32"
+                 [iconName]="'downvote-active-icon'"
+                 (click)="setIsActive(false)"
+></app-icon-button>
+
+<span class="action-panel-label"
+      *ngIf="isShowLabel"
+>
+  Downvote
+  <span *ngIf="count > 0">
+    ({{count | numeral}})
+  </span>
+</span>
+
+<span
+  class="action-panel-label"
+  [ngClass]="{ 'active': isActive }"
+  *ngIf="!isShowLabel && count > 0"
+>
+  {{count | numeral}}
+</span>
+

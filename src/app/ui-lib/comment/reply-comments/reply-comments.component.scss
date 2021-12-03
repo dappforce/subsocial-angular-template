@@ -1,0 +1,48 @@
+.reply-comment-title {
+  margin-left: 9px;
+  display: flex;
+  align-items: center;
+  color: #F759AB;
+
+  mat-icon {
+    margin-left: 3px;
+  }
+
+ .reply-count {
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 24px;
+   letter-spacing: 0.1px;
+   cursor: pointer;
+ }
+}
+
+.rotate-up {
+  animation: rotate-up 0.3s ease-out;
+  transform: rotate(180deg);
+}
+
+.rotate-down {
+  animation: rotate-down 0.3s ease-out;
+  transform: rotate(0deg);
+}
+
+@keyframes rotate-up {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes rotate-down {
+  0% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

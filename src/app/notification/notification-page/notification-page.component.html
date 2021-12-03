@@ -1,0 +1,14 @@
+<mat-card>
+  <app-title type="medium" text="Notifications"></app-title>
+  <div class="notification-list">
+    <div class="notification-wp" *ngFor="let notification of ['', '', '', '', '']">
+      <app-post-info
+        [imageUrl]="'assets/avatar1.png'"
+        [userName]="'Young Beef 4.0'"
+        [spaceName]="'Subsocial'"
+        [createdAtTime]="1613161818000">
+      </app-post-info>
+      <app-post-image type="notification" [imageSrc]="'assets/post-image-example.png'"></app-post-image>
+    </div>
+  </div>
+</mat-card>

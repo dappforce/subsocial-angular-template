@@ -1,0 +1,46 @@
+.comment-input-wp {
+  display: flex;
+  align-items: flex-start;
+}
+
+.input-wp {
+  display: flex;
+  flex-direction: column;
+  margin-left: 9px;
+  width: 100%;
+
+  .text-area-wp {
+    position: relative;
+
+    .text-area-input {
+      border: 1px solid #DADADA;
+      border-radius: 3.5px;
+      padding: 7px 16px;
+      word-break: break-all;
+
+      &:hover, &:focus {
+        border: 1px solid #EB2F96;
+      }
+    }
+
+    .placeholder {
+      position: absolute;
+      top: 6px;
+      left: 16px;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.25px;
+      color: rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+  }
+
+  [contenteditable]:focus {
+    outline: 0px solid transparent;
+    border: 1px solid #bfbfbf;
+  }
+
+  .send-btn-wp {
+    margin-top: 16px;
+  }
+}

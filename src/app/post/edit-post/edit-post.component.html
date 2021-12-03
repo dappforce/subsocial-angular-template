@@ -1,0 +1,52 @@
+<section class="edit-post-container">
+  <mat-card>
+    <h2>{{type === 'edit' ? 'Edit' : 'New'}} post</h2>
+    <app-tabs [tabLinks]="tabs" [activeLink]="activeTab" (tabClick)="setActiveTab($event)"></app-tabs>
+
+    <form [formGroup]="postForm" action="">
+      <ng-container [ngSwitch]="activeTab.tabName">
+
+        <ng-template ngSwitchCase="article">
+          <div class="image-wp">
+            <app-image-loader type="square"></app-image-loader>
+          </div>
+        </ng-template>
+
+        <ng-template ngSwitchCase="video">
+          <div class="input-wp">
+            <app-text-input
+              formControlName="videoUrl"
+              [isRequired]="true"
+              [label]="'Video URL'"
+              (blur)="onVideoUrlBlur()"
+            ></app-text-input>
+          </div>
+          <app-embed-video [videoUrl]="videoUrl"></app-embed-video>
+        </ng-template>
+      </ng-container>
+
+      <app-text-input
+        [label]="'Post title'"
+        formControlName="postTitle"
+      ></app-text-input>
+
+      <app-text-area
+        [label]="'Post body'"
+        formControlName="postBody"
+        [isRequired]="true"
+      ></app-text-area>
+
+      <app-tag-input
+        formControlName="tags"
+        [placeholder]="'Press \'Enter\' or \'Tab\' key to add tags'"
+      ></app-tag-input>
+
+      <div class="button-wp">
+        <button mat-stroked-button>{{ type === 'edit' ? 'Cancel' : 'Reset form'}}</button>
+        <button mat-raised-button color="primary">{{ type === 'edit' ? 'Save' : 'Create post'}}</button>
+      </div>
+    </form>
+
+  </mat-card>
+</section>
+

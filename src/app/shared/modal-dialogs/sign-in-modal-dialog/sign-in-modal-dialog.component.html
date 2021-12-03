@@ -1,0 +1,101 @@
+<ng-container>
+  <div class="modal-wp">
+    <section class="modal-header">
+      <app-close-button class="close-btn" (onClose)="dialogRef.close()"></app-close-button>
+
+      <div class="header-title title-large">Sign In</div>
+    </section>
+
+    <ng-container [ngSwitch]="data.status">
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.EXTENSION_NOT_FOUND">
+        <section class="ext-not-found">
+          <p>
+            <span>
+              <a class="link" target="_blank" href="https://polkadot.js.org/extension/">
+                Polkadot Extension
+              </a>
+              <span>was not found or disabled</span>
+            </span>
+            <br>
+            <span>Install the extension with the button below.</span>
+          </p>
+
+          <div class="link-wp">
+            <a matRipple
+               target="_blank"
+               href="https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd">
+              <img src="assets/img/chrome.png" alt="">
+              <span>Install for Chrome</span>
+            </a>
+
+            <a matRipple
+               class="mt-16"
+               target="_blank"
+               href="https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension/">
+              <img src="assets/img/firefox.png" alt="">
+              <span>Install for Firefox</span>
+            </a>
+          </div>
+
+          <div class="footer-not-ext-wp">
+            <span>
+              Need help? Read our
+              <a class="link">Sign In Guide</a>
+            </span>
+          </div>
+        </section>
+
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.ACCOUNTS_NOT_FOUND">
+        <div class="account-not-found">
+          <p>
+            No accounts found. Please open your
+            <br>
+            <b>Polkadot extension</b>
+            and create a new account
+            <br>
+            or import existing. Then reload this page.
+          </p>
+
+          <div class="footer-wp">
+            <a href="">Privacy Policy</a>
+            <a href="">Terms of Use</a>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.UNAUTHORIZED">
+        <div class="unauthorized">
+          <span>Click on your account to sign in:</span>
+
+          <div class="account-list scrollable-list-wp">
+            <div (click)="selectAccount(account)"
+                 class="account-item"
+                 *ngFor="let account of data.accounts">
+              <app-avatar [size]="40"
+                          [jdentityValue]="account.id"
+                          [src]="account.avatar">
+              </app-avatar>
+              <div class="account-info-wp">
+                <div>
+                  <span class="name">{{account.name}}</span>
+                  <app-tokens [size]="'small'" [showIcon]="false" [tokens]="account.balance"></app-tokens>
+                </div>
+                <app-address size="small"
+                             [address]="account.id"
+                ></app-address>
+              </div>
+            </div>
+          </div>
+          <div class="footer-wp">
+            <a href="">Privacy Policy</a>
+            <a href="">Terms of Use</a>
+          </div>
+        </div>
+      </ng-template>
+
+    </ng-container>
+  </div>
+</ng-container>

@@ -1,0 +1,8 @@
+<p
+  [ngStyle]="{
+  'margin-block-start': marginTop + 'px',
+  'margin-block-end': marginBottom + 'px'
+  }"
+>{{text}}
+  <app-see-more [link]="link" [isAutoExpand]="isAutoExpand" *ngIf="isShowMore"></app-see-more>
+</p>

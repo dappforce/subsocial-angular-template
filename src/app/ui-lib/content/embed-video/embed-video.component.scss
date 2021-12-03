@@ -1,0 +1,17 @@
+.video-wp {
+  width: 100%;
+  margin-top: 12px;
+
+  ::ng-deep {
+    iframe {
+      width: 100%;
+      height: 430px;
+    }
+
+    @media only screen and (max-width: 768px) {
+      iframe {
+        height: calc(100vw / 1.77);
+      }
+    }
+  }
+}

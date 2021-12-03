@@ -1,0 +1,42 @@
+<ng-container *ngIf="userInfo">
+  <div class="vote-item-wp"
+       [ngClass]="{
+          'hover': isHover,
+          'sub': type === 'sub',
+          'follow': type === 'follow'
+        }"
+       (click)="onClick.emit()">
+    <div>
+      <app-avatar
+        [src]="userInfo.avatarSrc"
+        [jdentityValue]="userInfo.address"
+      >
+      </app-avatar>
+
+      <div class="user-info-wp">
+        <a (click)="dialogRef.closeAll()"
+           [routerLink]="['/accounts/', userInfo.address]"
+           class="user-name">
+          {{userInfo.userName || (userInfo.address | addressHidden)}}
+        </a>
+
+        <app-address
+          [address]="userInfo.address"
+          [showCopyButton]="showCopyButton"
+        ></app-address>
+      </div>
+    </div>
+
+    <app-follow-button
+      *ngIf="type === 'follow'"
+      [isFollow]="userInfo.isFollowing"
+      (onFollow)="follow()"
+      (onUnfollow)="unFollow()"
+    ></app-follow-button>
+
+    <div class="sub-wb" *ngIf="type === 'sub'">
+      <app-tokens [tokens]="userInfo.balance!"></app-tokens>
+    </div>
+  </div>
+</ng-container>
+

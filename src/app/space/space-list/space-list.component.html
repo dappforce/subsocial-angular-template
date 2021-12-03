@@ -1,0 +1,13 @@
+<div
+  infinite-scroll
+  [infiniteScrollThrottle]="50"
+  [infiniteScrollDistance]="scrollDistance"
+  (scrolled)="onScrollDown()"
+  [infiniteScrollDisabled]="isBlockInfinityScroll"
+  class="space-list-wp">
+  <ng-container *ngFor="let space of listData; trackBy: trackById">
+    <app-space-item [spaceItemData]="space"></app-space-item>
+  </ng-container>
+
+  <app-spinner [showSpinner]="isLoading" [text]="'Loading more spaces...'"></app-spinner>
+</div>

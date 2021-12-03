@@ -1,0 +1,115 @@
+.profile-wp {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .avatar-wp {
+    height: fit-content;
+  }
+
+  .profile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .profile-info-wp {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 11px;
+
+    & > * {
+      padding-bottom: 16px;
+    }
+
+    app-paragraph {
+      padding-bottom: 12px;
+    }
+
+    .follower-info-wp {
+      font-weight: 500;
+      letter-spacing: 0.25px;
+      & > span {
+        padding-right: 12px;
+
+        span {
+          padding-right: 4px;
+        }
+      }
+    }
+  }
+
+  .buttons-wp {
+    gap: 16px;
+
+    &>* {
+      flex: 1;
+    }
+  }
+
+  .account-info-wp {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    app-qr-button {
+      margin-left: 52px;
+      width: 20px;
+      margin-top: -3px;
+    }
+
+    &>div {
+      display: flex;
+
+      &>mat-icon {
+
+      }
+    }
+  }
+}
+
+::ng-deep {
+  .mat-tab-link {
+    width: 50% !important;
+  }
+}
+
+app-qr-button {
+  margin-left: 52px;
+  width: 20px;
+  margin-top: -3px;
+}
+
+.mat-card {
+  padding-bottom: 0;
+  border-bottom-left-radius: 1px;
+  border-bottom-right-radius: 1px;
+}
+
+.tabs-wp {
+  width: calc(100% + 32px);
+  box-sizing: border-box;
+  margin: 0 -16px;
+
+  ::ng-deep {
+    .mat-tab-link {
+      font-size: 14px;
+    }
+
+    .mat-tab-link-container {
+      z-index: 0;
+    }
+  }
+}
+
+.buttons-wp {
+  margin: 22px 0 16px;
+  gap: 16px;
+
+  &>* {
+    flex: 1;
+  }
+}

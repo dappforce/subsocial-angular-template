@@ -1,0 +1,46 @@
+.edit-space-container {
+  width: 628px;
+  margin: 0 auto;
+  min-height: 60vh;
+  padding-bottom: 16px;
+
+  mat-card {
+    padding: 35px 23px 21px;
+  }
+
+  h2 {
+    margin: 19px 3px;
+  }
+
+  .space-form {
+    margin-top: 16px;
+    gap: 24px;
+  }
+
+  .button-wp {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 16px;
+    margin-top: 5px;
+
+    button {
+      min-width: 110px;
+      font-size: 17px;
+      .mat-button-wrapper {
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .edit-space-container {
+    width: 100%;
+  }
+}
+
+
+
+
+

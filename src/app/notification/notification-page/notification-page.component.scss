@@ -1,0 +1,11 @@
+.notification-list {
+  margin-top: 8px;
+
+  .notification-wp {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(33, 33, 33, 0.08);
+    padding: 12px 0;
+  }
+}

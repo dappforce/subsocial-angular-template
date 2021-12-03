@@ -1,0 +1,30 @@
+.space-item-wp {
+  width: 100%;
+  margin-top: 16px;
+
+  .space-item-header {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .button-wp {
+    display: flex;
+    align-items: flex-start;
+
+    &>div {
+      display: flex;
+      align-items: center;
+      >*:first-child {
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .link-icons-wp {
+    margin: 12px 0 8px;
+  }
+}
+
+.tags-wp {
+  margin-bottom: 16px;
+}

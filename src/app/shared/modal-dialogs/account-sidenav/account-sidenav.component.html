@@ -1,0 +1,68 @@
+<mat-sidenav-container>
+
+  <mat-sidenav
+    [mode]="'over'"
+    [fixedInViewport]="true"
+    fixedBottomGap="{{ (deviceService.isMobile$ | async) ? 50 : 0}}"
+    fixedTopGap="{{ (deviceService.isMobile$ | async) ? 50 : 0}}"
+    position="end">
+
+    <app-column [margin]="'0 16px'" class="side-wp" *ngIf="myProfileData">
+
+      <app-column [margin]="'16px 0 19px'" [v]="'start'">
+
+        <app-close-button (onClose)="sideNavService.closeAccountSideNav()"
+                          class="close-btn"
+        ></app-close-button>
+
+        <app-profile-info [profileName]="myProfileData.name"
+                          [avatarSrc]="myProfileData.avatar"
+                          [followersCount]="myProfileData.followersCount"
+                          [followingCount]="myProfileData.followingCount"
+                          [address]="myProfileData.address"
+        ></app-profile-info>
+
+        <app-row [v]="'center'" [margin]="'18px 0 0 0'">
+          <app-address [size]="'medium'"
+                       [showIcon]="true"
+                       [iconMargin]="'0 25px 0 11px'"
+                       [showCopyButton]="true"
+                       [address]="myProfileData.address"
+          ></app-address>
+
+          <app-qr-button [style.margin-left]="'50px'"
+                         [address]="myProfileData.address"
+          ></app-qr-button>
+        </app-row>
+
+        <app-tokens [size]="'medium'"
+                    [showIcon]="true"
+                    [iconMargin]="'0 25px 0 11px'"
+                    [style.margin-top]="'10px'"
+                    [tokens]="accountService.balance$ | async">
+        </app-tokens>
+      </app-column>
+
+      <mat-divider></mat-divider>
+
+      <app-sidenav-menu [profileId]="myProfileData.address"></app-sidenav-menu>
+
+      <mat-divider></mat-divider>
+
+      <app-scroll>
+        <app-account-list-item (onClick)="onChangeAccount(account)"
+                                 *ngFor="let account of accounts"
+                                 [accountData]="account"
+        ></app-account-list-item>
+      </app-scroll>
+
+
+      <mat-divider  [style.margin-bottom]="'16px'"></mat-divider>
+
+      <app-sign-out-button (click)="signOut()"></app-sign-out-button>
+
+     </app-column>
+
+  </mat-sidenav>
+
+</mat-sidenav-container>

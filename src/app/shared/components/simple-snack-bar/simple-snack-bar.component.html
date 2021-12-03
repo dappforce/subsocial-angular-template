@@ -1,0 +1,12 @@
+<app-row [v]="'center'">
+
+  <mat-icon *ngIf="options.iconName"
+            svgIcon="{{ options.iconName }}"
+            [style.margin-right]="'16px'"
+  ></mat-icon>
+
+  <span>{{ options.message }}</span>
+
+</app-row>
+
+<app-close-button *ngIf="options.isShowCloseButton"></app-close-button>

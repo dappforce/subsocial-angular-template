@@ -1,0 +1,27 @@
+<ng-container *ngIf="replyCommentCount > 0">
+
+  <div class="reply-comment-title"
+       [style.margin-bottom]="isShowReplyComments ? '0' : '9px'"
+  >
+    <a class="reply-count"
+       (click)="expandMoreReplies()" >
+      {{(isShowReplyComments ?  'Hide ' : 'Show ') + replyCommentCount + ' ' + (replyCommentCount | pluralize : 'reply')}}
+    </a>
+    <mat-icon svgIcon="arrow-icon"
+              [style.width]="'10px'"
+              [ngClass]="{ 'rotate-up': isShowReplyComments, 'rotate-down': !isShowReplyComments }"
+    ></mat-icon>
+  </div>
+
+  <ng-container *ngIf="isShowReplyComments">
+    <ng-container *ngIf="(commentData$ | async) as commentData; else loader"></ng-container>
+      <ng-container *ngFor="let commentItem of (commentData$ | async)">
+        <app-comment-message [commentData]="commentItem"></app-comment-message>
+      </ng-container>
+
+      <ng-template #loader>
+        <app-spinner [showSpinner]="true"></app-spinner>
+      </ng-template>
+  </ng-container>
+
+</ng-container>

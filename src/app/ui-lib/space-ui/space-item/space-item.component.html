@@ -1,0 +1,45 @@
+<div *ngIf="spaceItemData" class="space-item-wp">
+  <mat-card>
+    <app-row [v]="'start'"
+             [h]="'space-between'"
+    >
+      <app-space-info [spaceName]="spaceItemData.content.name"
+                      [avatarSrc]="spaceItemData.content.image"
+                      [followersCount]="spaceItemData.struct.followersCount"
+                      [postsCount]="spaceItemData.struct.postsCount"
+                      [link]="spaceItemData.content.handle ? '/@' + spaceItemData.content.handle : '/' + spaceItemData.struct.id"
+                      [itemType]="itemType"
+                      [spaceId]="spaceItemData.struct.id"
+      ></app-space-info>
+
+      <app-row [v]="'center'">
+
+        <app-follow-button [size]="'large'"
+                           ifDesktop
+                           [isFollow]="false"
+                           [style.margin-right]="'9px'"
+        ></app-follow-button>
+
+        <app-option-button type="space"></app-option-button>
+
+      </app-row>
+
+    </app-row>
+
+    <app-paragraph [marginTop]="10"
+                   [link]="spaceItemData.content.handle ? '/@' + spaceItemData.content.handle : '/' + spaceItemData.struct.id"
+                   [text]="spaceItemData.content.summary"
+                   [isAutoExpand]="true"
+                   [isShowMore]="spaceItemData.content.isShowMore"
+    ></app-paragraph>
+
+    <app-tag *ngFor="let tag of spaceItemData.content.tags" [tagName]="tag"></app-tag>
+
+    <app-follow-button width="full"
+                       size="large"
+                       ifMobile
+                       [style.margin-top]="'16px'"
+                       [isFollow]="false"
+    ></app-follow-button>
+  </mat-card>
+</div>

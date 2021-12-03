@@ -1,0 +1,21 @@
+<ng-container>
+  <div
+    infinite-scroll
+    [infiniteScrollThrottle]="50"
+    [infiniteScrollDistance]="scrollDistance"
+    (scrolled)="onScrollDown()"
+    [infiniteScrollDisabled]="false"
+    [infiniteScrollDisabled]="isBlockInfinityScroll"
+  >
+    <div class="post-item-wp" *ngFor="let postData of listData; trackBy: trackById">
+      <ng-container *ngIf="!postData.isSharedPost">
+        <app-post-item [postItemData]="postData"></app-post-item>
+      </ng-container>
+      <ng-container *ngIf="postData.isSharedPost">
+        <app-shared-post-item [postItemData]="postData"></app-shared-post-item>
+      </ng-container>
+    </div>
+
+    <app-spinner [showSpinner]="isLoading" [text]="'Loading more posts...'"></app-spinner>
+  </div>
+</ng-container>

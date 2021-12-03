@@ -1,0 +1,9 @@
+<div *ngFor="let link of _links"
+     matTooltipPosition="above"
+     matTooltip="{{link}}"
+>
+  <a target="_blank" href="{{link}}">
+    <mat-icon svgIcon="{{link | linkToIcon}}-icon"></mat-icon>
+  </a>
+</div>
+

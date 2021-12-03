@@ -1,0 +1,50 @@
+:host {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+}
+
+mat-icon {
+  margin-right: 6px;
+  width: 20px;
+}
+
+.address-text {
+  line-height: 20px;
+  letter-spacing: 0.25px;
+}
+
+.small {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.medium {
+  font-size: 17px;
+}
+
+.large {
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.copy-button {
+  position: absolute;
+  animation: fadeInFromNone 0.5s ease-out;
+}
+
+.small-button {
+  top: -6px;
+  right: -35px;
+}
+
+.medium-button {
+  top: -2px;
+  right: -43px;
+}
+
+.show-button {
+  display: block;
+}
+

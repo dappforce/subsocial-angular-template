@@ -1,0 +1,19 @@
+<app-column [v]="'start'" [padding]="'14px 0'">
+  <button mat-ripple [routerLink]="['/accounts', profileId]">
+    <mat-icon svgIcon="profile-icon"></mat-icon>
+    <span>My profile</span>
+  </button>
+
+  <button mat-ripple [routerLink]="['/accounts', profileId, 'edit']">
+    <mat-icon svgIcon="edit-icon"></mat-icon>
+    <span>Edit my profile</span>
+  </button>
+
+  <button mat-ripple (click)="onSettings()">
+    <mat-icon svgIcon="setting-icon"></mat-icon>
+    <span>Settings</span>
+  </button>
+</app-column>
+
+
+

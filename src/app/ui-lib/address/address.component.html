@@ -1,0 +1,17 @@
+<mat-icon  *ngIf="showIcon"
+           [style.margin]="iconMargin"
+           svgIcon="purse-icon"
+></mat-icon>
+
+<span
+  class="address-text"
+  [ngClass]="size">
+  {{address | addressHidden: addressLength}}
+</span>
+
+<app-icon-button *ngIf="showCopyButton"
+                 (click)="onCopy($event)"
+                 [iconName]="'copy-icon'"
+                 [cdkCopyToClipboard]="address"
+                 [ngClass]="['copy-button', size + '-button']"
+></app-icon-button>

@@ -1,0 +1,24 @@
+.tags-wp {
+  .mat-chip-list-wrapper .mat-standard-chip {
+    margin: 0;
+  }
+
+  .mat-form-field-infix {
+    border-top: 5px solid transparent !important;
+  }
+
+  .mat-form-field-label-wrapper {
+    margin-top: 9px !important;
+  }
+
+  .mat-chip.mat-standard-chip {
+    background: rgba(33, 33, 33, 0.08);
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: normal;
+    letter-spacing: 0.25px;
+    gap: 8px;
+  }
+}
+

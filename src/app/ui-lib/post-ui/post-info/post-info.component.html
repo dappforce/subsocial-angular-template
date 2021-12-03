@@ -1,0 +1,21 @@
+<app-avatar [jdentityValue]="ownerId"
+            [src]="imageUrl"
+></app-avatar>
+
+<app-column [margin]="'0 0 0 13px'">
+
+  <app-title [type]="'small'"
+             [link]="'/accounts/' + ownerId"
+             [text]="userName || (ownerId | addressHidden)"
+  ></app-title>
+
+  <app-row class="info">
+
+    <a *ngIf="spaceName" [routerLink]="spaceLink">{{ spaceName }}</a>
+    <span *ngIf="spaceName">·</span>
+    <a [routerLink]="postLink">{{ createdAtTime | day }}</a>
+
+  </app-row>
+
+</app-column>
+

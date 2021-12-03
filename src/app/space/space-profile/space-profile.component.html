@@ -1,0 +1,68 @@
+<ng-container *ngIf="spaceItemData">
+
+  <mat-card>
+
+    <app-row [h]="'space-between'"
+             [v]="'start'"
+             [margin]="'0 0 10px 0'"
+    >
+
+      <app-space-info [spaceName]="spaceItemData.content.name"
+                      [avatarSrc]="spaceItemData.content.image"
+                      [followersCount]="spaceItemData.struct.followersCount"
+                      [postsCount]="spaceItemData.struct.postsCount"
+                      [link]="'@' + spaceItemData.content.handle"
+                      [itemType]="'single'"
+                      [spaceId]="spaceItemData.struct.id"
+      ></app-space-info>
+
+      <app-row [v]="'center'">
+
+        <app-edit-button *ngIf="isOwner" [style.margin-right]="'16px'"></app-edit-button>
+        <app-option-button [type]="'space'"></app-option-button>
+
+      </app-row>
+
+    </app-row>
+
+    <app-paragraph *ngIf="!spaceItemData.content.isShowMore"
+                   [text]="spaceItemData.content.summary"
+    ></app-paragraph>
+
+    <app-expand-paragraph *ngIf="spaceItemData.content.isShowMore"
+                          [text]="spaceItemData.content.summary"
+                          [expandedText]="spaceItemData.content.about"
+                          [isMore]="!isAutoExpandSummary"
+    ></app-expand-paragraph>
+
+    <app-link-icons *ngIf="spaceItemData.content.links.length > 0"
+                    [links]="spaceItemData.content.links"
+                    [style.margin]="'19px 0 14px'"
+    ></app-link-icons>
+
+    <app-tag *ngFor="let tag of spaceItemData.content.tags"
+             [tagName]="tag"
+    ></app-tag>
+
+    <app-row [ngClass]="'buttons-wp'"
+             [margin]="'16px 0 0 0'"
+    >
+
+      <app-write-post-button *ngIf="isOwner"
+                             width="full"
+      ></app-write-post-button>
+
+      <app-send-tips-button *ngIf="!isOwner"
+                            width="full"
+      ></app-send-tips-button>
+
+      <app-follow-button size="large"
+                         width="full"
+                         [isFollow]="false"
+      ></app-follow-button>
+
+    </app-row>
+
+  </mat-card>
+
+</ng-container>

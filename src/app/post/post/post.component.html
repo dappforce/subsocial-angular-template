@@ -1,0 +1,75 @@
+<ng-container *ngIf="postData">
+  <section>
+    <mat-card>
+
+      <app-hidden-content *ngIf="postData.hidden && postData.isMyPost" [type]="'post'"></app-hidden-content>
+
+      <div class="post-main-wp">
+        <div class="post-data">
+          <div class="post-item-header">
+
+            <app-post-info
+              [userName]="postData.ownerName"
+              [spaceName]="postData.spaceName"
+              [imageUrl]="postData.ownerImageUrl"
+              [createdAtTime]="postData.createdAtTime"
+              [ownerId]="postData.ownerId"
+              [spaceLink]="postData.spaceLink"
+            ></app-post-info>
+
+            <app-option-button></app-option-button>
+          </div>
+
+          <app-embed-video [videoUrl]="postData.link"></app-embed-video>
+
+          <app-title *ngIf="!postData.isComment" type="large" [text]="postData.title"></app-title>
+
+          <app-comment-post-title *ngIf="postData.isComment"
+                                  [postTitle]="commentPostData?.postTitle"
+                                  [link]="commentPostData?.link"
+          ></app-comment-post-title>
+
+          <div class="post-image mb-16">
+            <app-post-image type="full" [imageSrc]="postData.imageUrl"></app-post-image>
+          </div>
+
+          <markdown class="markdown-body" ngPreserveWhitespaces>
+            {{postData.body}}
+          </markdown>
+
+          <div>
+            <app-tag [tagName]="tag" *ngFor="let tag of postData.tags"></app-tag>
+          </div>
+        </div>
+      </div>
+
+
+      <mat-divider [inset]="true"></mat-divider>
+
+      <div class="action-panel-wp">
+        <app-action-panel
+          [isShowShare]="true"
+          [isShowLabel]="true"
+          [upvoteCount]="postData.upvotesCount"
+          [downvoteCount]="postData.downvotesCount"
+          [commentCount]="postData.repliesCount"
+          [isDownvoteActive]="postData.downvoteActive"
+          [isUpvoteActive]="postData.upvoteActive"
+        >
+        </app-action-panel>
+      </div>
+
+
+    </mat-card>
+  </section>
+
+  <section>
+    <app-space-item [spaceItemData]="spaceData"></app-space-item>
+  </section>
+
+  <section class="mt-16">
+    <mat-card class="comment-card">
+      <app-comments [commentListData]="commentData"></app-comments>
+    </mat-card>
+  </section>
+</ng-container>

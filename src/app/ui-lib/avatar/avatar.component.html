@@ -1,0 +1,16 @@
+<img *ngIf="!showJdentity"
+     width="{{size}}"
+     height="{{size}}"
+     (error)="onImgError($event)"
+     src="{{url}}"
+>
+
+<div *ngIf="showJdentity" [style.width]="size + 'px'" [style.height]="size + 'px'" >
+
+  <svg width="{{size}}"
+       height="{{size}}"
+       [data-jdenticon-value]="jdentityValue"
+  ></svg>
+
+</div>
+

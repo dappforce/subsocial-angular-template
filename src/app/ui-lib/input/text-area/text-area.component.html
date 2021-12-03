@@ -1,0 +1,21 @@
+<div class="text-area-wp">
+  <mat-form-field class="w100" appearance="outline">
+    <mat-label>
+      <span *ngIf="!isRequired; else required">
+        {{label}}
+      </span>
+    </mat-label>
+    <textarea
+      #textarea
+      (input)="changeText()"
+      (blur)="onBlur()"
+      [(ngModel)]="value"
+      matInput
+    ></textarea>
+  </mat-form-field>
+</div>
+
+<ng-template #required>
+  <span class="asterisk">*</span>
+  <span>&#32;</span> {{label}}
+</ng-template>

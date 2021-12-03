@@ -1,0 +1,31 @@
+.post-main-wp {
+  display: flex;
+  padding-bottom: 15px;
+
+  .post-data {
+    width: 100%;
+  }
+}
+
+.post-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.mat-card {
+  padding-bottom: 7px;
+}
+
+.post-image {
+  margin-top: 16px;
+}
+
+.action-panel-wp {
+  margin-top: 8px;
+}
+
+.comment-card {
+  padding-bottom: 16px;
+}

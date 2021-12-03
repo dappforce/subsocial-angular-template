@@ -1,0 +1,8 @@
+<nav mat-tab-nav-bar animationDuration="0ms">
+  <a mat-tab-link *ngFor="let link of tabLinks"
+     [active]="link.tabName === activeLink?.tabName"
+     (click)="onTabClick(link)">
+    {{link.tabName}} <span class="add-info">{{link.additionalInfo}}</span>
+  </a>
+</nav>
+

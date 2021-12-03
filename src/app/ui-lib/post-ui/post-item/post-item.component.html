@@ -1,0 +1,78 @@
+<ng-container *ngIf="postItemData && !isHiddenPost">
+
+  <mat-card [style.padding-bottom]="showActionPanel ? '4px' : '16px'">
+
+    <app-hidden-content *ngIf="postItemData.hidden && postItemData.isMyPost" [type]="'post'"></app-hidden-content>
+
+    <app-row [ngClass]="['post-main-wp']">
+
+      <app-column class="w100">
+
+        <app-row [v]="'start'"
+                 [h]="'space-between'"
+        >
+          <app-post-info [userName]="postItemData.ownerName"
+                         [spaceName]="postItemData.spaceName"
+                         [imageUrl]="postItemData.ownerImageUrl"
+                         [createdAtTime]="postItemData.createdAtTime"
+                         [ownerId]="postItemData.ownerId"
+                         [postLink]="postItemData.postLink"
+                         [spaceLink]="postItemData.spaceLink"
+          ></app-post-info>
+
+          <app-option-button [type]="'post'"
+                             [isContentHidden]="postItemData.hidden"
+                             (onClickViewReaction)="onViewReaction()"
+          ></app-option-button>
+
+        </app-row>
+
+        <app-embed-video [videoUrl]="postItemData.link"></app-embed-video>
+
+        <app-title [text]="postItemData.title"
+                   [link]="postItemData.postLink"
+                   [style.margin-top]="'15px'"
+        ></app-title>
+
+        <app-paragraph [marginTop]="5"
+                       [link]="postItemData.postLink"
+                       [text]="postItemData.summary"
+                       [isShowMore]="postItemData.isShowMore"
+        ></app-paragraph>
+
+      </app-column>
+
+      <app-post-image [link]="postItemData.postLink"
+                      [type]="(deviceService.isMobile$ | async) ? 'full' : 'square'"
+                      [imageSrc]="postItemData.imageUrl"
+      ></app-post-image>
+
+    </app-row>
+
+    <mat-divider *ngIf="showActionPanel"
+                 [style.margin]="'12px 0 4px 0'"
+                 [inset]="true"
+    ></mat-divider>
+
+    <app-action-panel [isShowComment]="true"
+                      [upvoteCount]="postItemData.upvotesCount"
+                      [downvoteCount]="postItemData.downvotesCount"
+                      [commentCount]="postItemData.repliesCount"
+                      [isUpvoteActive]="postItemData.upvoteActive"
+                      [isDownvoteActive]="postItemData.downvoteActive"
+                      [isShowShare]="true"
+                      (commentClick)="onCommentButtonClick()"
+                      *ngIf="showActionPanel"
+    ></app-action-panel>
+
+    <ng-container *ngIf="isCommentOpen">
+
+      <mat-divider [inset]="true" [style.margin]="'4px 0 16px 0'"></mat-divider>
+
+      <app-comments [commentListData]="commentData$ | async"></app-comments>
+
+    </ng-container>
+
+  </mat-card>
+
+</ng-container>

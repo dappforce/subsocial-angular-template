@@ -1,0 +1,26 @@
+.post-image {
+  width: 174px;
+  height: 174px;
+  margin-left: 16px;
+  border-radius: 4px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+
+  &-full{
+    display: block;
+    width: 100%;
+    margin-top: 14px;
+    border-radius: 4px;
+  }
+
+  &-notification {
+    width: 46px;
+    height: 46px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }
+}

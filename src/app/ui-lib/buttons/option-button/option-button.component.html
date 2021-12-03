@@ -1,0 +1,87 @@
+<ng-container [ngSwitch]="type">
+
+  <ng-template ngSwitchCase="post">
+
+    <app-icon-button [iconSize]="16"
+                     [matMenuTriggerFor]="menu"
+                     [iconName]="'option-icon'"
+    ></app-icon-button>
+
+    <mat-menu #menu="matMenu">
+
+      <button (click)="onClickViewReaction.emit()"
+              mat-menu-item>
+        <span>View reactions</span>
+      </button>
+
+      <button mat-menu-item *ngIf="!isContentHidden">
+        <span>Hide Post</span>
+      </button>
+
+      <button mat-menu-item *ngIf="isContentHidden">
+        <span>Make visible</span>
+      </button>
+
+      <button mat-menu-item>
+        <span>View on IPFS</span>
+      </button>
+
+    </mat-menu>
+
+  </ng-template>
+
+  <ng-template ngSwitchCase="space">
+
+    <app-icon-button [iconSize]="16"
+                     [matMenuTriggerFor]="menu"
+                     [iconName]="'option-icon'"
+    ></app-icon-button>
+
+    <mat-menu #menu="matMenu">
+
+      <button mat-menu-item *ngIf="!isContentHidden">
+        <span>Hide Space</span>
+      </button>
+
+      <button mat-menu-item *ngIf="isContentHidden">
+        <span>Make visible</span>
+      </button>
+
+      <button mat-menu-item>
+        <span>View on IPFS</span>
+      </button>
+
+    </mat-menu>
+
+  </ng-template>
+
+  <ng-template ngSwitchCase="comment">
+    <app-icon-button [iconSize]="16"
+                     [matMenuTriggerFor]="menu"
+                     [iconName]="'option-hor-icon'"
+    ></app-icon-button>
+
+    <mat-menu #menu="matMenu">
+
+      <button (click)="onClickViewReaction.emit()"
+              mat-menu-item>
+        <span>View reactions</span>
+      </button>
+
+      <button mat-menu-item>
+        <span>Hide Comment</span>
+      </button>
+
+      <button mat-menu-item>
+        <span>Make visible</span>
+      </button>
+
+      <button mat-menu-item>
+        <span>View on IPFS</span>
+      </button>
+
+    </mat-menu>
+
+  </ng-template>
+
+</ng-container>

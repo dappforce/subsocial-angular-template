@@ -1,0 +1,34 @@
+<ng-container *ngIf="accountData">
+
+  <app-row [h]="'space-between'"
+           [v]="'center'" (click)="onClick.emit()"
+           mat-ripple
+           [style.height]="'65px'"
+  ><app-row>
+
+      <app-avatar [src]="accountData.avatar"
+                  [jdentityValue]="accountData.id"
+                  [style.margin-right]="'16px'"
+      ></app-avatar>
+
+      <app-column>
+
+        <app-title [text]="accountData.name || (accountData.id | addressHidden)"
+                   type="small"
+        ></app-title>
+
+        <app-address [address]="accountData.id"
+                     [showCopyButton]="showCopyButton"
+        ></app-address>
+
+      </app-column>
+
+    </app-row>
+
+    <app-tokens [tokens]="accountData.balance"
+                [style.margin-right]="'5px'"
+    ></app-tokens>
+
+  </app-row>
+
+</ng-container>

@@ -1,0 +1,23 @@
+<div class="input-wp">
+  <mat-form-field class="w100" appearance="outline">
+    <mat-label>
+      <span *ngIf="!isRequired; else required">
+        {{label}}
+      </span>
+    </mat-label>
+
+    <input (blur)="onBlur()" [(ngModel)]="value" matInput>
+
+  </mat-form-field>
+
+  <ng-container *ngIf="error">
+    <div class="error-wp">
+      <span>{{error}}</span>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #required>
+  <span class="asterisk">*</span>
+  <span>&#32;</span> {{label}}
+</ng-template>

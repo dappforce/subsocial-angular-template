@@ -1,0 +1,31 @@
+<ng-container *ngIf="isAuthorized && (profileData$ | async) as profileData">
+
+  <div (click)="sideNavService.openAccountSideNav()"
+       class="profile-button-wp"
+  >
+    <app-avatar [src]="profileData.avatar"
+                [jdentityValue]="profileData.address"
+                [size]="30"
+    ></app-avatar>
+
+    <app-column [margin]="'0 0 0 10px'">
+
+      <span>{{profileData.name || (profileData.address | addressHidden)}}</span>
+
+      <app-tokens type="primary" [tokens]="accountService.balance$ | async"></app-tokens>
+
+    </app-column>
+
+  </div>
+</ng-container>
+
+<ng-container *ngIf="!isAuthorized">
+
+  <button mat-stroked-button
+          (click)="onSignInBtnClick()"
+          class="sign-in-btn"
+          color="primary">
+    Sign in
+  </button>
+
+</ng-container>

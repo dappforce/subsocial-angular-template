@@ -1,0 +1,57 @@
+.edit-post-container {
+  width: 628px;
+  margin: 0 auto;
+  min-height: 60vh;
+  padding-bottom: 16px;
+
+  h2 {
+    margin-block-end: 4px;
+  }
+
+  .image-wp {
+    margin-top: 16px;
+    margin-bottom: 20px;
+  }
+
+  .input-wp {
+    margin-top: 16px;
+  }
+
+  ::ng-deep {
+    .mat-tab-header {
+      margin: 0 -16px;
+    }
+
+    .mat-tab-link {
+      font-size: 14px !important;
+      letter-spacing: 1.25px;
+    }
+
+    .mat-tab-link-container {
+      z-index: 0 !important;
+    }
+  }
+
+  .button-wp {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: 16px;
+    margin-top: 5px;
+
+    button {
+      min-width: 110px;
+      font-size: 17px;
+      .mat-button-wrapper {
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+
+@media only screen and (max-width: 768px) {
+  .edit-post-container {
+    width: 100%;
+  }
+}

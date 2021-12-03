@@ -1,0 +1,23 @@
+:host {
+  overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    margin-top: 20px;
+    width: 7px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+
+    //margin-top: 16px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #C1C1C1;
+    border-radius: 18px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #b6b6b6;
+  }
+}

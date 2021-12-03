@@ -1,0 +1,26 @@
+<div [ngClass]="position">
+  <app-upvote-button [isActive]="!!isUpvoteActive"
+                     [isShowLabel]="isShowLabel"
+                     [count]="upvoteCount"
+  ></app-upvote-button>
+
+  <app-downvote-button [isActive]="!!isDownvoteActive"
+                       [count]="downvoteCount"
+                       [isShowLabel]="isShowLabel"
+  ></app-downvote-button>
+
+  <app-comment-button *ngIf="isShowComment"
+                      [isShowLabel]="isShowLabel"
+                      [count]="commentCount"
+                      (onClick)="commentClick.emit()"
+  ></app-comment-button>
+
+  <app-shared-button *ngIf="isShowShare"
+                     [isShowLabel]="isShowLabel"
+  ></app-shared-button>
+
+  <app-reply-button *ngIf="isShowReply"
+                    (click)="replyClick.emit()"
+                    [isShowLabel]="isShowLabel"
+  ></app-reply-button>
+</div>

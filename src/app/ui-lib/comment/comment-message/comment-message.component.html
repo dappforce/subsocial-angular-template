@@ -1,0 +1,53 @@
+<app-avatar [size]="36"
+            [src]="commentData.avatar"
+            [jdentityValue]="commentData.ownerId"
+></app-avatar>
+
+<app-column class="message-wp">
+
+  <app-column class="message" [padding]="'8px 16px 11px 16px'">
+
+    <app-row [v]="'center'">
+
+      <app-title [text]="commentData.profileName || (commentData.ownerId | addressHidden)"
+                 [link]="'/accounts/' + commentData.ownerId"
+                 type="small"
+      ></app-title>
+
+      <span class="dot">·</span>
+
+      <span class="date">{{commentData.createdAtTime | day}}</span>
+
+      <app-option-button type="comment"
+                         (onClickViewReaction)="onOpenReactions()"
+      ></app-option-button>
+
+    </app-row>
+
+    <app-paragraph [text]="commentData.commentText"></app-paragraph>
+
+  </app-column>
+
+  <app-action-panel [isShowLabel]="!(device.isMobile$ | async)"
+                    [isShowReply]="true"
+                    [isDownvoteActive]="commentData.downvoteActive"
+                    [isUpvoteActive]="commentData.upvoteActive"
+                    [upvoteCount]="commentData.upvoteCount"
+                    [downvoteCount]="commentData.downvoteCount"
+                    [position]="!(device.isMobile$ | async) ? 'left' : 'center'"
+                    (replyClick)="onReplyClick()"
+  >
+  </app-action-panel>
+
+  <ng-container *ngIf="showReplyInput">
+    <app-comment-input [isReply]="showReplyInput" [autofocus]="true"></app-comment-input>
+  </ng-container>
+
+  <app-reply-comments *ngIf="commentData.replyCount > 0"
+                      [replyCommentCount]="commentData.replyCount"
+                      [rootPostId]="commentData.postId"
+  ></app-reply-comments>
+</app-column>
+
+
+

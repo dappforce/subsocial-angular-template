@@ -1,0 +1,58 @@
+
+<ng-container *ngIf="type === 'round'">
+  <section class="center-column w100 round-container">
+    <div class="image-loader-wp">
+      <ng-container *ngIf="!imageUrl; else isLoaded">
+
+        <div (click)="openFile()" class="image-loader center-column">
+          <mat-icon svgIcon="photo-icon"></mat-icon>
+          <span class="label">Upload</span>
+        </div>
+
+      </ng-container>
+
+      <div class="loader-alert">
+        <span class="secondary-text">Image should be less than 2 MB</span>
+      </div>
+    </div>
+    <ng-template #isLoaded>
+      <div (click)="openFile()" class="image-loader loaded center-column" [ngStyle]="{'background-image': 'url(' + imageUrl +')'}">
+        <mat-icon svgIcon="photo-white-icon"></mat-icon>
+      </div>
+      <button (click)="removeImage()" class="remove-btn" mat-icon-button>
+        <mat-icon svgIcon="remove-icon"></mat-icon>
+      </button>
+    </ng-template>
+  </section>
+</ng-container>
+
+<ng-container *ngIf="type === 'square'">
+  <ng-container *ngIf="!imageUrl; else isLoaded">
+    <section (click)="openFile()" class="center-column w100 square-container">
+      <div class="image-loader-wp">
+        <div class="image-loader center-column">
+          <mat-icon svgIcon="photo-icon"></mat-icon>
+          <span class="label">Upload cover image</span>
+        </div>
+        <div class="loader-alert">
+          <span class="secondary-text">Image should be less than 2 MB</span>
+        </div>
+
+      </div>
+    </section>
+  </ng-container>
+  <ng-template #isLoaded>
+    <div class="square-container-loaded" [ngStyle]="{'background-image': 'url(' + imageUrl +')'}">
+      <div class="button-wp">
+        <button (click)="openFile()" mat-icon-button>
+          <mat-icon svgIcon="photo-white-icon"></mat-icon>
+        </button>
+        <button (click)="removeImage()" mat-icon-button>
+          <mat-icon svgIcon="remove-white-icon"></mat-icon>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</ng-container>
+
+<input #fileInput type="file" (change)="loadImage($event)" hidden>

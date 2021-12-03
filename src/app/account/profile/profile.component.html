@@ -1,0 +1,82 @@
+<ng-container *ngIf="profileData">
+  <mat-card>
+
+      <app-column class="w100">
+
+        <app-row>
+          <app-profile-info [address]="profileData.address"
+                            [profileName]="profileData.name"
+                            [avatarSrc]="profileData.avatar"
+                            [followersCount]="profileData.followersCount"
+                            [followingCount]="profileData.followingCount"
+                            [type]="(device.isMobile$ | async) ? 'small' : 'medium'"
+                            class="w100"
+          ></app-profile-info>
+
+          <app-option-button></app-option-button>
+        </app-row>
+
+        <app-column [margin]="'14px 0 0 0'">
+
+          <app-paragraph [text]="profileData.summary"></app-paragraph>
+
+          <app-row [margin]="'10px 0 8px'">
+
+            <app-address size="medium"
+                         [showIcon]="true"
+                         [showCopyButton]="true"
+                         [address]="profileData.address"
+            ></app-address>
+
+            <app-qr-button [address]="profileData.address"></app-qr-button>
+
+          </app-row>
+
+          <app-tokens size="medium" [tokens]="tokens" [showIcon]="true"></app-tokens>
+
+
+          <app-row class="buttons-wp w100">
+
+            <app-send-tokens-button width="full"></app-send-tokens-button>
+            <app-follow-button size="large" width="full"></app-follow-button>
+
+          </app-row>
+
+        </app-column>
+      </app-column>
+
+      <mat-divider [inset]="true"></mat-divider>
+
+      <div class="tabs-wp">
+        <app-tabs (tabClick)="onTabClick($event)"
+                  [activeLink]="activeTab"
+                  [tabLinks]="tabLinks"
+        ></app-tabs>
+      </div>
+  </mat-card>
+
+    <ng-container *ngIf="activeTab.tabName === 'posts'">
+      <ng-container *ngIf="postIds && postIds.length > 0; else noPost">
+        <app-post-list [ids]="postIds"></app-post-list>
+      </ng-container>
+
+      <ng-template #noPost>
+        <app-no-content [text]="'No posts yet'"></app-no-content>
+      </ng-template>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab.tabName === 'spaces'">
+      <ng-container *ngIf="spaceIds && spaceIds.length > 0; else noSpaces">
+        <app-space-list [ids]="spaceIds"></app-space-list>
+      </ng-container>
+
+      <ng-template #noSpaces>
+        <app-no-content [text]="'No spaces yet'"></app-no-content>
+      </ng-template>
+    </ng-container>
+
+</ng-container>
+
+<ng-container *ngIf="!profileData">
+  <app-spinner [showSpinner]="true"></app-spinner>
+</ng-container>

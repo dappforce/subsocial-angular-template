@@ -1,0 +1,15 @@
+.tabs-wp {
+  position: fixed;
+  width: 763px;
+  margin: 0 auto;
+  top: 7px;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+}
+
+@media only screen and (max-width: 768px) {
+  .tabs-wp {
+    flex-direction: column;
+  }
+}

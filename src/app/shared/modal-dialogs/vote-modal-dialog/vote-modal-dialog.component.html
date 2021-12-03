@@ -1,0 +1,27 @@
+<div class="modal-wp">
+  <div class="modal-header">
+    <h2>{{reactionCount + ' ' + (reactionCount | pluralize: 'Reaction')}}</h2>
+    <app-close-button class="close-btn" (onClose)="dialogRef.close()"></app-close-button>
+  </div>
+  <div class="modal-tabs">
+    <app-tabs (tabClick)="onTabClick($event)" [activeLink]="activeTab" [tabLinks]="tabLinks"></app-tabs>
+  </div>
+
+  <div class="modal-body">
+    <ng-container *ngIf="activeTab.tabName === 'upvotes'">
+      <ng-container *ngIf="upvotesIds.length > 0; else noDownload">
+        <app-vote-user-list [ids]="upvotesIds"></app-vote-user-list>
+      </ng-container>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab.tabName === 'downvotes'">
+      <ng-container *ngIf="downvotesIds.length > 0; else noDownload">
+        <app-vote-user-list [ids]="downvotesIds"></app-vote-user-list>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+
+<ng-template #noDownload>
+  <app-row margin="16px 0 0" h="center">No download yet</app-row>
+</ng-template>

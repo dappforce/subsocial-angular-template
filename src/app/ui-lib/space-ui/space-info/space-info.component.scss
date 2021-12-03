@@ -1,0 +1,33 @@
+:host {
+  display: flex;
+}
+
+.info {
+  font-size: 14px;
+
+  .dot {
+    margin-right: 4px;
+  }
+
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+
+.single {
+  color: var(--black);
+
+  .count {
+    font-weight: 500;
+  }
+}
+
+.list {
+  color: var(--gray-dark);
+}
+
+.count {
+  padding-right: 4px;
+}

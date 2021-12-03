@@ -1,0 +1,22 @@
+.side-wp {
+  position: relative;
+  width: 393px;
+
+  .close-btn {
+    position: absolute;
+    right: 0;
+    top: 13px;
+  }
+}
+
+app-scroll {
+  height: calc(100vh - 380px);
+}
+
+@media only screen and (max-width: 768px) {
+  .side-wp {
+    width: auto;
+  }
+}
+
+

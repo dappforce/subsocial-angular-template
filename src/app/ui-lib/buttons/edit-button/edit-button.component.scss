@@ -1,0 +1,25 @@
+.edit-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid #EDEDED;
+  cursor: pointer;
+
+  ::ng-deep {
+    mat-icon {
+      width: 15px;
+      svg {
+        path {
+          fill: #EB2F96;
+        }
+      }
+    }
+  }
+
+  &:hover, &:active {
+    border-color: #EB2F96;
+  }
+}

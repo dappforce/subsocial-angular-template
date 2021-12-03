@@ -1,0 +1,7 @@
+<span *ngIf="isMore">{{ text }}</span>
+
+<markdown *ngIf="!isMore" class="markdown-body" ngPreserveWhitespaces>
+  {{ expandedText }}
+</markdown>
+
+<app-see-more (switch)="isMore = !isMore" type="expand"></app-see-more>

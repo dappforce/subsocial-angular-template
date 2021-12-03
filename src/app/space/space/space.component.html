@@ -1,0 +1,19 @@
+<app-space-profile [spaceItemData]="spaceData"
+                   [isAutoExpandSummary]="isAutoExpandSummary"
+                   class="space-wp"
+></app-space-profile>
+
+<ng-container *ngIf="postIds.length > 0; else noPost">
+
+  <app-post-list [type]="'all'" [ids]="postIds"></app-post-list>
+
+</ng-container>
+
+<ng-template #noPost>
+
+  <app-no-content [text]="'No posts yet'"></app-no-content>
+
+</ng-template>
+
+
+

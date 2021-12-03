@@ -1,0 +1,13 @@
+.input-wp {
+  position: relative;
+  width: 100%;
+
+  .error-wp {
+    position: absolute;
+    bottom: 1px;
+    left: 22px;
+    font-size: 12px;
+    letter-spacing: 0.4px;
+    color: #B00020;
+  }
+}

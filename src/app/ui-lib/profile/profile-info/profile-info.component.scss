@@ -1,0 +1,44 @@
+.profile-info-wp {
+  display: flex;
+  &>div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 13px;
+  }
+}
+
+.profile-name-wp {
+  display: flex;
+  align-items: center;
+
+  mat-icon {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.small {
+  font-size: 14px;
+}
+
+.medium {
+  font-size: 16px;
+}
+
+.profile-stats-wp {
+  margin-top: 4px;
+
+  &>span {
+    margin-right: 8px;
+
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    strong {
+      margin-right: 4px;
+    }
+  }
+}

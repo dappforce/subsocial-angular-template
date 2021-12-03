@@ -1,0 +1,11 @@
+<ng-container [ngSwitch]="type">
+  <ng-template ngSwitchCase="post">
+    <app-row [ngClass]="type">
+      <div class="center-vertical">
+        <mat-icon  svgIcon="info-yellow-icon"></mat-icon>
+        <span>This post is unlisted and only you can see it</span>
+      </div>
+      <button mat-ripple class="make-visible-btn">Make visible</button>
+    </app-row>
+  </ng-template>
+</ng-container>

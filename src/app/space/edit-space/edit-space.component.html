@@ -1,0 +1,32 @@
+<section class="edit-space-container">
+  <mat-card>
+    <h2>{{type === 'edit' ? 'Edit' : 'New'}} space</h2>
+
+    <app-image-loader [imageUrl]="url"></app-image-loader>
+
+    <form [formGroup]="editSpaceForm" class="space-form" action="">
+      <app-text-input
+        formControlName="spaceName"
+        [isRequired]="true"
+        [label]="'Space name'"
+      ></app-text-input>
+
+      <app-text-area
+        formControlName="description"
+        [initHeight]="(deviceService.isMobile$ | async) ? 180 : 260"
+        [label]="'Description'"
+      >
+      </app-text-area>
+
+      <app-tag-input
+        [placeholder]="'Press \'Enter\' or \'Tab\' key to add tags'"
+        formControlName="tags"
+      ></app-tag-input>
+
+      <div class="button-wp">
+        <button mat-stroked-button>{{ type === 'edit' ? 'Cancel' : 'Reset form'}}</button>
+        <button mat-raised-button color="primary">{{ type === 'edit' ? 'Save' : 'Create space'}}</button>
+      </div>
+    </form>
+  </mat-card>
+</section>

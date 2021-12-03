@@ -1,0 +1,17 @@
+<div class="modal-wp">
+  <div class="modal-header">
+    <h2>{{followersIds.length + ' ' + (followersIds.length | pluralize: 'Follower') }}</h2>
+    <app-close-button (onClose)="dialogRef.close()"></app-close-button>
+  </div>
+
+  <div class="modal-body">
+    <ng-container *ngIf="followersIds.length > 0; else noDownload">
+      <app-vote-user-list [ids]="followersIds"></app-vote-user-list>
+    </ng-container>
+  </div>
+
+</div>
+
+<ng-template #noDownload>
+  <app-row margin="16px 0 0" h="center">No download yet</app-row>
+</ng-template>

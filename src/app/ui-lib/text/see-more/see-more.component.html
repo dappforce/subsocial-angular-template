@@ -1,0 +1,8 @@
+<a *ngIf="type === 'link'" (click)="goToSpacePage()">
+  <span>See&nbsp;More</span>
+</a>
+
+<span *ngIf="type === 'expand'" (click)="onSwitch()">
+  {{ isMore ? 'See&nbsp;More' : 'See&nbsp;Less'  }}
+</span>
+

@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+}
+
+.info {
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: var(--gray-dark);
+
+  &>*:first-child {
+    text-transform: capitalize;
+  }
+
+  a {
+    margin-right: 4px;
+    &:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  span {
+    margin-right: 4px;
+  }
+}
+

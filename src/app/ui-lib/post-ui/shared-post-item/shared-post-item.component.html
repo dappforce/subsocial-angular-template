@@ -1,0 +1,45 @@
+<div class="shared-post-item-wp">
+  <mat-card>
+    <div class="post-main-wp">
+      <div class="post-data">
+        <div class="post-item-header">
+
+          <app-post-info
+            [userName]="postItemData.ownerName"
+            [spaceName]="postItemData.spaceName"
+            [imageUrl]="postItemData.ownerImageUrl"
+            [createdAtTime]="postItemData.createdAtTime"
+            [ownerId]="postItemData.ownerId"
+          ></app-post-info>
+
+          <app-option-button (onClickViewReaction)="onViewReaction()"></app-option-button>
+        </div>
+
+        <ng-container *ngIf="(sharedPostItemData$ | async); else spinner">
+          <app-post-item
+            [showActionPanel]="false"
+            [postItemData]="sharedPostItemData$ | async">
+          </app-post-item>
+        </ng-container>
+
+        <ng-template #spinner>
+          <app-row h="center" v="center">
+            <app-spinner [showSpinner]="true"></app-spinner>
+          </app-row>
+        </ng-template>
+
+      </div>
+
+      <div class="action-panel-wp">
+        <app-action-panel
+          [isShowComment]="true"
+          [upvoteCount]="postItemData.upvotesCount"
+          [downvoteCount]="postItemData.downvotesCount"
+          [commentCount]="postItemData.repliesCount"
+          [isShowShare]="true"
+          (commentClick)="onCommentButtonClick()"
+        ></app-action-panel>
+      </div>
+    </div>
+  </mat-card>
+</div>

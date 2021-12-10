@@ -1,6 +1,10 @@
+@import "_var.scss";
+
+$height: 550px;
+
 .scroll-container {
   overflow-y: scroll;
-  height: 550px;
-  min-height: 550px;
-  margin: 0 4px 0 16px;
+  height: $height;
+  min-height: $height;
+  margin: 0 $space_mini 0 $space_normal;
 }

@@ -2,8 +2,8 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Input,
 } from '@angular/core';
+import { VoteButtonComponent } from '../../../core/base-component/vote-button.component';
 
 @Component({
   selector: 'app-upvote-button',
@@ -11,13 +11,4 @@ import {
   styleUrls: ['./upvote-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class UpvoteButtonComponent {
-  @Input() isShowLabel: boolean = false;
-  @Input() isActive: boolean = false;
-  @Input() count: number = 0;
-
-  setIsActive(value: boolean) {
-    this.isActive = value;
-    this.count = value ? ++this.count : --this.count;
-  }
-}
+export class UpvoteButtonComponent extends VoteButtonComponent {}

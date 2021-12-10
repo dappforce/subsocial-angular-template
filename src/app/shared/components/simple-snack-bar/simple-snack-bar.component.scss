@@ -1,5 +1,15 @@
+@import "_var.scss";
+
 :host {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+mat-icon, mat-spinner {
+  margin-right: $space_normal;
+}
+
+mat-icon {
+  width: 20px;
 }

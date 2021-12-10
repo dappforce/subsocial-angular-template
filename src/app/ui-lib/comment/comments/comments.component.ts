@@ -1,14 +1,5 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommentItemData } from '../../../core/types/comment-data.type';
-import { PluralizePipe } from '../../../shared/pipes/pluralize.pipe';
 
 @Component({
   selector: 'app-comments',
@@ -16,21 +7,9 @@ import { PluralizePipe } from '../../../shared/pipes/pluralize.pipe';
   styleUrls: ['./comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentsComponent implements OnChanges {
+export class CommentsComponent {
   @Input() commentListData: CommentItemData[] | null = [];
+  @Input() commentsCount: number = 0;
 
-  commentsCount: string = '';
-
-  constructor(private pluralize: PluralizePipe) {}
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.commentListData) {
-      this.commentsCount = `${
-        this.commentListData?.length || '0'
-      } ${this.pluralize.transform(
-        this.commentListData?.length || 0,
-        'Comment'
-      )}`;
-    }
-  }
+  constructor() {}
 }

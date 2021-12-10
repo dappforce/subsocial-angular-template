@@ -1,16 +1,20 @@
-:host {
+@import "_var.scss";
+
+@mixin flex-center {
   display: flex;
   align-items: center;
+}
 
+:host {
+  @include flex-center;
 }
 
 div {
-  display: flex;
-  align-items: center;
-  margin-right: 10px;
+  @include flex-center;
+  margin-right: $space_small;
 
   mat-icon {
-    height: 20px;
+    height: $space_large;
   }
 }
 

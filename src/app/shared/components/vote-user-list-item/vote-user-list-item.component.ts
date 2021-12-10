@@ -29,8 +29,4 @@ export class VoteUserListItemComponent implements OnInit {
   constructor(public dialogRef: MatDialog) {}
 
   ngOnInit(): void {}
-
-  follow() {}
-
-  unFollow() {}
 }

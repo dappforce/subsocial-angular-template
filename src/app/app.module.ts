@@ -28,6 +28,8 @@ import { ProfileEffects } from './state/profile/profile.effects';
 import { RouterModule } from '@angular/router';
 import { MyPostReactionsEffects } from './state/my-post-reactions/my-post-reactions.effects';
 import { PostModule } from './post/post.module';
+import { FollowedSpaceIdsEffects } from './state/followed-space-ids/followed-space-ids.effects';
+import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed-account-ids.effects';
 
 @NgModule({
   declarations: [AppComponent, BaseControlValueAccessorComponent],
@@ -53,6 +55,8 @@ import { PostModule } from './post/post.module';
       ReplyIdEffects,
       ProfileEffects,
       MyPostReactionsEffects,
+      FollowedSpaceIdsEffects,
+      FollowedAccountIdsEffects,
     ]),
     SharedModule,
   ],

@@ -41,6 +41,7 @@ export class SubsocialApiService {
     const snackBar = this.snackBarService.openSimpleSnackBar({
       message: 'Connecting to network...',
       iconName: 'info-icon',
+      isShowCloseButton: true,
     });
 
     const { substrateNodeUrl, offchainUrl, ipfsNodeUrl } = environment;

@@ -12,6 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { SignInModalDialogComponent } from '../../../shared/modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
 import { SignInModalData } from '../../../core/types/dialog-modal-data.types';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile-button',
@@ -26,34 +27,15 @@ export class ProfileButtonComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
-  isAuthorized: boolean = false;
-  accountStatus: ACCOUNT_STATUS;
-  signInModalData: SignInModalData = {
-    status: ACCOUNT_STATUS.INIT,
-  };
+  isAuthorized$: Observable<boolean>;
 
   profileData$: Observable<ProfileComponentData | undefined>;
 
   ngOnInit(): void {
     this.profileData$ = this.store.select(selectMyAccountProfileData);
 
-    this.accountService.status$.subscribe((status) => {
-      this.signInModalData.status = status;
-    });
-
-    this.accountService.getAccountsData().subscribe((accountData) => {
-      this.signInModalData.accounts = accountData;
-    });
-
-    this.accountService.currentAccount$.subscribe(
-      (currentAccount) => (this.isAuthorized = !!currentAccount)
+    this.isAuthorized$ = this.accountService.currentAccount$.pipe(
+      map((currentAccount) => !!currentAccount)
     );
-  }
-
-  onSignInBtnClick() {
-    this.dialog.open(SignInModalDialogComponent, {
-      maxWidth: '430px',
-      data: this.signInModalData,
-    });
   }
 }

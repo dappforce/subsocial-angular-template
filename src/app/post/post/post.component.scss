@@ -1,31 +1,20 @@
-.post-main-wp {
-  display: flex;
-  padding-bottom: 15px;
-
-  .post-data {
-    width: 100%;
-  }
-}
-
-.post-item-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 16px;
-}
-
-.mat-card {
-  padding-bottom: 7px;
-}
+@import "_var.scss";
 
 .post-image {
-  margin-top: 16px;
+  margin-bottom: $space_normal;
 }
 
 .action-panel-wp {
-  margin-top: 8px;
+  display: block;
+  margin-top: $space_tiny;
+  margin-bottom: -$space_tiny !important;
 }
 
 .comment-card {
-  padding-bottom: 16px;
+  padding-bottom: $space_mini;
+  margin-top: $space_normal;
+}
+
+app-title {
+  margin-bottom: $space_normal;
 }

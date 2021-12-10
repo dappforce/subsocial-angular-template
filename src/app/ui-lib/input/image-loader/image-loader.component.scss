@@ -1,3 +1,9 @@
+@mixin background-image {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .square-container {
   border: 1px solid rgb(0, 0, 0, 0.19);
   border-radius: 3.5px;
@@ -26,12 +32,10 @@
 }
 
 .square-container-loaded {
+  @include background-image;
   width: 100%;
   min-height: 100px;
   height: 20vh;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
   border-radius: 3.5px;
   position: relative;
 
@@ -68,10 +72,8 @@
     }
 
     .loaded {
+      @include background-image;
       border: none;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
 
       mat-icon {
         display: none;

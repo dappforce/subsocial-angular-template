@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/state';
 import {
   loadProfiles,
-  upsertProfiles,
+  saveProfilesSuccess,
 } from '../../../state/profile/profile.actions';
 import { selectUserInfoByIds } from '../../../state/profile/profile.selectors';
 import { Actions } from '@ngrx/effects';
@@ -30,6 +30,10 @@ export class VoteUserListComponent extends BaseInfinityScrollComponent<UserInfo>
   }
 
   ngOnInit(): void {
-    this.getScrollableData(loadProfiles, selectUserInfoByIds, upsertProfiles);
+    this.getScrollableData(
+      loadProfiles,
+      selectUserInfoByIds,
+      saveProfilesSuccess
+    );
   }
 }

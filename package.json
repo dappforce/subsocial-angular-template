@@ -59,8 +59,6 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@types/numeral": "^2.0.2",
-    "@subsocial/types": "0.6.5-dev.0",
     "@angular-devkit/build-angular": "~12.2.7",
     "@angular/cli": "~12.2.7",
     "@angular/compiler-cli": "~12.2.0",
@@ -74,11 +72,13 @@
     "@storybook/angular": "^6.4.0-beta.1",
     "@storybook/builder-webpack5": "^6.4.0-beta.1",
     "@storybook/manager-webpack5": "^6.4.0-beta.1",
+    "@subsocial/types": "0.6.5-dev.0",
     "@types/bn.js": "^5.1.0",
     "@types/express": "^4.17.0",
     "@types/jasmine": "~3.8.0",
     "@types/lodash": "^4.14.176",
     "@types/node": "^12.20.33",
+    "@types/numeral": "^2.0.2",
     "@types/pluralize": "0.0.29",
     "@webcomponents/custom-elements": "^1.5.0",
     "babel-loader": "^8.2.2",

@@ -58,5 +58,6 @@ export const mapPostDataToPostListItem = (
     upvoteActive: myPostReaction?.kind === 'Upvote',
     downvoteActive: myPostReaction?.kind === 'Downvote',
     rootPostId: postStruct.rootPostId,
+    reactionId: myPostReaction?.reactionId,
   };
 };

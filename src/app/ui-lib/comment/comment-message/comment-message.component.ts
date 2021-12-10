@@ -23,7 +23,6 @@ import { VoteModalDialogComponent } from '../../../shared/modal-dialogs/vote-mod
 export class CommentMessageComponent implements OnInit, OnDestroy {
   @Input() commentData: CommentItemData;
   showReplyInput: boolean;
-  reactionModalData: ReactionModalData;
 
   private modalConfig: MatDialogConfig = {};
   private unsubscribe$: Subject<void> = new Subject();
@@ -55,24 +54,17 @@ export class CommentMessageComponent implements OnInit, OnDestroy {
   }
 
   private prepareModalConfig() {
-    this.reactionModalData = {
+    const data = {
       postId: this.commentData.postId || '',
       upvotesCount: this.commentData.upvoteCount || 0,
       downvotesCount: this.commentData.downvoteCount || 0,
     };
 
-    this.modalConfig.data = this.reactionModalData;
-
-    this.deviceService?.isMobile$
+    this.deviceService
+      ?.getResponsiveModalData()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isMobile) => {
-        if (isMobile) {
-          this.modalConfig.width = '95%';
-          this.modalConfig.maxWidth = 'none';
-        } else {
-          this.modalConfig.width = '500px';
-          this.modalConfig.maxWidth = '80vh';
-        }
-      });
+      .subscribe(
+        (responsiveData) => (this.modalConfig = { ...responsiveData, data })
+      );
   }
 }

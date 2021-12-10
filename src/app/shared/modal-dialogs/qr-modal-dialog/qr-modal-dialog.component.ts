@@ -1,8 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { PostListItemData } from '../../../core/models/post/post-list-item.model';
-import { SpaceListItemData } from '../../../core/models/space/space-list-item.model';
+import { SnackBarService } from '../../services/snack-bar.service';
 
 @Component({
   selector: 'app-qr-modal-dialog',
@@ -13,16 +11,17 @@ export class QrModalDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<QrModalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string,
-    private _snackBar: MatSnackBar
+    private snackBarService: SnackBarService
   ) {}
 
   ngOnInit(): void {}
 
   onCopy() {
-    this._snackBar.open('Address copied!', 'Ok', {
-      horizontalPosition: 'start',
-      verticalPosition: 'bottom',
+    this.snackBarService.openSimpleSnackBar({
+      message: 'Address copied!',
+      isShowCloseButton: true,
       duration: 1000,
+      iconName: 'info-icon',
     });
   }
 }

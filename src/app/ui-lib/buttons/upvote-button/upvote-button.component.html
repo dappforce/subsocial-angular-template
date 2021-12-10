@@ -1,15 +1,7 @@
-<app-icon-button *ngIf="!isActive"
-                 [iconSize]="22"
+<app-icon-button [iconSize]="22"
                  [buttonSize]="32"
-                 [iconName]="'upvote-default-icon'"
-                 (click)="setIsActive(true)"
-></app-icon-button>
-
-<app-icon-button *ngIf="isActive"
-                 [iconSize]="22"
-                 [buttonSize]="32"
-                 [iconName]="'upvote-active-icon'"
-                 (click)="setIsActive(false)"
+                 [iconName]="isActive ? 'upvote-active-icon' : 'upvote-default-icon'"
+                 (click)="this.voteClick.emit();"
 ></app-icon-button>
 
 <span class="action-panel-label"

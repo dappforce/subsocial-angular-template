@@ -18,6 +18,7 @@ import { PostUiModule } from '../ui-lib/post-ui/post-ui.module';
 import { ContentModule } from '../ui-lib/content/content.module';
 import { CommentModule } from '../ui-lib/comment/comment.module';
 import { ActionPanelModule } from '../ui-lib/action-panel/action-panel.module';
+import { ContainersModule } from "../ui-lib/containers/containers.module";
 
 @NgModule({
   declarations: [PostListComponent, PostComponent, EditPostComponent],
@@ -38,6 +39,7 @@ import { ActionPanelModule } from '../ui-lib/action-panel/action-panel.module';
     ContentModule,
     CommentModule,
     ActionPanelModule,
-  ],
+    ContainersModule
+  ]
 })
 export class PostModule {}

@@ -74,6 +74,7 @@ export const selectCommentItemsData = (postId: string) =>
               replyCount: postStruct.repliesCount,
               upvoteActive: myPostReaction?.kind === 'Upvote',
               downvoteActive: myPostReaction?.kind === 'Downvote',
+              reactionId: myPostReaction?.reactionId,
             });
           }
         });

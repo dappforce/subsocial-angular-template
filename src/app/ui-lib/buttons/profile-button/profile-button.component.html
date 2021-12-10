@@ -1,4 +1,4 @@
-<ng-container *ngIf="isAuthorized && (profileData$ | async) as profileData">
+<ng-container *ngIf="(isAuthorized$ | async) && (profileData$ | async) as profileData">
 
   <div (click)="sideNavService.openAccountSideNav()"
        class="profile-button-wp"
@@ -19,10 +19,10 @@
   </div>
 </ng-container>
 
-<ng-container *ngIf="!isAuthorized">
+<ng-container *ngIf="!(isAuthorized$ | async)">
 
   <button mat-stroked-button
-          (click)="onSignInBtnClick()"
+          (click)="accountService.openSignInModal()"
           class="sign-in-btn"
           color="primary">
     Sign in

@@ -1,9 +1,11 @@
+@import "../../../shared/styles/_var.scss";
+
 :host {
   display: block;
 
    &:hover {
      cursor: pointer;
-     background-color: var(--hover-color-light);
+     background-color: $hover_color_light;
    }
 }
 

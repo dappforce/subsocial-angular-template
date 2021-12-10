@@ -31,7 +31,7 @@
 
         <app-title [text]="postItemData.title"
                    [link]="postItemData.postLink"
-                   [style.margin-top]="'15px'"
+                   [style.margin-top]="'7px'"
         ></app-title>
 
         <app-paragraph [marginTop]="5"
@@ -45,6 +45,7 @@
       <app-post-image [link]="postItemData.postLink"
                       [type]="(deviceService.isMobile$ | async) ? 'full' : 'square'"
                       [imageSrc]="postItemData.imageUrl"
+                      [style.margin-top]="(deviceService.isMobile$ | async) ? '8px' : '0'"
       ></app-post-image>
 
     </app-row>
@@ -55,6 +56,8 @@
     ></mat-divider>
 
     <app-action-panel [isShowComment]="true"
+                      [postId]="postItemData.id"
+                      [reactionId]="postItemData.reactionId"
                       [upvoteCount]="postItemData.upvotesCount"
                       [downvoteCount]="postItemData.downvotesCount"
                       [commentCount]="postItemData.repliesCount"
@@ -69,7 +72,9 @@
 
       <mat-divider [inset]="true" [style.margin]="'4px 0 16px 0'"></mat-divider>
 
-      <app-comments [commentListData]="commentData$ | async"></app-comments>
+      <app-comments [commentListData]="commentData$ | async"
+                    [commentsCount]="postItemData.repliesCount"
+      ></app-comments>
 
     </ng-container>
 

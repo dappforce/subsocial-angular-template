@@ -42,6 +42,8 @@ export class IconRegistryService {
     'info',
     'arrow',
     'info-yellow',
+    'error',
+    'success',
   ];
 
   SOCIAL_ICONS_NAMES = [

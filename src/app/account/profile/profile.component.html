@@ -38,7 +38,13 @@
           <app-row class="buttons-wp w100">
 
             <app-send-tokens-button width="full"></app-send-tokens-button>
-            <app-follow-button size="large" width="full"></app-follow-button>
+
+            <app-follow-button [entityId]="profileData.address"
+                               [isFollow]="isFollow$ | async"
+                               size="large"
+                               type="profile"
+                               width="full"
+            ></app-follow-button>
 
           </app-row>
 

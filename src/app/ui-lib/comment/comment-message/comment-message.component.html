@@ -1,6 +1,7 @@
 <app-avatar [size]="36"
             [src]="commentData.avatar"
             [jdentityValue]="commentData.ownerId"
+            [alignItem]="'start'"
 ></app-avatar>
 
 <app-column class="message-wp">
@@ -24,7 +25,10 @@
 
     </app-row>
 
-    <app-paragraph [text]="commentData.commentText"></app-paragraph>
+<!--    <app-paragraph [text]="commentData.commentText"></app-paragraph>-->
+    <markdown class="markdown-body" ngPreserveWhitespaces>
+      {{ commentData.commentText }}
+    </markdown>
 
   </app-column>
 
@@ -34,6 +38,8 @@
                     [isUpvoteActive]="commentData.upvoteActive"
                     [upvoteCount]="commentData.upvoteCount"
                     [downvoteCount]="commentData.downvoteCount"
+                    [postId]="commentData.postId"
+                    [reactionId]="commentData.reactionId"
                     [position]="!(device.isMobile$ | async) ? 'left' : 'center'"
                     (replyClick)="onReplyClick()"
   >

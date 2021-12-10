@@ -24,8 +24,9 @@ import { RouterModule } from '@angular/router';
 import { QrButtonComponent } from './qr-button/qr-button.component';
 import { ContainersModule } from '../containers/containers.module';
 import { AvatarModule } from '../avatar/avatar.module';
-import { AddressModule } from '../address/address.module';
 import { BalanceModule } from '../balance/balance.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatRippleModule } from '@angular/material/core';
 
 const components = [
   QrButtonComponent,
@@ -60,6 +61,8 @@ const components = [
     ContainersModule,
     AvatarModule,
     BalanceModule,
+    MatProgressSpinnerModule,
+    MatRippleModule,
   ],
 })
 export class ButtonsModule {}

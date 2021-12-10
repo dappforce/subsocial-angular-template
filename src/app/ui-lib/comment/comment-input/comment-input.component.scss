@@ -1,3 +1,5 @@
+@import "_var.scss";
+
 .comment-input-wp {
   display: flex;
   align-items: flex-start;
@@ -19,7 +21,7 @@
       word-break: break-all;
 
       &:hover, &:focus {
-        border: 1px solid #EB2F96;
+        border: $border_primary;
       }
     }
 
@@ -30,7 +32,7 @@
       font-size: 16px;
       line-height: 24px;
       letter-spacing: 0.25px;
-      color: rgba(0, 0, 0, 0.6);
+      color: $color_gray_dark;
       pointer-events: none;
     }
   }
@@ -41,6 +43,6 @@
   }
 
   .send-btn-wp {
-    margin-top: 16px;
+    margin-top: $space_normal;
   }
 }

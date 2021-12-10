@@ -5,7 +5,7 @@ export interface FollowedSpaceIdsState
 
 export type FollowedSpaceIdsStruct = {
   id: string;
-  followingAccountIds: Array<string>;
+  followingSpaceIds: Array<string>;
 };
 
 export const followedSpaceIdsAdapter: EntityAdapter<FollowedSpaceIdsStruct> =

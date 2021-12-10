@@ -7,6 +7,7 @@ import {
 } from '../../core/models/space/space-list-item.model';
 import { SpaceContent } from '@subsocial/api/flat-subsocial/dto';
 import { KeyValuePair } from '../../core/models/key-value-pair.model';
+import { selectFollowedSpaceIdsByCurrentAccount } from '../followed-space-ids/followed-space-ids.selectors';
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   spaceAdapter.getSelectors();
@@ -38,7 +39,8 @@ export const selectSpacesByIds = (ids: string[]) =>
   createSelector(
     selectSpaceEntities,
     selectContentEntities,
-    (spaceEntities, contentEntities) => {
+    selectFollowedSpaceIdsByCurrentAccount,
+    (spaceEntities, contentEntities, followedSpaceIds) => {
       const spaceDataArray: KeyValuePair<SpaceListItemData> = {};
       ids.forEach((id) => {
         const struct = spaceEntities[id];

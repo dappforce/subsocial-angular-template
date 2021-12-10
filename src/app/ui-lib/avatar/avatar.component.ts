@@ -1,6 +1,7 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  HostBinding,
   Inject,
   Input,
   PLATFORM_ID,
@@ -22,6 +23,9 @@ export class AvatarComponent {
     this.showJdentity = !value && isPlatformBrowser(this.platformId);
     this.url = environment.ipfsUrl + value;
   }
+
+  @HostBinding('style.align-items') @Input() alignItem: 'center' | 'start' =
+    'center';
 
   url = '';
   showJdentity = false;

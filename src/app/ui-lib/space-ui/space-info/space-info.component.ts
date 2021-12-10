@@ -11,8 +11,8 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeviceService } from '../../../shared/services/device.service';
 import { takeUntil } from 'rxjs/operators';
 import { FollowersModalDialogComponent } from '../../../shared/modal-dialogs/followers-modal-dialog/followers-modal-dialog.component';
-import { FollowersModalData } from '../../../core/types/dialog-modal-data.types';
 import { isPlatformBrowser } from '@angular/common';
+import { AVATAR_SIZE } from '../../../core/constants/size.const';
 
 @Component({
   selector: 'app-space-info',
@@ -28,7 +28,7 @@ export class SpaceInfoComponent implements OnInit, OnDestroy {
   @Input() followersCount = 1;
   @Input() itemType: 'list' | 'single';
 
-  followersModalData: FollowersModalData;
+  AVATAR_SIZE = AVATAR_SIZE;
 
   private unsubscribe$: Subject<void> = new Subject();
   private modalConfig: MatDialogConfig = {};
@@ -56,23 +56,17 @@ export class SpaceInfoComponent implements OnInit, OnDestroy {
   }
 
   private configModalDialog() {
-    this.followersModalData = {
+    const data = {
       spaceId: this.spaceId,
     };
-    this.modalConfig.data = this.followersModalData;
 
     if (isPlatformBrowser(this.platformId)) {
-      this.deviceService?.isMobile$
+      this.deviceService
+        ?.getResponsiveModalData()
         .pipe(takeUntil(this.unsubscribe$))
-        .subscribe((isMobile) => {
-          if (isMobile) {
-            this.modalConfig.width = '95%';
-            this.modalConfig.maxWidth = 'none';
-          } else {
-            this.modalConfig.width = '500px';
-            this.modalConfig.maxWidth = '80vh';
-          }
-        });
+        .subscribe(
+          (responsiveData) => (this.modalConfig = { ...responsiveData, data })
+        );
     }
   }
 }

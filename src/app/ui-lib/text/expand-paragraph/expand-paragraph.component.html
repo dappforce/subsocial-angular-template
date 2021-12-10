@@ -4,4 +4,4 @@
   {{ expandedText }}
 </markdown>
 
-<app-see-more (switch)="isMore = !isMore" type="expand"></app-see-more>
+<app-see-more (switch)="isMore = !isMore" [isAutoExpand]="!isMore" type="expand"></app-see-more>

@@ -8,7 +8,7 @@ import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { MyAccountState } from '../../state/my-account/my-account.state';
 import { loadMyProfile } from '../../state/profile/profile.actions';
 import { asAccountId } from '@subsocial/api';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import {
   AccountData,
   AccountRawData,
@@ -19,6 +19,8 @@ import { formatBalance } from '@polkadot/util';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { ProfileData } from '@subsocial/api/flat-subsocial/dto';
+import { SignInModalDialogComponent } from '../modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 export enum ACCOUNT_STATUS {
   INIT,
@@ -34,21 +36,24 @@ export enum ACCOUNT_STATUS {
 export class AccountService {
   private accountsSource = new BehaviorSubject<PolkadotAccount[]>([]);
   private currentAccountsSource = new BehaviorSubject<AccountData | null>(null);
+  private signerSource = new BehaviorSubject<any | null>(null);
   private statusSource = new BehaviorSubject<ACCOUNT_STATUS>(
     ACCOUNT_STATUS.INIT
   );
-
   private balanceSource = new BehaviorSubject<string>('');
-
   public accounts$ = this.accountsSource.asObservable();
   public currentAccount$ = this.currentAccountsSource.asObservable();
   public status$ = this.statusSource.asObservable();
   public balance$ = this.balanceSource.asObservable();
+  public signer$ = this.signerSource.asObservable();
+
+  private balanceUnsub: Function;
 
   constructor(
     private api: SubsocialApiService,
     private store: Store<AppState>,
-    private storage: StorageService
+    private storage: StorageService,
+    private dialog: MatDialog
   ) {
     const { decimals, currency: unit } = environment;
     formatBalance.setDefaults({ decimals, unit });
@@ -65,6 +70,8 @@ export class AccountService {
     }
 
     if (!polkadotJs) return;
+
+    this.signerSource.next(polkadotJs.signer);
 
     const unsub = polkadotJs!.accounts.subscribe((accounts) => {
       if (accounts?.length > 0) {
@@ -124,7 +131,11 @@ export class AccountService {
   }
 
   public async setCurrentAccount(account: AccountData) {
-    await this.setBalance(account.id);
+    if (this.balanceUnsub) {
+      this.balanceUnsub();
+    }
+
+    await this.subscribeOnBalance(account.id)
     this.store.dispatch(loadMyProfile({ id: account.id }));
     this.storage.setCurrentAccountId(account.id);
     this.currentAccountsSource.next(account);
@@ -164,6 +175,29 @@ export class AccountService {
   public async loadFormattedBalance(address: string) {
     const balance = await this.getBalance(address);
     return this.getFormattedBalance(balance);
+  }
+
+  public async openSignInModal() {
+    const status = this.statusSource.value;
+    let accounts: AccountData[] = [];
+    if (status === ACCOUNT_STATUS.UNAUTHORIZED) {
+      accounts = await this.getAccountsData().pipe(take(1)).toPromise();
+    }
+
+    this.dialog.open(SignInModalDialogComponent, {
+      maxWidth: '430px',
+      data: {
+        status: this.statusSource.value,
+        accounts,
+      },
+    });
+  }
+
+  private async subscribeOnBalance(address: string) {
+    const api = await this.api.api.subsocial.substrate.api;
+    this.balanceUnsub = await api.derive.balances.all(address, (data) => {
+      this.balanceSource.next(this.getFormattedBalance(data));
+    })
   }
 
   private setStatus(status: ACCOUNT_STATUS) {

@@ -8,6 +8,7 @@ export const environment = {
   domainUrl: 'http://localhost:4200/',
   appName: 'Subsocial Angular',
   substrateNodeUrl: 'wss://rpc.subsocial.network',
+  // substrateNodeUrl: 'ws://127.0.0.1:9944',
   offchainUrl: 'https://app.subsocial.network/offchain',
   ipfsNodeUrl: 'https://staging.subsocial.network/ipfs-1',
   currency: 'SUB',

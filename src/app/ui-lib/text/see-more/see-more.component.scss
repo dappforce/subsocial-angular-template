@@ -1,8 +1,9 @@
+@import "_var.scss";
+@import "_mixins.scss";
+
 span {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 20px;
   letter-spacing: 0.25px;
+  @include font($font_normal, 500, 20px);
   color: #EB2F96;
 
   &:hover {

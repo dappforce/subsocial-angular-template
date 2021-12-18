@@ -2,11 +2,13 @@
   <app-upvote-button [isActive]="!!isUpvoteActive"
                      [isShowLabel]="isShowLabel"
                      [count]="upvoteCount"
+                     (voteClick)="onVoteClick(KIND.UPVOTE)"
   ></app-upvote-button>
 
   <app-downvote-button [isActive]="!!isDownvoteActive"
                        [count]="downvoteCount"
                        [isShowLabel]="isShowLabel"
+                       (voteClick)="onVoteClick(KIND.DOWNVOTE)"
   ></app-downvote-button>
 
   <app-comment-button *ngIf="isShowComment"

@@ -15,15 +15,11 @@ import { Subject } from 'rxjs';
 import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
-import { getPostsByIds, loadPostsSuccess } from '../../state/post/post.actions';
-import { selectPostWithAllDetailsById } from '../../state/post/post.selectors';
 import { selectSpaceById } from '../../state/space/space.selectors';
 import { CommentItemData } from '../../core/types/comment-data.type';
-import { selectCommentItemsData } from '../../state/reply-id/reply-id.selectors';
 import { StoreService } from '../../state/store.service';
 import { SSRLoadData } from '../../core/decorators/ssr-load-data.decorator.tw';
 import { PostService } from '../services/post.service';
-import { getReplyIdsByParentPostId } from '../../state/reply-id/reply-id.actions';
 import { CommentService } from '../../shared/services/comment.service';
 
 type CommentPostData = {

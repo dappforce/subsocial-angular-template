@@ -10,4 +10,5 @@ export type CommentItemData = {
   replyCount: number;
   upvoteActive?: boolean;
   downvoteActive?: boolean;
+  reactionId?: string;
 };

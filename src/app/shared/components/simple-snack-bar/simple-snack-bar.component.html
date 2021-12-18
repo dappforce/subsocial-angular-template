@@ -2,11 +2,12 @@
 
   <mat-icon *ngIf="options.iconName"
             svgIcon="{{ options.iconName }}"
-            [style.margin-right]="'16px'"
   ></mat-icon>
+  <mat-spinner *ngIf="options.isWait"
+               [diameter]="25"></mat-spinner>
 
   <span>{{ options.message }}</span>
 
 </app-row>
 
-<app-close-button *ngIf="options.isShowCloseButton"></app-close-button>
+<app-close-button (onClose)="snackBarRef.dismiss()" *ngIf="options.isShowCloseButton"></app-close-button>

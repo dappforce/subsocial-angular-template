@@ -33,6 +33,10 @@
       <div class="action-panel-wp">
         <app-action-panel
           [isShowComment]="true"
+          [isUpvoteActive]="postItemData.upvoteActive"
+          [isDownvoteActive]="postItemData.downvoteActive"
+          [postId]="postItemData.id"
+          [reactionId]="postItemData.reactionId"
           [upvoteCount]="postItemData.upvotesCount"
           [downvoteCount]="postItemData.downvotesCount"
           [commentCount]="postItemData.repliesCount"

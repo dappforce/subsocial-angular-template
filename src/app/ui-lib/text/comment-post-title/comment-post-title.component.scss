@@ -1,5 +1,7 @@
+@import "_var.scss";
+
 .link {
-  color: var(--main-color);
+  color: $color_primary;
   margin-left: 5px;
 
   &:hover {

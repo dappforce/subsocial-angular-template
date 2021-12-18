@@ -8,6 +8,7 @@ import { environment } from '../../../environments/environment';
 import { Content } from '../../core/types/content.type';
 import { UserInfo } from '../../core/models/user-info.model';
 import { KeyValuePair } from '../../core/models/key-value-pair.model';
+import { selectFollowedAccountIdsByCurrentAccount } from '../followed-account-ids/followed-account-ids.selectors';
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   profileAdapter.getSelectors();
@@ -45,7 +46,8 @@ export const selectUserInfoByIds = (ids: string[]) =>
   createSelector(
     selectProfileEntities,
     selectContentEntities,
-    (profileEntities, contentEntities) => {
+    selectFollowedAccountIdsByCurrentAccount,
+    (profileEntities, contentEntities, followedAccountsId) => {
       const usersInfo: KeyValuePair<UserInfo> = {};
       ids.forEach((id) => {
         const profile = profileEntities[id];
@@ -60,7 +62,7 @@ export const selectUserInfoByIds = (ids: string[]) =>
             address: profile.id,
             avatarSrc: content?.avatar,
             id: profile.id,
-            isFollowing: false,
+            isFollowing: followedAccountsId.indexOf(profile.id) >= 0,
           };
         }
       });

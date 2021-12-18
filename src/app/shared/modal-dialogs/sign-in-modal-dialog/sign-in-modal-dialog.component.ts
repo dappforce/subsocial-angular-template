@@ -23,6 +23,14 @@ export class SignInModalDialogComponent implements OnInit {
   ACCOUNT_STATUS = ACCOUNT_STATUS;
   ipfsUrl = environment.ipfsUrl;
 
+  links = {
+    polkadotExt: 'https://polkadot.js.org/extension/',
+    chromeExt:
+      'https://chrome.google.com/webstore/detail/polkadot%7Bjs%7D-extension/mopnmbcafieddcagagdcbnhejhlodfdd',
+    firefoxExt:
+      'https://addons.mozilla.org/en-US/firefox/addon/polkadot-js-extension/',
+  };
+
   constructor(
     private accountService: AccountService,
     public dialogRef: MatDialogRef<SignInModalDialogComponent>,

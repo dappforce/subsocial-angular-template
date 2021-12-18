@@ -16,8 +16,9 @@
 
         <app-follow-button [size]="'large'"
                            ifDesktop
-                           [isFollow]="false"
+                           [isFollow]="isFollowed$ | async"
                            [style.margin-right]="'9px'"
+                           [entityId]="spaceItemData.struct.id"
         ></app-follow-button>
 
         <app-option-button type="space"></app-option-button>
@@ -40,6 +41,7 @@
                        ifMobile
                        [style.margin-top]="'16px'"
                        [isFollow]="false"
+                       [entityId]="spaceItemData.struct.id"
     ></app-follow-button>
   </mat-card>
 </div>

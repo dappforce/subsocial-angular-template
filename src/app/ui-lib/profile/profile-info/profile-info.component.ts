@@ -11,6 +11,7 @@ import { DeviceService } from '../../../shared/services/device.service';
 import { Subject } from 'rxjs';
 import { ConnectionsModalDialogComponent } from '../../../shared/modal-dialogs/connections-modal-dialog/connections-modal-dialog.component';
 import { ConnectionModalData } from '../../../core/types/dialog-modal-data.types';
+import { AVATAR_SIZE } from '../../../core/constants/size.const';
 
 @Component({
   selector: 'app-profile-info',
@@ -29,23 +30,18 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
   @Input() link = '';
   @Input() address = '';
 
+  AVATAR_SIZE = AVATAR_SIZE;
+
   constructor(public dialog: MatDialog, public deviceService: DeviceService) {}
 
   connectionModalData: ConnectionModalData;
   private modalConfig: MatDialogConfig = {};
 
   ngOnInit(): void {
-    this.deviceService.isMobile$
+    this.deviceService
+      .getResponsiveModalData()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((isMobile) => {
-        if (isMobile) {
-          this.modalConfig.width = '95%';
-          this.modalConfig.maxWidth = 'none';
-        } else {
-          this.modalConfig.width = '500px';
-          this.modalConfig.maxWidth = '80vh';
-        }
-      });
+      .subscribe((data) => (this.modalConfig = { ...data }));
   }
 
   openConnectionDialog(activeTab: 'followers' | 'following') {
@@ -62,7 +58,7 @@ export class ProfileInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$?.next();
-    this.unsubscribe$?.complete();
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 }

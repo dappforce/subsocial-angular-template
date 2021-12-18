@@ -14,12 +14,13 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { map, take, takeUntil } from 'rxjs/operators';
 import { selectProfileDataById } from '../../state/profile/profile.selectors';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ProfileComponentData } from '../../core/types/profile-component-data.type';
 import { SpaceService } from '../../space/services/space.service';
 import { PostService } from '../../post/services/post.service';
 import { AccountService } from '../../shared/services/account.service';
 import { StoreService } from '../../state/store.service';
+import { FollowerService } from '../../shared/services/follower.service';
 
 @Component({
   selector: 'app-profile',
@@ -38,6 +39,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   postIds: string[] = [];
   tokens: string;
   profileData: ProfileComponentData | undefined;
+  isFollow$: Observable<boolean>;
 
   private destroy$ = new Subject<void>();
 
@@ -48,7 +50,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private cd: ChangeDetectorRef,
     private accountService: AccountService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private followerService: FollowerService
   ) {}
 
   ngOnInit(): void {
@@ -83,6 +86,10 @@ export class ProfileComponent implements OnInit, OnDestroy {
       .getPostIdsBySpaceIds(this.spaceIds)
       .pipe(take(1))
       .toPromise();
+
+    this.isFollow$ = this.followerService
+      .checkIfFollowAccount(address)
+      .pipe(takeUntil(this.destroy$));
 
     this.cd.markForCheck();
   }

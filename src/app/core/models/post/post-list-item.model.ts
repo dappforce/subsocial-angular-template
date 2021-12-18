@@ -29,4 +29,5 @@ export interface PostListItemData {
   spaceLink?: string;
   upvoteActive?: boolean;
   downvoteActive?: boolean;
+  reactionId?: string;
 }

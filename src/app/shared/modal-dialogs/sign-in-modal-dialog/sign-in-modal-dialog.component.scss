@@ -1,3 +1,6 @@
+@import "_var.scss";
+@import "_mixins.scss";
+
 .modal-header {
   position: relative;
   text-align: center;
@@ -9,10 +12,6 @@
   }
 }
 
-.modal-wp {
-  padding: 16px;
-  padding-bottom: 0;
-}
 
 .close-btn {
   position: absolute;
@@ -21,40 +20,34 @@
 }
 
 .ext-not-found {
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
+  padding: 0 $space_big;
   align-items: center;
+
   span {
     white-space: nowrap;
   }
 
-
-  p {
-    font-size: 17px;
-    line-height: 125%;
+  .message {
     text-align: center;
+    padding: $space_small 0;
 
     a {
-      padding-right: 4px;
+      padding-right: $space_mini;
     }
   }
 
   .link-wp {
-    display: flex;
-    flex-direction: column;
     width: 230px;
 
     a {
-      color: #262626;
-      font-weight: 500;
-      font-size: 17px;
-      border: 1px solid #D9D9D9;
-      border-radius: 4px;
+      @include font($font_normal, 500);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px 24px;
+      color: #262626;
+      border: 1px solid #D9D9D9;
+      border-radius: 4px;
+      padding: $space_tiny $space_big;
 
       &:hover {
         transition: background-color 300ms;
@@ -62,15 +55,15 @@
       }
 
       img {
-        margin-right: 5px;
+        margin-right: $space_mini;
       }
     }
   }
 
   .footer-not-ext-wp {
-    font-size: 14px;
-    margin-top: 20px;
-    padding: 4px 0 21px;
+    font-size: $font_small;
+    margin-top: $space_large;
+    padding: $space_mini 0 $space_large;
 
     span {
       color: #8C8C8C;
@@ -80,25 +73,22 @@
 
 .account-not-found {
   p {
-    font-size: 17px;
+    font-size: $font-normal;
     padding: 21px 28px;
     text-align: center;
     white-space: pre;
     background: #FFFAD5;
     border-radius: 5px;
   };
-
 }
 
 .footer-wp {
-  display: flex;
-  justify-content: center;
-  padding: 4px 0 21px;
+  @include font($font_small, 500);
+  padding: $space_mini 0 $space_large;
   color: #A0A0A0;
-  font-weight: 500;
-  font-size: 14px;
+
   a {
-    padding: 0 16px;
+    padding: 0 $space_normal;
 
     &:first-child {
       border-right: 1px solid #EEECEC;
@@ -107,30 +97,24 @@
 }
 
 .link{
-  color: #EB2F96;
+  color: $color_primary;
   font-weight: 500;
 }
 
 .unauthorized {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   &>span {
     padding: 8px 0 5px;
-    font-size: 17px;
+    font-size: $font_normal;
   }
 
   .account-list {
     width: 400px;
-    margin-bottom: 20px;
+    margin-bottom: $space_large;
     max-height: 244px;
     overflow-y: auto;
-    margin-right: -4px;
+    margin-right: -$space_mini;
 
     .account-item {
-      display: flex;
-      align-items: center;
       border-bottom: 1px solid #EEECEC;
       padding: 8px 0 5px;
       cursor: pointer;
@@ -140,18 +124,14 @@
       }
 
       .account-info-wp {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
         width: 100%;
-        margin-left: 16px;
-        padding-right: 4px;
+        margin-left: $space_normal;
+        padding-right: $space_mini;
 
         .name {
+          @include font($font_normal, 500);
           display: block;
-          padding-bottom: 3px;
-          font-weight: 500;
-          font-size: 17px;
+          padding-bottom: $space_mini;
         }
       }
     }

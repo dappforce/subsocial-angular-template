@@ -1,3 +1,5 @@
+@import "../../../shared/styles/_var.scss";
+
 :host {
   display: flex;
 }
@@ -6,7 +8,7 @@
   font-size: 14px;
   line-height: 20px;
   letter-spacing: 0.25px;
-  color: var(--gray-dark);
+  color: $color_gray_dark;
 
   &>*:first-child {
     text-transform: capitalize;

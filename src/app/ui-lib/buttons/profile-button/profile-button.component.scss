@@ -1,3 +1,5 @@
+@import '_var.scss';
+
 .profile-button-wp {
   display: flex;
   align-items: center;
@@ -6,8 +8,8 @@
 }
 
 .sign-in-btn {
-  font-size: 17px;
+  font-size: $font_normal;
 }
 .mat-stroked-button {
-  border: 1px solid #EB2F96 !important;
+  border: $border_primary !important;
 }

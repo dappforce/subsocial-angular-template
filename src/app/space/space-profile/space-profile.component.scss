@@ -1,5 +1,7 @@
+@import "_var.scss";
+
 .buttons-wp {
-  gap: 16px;
+  gap: $space_normal;
 
   &>* {
     flex: 1;

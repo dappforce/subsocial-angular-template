@@ -1,12 +1,14 @@
+@import "_var.scss";
+
 :host {
   display: flex;
 }
 
 .info {
-  font-size: 14px;
+  font-size: $font_small;
 
   .dot {
-    margin-right: 4px;
+    margin-right: $space_mini;
   }
 
   a:hover {
@@ -17,7 +19,7 @@
 
 
 .single {
-  color: var(--black);
+  color: $color_black;
 
   .count {
     font-weight: 500;
@@ -25,9 +27,9 @@
 }
 
 .list {
-  color: var(--gray-dark);
+  color: $color_gray_dark;
 }
 
 .count {
-  padding-right: 4px;
+  padding-right: $space_mini;
 }

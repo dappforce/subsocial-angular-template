@@ -29,7 +29,7 @@ export class SeeMoreComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    this.isMore = this.isAutoExpand;
+    this.isMore = !this.isAutoExpand;
 
     this.routerData = {
       isAutoExpand: this.isAutoExpand,

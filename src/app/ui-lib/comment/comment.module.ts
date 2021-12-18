@@ -13,6 +13,7 @@ import { AddressModule } from '../address/address.module';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ContainersModule } from '../containers/containers.module';
 import { ActionPanelModule } from '../action-panel/action-panel.module';
+import { MarkdownModule } from 'ngx-markdown';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ActionPanelModule } from '../action-panel/action-panel.module';
     PipesModule,
     ContainersModule,
     ActionPanelModule,
+    MarkdownModule,
   ],
   exports: [
     CommentInputComponent,

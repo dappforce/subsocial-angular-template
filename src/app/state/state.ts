@@ -15,6 +15,10 @@ import { MyAccountState } from './my-account/my-account.state';
 import { myAccountReducer } from './my-account/my-account.reducer';
 import { MyPostReactionsState } from './my-post-reactions/my-post-reactions.state';
 import { myPostReactionsReducer } from './my-post-reactions/my-post-reactions.reducer';
+import { FollowedSpaceIdsState } from './followed-space-ids/followed-space-ids.state';
+import { followedSpaceIdsReducer } from './followed-space-ids/followed-space-ids.reducer';
+import { FollowedAccountIdsState } from './followed-account-ids/followed-account-ids.state';
+import { followedAccountIdsReducer } from './followed-account-ids/followed-account-ids.reducer';
 
 export interface AppState {
   spaces: SpaceState;
@@ -25,6 +29,8 @@ export interface AppState {
   loader: LoaderState;
   myAccount: MyAccountState;
   myPostReactions: MyPostReactionsState;
+  followedSpaceIds: FollowedSpaceIdsState;
+  followedAccountIds: FollowedAccountIdsState;
 }
 
 export const appReducers: ActionReducerMap<AppState> = {
@@ -36,4 +42,6 @@ export const appReducers: ActionReducerMap<AppState> = {
   loader: loaderReducer,
   myAccount: myAccountReducer,
   myPostReactions: myPostReactionsReducer,
+  followedSpaceIds: followedSpaceIdsReducer,
+  followedAccountIds: followedAccountIdsReducer,
 };

@@ -1,5 +1,7 @@
+@import "_var.scss";
+
 .static {
-  width: 99px;
+  width: fit-content;
 }
 
 .full {
@@ -7,7 +9,65 @@
 }
 
 .mat-stroked-button {
-  border: 1px solid #EB2F96 !important;
+  border: $border_primary !important;
+  padding: 0 13px 0 12px !important;
+}
 
+mat-spinner {
+  display: inline;
+  left: -24px;
+  top: 2px;
+}
+
+.medium {
+  font-size: $font_small;
+  letter-spacing: 1.25px;
+}
+
+.large {
+  font-size: $font_normal;
+}
+
+.follow {
+  background-color: $color_primary;
+  color: white;
+  padding: 1px 25px;
+}
+
+.following {
+  border: $border-primary;
+  color: $color_primary;
+  padding: 0 12px;
+
+  &:active {
+    border: $border-primary;
+  }
+}
+
+button {
+  min-width: 64px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 4px;
+  font-weight: 500;
+
+  span {
+    text-transform: capitalize;
+  }
+
+  &:disabled {
+    cursor: default;
+    background: $color_white;
+    border: 1px solid $color_gray_light;
+    color: $color_gray_secondary;
+    padding-left: $space_huge;
+    transition: padding-left 500ms;
+  }
+
+  ::ng-deep {
+    .mat-progress-spinner circle, .mat-spinner circle {
+      stroke: $color_gray_secondary !important;
+    }
+  }
 }
 

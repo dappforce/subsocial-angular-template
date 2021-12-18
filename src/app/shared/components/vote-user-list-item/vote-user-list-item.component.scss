@@ -1,39 +1,25 @@
+@import "_var.scss";
+
 .vote-item-wp {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 0;
+  padding: $space_tiny 0;
   border-bottom: 1px solid  rgba(33, 33, 33, 0.08);
-  margin-right: 5px;
+  margin-right: $space_mini;
+}
 
-  //&:hover {
-  //  background: rgba(0, 0, 0, 0.04);
-  //}
-
-  &>div {
-    display: flex;
+.sub-wb {
+  span {
+    font-weight: 500;
+    font-size: $font_small;
+    padding-left: $space_mini;
+    color: #A0A0A0;
   }
+}
 
-  .user-info-wp {
-    margin-left: 16px;
-
-    .user-name {
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 22px;
-      letter-spacing: 0.25px;
-      color: rgba(0, 0, 0, 0.87);
-    }
-  }
-
-  .sub-wb {
-    span {
-      font-weight: 500;
-      font-size: 14px;
-      padding-left: 4px;
-      color: #A0A0A0;
-    }
-  }
+.user-name {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 22px;
+  letter-spacing: 0.25px;
 }
 
 .sub {

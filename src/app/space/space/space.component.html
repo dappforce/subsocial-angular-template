@@ -1,4 +1,5 @@
-<app-space-profile [spaceItemData]="spaceData"
+<app-space-profile *ngIf="spaceData"
+                    [spaceItemData]="spaceData"
                    [isAutoExpandSummary]="isAutoExpandSummary"
                    class="space-wp"
 ></app-space-profile>

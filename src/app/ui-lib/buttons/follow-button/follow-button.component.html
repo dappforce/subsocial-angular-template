@@ -1,34 +1,9 @@
-<ng-container *ngIf="isFollow; else following">
-
-  <button
-    (click)="onUnfollow.emit();"
-    [ngClass]="width"
-    [ngStyle]="{
-      'font-size': size === 'medium' ? '14px': '17px',
-      'letter-spacing': size === 'medium' ? '1.25px' : '0'
-    }"
-    mat-stroked-button
-    color="primary"
-  >
-    Following
-  </button>
-
-</ng-container>
-
-<ng-template #following>
-
-  <button
-    (click)="onFollow.emit()"
-    [ngClass]="width"
-    [ngStyle]="{
-      'font-size': size === 'medium' ? '14px': '17px',
-      'letter-spacing': size === 'medium' ? '1.25px' : '0'
-    }"
-    class="follow-button"
-    mat-flat-button
-    color="primary"
-  >
-    Follow
-  </button>
-
-</ng-template>
+<button
+  (click)="onClick();"
+  [ngClass]="[width, size, label]"
+  [disabled]="isSending"
+  mat-ripple
+>
+  <mat-spinner *ngIf="isSending" [diameter]="15"></mat-spinner>
+  <span>{{label}}</span>
+</button>

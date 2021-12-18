@@ -1,3 +1,5 @@
+@import "../../../shared/styles/_var.scss";
+
 button {
   display: flex;
   align-items: center;
@@ -13,7 +15,7 @@ button {
   }
 
   &:hover {
-    background-color: var(--hover-color-light);
+    background-color: $hover_color_light;
   }
 }
 

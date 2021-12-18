@@ -1,13 +1,9 @@
 @import '~@angular/material/theming';
+@import "_var.scss";
+@import "_mixins.scss";
 
 @include mat-core();
 
-:root {
-  --black: rgba(0, 0, 0, 0.87);
-  --main-color: #EB2F96;
-  --gray-dark: rgba(0, 0, 0, 0.6);
-  --hover-color-light: rgba(0,0,0,.04);
-}
 
 $subsocial-palette: (
   50: #f6a3d1,
@@ -15,7 +11,7 @@ $subsocial-palette: (
   200: #f275b9,
   300: #ef5ead,
   400: #ed46a2,
-  500: #eb2f96,
+  500: $color_primary,
   600: #e9188a,
   700: #d3147d,
   800: #bb126f,
@@ -25,17 +21,17 @@ $subsocial-palette: (
   A400: #fde9f4,
   A700: #8d0e53,
   contrast: (
-    50: rgba(black, 0.87),
-    100: rgba(black, 0.87),
-    200: rgba(black, 0.87),
-    300: rgba(black, 0.87),
+    50: $color_black,
+    100: $color_black,
+    200: $color_black,
+    300: $color_black,
     400: white,
     500: white,
     600: white,
     700: white,
     800: white,
     900: white,
-    A100: rgba(black, 0.87),
+    A100: $color_black,
     A200: white,
     A400: white,
     A700: white,
@@ -60,14 +56,14 @@ $subsocial-ng-app-theme: mat-light-theme((
 @mixin custom-tabs-theme() {
   .mat-tab-link  {
     font-size: 16px;
-    color: rgba(0, 0, 0, 0.6);
+    color: $color_gray_dark;
     width: 100%;
     letter-spacing: 1.25px;
     text-transform: uppercase;
     opacity: 1 !important;
 
     &:hover, &:active{
-      color: var(--main-color) !important;
+      color: $color_primary !important;
     }
   }
 
@@ -76,7 +72,7 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 
   .mat-tab-label-active {
-    color: var(--main-color)
+    color: $color_primary;
   }
 
   .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
@@ -95,15 +91,15 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 
   .mat-form-field-label-wrapper {
-    top: -16px !important;
+    top: -$space_normal !important;
   }
 
   .mat-form-field-wrapper {
-    padding-bottom: 15px;
+    padding-bottom: $space_normal;
   }
 
   .mat-input-element::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.6);
+    color: $color_gray_dark;
   }
 }
 
@@ -112,19 +108,19 @@ $subsocial-ng-app-theme: mat-light-theme((
   .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-end,
   .mat-form-field-appearance-outline .mat-form-field-outline-thick .mat-form-field-outline-gap {
     border-width: 1px !important;
-    border-color: var(--main-color);
+    border-color: $color_primary;
   }
 
   .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
-    color: var(--main-color)
+    color: $color_primary;
   }
 
   .mat-input-element {
-    caret-color: rgba(0, 0, 0, 0.6)!important;
+    caret-color: $color_gray_dark!important;
   }
 
   .mat-form-field.mat-focused .mat-form-field-label {
-    color: rgba(0, 0, 0, 0.6) !important;
+    color: $color_gray_dark !important;
     .asterisk {
       display: inline;
     }
@@ -140,24 +136,24 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: #F2F2F2;
-  color: var(--black)
+  color: $color_black;
 }
 
 li {
   list-style: none;
 }
 
-h1 {
-  font-weight: 500;
-  font-size: 24px;
-  line-height: 24px;
-}
-
-h2 {
-  font-weight: 500;
-  font-size: 20px;
-  line-height: 24px;
-}
+//h1 {
+//  font-weight: 500;
+//  font-size: 24px;
+//  line-height: 24px;
+//}
+//
+//h2 {
+//  font-weight: 500;
+//  font-size: 20px;
+//  line-height: 24px;
+//}
 
 a, a:hover, a:focus, a:active {
   text-decoration: none;
@@ -198,14 +194,48 @@ strong {
 }
 
 p {
-  font-size: 17px;
-  line-height: 24px;
+  @include font($font_normal, 400, 24px);
+}
+
+/*      Font      */
+
+.font-success {
+  color: $color_green;
+}
+
+.font-error {
+  color: $color_red;
+}
+
+.title-large {
+  @include font($font_big, 500)
+}
+
+.title-medium {
+  @include font($font_large, 500)
+}
+
+.title-small {
+  @include font($font_normal, 500)
+}
+
+.normal {
+  @include font($font_normal)
+}
+
+.secondary-text {
+  @include font($font_small);
+  color: $color_gray_secondary;
+}
+
+.button-text {
+  @include font($font_normal, 500)
 }
 
 .container {
-  width: 763px;
+  width: $container-width;
   margin: 72px auto;
-  padding-bottom: 16px;
+  padding-bottom: $space_normal;
 }
 
 .mat-dialog-container {
@@ -214,7 +244,7 @@ p {
 
 .scrollable-list-wp {
   &::-webkit-scrollbar {
-    margin-top: 20px;
+    margin-top: $space_large;
     width: 7px;
   }
 
@@ -234,41 +264,7 @@ p {
   }
 }
 
-/*      Font      */
-.title-large {
-  font-weight: 500;
-  font-size: 22px;
-  line-height: 125%;
-}
 
-.title-medium {
-  font-weight: 500;
-  font-size: 19px;
-  line-height: 125%;
-}
-
-.title-small {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 125%;
-}
-
-.normal {
-  font-size: 17px;
-  line-height: 125%;
-}
-
-.secondary-text {
-  font-size: 14px;
-  line-height: 125%;
-  color: #A0A0A0;
-}
-
-.button-text {
-  font-weight: 500;
-  font-size: 17px;
-  line-height: 125%;
-}
 
 .center {
   display: flex;
@@ -280,9 +276,15 @@ p {
   align-items: center;
 }
 
+.center-all {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .asterisk {
   position: relative;
-  font-size: 17px;
+  font-size: $font_normal;
   font-weight: 500;
   top: -3px;
   color: #B00020;
@@ -311,13 +313,12 @@ markdown {
 
 /*    Spacing    */
 .mt-16 {
-  margin-top: 16px;
+  margin-top: $space_normal;
 }
 
 .mb-16 {
-  margin-bottom: 16px !important;
+  margin-bottom: $space_normal !important;
 }
-
 
 .w100 {
   width: 100%;
@@ -333,15 +334,13 @@ markdown {
 
 .white-snackbar {
   background-color: white;
-  color: var(--black);
+  color: $color_black;
 }
 
 .action-panel-label {
-  color: var(--gray-dark);
-  margin-left: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
+  color: $color_gray_dark;
+  @include font($font_small, 500, 24px);
+  margin-left: $space_mini;
   letter-spacing: 0.1px;
   text-transform: capitalize;
   white-space: nowrap;
@@ -402,11 +401,6 @@ markdown {
 
   .modal-body {
     min-height: 550px;
-  }
-
-  .close-icon {
-    width: 16px;
-    height: 16px;
   }
 }
 

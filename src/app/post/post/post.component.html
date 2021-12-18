@@ -1,75 +1,73 @@
 <ng-container *ngIf="postData">
-  <section>
     <mat-card>
 
-      <app-hidden-content *ngIf="postData.hidden && postData.isMyPost" [type]="'post'"></app-hidden-content>
+      <app-hidden-content *ngIf="postData.hidden && postData.isMyPost"
+                          [type]="'post'"
+      ></app-hidden-content>
 
-      <div class="post-main-wp">
-        <div class="post-data">
-          <div class="post-item-header">
+      <app-column >
+        <app-row [h]="'space-between'"
+                 [v]="'center'"
+                 [margin]="'0 0 16px 0'"
+        >
 
-            <app-post-info
-              [userName]="postData.ownerName"
-              [spaceName]="postData.spaceName"
-              [imageUrl]="postData.ownerImageUrl"
-              [createdAtTime]="postData.createdAtTime"
-              [ownerId]="postData.ownerId"
-              [spaceLink]="postData.spaceLink"
-            ></app-post-info>
+          <app-post-info [userName]="postData.ownerName"
+                         [spaceName]="postData.spaceName"
+                         [imageUrl]="postData.ownerImageUrl"
+                         [createdAtTime]="postData.createdAtTime"
+                         [ownerId]="postData.ownerId"
+                         [spaceLink]="postData.spaceLink"
+          ></app-post-info>
 
-            <app-option-button></app-option-button>
-          </div>
+          <app-option-button></app-option-button>
 
-          <app-embed-video [videoUrl]="postData.link"></app-embed-video>
+        </app-row>
 
-          <app-title *ngIf="!postData.isComment" type="large" [text]="postData.title"></app-title>
+        <app-embed-video [videoUrl]="postData.link"></app-embed-video>
 
-          <app-comment-post-title *ngIf="postData.isComment"
-                                  [postTitle]="commentPostData?.postTitle"
-                                  [link]="commentPostData?.link"
-          ></app-comment-post-title>
+        <app-title *ngIf="!postData.isComment" type="large" [text]="postData.title"></app-title>
 
-          <div class="post-image mb-16">
-            <app-post-image type="full" [imageSrc]="postData.imageUrl"></app-post-image>
-          </div>
+        <app-comment-post-title *ngIf="postData.isComment"
+                                [postTitle]="commentPostData?.postTitle"
+                                [link]="commentPostData?.link"
+        ></app-comment-post-title>
 
-          <markdown class="markdown-body" ngPreserveWhitespaces>
-            {{postData.body}}
-          </markdown>
+        <app-post-image class="post-image"
+                        type="full"
+                        *ngIf="postData.imageUrl"
+                        [imageSrc]="postData.imageUrl"
+        ></app-post-image>
 
-          <div>
-            <app-tag [tagName]="tag" *ngFor="let tag of postData.tags"></app-tag>
-          </div>
-        </div>
-      </div>
+        <markdown class="markdown-body" ngPreserveWhitespaces>
+          {{postData.body}}
+        </markdown>
 
+        <app-row [margin]="'4px 0 16px 0'">
+          <app-tag [tagName]="tag" *ngFor="let tag of postData.tags"></app-tag>
+        </app-row>
+
+      </app-column>
 
       <mat-divider [inset]="true"></mat-divider>
 
-      <div class="action-panel-wp">
-        <app-action-panel
-          [isShowShare]="true"
-          [isShowLabel]="true"
-          [upvoteCount]="postData.upvotesCount"
-          [downvoteCount]="postData.downvotesCount"
-          [commentCount]="postData.repliesCount"
-          [isDownvoteActive]="postData.downvoteActive"
-          [isUpvoteActive]="postData.upvoteActive"
-        >
-        </app-action-panel>
-      </div>
-
+      <app-action-panel class="action-panel-wp"
+                        [isShowShare]="true"
+                        [isShowLabel]="true"
+                        [upvoteCount]="postData.upvotesCount"
+                        [downvoteCount]="postData.downvotesCount"
+                        [commentCount]="postData.repliesCount"
+                        [isDownvoteActive]="postData.downvoteActive"
+                        [isUpvoteActive]="postData.upvoteActive"
+                        [postId]="postData.id"
+                        [reactionId]="postData.reactionId"
+      ></app-action-panel>
 
     </mat-card>
-  </section>
 
-  <section>
     <app-space-item [spaceItemData]="spaceData"></app-space-item>
-  </section>
 
-  <section class="mt-16">
     <mat-card class="comment-card">
       <app-comments [commentListData]="commentData"></app-comments>
     </mat-card>
-  </section>
+
 </ng-container>

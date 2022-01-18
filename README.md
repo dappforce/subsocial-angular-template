@@ -8,7 +8,7 @@ Run `yarn install`
 
 ## Install angular cli
 
-Run `npm install -g @angular/cli`
+Run `yarn global add @angular/cli`
 
 ## Development server
 

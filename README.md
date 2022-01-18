@@ -2,9 +2,13 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
-##Install package
+## Install package
 
 Run `yarn install`
+
+## Install angular cli
+
+Run `yarn global add @angular/cli`
 
 ## Development server
 

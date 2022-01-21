@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { SubsocialApiService } from './subsocial-api.service';
 import { ReplyIds } from '../../core/types/reply-id.type';
 import { ConvertService } from './convert.service';
-import { StoreService } from '../../state/store.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

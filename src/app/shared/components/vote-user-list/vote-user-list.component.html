@@ -10,13 +10,13 @@
       [fromRoot]="true"
       [infiniteScrollContainer]="'.scroll-container'"
     >
-      <div class="modal-list" *ngFor="let data of listData; trackBy: trackById">
+      <div class="modal-list" *ngFor="let data of items$ | async; trackBy: trackById">
           <app-vote-user-list-item
             [userInfo]="data">
           </app-vote-user-list-item>
       </div>
 
-      <app-spinner [showSpinner]="isLoading" [text]="'Loading more profiles...'"></app-spinner>
+      <app-spinner [showSpinner]="isLoading" [text]="'content.moreProfiles' | transloco"></app-spinner>
     </div>
   </div>
 

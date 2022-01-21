@@ -1,6 +1,6 @@
 export class ScrollProps {
   startIndex: number = 0;
-  step: number;
+  limit: number;
   endIndex: number;
 
   public isFinish: boolean = false;
@@ -14,17 +14,17 @@ export class ScrollProps {
   }
   private _max = Number.MAX_SAFE_INTEGER;
 
-  constructor(step: number) {
-    this.step = step;
-    this.endIndex = step;
+  constructor(limit: number) {
+    this.limit = limit;
+    this.endIndex = limit;
   }
 
   public next() {
-    this.startIndex += this.step;
-    if (this.startIndex + this.step > this.max) {
+    this.startIndex += this.limit;
+    if (this.startIndex + this.limit > this.max) {
       this.endIndex = this.max;
     } else {
-      this.endIndex = this.startIndex + this.step;
+      this.endIndex = this.startIndex + this.limit;
     }
 
     this.isFinish = this.startIndex > this.max;

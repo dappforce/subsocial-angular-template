@@ -1,0 +1,29 @@
+<ng-container *ngIf="isShowInput">
+  <app-comment-input [rootPostId]="rootPostId"
+                     [parentPostId]="parentId"
+                     (cancel)="closeReply.emit()"
+                     [autofocus]="!isFirstLevel"
+  ></app-comment-input>
+</ng-container>
+
+<ng-container *ngIf="!isFirstLevel">
+  <app-show-comments-button [isShowReplyComments]="isChildrenShow$ | async"
+                            [replyCommentCount]="commentsCount$ | async"
+                            (showMore)="onShowMore()"
+  ></app-show-comments-button>
+</ng-container>
+
+<ng-container *ngIf="isChildrenShow$ | async">
+  <ng-container *ngIf="(comments$ | async) as comments; else loading">
+    <ng-container *ngFor="let comment of comments">
+      <app-comment-item [isFirstLevel]="isFirstLevel"
+                        [rootPostId]="rootPostId"
+                        [comment]="comment"
+      ></app-comment-item>
+    </ng-container>
+  </ng-container>
+</ng-container>
+
+<ng-template #loading>
+  <app-spinner [showSpinner]="!!(commentsCount$ | async)"></app-spinner>
+</ng-template>

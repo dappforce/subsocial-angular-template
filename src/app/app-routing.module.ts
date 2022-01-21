@@ -12,21 +12,26 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'spaces/:type',
-    component: EditSpaceComponent,
-  },
-  { path: 'posts/:type', component: EditPostComponent },
-  {
-    path: 'accounts',
-    loadChildren: () =>
-      import('./account/account.module').then((m) => m.AccountModule),
-  },
-  {
-    path: 'notification',
+    path: 'notifications',
     loadChildren: () =>
       import('./notification/notification.module').then(
         (m) => m.NotificationModule
       ),
+  },
+  {
+    path: 'spaces/:type',
+    component: EditSpaceComponent,
+  },
+  {
+    path: 'spaces/:spaceId/:type',
+    component: EditSpaceComponent,
+  },
+  { path: 'posts/:type', component: EditPostComponent },
+  { path: 'posts/:postId/:type', component: EditPostComponent },
+  {
+    path: 'accounts',
+    loadChildren: () =>
+      import('./account/account.module').then((m) => m.AccountModule),
   },
   {
     path: ':spaceId',

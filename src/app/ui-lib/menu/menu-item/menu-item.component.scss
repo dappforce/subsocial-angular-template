@@ -1,0 +1,18 @@
+@import "var";
+
+span {
+  font-size: $font_normal;
+  color: $color_gray_dark;
+}
+
+button {
+  ::ng-deep {
+    mat-icon {
+      svg {
+        path {
+          fill: $color_gray_dark;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,40 @@
+<app-column padding="16px">
+
+  <app-row [margin]="'-6px 0 0 0'"
+           [h]="'space-between'"
+           [v]="'center'"
+  >
+    <span class="title-medium">{{ 'modals.qrCode.title' | transloco }}</span>
+
+    <app-close-button (onClose)="dialogRef.close()"></app-close-button>
+  </app-row>
+  <app-column [v]="'center'">
+
+    <qrcode [qrdata]="data"
+            [width]="256"
+            [errorCorrectionLevel]="'M'">
+    </qrcode>
+
+    <div class="address-wp">
+      <span class="address-text">{{data}}</span>
+    </div>
+
+  </app-column>
+
+  <div class="button-wp">
+    <button mat-stroked-button (click)="dialogRef.close()">
+      {{ 'buttons.close' | transloco }}
+    </button>
+
+    <button
+      mat-flat-button
+      [cdkCopyToClipboard]="data"
+      (click)="onCopy()"
+      color="primary">
+      <mat-icon svgIcon="copy-white-icon"></mat-icon>
+      <span>{{ 'buttons.copy' | transloco }}</span>
+    </button>
+  </div>
+
+
+</app-column>

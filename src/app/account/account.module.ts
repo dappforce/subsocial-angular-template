@@ -13,9 +13,13 @@ import { ContainersModule } from '../ui-lib/containers/containers.module';
 import { ContentModule } from '../ui-lib/content/content.module';
 import { ProfileModule } from '../ui-lib/profile/profile.module';
 import { AccountRoutingModule } from './account-routing.module';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { InputModule } from '../ui-lib/input/input.module';
+import { TranslocoModule } from '@ngneat/transloco';
+import { MenuModule } from '../ui-lib/menu/menu.module';
 
 @NgModule({
-  declarations: [ProfileComponent, AccountComponent],
+  declarations: [ProfileComponent, AccountComponent, EditProfileComponent],
   imports: [
     CommonModule,
     PostModule,
@@ -29,6 +33,9 @@ import { AccountRoutingModule } from './account-routing.module';
     SharedModule,
     ProfileModule,
     AccountRoutingModule,
+    InputModule,
+    TranslocoModule,
+    MenuModule,
   ],
 })
 export class AccountModule {}

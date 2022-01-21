@@ -1,31 +1,45 @@
 <section class="edit-space-container">
   <mat-card>
-    <h2>{{type === 'edit' ? 'Edit' : 'New'}} space</h2>
+    <h2 class="title-medium" *transloco="let t; read: 'general'">{{t(type)}} {{t('space')}}</h2>
 
-    <app-image-loader [imageUrl]="url"></app-image-loader>
 
-    <form [formGroup]="editSpaceForm" class="space-form" action="">
-      <app-text-input
-        formControlName="spaceName"
-        [isRequired]="true"
-        [label]="'Space name'"
+    <form [formGroup]="editSpaceForm"
+          class="space-form" action=""
+          *transloco="let t; read: 'forms.placeholder'"
+    >
+
+      <app-image-loader formControlName="image"
+                        [imageUrl]="url"
+      ></app-image-loader>
+
+      <app-text-input  formControlName="name"
+                       [isRequired]="true"
+                       [label]="t('spaceName')"
+                       [error]="errors.name"
       ></app-text-input>
 
-      <app-text-area
-        formControlName="description"
-        [initHeight]="(deviceService.isMobile$ | async) ? 180 : 260"
-        [label]="'Description'"
-      >
-      </app-text-area>
+      <app-mde-editor [isToolbarHidden]="false"
+                      formControlName="about"
+                      [height]="160"
+                      [autoFocus]="true"
+                      [placeholder]="t('description')"
+      ></app-mde-editor>
 
-      <app-tag-input
-        [placeholder]="'Press \'Enter\' or \'Tab\' key to add tags'"
-        formControlName="tags"
+      <app-tag-input [placeholder]="t('tags')"
+                     formControlName="tags"
       ></app-tag-input>
 
-      <div class="button-wp">
-        <button mat-stroked-button>{{ type === 'edit' ? 'Cancel' : 'Reset form'}}</button>
-        <button mat-raised-button color="primary">{{ type === 'edit' ? 'Save' : 'Create space'}}</button>
+      <div class="button-wp" *transloco="let t; read: 'buttons'">
+        <button (click)="resetForm()"
+                mat-stroked-button
+        >
+          {{ type === 'edit' ? t('cancel') : t('resetForm') }}
+        </button>
+
+        <app-tx-button [name]="type === 'edit' ? t('save') : t('createSpace')"
+                       (click)="onEditSpace()"
+                       [isSending]="isSending"
+        ></app-tx-button>
       </div>
     </form>
   </mat-card>

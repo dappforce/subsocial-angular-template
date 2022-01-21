@@ -1,8 +1,10 @@
-<ng-container *ngIf="postItemData && !isHiddenPost">
+<ng-container *ngIf="postItemData && !(skip$ | async)">
 
-  <mat-card [style.padding-bottom]="showActionPanel ? '4px' : '16px'">
+  <mat-card [ngClass]="{'shared-post-card' : isSharedPost, 'common-post-card': !isSharedPost}">
 
-    <app-hidden-content *ngIf="postItemData.hidden && postItemData.isMyPost" [type]="'post'"></app-hidden-content>
+    <app-hidden-content [id]="postItemData.id"
+                        [type]="'post'"
+    ></app-hidden-content>
 
     <app-row [ngClass]="['post-main-wp']">
 
@@ -20,10 +22,9 @@
                          [spaceLink]="postItemData.spaceLink"
           ></app-post-info>
 
-          <app-option-button [type]="'post'"
-                             [isContentHidden]="postItemData.hidden"
-                             (onClickViewReaction)="onViewReaction()"
-          ></app-option-button>
+          <app-post-menu [post]="postItemData"
+                         (onClickViewReaction)="onViewReaction()"
+          ></app-post-menu>
 
         </app-row>
 
@@ -44,36 +45,34 @@
 
       <app-post-image [link]="postItemData.postLink"
                       [type]="(deviceService.isMobile$ | async) ? 'full' : 'square'"
-                      [imageSrc]="postItemData.imageUrl"
+                      [image]="postItemData.imageUrl"
                       [style.margin-top]="(deviceService.isMobile$ | async) ? '8px' : '0'"
       ></app-post-image>
 
     </app-row>
 
-    <mat-divider *ngIf="showActionPanel"
+    <mat-divider *ngIf="!isSharedPost"
                  [style.margin]="'12px 0 4px 0'"
                  [inset]="true"
     ></mat-divider>
 
     <app-action-panel [isShowComment]="true"
                       [postId]="postItemData.id"
-                      [reactionId]="postItemData.reactionId"
                       [upvoteCount]="postItemData.upvotesCount"
                       [downvoteCount]="postItemData.downvotesCount"
                       [commentCount]="postItemData.repliesCount"
-                      [isUpvoteActive]="postItemData.upvoteActive"
-                      [isDownvoteActive]="postItemData.downvoteActive"
                       [isShowShare]="true"
                       (commentClick)="onCommentButtonClick()"
-                      *ngIf="showActionPanel"
+                      (shareClick)="onShareClick()"
+                      *ngIf="!isSharedPost"
     ></app-action-panel>
 
     <ng-container *ngIf="isCommentOpen">
 
       <mat-divider [inset]="true" [style.margin]="'4px 0 16px 0'"></mat-divider>
 
-      <app-comments [commentListData]="commentData$ | async"
-                    [commentsCount]="postItemData.repliesCount"
+      <app-comments [rootPost]="postItemData"
+                    [repliesCount]="postItemData.repliesCount"
       ></app-comments>
 
     </ng-container>

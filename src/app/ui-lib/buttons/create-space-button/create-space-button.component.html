@@ -1,0 +1,8 @@
+<button [ngClass]="[width, color]"
+        mat-stroked-button
+        color="primary"
+        (click)="onClick()"
+        *transloco="let t; read: 'buttons'"
+>
+  {{ isCreate ? t('createSpace') : t('editSpace') }}
+</button>

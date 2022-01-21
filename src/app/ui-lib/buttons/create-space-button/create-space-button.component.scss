@@ -1,0 +1,22 @@
+@import "_var.scss";
+
+.static {
+  width: 99px;
+}
+
+.full {
+  width: 100%;
+}
+
+.primary {
+  border: $border_primary !important;
+}
+
+.gray {
+  border: $border_light !important;
+  color: $color_black;
+}
+
+button {
+  font-size: $font_normal;
+}

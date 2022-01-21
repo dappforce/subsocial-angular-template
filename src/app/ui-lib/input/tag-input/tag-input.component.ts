@@ -45,8 +45,14 @@ export class TagInputComponent
     this.onChange(this.tags);
   }
 
+  writeValue(obj: any) {
+    super.writeValue(obj);
+    this.tags = (this.value as string[]) || [];
+  }
+
   add(tag: any) {
-    this.tags.push((tag.value || '').trim());
+    const value = (tag.value || '').trim();
+    this.tags = [...this.tags, value];
     this.onChange(this.tags);
     this.tagCtrl.setValue(null);
   }

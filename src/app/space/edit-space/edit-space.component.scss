@@ -1,8 +1,10 @@
+@import "var";
+
 .edit-space-container {
   width: 628px;
   margin: 0 auto;
   min-height: 60vh;
-  padding-bottom: 16px;
+  padding-bottom: $space_normal;
 
   mat-card {
     padding: 35px 23px 21px;
@@ -13,7 +15,7 @@
   }
 
   .space-form {
-    margin-top: 16px;
+    margin-top: $space_normal;
     gap: 24px;
   }
 
@@ -21,16 +23,23 @@
     display: flex;
     justify-content: flex-end;
     width: 100%;
-    gap: 16px;
+    gap: $space_normal;
     margin-top: 5px;
 
     button {
       min-width: 110px;
-      font-size: 17px;
+      font-size: $font_normal;
       .mat-button-wrapper {
         letter-spacing: 0.5px;
       }
     }
+  }
+}
+
+form {
+  &>:not(:last-child) {
+    display: block;
+    margin-bottom: $space_normal;
   }
 }
 

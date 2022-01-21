@@ -2,13 +2,14 @@ import {
   ChangeDetectionStrategy,
   Component,
   Input,
-  OnChanges,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
-import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
 import { Observable } from 'rxjs';
 import { FollowerService } from '../../shared/services/follower.service';
+import { AccountService } from '../../shared/services/account.service';
+import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { Space } from '../../state/space/space.state';
 
 @Component({
   selector: 'app-space-profile',
@@ -16,21 +17,22 @@ import { FollowerService } from '../../shared/services/follower.service';
   styleUrls: ['./space-profile.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SpaceProfileComponent implements OnInit, OnChanges {
-  @Input() spaceItemData: SpaceListItemData | null;
+export class SpaceProfileComponent implements OnInit {
+  @Input() space: Space | null;
   @Input() isAutoExpandSummary: boolean;
+  @Input() isMySpace: boolean | null;
   isFollowed$: Observable<boolean>;
-  isOwner: boolean;
+  isHidden: boolean;
 
   constructor(private followerService: FollowerService) {}
 
-  ngOnChanges(changes: SimpleChanges): void {
-    this.isOwner = this.spaceItemData?.struct.handle === 'subsocial';
+  ngOnInit(): void {
+    this.isHidden = !!this.space?.isHidden;
+
+    this.isFollowed$ = this.followerService.checkIfFollowSpace(this.space?.id);
   }
 
-  ngOnInit(): void {
-    this.isFollowed$ = this.followerService.checkIfFollowSpace(
-      this.spaceItemData?.struct.id
-    );
+  onSwitchHidden() {
+    this.isHidden = !this.isHidden;
   }
 }

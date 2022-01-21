@@ -1,9 +1,8 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
-import { PostStruct } from '@subsocial/api/flat-subsocial/flatteners';
+import { Post } from '../../core/models/post/post-list-item.model';
 
-export interface PostState extends EntityState<PostStruct> {}
+export interface PostState extends EntityState<Post> {}
 
-export const postAdapter: EntityAdapter<PostStruct> =
-  createEntityAdapter<PostStruct>();
+export const postAdapter: EntityAdapter<Post> = createEntityAdapter<Post>();
 
 export const initialPostState: PostState = postAdapter.getInitialState();

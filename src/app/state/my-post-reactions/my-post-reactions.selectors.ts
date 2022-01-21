@@ -12,8 +12,9 @@ export const selectMyPostReactions =
 
 export const selectMyPostReactionsIds = createSelector(
   selectMyPostReactions,
-  selectAll
+  selectIds
 );
+
 export const selectMyPostReactionsCount = createSelector(
   selectMyPostReactions,
   selectTotal
@@ -22,3 +23,12 @@ export const selectMyPostReactionsEntities = createSelector(
   selectMyPostReactions,
   selectEntities
 );
+
+export const selectMyPostReactionsByPostId = (
+  address: string,
+  postId: string
+) =>
+  createSelector(
+    selectMyPostReactionsEntities,
+    (myPostReactionsEntities) => myPostReactionsEntities[address + '-' + postId]
+  );

@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CommentInputComponent } from './comment-input/comment-input.component';
 import { CommentsComponent } from './comments/comments.component';
-import { CommentMessageComponent } from './comment-message/comment-message.component';
-import { ReplyCommentsComponent } from './reply-comments/reply-comments.component';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { AvatarModule } from '../avatar/avatar.module';
 import { TextModule } from '../text/text.module';
@@ -14,13 +12,22 @@ import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ContainersModule } from '../containers/containers.module';
 import { ActionPanelModule } from '../action-panel/action-panel.module';
 import { MarkdownModule } from 'ngx-markdown';
+import { InputModule } from '../input/input.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MenuModule } from '../menu/menu.module';
+import { ShowCommentsButtonComponent } from './show-comments-button/show-comments-button.component';
+import { CommentItemComponent } from './comment-item/comment-item.component';
+import { CommentListComponent } from './comment-list/comment-list.component';
+import { ContentModule } from '../content/content.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
     CommentInputComponent,
     CommentsComponent,
-    CommentMessageComponent,
-    ReplyCommentsComponent,
+    ShowCommentsButtonComponent,
+    CommentItemComponent,
+    CommentListComponent,
   ],
   imports: [
     CommonModule,
@@ -34,12 +41,13 @@ import { MarkdownModule } from 'ngx-markdown';
     ContainersModule,
     ActionPanelModule,
     MarkdownModule,
+    InputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MenuModule,
+    ContentModule,
+    TranslocoModule,
   ],
-  exports: [
-    CommentInputComponent,
-    CommentsComponent,
-    CommentMessageComponent,
-    ReplyCommentsComponent,
-  ],
+  exports: [CommentInputComponent, CommentsComponent],
 })
 export class CommentModule {}

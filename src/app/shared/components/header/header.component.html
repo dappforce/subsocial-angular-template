@@ -4,25 +4,29 @@
            [v]="'center'"
            class="header-wp"
   >
-    <app-row>
-      <app-icon-button [buttonSize]="30"
-                       [iconName]="'menu-icon'"
-      ></app-icon-button>
-
-      <app-title type="large"
+    <app-row [v]="'center'">
+      <app-header-menu-button ifMobile></app-header-menu-button>
+      <app-title type="medium"
                  [link]="'/'"
-                 [text]="appName"
+                 [text]="'general.title' | transloco"
+                 [style.margin-left]="(device.isMobile$ | async) ? '10px' : '34px'"
       ></app-title>
     </app-row>
 
-    <app-profile-button></app-profile-button>
+    <app-row [h]="'center'" [v]="'center'">
+      <app-create-entity-button ifDesktop></app-create-entity-button>
+      <app-notification-icon-button></app-notification-icon-button>
+      <app-profile-button></app-profile-button>
+    </app-row>
 
   </app-row>
+</header>
 
-  <app-tabs class="header-tabs-wp"
-            [tabLinks]="navService.tabLinks"
+<div class="tabs-wp" *ngIf="navService.isShowTab$ | async">
+  <app-tabs [tabLinks]="navService.tabLinks"
             (tabClick)="onTabLinkClick($event)"
             [activeLink]="(navService.activeTab$ | async)!"
   ></app-tabs>
-</header>
+</div>
 
+<app-left-side-menu ifDesktop></app-left-side-menu>

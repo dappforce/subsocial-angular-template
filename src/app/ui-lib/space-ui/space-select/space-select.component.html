@@ -1,0 +1,43 @@
+<div class="w100 space-select"
+     (click)="isShowSpaceList = !isShowSpaceList">
+  <app-row *ngIf="selectedSpace; else loading"
+           margin="0 0 0 16px" [v]="'center'"
+  >
+
+    <app-avatar [src]="selectedSpace.image"
+                [jdentityValue]="selectedSpace.id"
+    ></app-avatar>
+
+    <span>{{ selectedSpace.name }}</span>
+
+  </app-row>
+</div>
+
+<div class="dropdown" *ngIf="isShowSpaceList">
+
+  <ul>
+    <li *ngFor="let space of spaces"
+        (click)="selectSpace(space)"
+        class="dropdown-item">
+
+      <app-row [v]="'center'">
+
+        <app-avatar [src]="space.image"
+                    [jdentityValue]="space.id"
+        ></app-avatar>
+
+        <span>{{ space.name }}</span>
+
+      </app-row>
+    </li>
+  </ul>
+
+</div>
+
+<div class="space-select-label">
+  <span>{{ 'forms.placeholder.postInSpace' | transloco }}</span>
+</div>
+
+<ng-template #loading>
+  <span class="loading">{{ 'content.loadingSpace' | transloco }}</span>
+</ng-template>

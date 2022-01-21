@@ -1,0 +1,32 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.15'
+  displayName: 'Install Node.js'
+
+- script: 
+    npm install yarn
+  displayName: 'npm install yarn'
+- script: 
+    yarn install
+  displayName: 'yarn install'
+- script:
+    npm run build
+  displayName: 'npm run build:ssr'
+- task: ArchiveFiles@2
+  displayName: 'Archive files'
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)/dist/subsocial-angular/browser/'
+    includeRootFolder: false
+    archiveType: zip
+    archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+    replaceExistingArchive: true
+
+- upload: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
+  artifact: drop

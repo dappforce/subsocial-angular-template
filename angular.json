@@ -33,9 +33,12 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/app/shared/styles/github-markdown.css",
+              "node_modules/simplemde/dist/simplemde.min.css",
               "src/styles.scss"
             ],
-            "scripts": [],
+            "scripts": [
+              "node_modules/simplemde/dist/simplemde.min.js"
+            ],
             "stylePreprocessorOptions": {
               "includePaths": ["src/app/shared/styles"]
             }
@@ -116,7 +119,10 @@
             "outputPath": "dist/subsocial-angular/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
-            "inlineStyleLanguage": "scss"
+            "inlineStyleLanguage": "scss",
+            "stylePreprocessorOptions": {
+              "includePaths": ["src/app/shared/styles"]
+            }
           },
           "configurations": {
             "production": {
@@ -126,7 +132,10 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
-              ]
+              ],
+              "stylePreprocessorOptions": {
+                "includePaths": ["src/app/shared/styles"]
+              }
             },
             "development": {
               "optimization": false,

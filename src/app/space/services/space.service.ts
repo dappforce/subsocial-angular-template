@@ -2,24 +2,26 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SubsocialApiService } from '../../shared/services/subsocial-api.service';
 import { SpaceStruct } from '@subsocial/api/flat-subsocial/flatteners';
-import { SpaceData } from '@subsocial/api/flat-subsocial/dto';
-import { Content } from '../../core/types/content.type';
 import { SpaceId } from '@subsocial/types/substrate/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
-import { selectSpaceById } from '../../state/space/space.selectors';
 import {
+  selectSpaceById,
+  selectSpaceEntitiesByIds,
+} from '../../state/space/space.selectors';
+import {
+  loadSpacesByIds,
   loadSpaceById,
   loadSpaceSuccess,
 } from '../../state/space/space.actions';
-import {
-  TransformData,
-  TransformDataArray,
-} from '../../core/types/transform-dto.types';
-import { transformEntityDataArray } from '../../core/utils';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { ConvertService } from '../../shared/services/convert.service';
 import { StoreService } from '../../state/store.service';
+import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
+import { BehaviorSubject } from 'rxjs';
+import { AccountService } from '../../shared/services/account.service';
+import { mapSpaceDTOToSpace } from '../../core/mapper/space.map';
+import { Space } from '../../state/space/space.state';
 
 @Injectable({
   providedIn: 'root',
@@ -30,27 +32,43 @@ export class SpaceService {
     private apiService: SubsocialApiService,
     private store: Store<AppState>,
     private convert: ConvertService,
-    private storeService: StoreService
+    private storeService: StoreService,
+    private accountService: AccountService
   ) {}
+
+  private myOwnSpaceIdsSource = new BehaviorSubject<string[] | null>(null);
+  myOwnSpaceIds$ = this.myOwnSpaceIdsSource.asObservable();
 
   public async getSpacesByIds(ids: string[]): Promise<SpaceStruct[]> {
     return await this.apiService.api.findSpaceStructs(ids);
   }
 
-  public async getFlatSpacesById(
+  public async getMyOwnSpaceIds() {
+    const accountId = this.accountService.getCurrentAccountId();
+    if (accountId) {
+      const ids = await this.getSpaceIdsByAccount(accountId);
+
+      if (ids?.length > 0) {
+        this.myOwnSpaceIdsSource.next(ids);
+        return;
+      }
+    }
+
+    this.myOwnSpaceIdsSource.next(null);
+  }
+
+  public async loadSpacesByIds(
     ids: string[],
     type: 'public' | 'all' = 'public'
-  ): Promise<TransformDataArray> {
-    const spaceData: SpaceData[] = await this.apiService.api.findPublicSpaces(
-      ids
-    );
+  ): Promise<Space[]> {
+    const spaceData = await this.apiService.api.findPublicSpaces(ids);
 
     if (type === 'public') {
       const unlistedSpaces = await this.apiService.api.findUnlistedSpaces(ids);
       spaceData.push(...unlistedSpaces);
     }
 
-    return transformEntityDataArray(spaceData);
+    return spaceData.map((data) => mapSpaceDTOToSpace(data));
   }
 
   async getSpaceIdByHandle(handle: string): Promise<string | undefined> {
@@ -62,21 +80,12 @@ export class SpaceService {
     return res?.toString();
   }
 
-  async getSpaceById(id: string) {
+  async loadSpaceById(id: string) {
     const spaceData = await this.apiService.api.findSpace({
       id: this.convert.convertToBN(id),
     });
-    if (spaceData && spaceData.struct.contentId) {
-      const transformSpaceData: TransformData = {
-        struct: spaceData!.struct,
-        content: spaceData.content as Content,
-      };
-      transformSpaceData.content['id'] = spaceData.struct.contentId;
 
-      return transformSpaceData;
-    }
-
-    return undefined;
+    return spaceData ? mapSpaceDTOToSpace(spaceData) : undefined;
   }
 
   async getFollowersIdsBySpaceId(id: string) {
@@ -87,14 +96,26 @@ export class SpaceService {
     });
   }
 
-  async getOrFetchSpaceById(id: string | undefined) {
-    return await this.storeService.getOrLoadEntities(
+  async reloadSpaceById(id: string) {
+    return (await this.storeService.reloadEntity(
       selectSpaceById,
       loadSpaceById,
       loadSpaceSuccess,
       id,
       { id }
+    )) as SpaceListItemData;
+  }
+
+  async getOrLoadSpacesByIds(ids: string[] | undefined) {
+    const spaceEntityData = await this.storeService.getOrLoadEntities(
+      selectSpaceEntitiesByIds,
+      loadSpacesByIds,
+      loadSpaceSuccess,
+      ids,
+      { payload: { ids } }
     );
+
+    return Object.values(spaceEntityData) as SpaceListItemData[];
   }
 
   async getSpaceIdsByAccount(id: string) {

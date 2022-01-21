@@ -1,0 +1,42 @@
+<section class="edit-profile-container" *ngIf="hasPermission$ | async; else noPermission">
+  <mat-card>
+    <h2 class="title-medium">{{ titleKey | transloco }} {{ 'general.profile' | transloco}}</h2>
+
+    <form [formGroup]="editProfileForm" class="profile-form" action="">
+
+      <app-image-loader formControlName="avatar"
+                        [imageUrl]="url"
+      ></app-image-loader>
+
+      <app-text-input formControlName="name"
+                      [isRequired]="true"
+                      [label]="'forms.placeholder.profileName' | transloco"
+      ></app-text-input>
+
+      <app-mde-editor [isToolbarHidden]="false"
+                      [height]="160"
+                      [autoFocus]="true"
+                      formControlName="about"
+                      [placeholder]="'forms.placeholder.about' | transloco"
+      ></app-mde-editor>
+
+      <div class="button-wp">
+
+        <button (click)="resetForm()"
+                mat-stroked-button
+                *transloco="let t; read: 'buttons'"
+        >{{ isNew ? t('cancel') : t('resetForm')}}</button>
+
+        <app-tx-button *transloco="let t; read: 'buttons'"
+                       [name]="isNew ?  t('createProfile') : t('save')"
+                       (click)="onEditProfile()"
+        ></app-tx-button>
+
+      </div>
+    </form>
+  </mat-card>
+</section>
+
+<ng-template #noPermission>
+  <div>No permission</div>
+</ng-template>

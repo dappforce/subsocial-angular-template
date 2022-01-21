@@ -1,0 +1,19 @@
+@import "var";
+
+
+app-column {
+  padding: 24px;
+  &>*:not(:last-child) {
+    margin-bottom: $space_normal;
+  }
+}
+
+p {
+  text-align: center;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+button {
+
+}

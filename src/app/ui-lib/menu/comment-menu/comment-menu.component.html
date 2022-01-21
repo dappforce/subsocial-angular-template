@@ -1,0 +1,37 @@
+
+<app-icon-button [iconSize]="16"
+                 [matMenuTriggerFor]="menu"
+                 [iconName]="'option-hor-icon'"
+></app-icon-button>
+
+<mat-menu #menu="matMenu">
+
+  <app-menu-item *ngIf="isOwner$ | async"
+                 (click)="edit.emit()"
+                 [title]="'buttons.editComment' | transloco"
+                 [iconName]="'edit-icon'"
+                 [iconSize]="18"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.makeVisible' | transloco"
+                 [iconName]="'visible-icon'"
+                 (click)="show()"
+                 *ngIf="isHidden && (isOwner$ | async)"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.hideComment' | transloco"
+                 [iconName]="'hide-icon'"
+                 (click)="hide()"
+                 *ngIf="!isHidden && (isOwner$ | async)"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.viewReactions' | transloco"
+                 [iconName]="'view-reaction-icon'"
+                 (click)="onClickViewReaction.emit()"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.viewOnIPFS' | transloco"
+                 [iconName]="'ipfs-icon'"
+  ></app-menu-item>
+
+</mat-menu>

@@ -5,9 +5,11 @@
   (scrolled)="onScrollDown()"
   [infiniteScrollDisabled]="isBlockInfinityScroll"
   class="space-list-wp">
-  <ng-container *ngFor="let space of listData; trackBy: trackById">
-    <app-space-item [spaceItemData]="space"></app-space-item>
+  <ng-container *ngFor="let space of items$ | async; trackBy: trackById">
+    <app-space-item [showHidden]="showHidden" [space]="space"></app-space-item>
   </ng-container>
 
-  <app-spinner [showSpinner]="isLoading" [text]="'Loading more spaces...'"></app-spinner>
+  <app-spinner [showSpinner]="isLoading"
+               [text]="'content.moreSpaces' | transloco"
+  ></app-spinner>
 </div>

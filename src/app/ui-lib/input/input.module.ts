@@ -10,6 +10,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { ImageLoaderComponent } from './image-loader/image-loader.component';
+import { MdeEditorComponent } from './mde-editor/mde-editor.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { ImageLoaderComponent } from './image-loader/image-loader.component';
     TextAreaComponent,
     TextInputComponent,
     ImageLoaderComponent,
+    MdeEditorComponent,
   ],
   exports: [
     TagComponent,
@@ -25,6 +28,7 @@ import { ImageLoaderComponent } from './image-loader/image-loader.component';
     TextAreaComponent,
     TextInputComponent,
     ImageLoaderComponent,
+    MdeEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +38,7 @@ import { ImageLoaderComponent } from './image-loader/image-loader.component';
     MatIconModule,
     FormsModule,
     MatInputModule,
+    TranslocoModule,
   ],
 })
 export class InputModule {}

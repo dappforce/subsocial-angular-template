@@ -15,14 +15,14 @@
       </app-title>
     </div>
 
-    <div class="profile-stats-wp" [ngClass]="type">
+    <div class="profile-stats-wp" [ngClass]="type" *transloco="let t; read: 'general'">
       <span (click)="openConnectionDialog('following')">
         <strong class="count">{{followingCount | numeral}}</strong>
-        <span>{{'Following'}}</span>
+        <span>{{ t('following') }}</span>
       </span>
       <span (click)="openConnectionDialog('followers')">
         <strong class="count">{{followersCount | numeral}}</strong>
-        <span>{{followersCount | pluralize: 'Follower'}}</span>
+        <span>{{followersCount | pluralize: t('follower')}}</span>
       </span>
     </div>
 

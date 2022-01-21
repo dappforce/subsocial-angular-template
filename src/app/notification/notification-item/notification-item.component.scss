@@ -1,0 +1,42 @@
+@import "var";
+
+:host {
+  width: 100%;
+  max-width: 100%;
+}
+
+.notification-item {
+  height: 77px;
+}
+
+.description {
+  height: 20px;
+  overflow: hidden;
+  max-width: 617px;
+
+  &>*:not(:last-child) {
+    padding-right: 4px;
+    white-space: nowrap;
+  }
+
+  a {
+    font-weight: 500;
+    text-overflow: ellipsis;
+
+    &:hover {
+      color: $color_primary;
+      cursor: pointer;
+    }
+  }
+}
+
+.date {
+  font-size: $font_small;
+  color: $color_gray_dark;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

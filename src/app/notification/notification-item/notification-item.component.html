@@ -1,0 +1,49 @@
+<ng-container *ngIf="notification">
+
+  <app-row v="center" h="space-between" class="notification-item">
+
+    <app-row>
+
+      <app-avatar [jdentityValue]="notification.profileId"
+                  [src]="notification.avatar"
+                  [routerLink]="notification.profileLink"
+                  [size]="46"
+      ></app-avatar>
+
+      <app-column [margin]="'0 0 0 8px'" h="space-between">
+
+        <app-row class="description" *transloco="let t; read: 'notifications'">
+
+          <a [routerLink]="notification.profileLink">
+            {{notification.profileName || (notification.profileId | addressHidden)}}
+          </a>
+
+          <span *ngIf="notification.aggregate">
+            {{t('aggregate', {count: notification.aggregate.toString()}) }}
+          </span>
+
+          <span>{{t(notification.event)}}</span>
+
+          <div class="ellipsis">
+            <a [routerLink]="notification.contentLink">
+              {{notification.name}}
+            </a>
+          </div>
+
+        </app-row>
+
+
+        <div class="date">{{notification.date | day}}</div>
+
+      </app-column>
+
+    </app-row>
+
+    <app-post-image type="notification"
+                    [image]="notification.image"
+                    [link]="notification.contentLink"
+    ></app-post-image>
+
+  </app-row>
+
+</ng-container>

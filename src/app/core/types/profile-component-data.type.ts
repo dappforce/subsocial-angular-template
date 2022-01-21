@@ -7,4 +7,6 @@ export type ProfileComponentData = {
   tokens?: string;
   name?: string;
   avatar?: string;
+  about?: string;
+  contentId?: string;
 };

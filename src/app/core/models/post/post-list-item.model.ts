@@ -1,4 +1,4 @@
-export interface PostListItemData {
+export interface Post {
   id: string;
   ownerId: string;
   ownerImageUrl: string;
@@ -18,16 +18,15 @@ export interface PostListItemData {
   isShowMore: boolean;
   ownerName: string;
   postLink: string;
-  isMyPost: boolean;
   hidden: boolean;
+  spaceHidden: boolean;
   body: string;
   tags: string[];
-  spaceId?: string;
+  spaceId: string;
   link?: string;
   sharedPostId?: string;
   rootPostId?: string;
   spaceLink?: string;
-  upvoteActive?: boolean;
-  downvoteActive?: boolean;
-  reactionId?: string;
+  parentId?: string;
+  isChildrenCommentShow?: boolean;
 }

@@ -10,6 +10,7 @@ export const MODAL_CONFIG = {
 };
 
 export const AVATAR_SIZE = {
+  MINI: 36,
   SMALL: 40,
   MEDIUM: 46,
 };

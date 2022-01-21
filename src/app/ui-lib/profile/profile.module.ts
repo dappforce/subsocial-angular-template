@@ -10,6 +10,7 @@ import { MatRippleModule } from '@angular/material/core';
 import { PipesModule } from '../../shared/pipes/pipes.module';
 import { ProfileInfoComponent } from './profile-info/profile-info.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [AccountListItemComponent, ProfileInfoComponent],
@@ -24,6 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatRippleModule,
     PipesModule,
     MatDialogModule,
+    TranslocoModule,
   ],
 })
 export class ProfileModule {}

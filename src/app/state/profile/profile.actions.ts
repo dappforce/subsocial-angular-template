@@ -1,15 +1,16 @@
 import { createAction, props } from '@ngrx/store';
 import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { LoadEntitiesProps } from '../types';
+import { Profile } from './profile.state';
 
 export const upsertProfiles = createAction(
   '[Profile] Upsert Profiles',
-  props<{ payload: Array<ProfileStruct> }>()
+  props<{ payload: Array<Profile> }>()
 );
 
 export const upsertProfile = createAction(
   '[Profile] Upsert Profile',
-  props<{ payload: ProfileStruct }>()
+  props<{ payload: Profile }>()
 );
 
 export const loadMyProfile = createAction(
@@ -17,16 +18,24 @@ export const loadMyProfile = createAction(
   props<{ id: string }>()
 );
 
-export const loadProfile = createAction(
+export const loadProfileById = createAction(
   '[Profile] Load Profile By Id',
   props<{ id: string }>()
 );
 
-export const loadProfiles = createAction(
+export const loadProfilesByIds = createAction(
   '[Profile] Load Profiles By Ids',
   props<{ payload: LoadEntitiesProps }>()
 );
 
 export const saveProfilesSuccess = createAction(
   '[Profile] Load Profiles Success'
+);
+
+export const saveProfileSuccess = createAction(
+  '[Profile] Load Profile Success'
+);
+
+export const saveMyProfileSuccess = createAction(
+  '[Profile] Load My Profile Success'
 );

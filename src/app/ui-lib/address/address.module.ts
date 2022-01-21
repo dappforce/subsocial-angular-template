@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ButtonsModule } from '../buttons/buttons.module';
 import { PipesModule } from '../../shared/pipes/pipes.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [AddressComponent],
@@ -14,6 +15,7 @@ import { PipesModule } from '../../shared/pipes/pipes.module';
     ClipboardModule,
     ButtonsModule,
     PipesModule,
+    TranslocoModule,
   ],
   exports: [AddressComponent],
 })

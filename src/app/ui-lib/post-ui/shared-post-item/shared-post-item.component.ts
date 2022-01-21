@@ -1,15 +1,19 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
+  OnChanges,
   OnInit,
+  SimpleChanges,
 } from '@angular/core';
-import { PostListItemData } from '../../../core/models/post/post-list-item.model';
-import { Observable } from 'rxjs';
-import { getPostsByIds } from '../../../state/post/post.actions';
+import { Post } from '../../../core/models/post/post-list-item.model';
+import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/state';
-import { selectPostWithAllDetailsById } from '../../../state/post/post.selectors';
+import { filter, takeUntil } from 'rxjs/operators';
+import { CommentService } from '../../../shared/services/comment.service';
+import { PostService } from '../../../post/services/post.service';
 
 @Component({
   selector: 'app-shared-post-item',
@@ -17,24 +21,58 @@ import { selectPostWithAllDetailsById } from '../../../state/post/post.selectors
   styleUrls: ['./shared-post-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SharedPostItemComponent implements OnInit {
-  @Input() postItemData: PostListItemData;
-  sharedPostItemData$: Observable<PostListItemData>;
+export class SharedPostItemComponent implements OnInit, OnChanges {
+  @Input() postItemData: Post;
+  sharedPostItemData: Post | undefined;
+  isHidden: boolean;
+  isCommentOpen: boolean;
+  repliesCount: number;
+  isSharedPostHidden: boolean;
 
-  constructor(private store: Store<AppState>) {}
+  private unsubscribe$: Subject<void> = new Subject();
 
-  ngOnInit(): void {
+  constructor(
+    private store: Store<AppState>,
+    private commentService: CommentService,
+    private postService: PostService,
+    private cd: ChangeDetectorRef
+  ) {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.postItemData && changes.postItemData.currentValue) {
+      this.repliesCount = this.postItemData!.repliesCount;
+    }
+  }
+
+  async ngOnInit() {
+    this.isHidden = this.postItemData.hidden;
+
     const sharedPostId = this.postItemData.sharedPostId;
 
     if (sharedPostId) {
-      this.store.dispatch(getPostsByIds({ payload: { ids: [sharedPostId] } }));
-      this.sharedPostItemData$ = this.store.select(
-        selectPostWithAllDetailsById(sharedPostId)
+      this.sharedPostItemData = await this.postService.loadPostById(
+        sharedPostId
       );
+
+      this.isSharedPostHidden =
+        !this.sharedPostItemData || this.sharedPostItemData.spaceHidden;
+
+      this.cd.markForCheck();
     }
   }
 
   onViewReaction() {}
 
-  onCommentButtonClick() {}
+  onCommentButtonClick() {
+    this.isCommentOpen = !this.isCommentOpen;
+  }
+
+  onSwitchHidden() {
+    this.isHidden = !this.isHidden;
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$?.next();
+    this.unsubscribe$?.complete();
+  }
 }

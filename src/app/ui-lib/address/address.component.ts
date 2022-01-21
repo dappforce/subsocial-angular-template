@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { SnackBarService } from '../../shared/services/snack-bar.service';
+import { TranslocoService } from '@ngneat/transloco';
 
 @Component({
   selector: 'app-address',
@@ -15,12 +16,15 @@ export class AddressComponent {
   @Input() showCopyButton = false;
   @Input() size: 'small' | 'medium' = 'small';
 
-  constructor(private snackBar: SnackBarService) {}
+  constructor(
+    private snackBar: SnackBarService,
+    private transloco: TranslocoService
+  ) {}
 
   onCopy(event: any) {
     event.stopPropagation();
     this.snackBar.openSimpleSnackBar({
-      message: 'Address copied!',
+      message: this.transloco.translate('snackbars.addressCopied'),
       iconName: 'info-icon',
       duration: 1500,
     });

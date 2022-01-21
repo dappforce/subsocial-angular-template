@@ -6,6 +6,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `yarn install`
 
+>In order to correctly build the application, Yarn needs to be used. 
+>If you try to use NPM, you may face issues with some NPM packages.
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

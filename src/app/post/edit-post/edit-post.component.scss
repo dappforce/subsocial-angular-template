@@ -1,3 +1,5 @@
+@import "var";
+
 .edit-post-container {
   width: 628px;
   margin: 0 auto;
@@ -9,8 +11,8 @@
   }
 
   .image-wp {
-    margin-top: 16px;
-    margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 16px;
   }
 
   .input-wp {
@@ -47,6 +49,18 @@
       }
     }
   }
+}
+
+form {
+  &>:not(:last-child) {
+    display: block;
+    margin-bottom: $space_normal;
+  }
+}
+
+app-space-select {
+  margin-top: 20px;
+  margin-bottom: 6px;
 }
 
 

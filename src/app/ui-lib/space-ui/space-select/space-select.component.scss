@@ -1,0 +1,68 @@
+@import "var";
+
+:host {
+  position: relative;
+  cursor: pointer;
+  display: block;
+}
+
+app-avatar {
+  margin-right: 4px;
+}
+
+.space-select {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 6px 0;
+  border-radius: 4px;
+  &:hover {
+    border: 1px solid $color_primary;
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 24px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid rgba(0, 0, 0, 0.54);
+    clear: both;
+  }
+}
+
+.dropdown {
+  right: 0;
+  left: 0;
+  border: 1px solid rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  background: $color_white;
+  position: absolute;
+  z-index: 10;
+  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+
+  .dropdown-item {
+    padding: 6px 16px;
+
+    &:hover {
+      background-color: $hover_color_light;
+    }
+  }
+}
+
+.loading {
+  color: $color_gray_dark;
+  padding: 12px 16px;
+  display: block;
+}
+
+.space-select-label {
+  position: absolute;
+  top: -7px;
+  left: 6px;
+  padding: 0 5px;
+  background-color: $color_white;
+  font-size: 12px;
+  color: $color_gray_dark;
+}

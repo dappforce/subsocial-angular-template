@@ -1,11 +1,12 @@
-.notification-list {
-  margin-top: 8px;
+@import "var";
 
-  .notification-wp {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(33, 33, 33, 0.08);
-    padding: 12px 0;
-  }
+.notification-wp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid $color_border_list;
+}
+
+app-title {
+  margin-top: 8px;
 }

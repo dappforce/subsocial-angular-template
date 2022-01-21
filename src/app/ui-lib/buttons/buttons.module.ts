@@ -5,7 +5,6 @@ import { CloseButtonComponent } from './close-button/close-button.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
-import { OptionButtonComponent } from './option-button/option-button.component';
 import { MatMenuModule } from '@angular/material/menu';
 import { SendTipsButtonComponent } from './send-tips-button/send-tips-button.component';
 import { ReplyButtonComponent } from './reply-button/reply-button.component';
@@ -27,6 +26,14 @@ import { AvatarModule } from '../avatar/avatar.module';
 import { BalanceModule } from '../balance/balance.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRippleModule } from '@angular/material/core';
+import { TxButtonComponent } from './tx-button/tx-button.component';
+import { CreateEntityButtonComponent } from './create-entity-button/create-entity-button.component';
+import { NotificationIconButtonComponent } from './notification-icon-button/notification-icon-button.component';
+import { MatBadgeModule } from '@angular/material/badge';
+import { TranslocoModule } from '@ngneat/transloco';
+import { HeaderMenuButtonComponent } from './header-menu-button/header-menu-button.component';
+import { CreateSpaceButtonComponent } from './create-space-button/create-space-button.component';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const components = [
   QrButtonComponent,
@@ -38,7 +45,6 @@ const components = [
   IconButtonComponent,
   CloseButtonComponent,
   FollowButtonComponent,
-  OptionButtonComponent,
   SendTipsButtonComponent,
   ReplyButtonComponent,
   UpvoteButtonComponent,
@@ -46,6 +52,11 @@ const components = [
   CommentButtonComponent,
   SharedButtonComponent,
   SendButtonComponent,
+  TxButtonComponent,
+  CreateEntityButtonComponent,
+  NotificationIconButtonComponent,
+  HeaderMenuButtonComponent,
+  CreateSpaceButtonComponent,
 ];
 
 @NgModule({
@@ -63,6 +74,9 @@ const components = [
     BalanceModule,
     MatProgressSpinnerModule,
     MatRippleModule,
+    MatBadgeModule,
+    TranslocoModule,
+    MatTooltipModule,
   ],
 })
 export class ButtonsModule {}

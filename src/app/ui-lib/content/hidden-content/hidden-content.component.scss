@@ -1,4 +1,4 @@
-.post {
+.hidden-wp {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,7 +6,7 @@
   border-bottom: 1px solid #F1E8B3;
   border-radius: 4px 4px 0 0;
   height: 40px;
-  margin: -16px -16px 16px;
+  margin: -16px -16px 8px;
 
   mat-icon {
     margin: 0 10px 0 16px;
@@ -27,3 +27,8 @@
   }
 }
 
+@media only screen and (max-width: 768px) {
+  .hidden-wp {
+    height: 55px;
+  }
+}

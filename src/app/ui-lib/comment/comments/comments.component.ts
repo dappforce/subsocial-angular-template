@@ -1,5 +1,10 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommentItemData } from '../../../core/types/comment-data.type';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  OnInit,
+} from '@angular/core';
+import { Post } from '../../../core/models/post/post-list-item.model';
 
 @Component({
   selector: 'app-comments',
@@ -7,9 +12,11 @@ import { CommentItemData } from '../../../core/types/comment-data.type';
   styleUrls: ['./comments.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CommentsComponent {
-  @Input() commentListData: CommentItemData[] | null = [];
-  @Input() commentsCount: number = 0;
+export class CommentsComponent implements OnInit {
+  @Input() rootPost: Post;
+  @Input() repliesCount: number;
 
   constructor() {}
+
+  ngOnInit() {}
 }

@@ -1,8 +1,9 @@
 <button
   [disabled]="isDisabled"
   (click)="onSendBtnClick.emit()"
+  *transloco="let t; read: 'buttons'"
   class="send-button"
   mat-flat-button
   color="primary">
-  Send
+  {{ type === 'edit'  ? t('update') : t('send') }}
 </button>

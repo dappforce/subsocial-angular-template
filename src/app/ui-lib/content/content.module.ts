@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatRippleModule } from '@angular/material/core';
 import { NoContentComponent } from './no-content/no-content.component';
 import { MatCardModule } from '@angular/material/card';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MatCardModule } from '@angular/material/card';
     MatIconModule,
     MatRippleModule,
     MatCardModule,
+    TranslocoModule,
   ],
   exports: [
     EmbedVideoComponent,

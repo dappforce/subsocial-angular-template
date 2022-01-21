@@ -1,63 +1,48 @@
-import { PostContent, ProfileContent } from '@subsocial/api/flat-subsocial/dto';
-import {
-  CommentStruct,
-  PostStruct,
-  SharedPostStruct,
-  SpaceStruct,
-} from '@subsocial/api/flat-subsocial/flatteners';
-import { PostListItemData } from '../models/post/post-list-item.model';
-import { environment } from '../../../environments/environment';
+import { Post } from '../models/post/post-list-item.model';
 import { getPostLink } from '../utils';
-import { SpaceContentExtend } from '../models/space/space-list-item.model';
-import { MyPostReactionsStruct } from '../../state/my-post-reactions/my-post-reactions.state';
+import { ProfileContent, SpaceData } from '@subsocial/api/flat-subsocial/dto';
 
-export const mapPostDataToPostListItem = (
-  postStruct: SharedPostStruct & CommentStruct,
-  postContent: PostContent,
-  spaceStruct: SpaceStruct | undefined,
-  profileContent: ProfileContent | undefined,
-  spaceContent: SpaceContentExtend | undefined,
-  myAddress: string,
-  myPostReaction?: MyPostReactionsStruct
-): PostListItemData => {
+export const mapPostDTOToPost = (
+  post: any,
+  space: SpaceData | undefined,
+  profileContent: ProfileContent | undefined
+): Post => {
   return {
-    id: postStruct.id,
-    ownerId: postStruct.ownerId,
+    id: post.struct.id,
+    ownerId: post.struct.ownerId,
     ownerImageUrl: profileContent?.avatar || '',
-    spaceName: spaceContent?.name || '',
-    title: postContent.title,
-    summary: postContent.summary,
-    imageUrl: postContent.image ? environment.ipfsUrl + postContent.image : '',
-    createdAtTime: postStruct.createdAtTime,
-    repliesCount: postStruct.repliesCount,
-    hiddenRepliesCount: postStruct.hiddenRepliesCount,
-    visibleRepliesCount: postStruct.visibleRepliesCount,
-    sharesCount: postStruct.visibleRepliesCount,
-    upvotesCount: postStruct.upvotesCount,
-    downvotesCount: postStruct.downvotesCount,
-    isSharedPost: postStruct.isSharedPost,
-    isComment: postStruct.isComment,
-    isShowMore: postContent.isShowMore,
+    spaceName: space?.content?.name || '',
+    title: post.content!.title,
+    summary: post.content!.summary,
+    imageUrl: post.content!.image,
+    createdAtTime: post.struct.createdAtTime,
+    repliesCount: post.struct.repliesCount,
+    hiddenRepliesCount: post.struct.hiddenRepliesCount,
+    visibleRepliesCount: post.struct.visibleRepliesCount,
+    sharesCount: post.struct.visibleRepliesCount,
+    upvotesCount: post.struct.upvotesCount,
+    downvotesCount: post.struct.downvotesCount,
+    isSharedPost: post.struct.isSharedPost,
+    isComment: post.struct.isComment,
+    isShowMore: post.content!.isShowMore,
     ownerName: profileContent?.name || '',
     postLink: getPostLink(
-      spaceStruct?.handle,
-      postContent.title ? postContent.title : postContent.summary.slice(0, 30),
-      postStruct.id,
-      postStruct.isComment ? 'comments' : postStruct.spaceId!
+      '',
+      post.content!.title
+        ? post.content!.title
+        : post.content!.summary.slice(0, 30),
+      post.struct.id,
+      post.struct.isComment ? 'comments' : post.struct.spaceId!
     ),
-    hidden: postStruct.hidden,
-    isMyPost: postStruct.ownerId === myAddress,
-    body: postContent.body,
-    tags: postContent.tags,
-    spaceId: postStruct.spaceId,
-    link: postContent.link,
-    sharedPostId: postStruct.sharedPostId,
-    spaceLink: spaceStruct?.handle
-      ? '/' + (spaceStruct.handle ? '@' + spaceStruct.handle : spaceStruct.id)
-      : '',
-    upvoteActive: myPostReaction?.kind === 'Upvote',
-    downvoteActive: myPostReaction?.kind === 'Downvote',
-    rootPostId: postStruct.rootPostId,
-    reactionId: myPostReaction?.reactionId,
+    hidden: post.struct.hidden,
+    spaceHidden: space === undefined || !!space?.struct.hidden,
+    body: post.content!.body,
+    tags: post.content!.tags,
+    spaceId: post.struct.spaceId,
+    link: post.content!.link,
+    sharedPostId: post.struct.sharedPostId,
+    spaceLink: '/' + space?.struct.id,
+    rootPostId: post.struct.rootPostId,
+    parentId: post.struct.parentId,
   };
 };

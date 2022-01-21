@@ -18,7 +18,9 @@ import { PostUiModule } from '../ui-lib/post-ui/post-ui.module';
 import { ContentModule } from '../ui-lib/content/content.module';
 import { CommentModule } from '../ui-lib/comment/comment.module';
 import { ActionPanelModule } from '../ui-lib/action-panel/action-panel.module';
-import { ContainersModule } from "../ui-lib/containers/containers.module";
+import { ContainersModule } from '../ui-lib/containers/containers.module';
+import { MenuModule } from '../ui-lib/menu/menu.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [PostListComponent, PostComponent, EditPostComponent],
@@ -39,7 +41,9 @@ import { ContainersModule } from "../ui-lib/containers/containers.module";
     ContentModule,
     CommentModule,
     ActionPanelModule,
-    ContainersModule
-  ]
+    ContainersModule,
+    MenuModule,
+    TranslocoModule,
+  ],
 })
 export class PostModule {}

@@ -1,12 +1,25 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { KeyValuePair } from '../models/key-value-pair.model';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   template: '',
+  animations: [
+    trigger('errorsAnimations', [
+      transition(':enter', [
+        style({ top: '-20px', opacity: 0 }),
+        animate('150ms', style({ top: '0', opacity: 1 })),
+      ]),
+      transition(':leave', [
+        style({ top: '0', opacity: 1 }),
+        animate('150ms', style({ top: '-20px', opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class BaseControlValueAccessorComponent implements ControlValueAccessor {
-  @Input() errorTexts: KeyValuePair<string>;
+  @Input() error: string = '';
   @Output() blur = new EventEmitter();
 
   onChange: any = () => {};
@@ -34,7 +47,8 @@ export class BaseControlValueAccessorComponent implements ControlValueAccessor {
   }
 
   writeValue(obj: any): void {
-    this._value = obj;
+    this.value = obj;
+    this.onBlur();
   }
 
   onBlur() {

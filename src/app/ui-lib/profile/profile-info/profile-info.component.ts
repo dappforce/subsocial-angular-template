@@ -9,7 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { takeUntil } from 'rxjs/operators';
 import { DeviceService } from '../../../shared/services/device.service';
 import { Subject } from 'rxjs';
-import { ConnectionsModalDialogComponent } from '../../../shared/modal-dialogs/connections-modal-dialog/connections-modal-dialog.component';
+import { ConnectionsModalDialogComponent } from '../../modal-dialogs/connections-modal-dialog/connections-modal-dialog.component';
 import { ConnectionModalData } from '../../../core/types/dialog-modal-data.types';
 import { AVATAR_SIZE } from '../../../core/constants/size.const';
 

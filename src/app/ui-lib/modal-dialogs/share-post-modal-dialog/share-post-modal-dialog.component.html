@@ -1,0 +1,33 @@
+<div class="modal-wp share-post">
+  <div class="modal-header">
+    <h2 class="title-medium">{{ 'post.sharePost' | transloco }}</h2>
+    <app-close-button (onClose)="dialogRef.close()"></app-close-button>
+  </div>
+
+  <form [formGroup]="sharedPostForm" action="" class="share-post-body"
+        *transloco="let t; read: 'forms.placeholder'"
+  >
+    <app-space-select formControlName="spaceId"></app-space-select>
+
+    <app-mde-editor [height]="80"
+                    [autoFocus]="true"
+                    [placeholder]="t('comment')"
+                    formControlName="body"
+    ></app-mde-editor>
+
+    <app-post-item [isSharedPost]="true"
+                   [postItemData]="data"
+    ></app-post-item>
+  </form>
+
+  <div class="button-wp" *transloco="let t; read: 'buttons'">
+    <button mat-stroked-button (click)="dialogRef.close()">{{ t('cancel') }}</button>
+
+    <app-tx-button [isSending]="isSending"
+                   (click)="createSharePost()"
+                   [name]="t('createPost')"
+    ></app-tx-button>
+  </div>
+
+</div>
+

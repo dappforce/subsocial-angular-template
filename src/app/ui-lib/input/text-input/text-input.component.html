@@ -10,11 +10,14 @@
 
   </mat-form-field>
 
-  <ng-container *ngIf="error">
-    <div class="error-wp">
-      <span>{{error}}</span>
-    </div>
-  </ng-container>
+
+  <div *ngIf="error"
+       class="error-wp"
+       [@errorsAnimations]
+  >
+    <span>{{error}}</span>
+  </div>
+
 </div>
 
 <ng-template #required>

@@ -10,11 +10,14 @@ import {
 import { KIND, METHODS, PALLETS } from '../../core/constants/query.const';
 import {
   ExtrinsicProps,
-  TxButtonComponent,
-} from '../../core/base-component/tx-button.component';
+  BaseTxComponent,
+} from '../../core/base-component/base-tx.component';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { SubmittableResult } from '@polkadot/api';
+import { MyPostReactions } from '../../state/my-post-reactions/my-post-reactions.state';
+import { MyPostReactionFacade } from '../../state/my-post-reactions/my-post-reaction.facade';
+import { filter, mergeMap, switchMap } from 'rxjs/operators';
 
 type OperationType = {
   update?: boolean;
@@ -34,35 +37,50 @@ type InitialVoteStatus = {
   styleUrls: ['./action-panel.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ActionPanelComponent extends TxButtonComponent implements OnInit {
+export class ActionPanelComponent extends BaseTxComponent implements OnInit {
   @Input() postId: string;
-  @Input() reactionId: string | undefined;
   @Input() isShowShare = false;
   @Input() isShowComment = false;
   @Input() upvoteCount: number = 0;
   @Input() downvoteCount: number = 0;
   @Input() commentCount: number = 0;
-  @Input() isUpvoteActive: boolean | undefined = false;
-  @Input() isDownvoteActive: boolean | undefined = false;
   @Input() isShowLabel = false;
   @Input() isShowReply = false;
   @Input() position: 'center' | 'left' = 'center';
   @Output() replyClick = new EventEmitter();
   @Output() commentClick = new EventEmitter();
+  @Output() shareClick = new EventEmitter();
 
+  reaction: MyPostReactions | undefined;
   KIND = KIND;
   initialVoteStatus: InitialVoteStatus;
+  isUpvoteActive: boolean;
+  isDownvoteActive: boolean;
 
   constructor(
     public transaction: TransactionService,
     public account: AccountService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    private reactionFacade: MyPostReactionFacade
   ) {
     super(transaction, account, cd);
   }
 
   ngOnInit(): void {
-    this.updateInitialState();
+    this.account.currentAccount$
+      .pipe(
+        filter((account) => !!account),
+        mergeMap((account) =>
+          this.reactionFacade.getReactionByPostId(account!.id, this.postId)
+        )
+      )
+      .subscribe((reaction) => {
+        this.reaction = reaction;
+        this.isDownvoteActive = reaction?.kind === 'Downvote';
+        this.isUpvoteActive = reaction?.kind === 'Upvote';
+        this.updateInitialState();
+        this.cd.markForCheck();
+      });
   }
 
   async onVoteClick(kind: KIND) {
@@ -118,7 +136,10 @@ export class ActionPanelComponent extends TxButtonComponent implements OnInit {
   }
 
   onSuccess(result: SubmittableResult): void {
-    this.updateInitialState();
+    const ids = this.getNewIdsFromEvent(result);
+    if (ids.length > 0) {
+      this.reactionFacade.loadMyPostReactionIds(ids);
+    }
   }
 
   validate(): boolean {
@@ -129,12 +150,12 @@ export class ActionPanelComponent extends TxButtonComponent implements OnInit {
     let method = '';
     let params: string[];
 
-    if (this.reactionId && type.delete) {
+    if (this.reaction?.reactionId && type.delete) {
       method = METHODS.deletePostReaction;
-      params = [this.postId, this.reactionId];
-    } else if (this.reactionId && type.update) {
+      params = [this.postId, this.reaction?.reactionId];
+    } else if (this.reaction?.reactionId && type.update) {
       method = METHODS.updatePostReaction;
-      params = [this.postId, this.reactionId, kind];
+      params = [this.postId, this.reaction?.reactionId, kind];
     } else {
       method = METHODS.createPostReaction;
       params = [this.postId, kind];
@@ -150,8 +171,8 @@ export class ActionPanelComponent extends TxButtonComponent implements OnInit {
   private returnToInitialState() {
     this.upvoteCount = this.initialVoteStatus.upvoteCount;
     this.downvoteCount = this.initialVoteStatus.downvoteCount;
-    this.isUpvoteActive = this.initialVoteStatus.isUpvoteActive;
-    this.isDownvoteActive = this.initialVoteStatus.isDownvoteActive;
+    this.isUpvoteActive = !!this.initialVoteStatus.isUpvoteActive;
+    this.isDownvoteActive = !!this.initialVoteStatus.isDownvoteActive;
   }
 
   private updateInitialState() {

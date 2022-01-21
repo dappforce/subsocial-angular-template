@@ -9,18 +9,25 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LinkService } from '../../shared/services/link.service';
-import { map, take, takeUntil, tap } from 'rxjs/operators';
-import { PostListItemData } from '../../core/models/post/post-list-item.model';
-import { Subject } from 'rxjs';
-import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
+import {
+  concatMap,
+  filter,
+  map,
+  shareReplay,
+  switchMap,
+  takeUntil,
+  tap,
+  withLatestFrom,
+} from 'rxjs/operators';
+import { Post } from '../../core/models/post/post-list-item.model';
+import { EMPTY, Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
-import { selectSpaceById } from '../../state/space/space.selectors';
 import { CommentItemData } from '../../core/types/comment-data.type';
-import { StoreService } from '../../state/store.service';
-import { SSRLoadData } from '../../core/decorators/ssr-load-data.decorator.tw';
-import { PostService } from '../services/post.service';
 import { CommentService } from '../../shared/services/comment.service';
+import { Space } from '../../state/space/space.state';
+import { PostFacade } from '../../state/post/post.facade';
+import { SpaceFacade } from '../../state/space/space.facade';
 
 type CommentPostData = {
   postTitle: string;
@@ -34,80 +41,87 @@ type CommentPostData = {
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PostComponent implements OnInit, OnDestroy {
-  postData: PostListItemData;
-  spaceData: SpaceListItemData | undefined;
+  post$: Observable<Post | undefined>;
+  space$: Observable<Space | undefined>;
+  sharedPost$: Observable<Post | undefined>;
+
   commentData: CommentItemData[] = [];
   commentPostData: CommentPostData;
+  isSharedPostHidden: boolean;
 
   private unsubscribe$: Subject<void> = new Subject();
+  isHidden: boolean;
+  repliesCount: number;
 
   constructor(
     private store: Store<AppState>,
     private route: ActivatedRoute,
     private linkService: LinkService,
     private cd: ChangeDetectorRef,
-    private storeService: StoreService,
-    private postService: PostService,
     private commentService: CommentService,
+    private postFacade: PostFacade,
+    private spaceFacade: SpaceFacade,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   async ngOnInit() {
-    this.getPostId().subscribe(async (postId) => await this.loadData(postId));
-  }
-
-  @SSRLoadData()
-  async loadData(postId: string) {
-    this.postData = await this.postService.getOrLoadPost(postId);
-
-    await this.handleIfPostIsComment();
-
-    this.spaceData = this.postData.spaceId
-      ? await this.getSpaceData(this.postData.spaceId)
-      : undefined;
-
-    this.commentData = await this.getCommentData(postId);
-
-    this.cd.markForCheck();
-  }
-
-  private async getSpaceData(spaceId: string) {
-    return (this.spaceData = await this.store
-      .select(selectSpaceById(spaceId))
-      .pipe(take(1))
-      .toPromise());
-  }
-
-  private async getCommentData(postId: string) {
-    return this.commentService.getOrLoadCommentDataByPostId(postId);
-  }
-
-  private getPostId() {
-    return this.route.params.pipe(
+    const ids$ = this.route.params.pipe(
       map((params) => {
         const slug = params['slug'];
-        return this.linkService.getPostIdFromLink(slug);
+        const spaceId = params['spaceId'];
+        return [this.linkService.getPostIdFromLink(slug), spaceId];
       }),
-      takeUntil(this.unsubscribe$)
+      shareReplay(1)
     );
+
+    this.post$ = ids$.pipe(
+      tap(([postId]) => this.postFacade.loadPost(postId)),
+      switchMap(([postId]) => this.postFacade.getPost(postId)),
+      filter((post) => !!post)
+    );
+
+    this.space$ = ids$.pipe(
+      tap(([, spaceId]) => this.spaceFacade.loadSpace(spaceId)),
+      switchMap(([, spaceId]) => this.spaceFacade.getSpace(spaceId))
+    );
+
+    this.handleSharedPost();
   }
 
   private async handleIfPostIsComment() {
-    if (this.postData.isComment && this.postData.rootPostId) {
-      const parentPostData = (await this.postService.getOrLoadPost(
-        this.postData.rootPostId
-      )) as PostListItemData;
-      this.commentPostData = {
-        postTitle: parentPostData.title,
-        link: parentPostData.postLink,
-      };
-      this.postData.spaceName = parentPostData.spaceName;
-      this.postData.spaceId = parentPostData.spaceId;
-    }
+    // if (this.postData.isComment && this.postData.rootPostId) {
+    //   const parentPostData = (await this.postService.getOrLoadPost(
+    //     this.postData.rootPostId
+    //   )) as Post;
+    //   this.commentPostData = {
+    //     postTitle: parentPostData.title,
+    //     link: parentPostData.postLink,
+    //   };
+    //   this.postData.spaceName = parentPostData.spaceName;
+    //   this.postData.spaceId = parentPostData.spaceId;
+    // }
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
   }
+
+  onSwitchHidden() {
+    this.isHidden = !this.isHidden;
+  }
+
+  handleSharedPost() {
+    this.sharedPost$ = this.post$.pipe(
+      concatMap((post) => {
+        if (post?.isSharedPost && post.sharedPostId) {
+          return this.postFacade.fetchPost(post.sharedPostId);
+        } else {
+          return EMPTY;
+        }
+      })
+    );
+  }
+
+  onViewReaction() {}
 }

@@ -18,6 +18,7 @@ import { filter, map, takeUntil, tap } from 'rxjs/operators';
 import { getFollowedSpaceIds } from './state/followed-space-ids/followed-space-ids.actions';
 import { Subject } from 'rxjs';
 import { getFollowedAccountIds } from './state/followed-account-ids/followed-account-ids.actions';
+import { MyPostReactionFacade } from './state/my-post-reactions/my-post-reaction.facade';
 
 @Component({
   selector: 'app-root',
@@ -35,6 +36,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private api: SubsocialApiService,
     private spaceService: SpaceService,
     private accountService: AccountService,
+    private reactionFacade: MyPostReactionFacade,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
@@ -42,13 +44,14 @@ export class AppComponent implements OnInit, OnDestroy {
     if (isPlatformBrowser(this.platformId)) {
       this.deviceService.init();
       await this.accountService.initAccount();
-      this.getFollowedSpaceIds();
+      this.getAccountAdditionalData();
     }
   }
 
-  getFollowedSpaceIds() {
+  getAccountAdditionalData() {
     this.accountService.currentAccount$
       .pipe(
+        tap(() => this.spaceService.getMyOwnSpaceIds()),
         filter((account) => !!account?.id),
         map((account) => account?.id!),
         tap((address: string) =>
@@ -57,6 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
         tap((address: string) =>
           this.store.dispatch(getFollowedAccountIds({ payload: { address } }))
         ),
+        tap((_) => this.reactionFacade.reloadReactionForAllPosts()),
         takeUntil(this.unsubscribe$)
       )
       .subscribe((_) => null);

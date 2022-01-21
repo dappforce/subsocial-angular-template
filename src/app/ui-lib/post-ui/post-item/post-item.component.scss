@@ -4,6 +4,16 @@ app-embed-video {
   margin-top: $space_tiny;
 }
 
+.shared-post-card {
+  box-shadow: none !important;
+  border: $shared_post_border;
+  padding-bottom: $space_normal;
+}
+
+.common-post-card {
+  padding-bottom: $space_mini;
+}
+
 @media only screen and (max-width: 768px) {
   .post-main-wp {
     flex-direction: column;

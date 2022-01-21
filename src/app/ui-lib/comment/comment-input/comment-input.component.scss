@@ -15,7 +15,7 @@
     position: relative;
 
     .text-area-input {
-      border: 1px solid #DADADA;
+      border: $shared_post_border;
       border-radius: 3.5px;
       padding: 7px 16px;
       word-break: break-all;
@@ -43,6 +43,8 @@
   }
 
   .send-btn-wp {
+    display: flex;
+    gap: 16px;
     margin-top: $space_normal;
   }
 }

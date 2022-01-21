@@ -20,4 +20,14 @@ export class SnackBarService {
       panelClass: ['white-snackbar'],
     });
   }
+
+  showErrorMessage(message: string) {
+    this.openSimpleSnackBar({
+      message,
+      iconName: 'error-icon',
+      isShowCloseButton: true,
+      duration: 3000,
+      className: 'font-error',
+    });
+  }
 }

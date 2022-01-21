@@ -7,7 +7,7 @@
 <span class="action-panel-label"
       *ngIf="isShowLabel"
 >
-  Upvote
+  {{ 'buttons.upvote' | transloco }}
   <span *ngIf="count > 0">
     ({{count | numeral}})
   </span>

@@ -7,6 +7,7 @@ import { SeeMoreComponent } from './see-more/see-more.component';
 import { ExpandParagraphComponent } from './expand-paragraph/expand-paragraph.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { CommentPostTitleComponent } from './comment-post-title/comment-post-title.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,7 @@ import { CommentPostTitleComponent } from './comment-post-title/comment-post-tit
     ExpandParagraphComponent,
     CommentPostTitleComponent,
   ],
-  imports: [CommonModule, RouterModule, MarkdownModule],
+  imports: [CommonModule, RouterModule, MarkdownModule, TranslocoModule],
   exports: [
     TitleComponent,
     ParagraphComponent,

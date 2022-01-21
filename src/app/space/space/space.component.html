@@ -1,18 +1,22 @@
-<app-space-profile *ngIf="spaceData"
-                    [spaceItemData]="spaceData"
+<app-space-profile *ngIf="(space$ | async) as space"
+                    [space]="space"
+                   [isMySpace]="isMySpace$ | async"
                    [isAutoExpandSummary]="isAutoExpandSummary"
                    class="space-wp"
 ></app-space-profile>
 
-<ng-container *ngIf="postIds.length > 0; else noPost">
+<ng-container *ngIf="(postIds$ | async) as postIds; else noPost">
 
-  <app-post-list [type]="'all'" [ids]="postIds"></app-post-list>
+  <app-post-list [type]="'all'"
+                 [ids]="postIds"
+                 [showHiddenContent]="isMySpace$ | async"
+  ></app-post-list>
 
 </ng-container>
 
 <ng-template #noPost>
 
-  <app-no-content [text]="'No posts yet'"></app-no-content>
+  <app-no-content [text]="'content.noPosts' | transloco"></app-no-content>
 
 </ng-template>
 

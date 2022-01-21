@@ -2,12 +2,9 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { AccountService } from '../../shared/services/account.service';
 import * as ProfileAction from './profile.actions';
-import * as ContentAction from '../content/content.actions';
-import * as LoaderAction from '../loader/loader.actions';
 import * as MyAccountAction from '../my-account/my-account.actions';
-import { concatMap, filter, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { Content } from 'src/app/core/types/content.type';
 import { ProfileService } from '../../account/services/profile.service';
 
 @Injectable()
@@ -20,18 +17,14 @@ export class ProfileEffects {
 
   loadProfile$ = createEffect(() =>
     this.action$.pipe(
-      ofType(ProfileAction.loadProfile),
+      ofType(ProfileAction.loadProfileById),
       switchMap(({ id }) =>
-        from(this.accountService.loadProfile(id)).pipe(
-          filter((profileData) => !!profileData),
-          switchMap((profileData) => [
+        from(this.profileService.fetchProfileById(id)).pipe(
+          filter((profile) => !!profile),
+          switchMap((profile) => [
             ProfileAction.upsertProfile({
-              payload: profileData!.struct,
+              payload: profile,
             }),
-            ContentAction.upsertContent({
-              payload: profileData!.content as Content,
-            }),
-            ProfileAction.saveProfilesSuccess(),
           ])
         )
       )
@@ -40,19 +33,14 @@ export class ProfileEffects {
 
   loadProfiles$ = createEffect(() =>
     this.action$.pipe(
-      ofType(ProfileAction.loadProfiles),
+      ofType(ProfileAction.loadProfilesByIds),
       switchMap(({ payload }) =>
-        from(this.profileService.getProfilesByIds(payload.ids)).pipe(
-          filter((profileData) => !!profileData),
-          switchMap((profileData) => [
-            ContentAction.upsertContents({
-              payload: profileData!.contents,
-            }),
-            LoaderAction.setLoader({ isLoading: false }),
+        from(this.profileService.fetchProfilesByIds(payload.ids)).pipe(
+          filter((profiles) => !!profiles),
+          switchMap((profiles) => [
             ProfileAction.upsertProfiles({
-              payload: profileData!.structs,
+              payload: profiles,
             }),
-            ProfileAction.saveProfilesSuccess(),
           ])
         )
       )
@@ -63,38 +51,16 @@ export class ProfileEffects {
     this.action$.pipe(
       ofType(ProfileAction.loadMyProfile),
       switchMap(({ id }) =>
-        from(this.accountService.loadProfile(id)).pipe(
-          filter((profileData) => !!profileData),
-          concatMap((profileData) => {
-            if (profileData?.content) {
-              return [
-                MyAccountAction.setMyAccount({
-                  payload: this.accountService.getMyAccountData(
-                    profileData!.struct
-                  ),
-                }),
-                ProfileAction.upsertProfile({
-                  payload: profileData!.struct,
-                }),
-                ContentAction.upsertContent({
-                  payload: profileData!.content as Content,
-                }),
-                ProfileAction.saveProfilesSuccess(),
-              ];
-            } else {
-              return [
-                MyAccountAction.setMyAccount({
-                  payload: this.accountService.getMyAccountData(
-                    profileData!.struct
-                  ),
-                }),
-                ProfileAction.upsertProfile({
-                  payload: profileData!.struct,
-                }),
-                ProfileAction.saveProfilesSuccess(),
-              ];
-            }
-          })
+        from(this.profileService.fetchProfileById(id)).pipe(
+          filter((profile) => !!profile),
+          switchMap((profile) => [
+            MyAccountAction.setMyAccount({
+              payload: this.accountService.getMyAccountData(profile.id),
+            }),
+            ProfileAction.upsertProfile({
+              payload: profile,
+            }),
+          ])
         )
       )
     )

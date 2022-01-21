@@ -1,0 +1,54 @@
+@import "var";
+
+.edit-profile-container {
+  width: 628px;
+  margin: 0 auto;
+  min-height: 60vh;
+  padding-bottom: $space_normal;
+
+  mat-card {
+    padding: 35px 23px 21px;
+  }
+
+  h2 {
+    margin: 19px 3px;
+  }
+
+  .profile-form {
+    margin-top: $space_normal;
+    gap: 24px;
+  }
+
+  .button-wp {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    gap: $space_normal;
+    margin-top: 5px;
+
+    button {
+      min-width: 110px;
+      font-size: $font_normal;
+      .mat-button-wrapper {
+        letter-spacing: 0.5px;
+      }
+    }
+  }
+}
+
+
+app-mde-editor, app-image-loader, app-text-input {
+  display: block;
+  margin-bottom: $space_normal;
+}
+
+@media only screen and (max-width: 768px) {
+  .edit-profile-container {
+    width: 100%;
+  }
+}
+
+
+
+
+

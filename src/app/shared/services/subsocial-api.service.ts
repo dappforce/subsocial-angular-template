@@ -2,12 +2,10 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { newFlatSubsocialApi, SubsocialSubstrateApi } from '@subsocial/api';
 import { environment } from '../../../environments/environment';
 import { FlatSubsocialApi } from '@subsocial/api/flat-subsocial';
-import { isPlatformBrowser } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AnyId } from '@subsocial/api/flat-subsocial/dto';
 import { SnackBarService } from './snack-bar.service';
 import { ConvertService } from './convert.service';
-import BN from 'bn.js';
 
 type FetchSubstrateProps = {
   pallet: string;
@@ -46,8 +44,8 @@ export class SubsocialApiService {
 
     const { substrateNodeUrl, offchainUrl, ipfsNodeUrl } = environment;
     this.api = await newFlatSubsocialApi({
-      substrateNodeUrl,
       offchainUrl,
+      substrateNodeUrl,
       ipfsNodeUrl,
       useServer: {
         httpRequestMethod: 'get',

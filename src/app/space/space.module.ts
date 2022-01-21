@@ -17,6 +17,9 @@ import { InputModule } from '../ui-lib/input/input.module';
 import { ContainersModule } from '../ui-lib/containers/containers.module';
 import { TextModule } from '../ui-lib/text/text.module';
 import { ContentModule } from '../ui-lib/content/content.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
+import { MenuModule } from '../ui-lib/menu/menu.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { ContentModule } from '../ui-lib/content/content.module';
     ContainersModule,
     TextModule,
     ContentModule,
+    DirectivesModule,
+    MenuModule,
+    TranslocoModule,
   ],
   exports: [SpaceListComponent],
 })

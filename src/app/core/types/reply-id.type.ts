@@ -1,4 +1,4 @@
-export type ReplyIdStruct = {
+export type ReplyIds = {
   id: string;
   replyIds: Array<string>;
 };

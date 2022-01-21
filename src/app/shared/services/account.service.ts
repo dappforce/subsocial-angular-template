@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { web3Enable } from '@polkadot/extension-dapp';
+import { web3Enable, web3Accounts } from '@polkadot/extension-dapp';
 import { BehaviorSubject, forkJoin, from, Observable } from 'rxjs';
 import { SubsocialApiService } from './subsocial-api.service';
 import { Store } from '@ngrx/store';
@@ -8,7 +8,7 @@ import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { MyAccountState } from '../../state/my-account/my-account.state';
 import { loadMyProfile } from '../../state/profile/profile.actions';
 import { asAccountId } from '@subsocial/api';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { filter, map, switchMap, take, tap } from 'rxjs/operators';
 import {
   AccountData,
   AccountRawData,
@@ -19,7 +19,7 @@ import { formatBalance } from '@polkadot/util';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
 import { ProfileData } from '@subsocial/api/flat-subsocial/dto';
-import { SignInModalDialogComponent } from '../modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
+import { SignInModalDialogComponent } from '../../ui-lib/modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 
 export enum ACCOUNT_STATUS {
@@ -59,10 +59,14 @@ export class AccountService {
     formatBalance.setDefaults({ decimals, unit });
   }
 
+  public getCurrentAccountId() {
+    return this.currentAccountsSource.value?.id;
+  }
+
   public async initAccount() {
     const injectedExtensions = await web3Enable('Subsocial');
     const polkadotJs = injectedExtensions.find(
-      (extension) => extension.name === 'polkadot-js'
+      (extension: any) => extension.name === 'polkadot-js'
     );
 
     if (injectedExtensions.length === 0) {
@@ -73,14 +77,13 @@ export class AccountService {
 
     this.signerSource.next(polkadotJs.signer);
 
-    const unsub = polkadotJs!.accounts.subscribe((accounts) => {
-      if (accounts?.length > 0) {
-        this.accountsSource.next(accounts as PolkadotAccount[]);
-        this.setStatus(ACCOUNT_STATUS.UNAUTHORIZED);
-      } else {
-        this.setStatus(ACCOUNT_STATUS.ACCOUNTS_NOT_FOUND);
-      }
-    });
+    const accounts = await web3Accounts();
+    if (accounts?.length > 0) {
+      this.accountsSource.next(accounts as unknown as PolkadotAccount[]);
+      this.setStatus(ACCOUNT_STATUS.UNAUTHORIZED);
+    } else {
+      this.setStatus(ACCOUNT_STATUS.ACCOUNTS_NOT_FOUND);
+    }
   }
 
   public getAccountsData(): Observable<AccountData[]> {
@@ -127,6 +130,7 @@ export class AccountService {
     polkadotAccount: PolkadotAccount[]
   ) {
     const ids = polkadotAccount.map((account) => account.address);
+
     return await this.api.api.findProfiles(ids);
   }
 
@@ -135,27 +139,14 @@ export class AccountService {
       this.balanceUnsub();
     }
 
-    await this.subscribeOnBalance(account.id)
+    await this.subscribeOnBalance(account.id);
     this.store.dispatch(loadMyProfile({ id: account.id }));
     this.storage.setCurrentAccountId(account.id);
     this.currentAccountsSource.next(account);
   }
 
-  public async loadProfile(id: string) {
-    const profileData = await this.api.api.findProfile(id);
-    if (profileData?.content && profileData?.struct) {
-      const struct = profileData?.struct;
-      if (struct) {
-        const content = { ...profileData.content, id: struct.contentId };
-        return { struct, content };
-      }
-    }
-
-    return this.getAnonymousAccountData(id);
-  }
-
-  public getMyAccountData(profileStruct: ProfileStruct): MyAccountState {
-    return { address: profileStruct.id, nonce: 0, blocked: false };
+  public getMyAccountData(address: string): MyAccountState {
+    return { address, nonce: 0, blocked: false };
   }
 
   public signOut() {
@@ -195,9 +186,9 @@ export class AccountService {
 
   private async subscribeOnBalance(address: string) {
     const api = await this.api.api.subsocial.substrate.api;
-    this.balanceUnsub = await api.derive.balances.all(address, (data) => {
+    this.balanceUnsub = await api.derive.balances.all(address, (data: any) => {
       this.balanceSource.next(this.getFormattedBalance(data));
-    })
+    });
   }
 
   private setStatus(status: ACCOUNT_STATUS) {
@@ -227,19 +218,5 @@ export class AccountService {
     if (account) {
       await this.setCurrentAccount(account);
     }
-  }
-
-  private getAnonymousAccountData(id: string) {
-    return {
-      id,
-      struct: {
-        id,
-        followersCount: 0,
-        followingAccountsCount: 0,
-        followingSpacesCount: 0,
-        reputation: 0,
-        hasProfile: false,
-      },
-    } as ProfileData;
   }
 }

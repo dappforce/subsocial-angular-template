@@ -1,3 +1,12 @@
-<a [routerLink]="['/posts/create']" [ngClass]="width" class="write-post-button" mat-stroked-button color="primary">
-  Write post
+<a [ngClass]="[width, className]"
+   mat-flat-button
+   matTooltip="{{ 'generalMessages.createSpaceFirst' | transloco }}"
+   matTooltipPosition="above"
+   matTooltipClass="tooltip"
+   [matTooltipDisabled]="!disabled"
+   class="write-post-button"
+   color="primary"
+   (click)="onWritePost()"
+>
+  {{ 'buttons.writePost' | transloco }}
 </a>

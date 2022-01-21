@@ -4,12 +4,17 @@ import { spaceAdapter, initialSpaceState, SpaceState } from './space.state';
 
 const spaceReducers = createReducer(
   initialSpaceState,
-  on(SpaceActions.getSpacesByIds, (state) => state),
+  on(SpaceActions.loadSpacesByIds, (state) => state),
+
   on(SpaceActions.upsertSpaces, (state, { payload }) => {
-    return spaceAdapter.upsertMany(payload, state);
+    return payload ? spaceAdapter.upsertMany(payload, state) : state;
   }),
+
   on(SpaceActions.upsertSpace, (state, { payload }) => {
-    return spaceAdapter.upsertOne(payload, state);
+    return payload ? spaceAdapter.upsertOne(payload, state) : state;
+  }),
+  on(SpaceActions.updateSpace, (state, { payload }) => {
+    return spaceAdapter.updateOne(payload, state);
   }),
   on(SpaceActions.loadSpaceById, (state) => state)
 );

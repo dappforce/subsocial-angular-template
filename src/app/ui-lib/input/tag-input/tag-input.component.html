@@ -1,5 +1,5 @@
 <mat-form-field class="w100 tags-wp" appearance="outline">
-  <mat-label>Tags</mat-label>
+  <mat-label> {{ 'forms.fieldName.tags' | transloco }} </mat-label>
   <mat-chip-list #tagList aria-label="Tag selection">
     <mat-chip
       *ngFor="let tag of tags"
@@ -12,7 +12,6 @@
     </mat-chip>
     <input
       placeholder="{{placeholder}}"
-      #tagInput
       [matChipInputFor]="tagList"
       [formControl]="tagCtrl"
       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"

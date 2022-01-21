@@ -1,65 +1,82 @@
-<mat-card *ngIf="spaceItemData">
+<mat-card *ngIf="space">
+  <app-hidden-content *ngIf="isHidden"
+                      [id]="space.id"
+                      [type]="'space'"
+                      (switchHidden)="onSwitchHidden()"
+  ></app-hidden-content>
 
   <app-row [h]="'space-between'"
            [v]="'start'"
            [margin]="'0 0 10px 0'"
   >
 
-    <app-space-info [spaceName]="spaceItemData.content.name"
-                    [avatarSrc]="spaceItemData.content.image"
-                    [followersCount]="spaceItemData.struct.followersCount"
-                    [postsCount]="spaceItemData.struct.postsCount"
-                    [link]="'@' + spaceItemData.content.handle"
+    <app-space-info [spaceName]="space.name"
+                    [avatarSrc]="space.image"
+                    [followersCount]="space.followersCount"
+                    [postsCount]="space.postsCount"
+                    [link]="'/' + space.id"
                     [itemType]="'single'"
-                    [spaceId]="spaceItemData.struct.id"
+                    [spaceId]="space.id"
     ></app-space-info>
 
     <app-row [v]="'center'">
 
-      <app-edit-button *ngIf="isOwner" [style.margin-right]="'16px'"></app-edit-button>
-      <app-option-button [type]="'space'"></app-option-button>
+      <app-space-menu (switchHidden)="onSwitchHidden()"
+                      [spaceId]="space.id"
+                      [isHidden]="isHidden"
+      ></app-space-menu>
 
     </app-row>
 
   </app-row>
 
-  <app-paragraph *ngIf="!spaceItemData.content.isShowMore"
-                 [text]="spaceItemData.content.summary"
+  <app-paragraph *ngIf="!space.isShowMore"
+                 [text]="space.summary"
   ></app-paragraph>
 
-  <app-expand-paragraph *ngIf="spaceItemData.content.isShowMore"
-                        [text]="spaceItemData.content.summary"
-                        [expandedText]="spaceItemData.content.about"
+  <app-expand-paragraph *ngIf="space.isShowMore"
+                        [text]="space.summary"
+                        [expandedText]="space.about"
                         [isMore]="!isAutoExpandSummary"
   ></app-expand-paragraph>
 
-  <app-link-icons *ngIf="spaceItemData.content.links.length > 0"
-                  [links]="spaceItemData.content.links"
+  <app-link-icons *ngIf="space.links && space.links.length > 0"
+                  [links]="space.links"
                   [style.margin]="'19px 0 14px'"
   ></app-link-icons>
 
-  <app-tag *ngFor="let tag of spaceItemData.content.tags"
-           [tagName]="tag"
-  ></app-tag>
+  <div>
+    <app-tag *ngFor="let tag of space.tags"
+             [tagName]="tag"
+    ></app-tag>
+  </div>
 
   <app-row [ngClass]="'buttons-wp'"
            [margin]="'16px 0 0 0'"
   >
 
-    <app-write-post-button *ngIf="isOwner"
-                           width="full"
-    ></app-write-post-button>
+    <ng-container *ngIf="isMySpace; else notMySpace">
+      <app-create-space-button width="full"
+                               type="edit"
+                               [spaceId]="space.id"
+      ></app-create-space-button>
 
-    <app-send-tips-button *ngIf="!isOwner"
-                          width="full"
-    ></app-send-tips-button>
+      <app-write-post-button [spaceId]="space.id"
+                             width="full"
+      ></app-write-post-button>
+    </ng-container>
 
-    <app-follow-button size="large"
-                       width="full"
-                       type="space"
-                       [entityId]="spaceItemData.struct.id"
-                       [isFollow]="isFollowed$ | async"
-    ></app-follow-button>
+    <ng-template #notMySpace>
+      <app-send-tips-button width="full"></app-send-tips-button>
+
+      <app-follow-button size="large"
+                         width="full"
+                         type="space"
+                         [entityId]="space.id"
+                         [isFollow]="isFollowed$ | async"
+      ></app-follow-button>
+    </ng-template>
+
 
   </app-row>
 

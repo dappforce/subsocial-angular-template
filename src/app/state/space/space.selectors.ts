@@ -1,16 +1,9 @@
-import { spaceAdapter, SpaceState } from './space.state';
+import { Space, spaceAdapter, SpaceState } from './space.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectContentEntities } from '../content/content.selectors';
-import {
-  SpaceContentExtend,
-  SpaceListItemData,
-} from '../../core/models/space/space-list-item.model';
-import { SpaceContent } from '@subsocial/api/flat-subsocial/dto';
 import { KeyValuePair } from '../../core/models/key-value-pair.model';
-import { selectFollowedSpaceIdsByCurrentAccount } from '../followed-space-ids/followed-space-ids.selectors';
+import { dictionaryToArray } from "../../core/utils";
 
-const { selectIds, selectEntities, selectAll, selectTotal } =
-  spaceAdapter.getSelectors();
+const { selectEntities, selectAll, selectTotal } = spaceAdapter.getSelectors();
 
 export const selectSpaceState = createFeatureSelector<SpaceState>('spaces');
 
@@ -22,64 +15,21 @@ export const selectSpaceEntities = createSelector(
 );
 
 export const selectSpaceById = (id: string) =>
-  createSelector(
-    selectSpaceEntities,
-    selectContentEntities,
-    (spaceEntities, contentEntities) => {
-      const struct = spaceEntities[id];
-      if (struct && struct.contentId) {
-        const content = contentEntities[struct.contentId] as SpaceContentExtend;
-        return content ? ({ struct, content } as SpaceListItemData) : undefined;
-      }
-      return undefined;
-    }
-  );
+  createSelector(selectSpaceEntities, (spaceEntities) => {
+    return spaceEntities[id];
+  });
+
+export const selectSpaceEntitiesByIds = (ids: string[]) =>
+  createSelector(selectSpaceEntities, (spaceEntities) => {
+    const spaceDataArray: KeyValuePair<Space> = {};
+    ids.forEach((id) => {
+      const space = spaceEntities[id];
+      space ? (spaceDataArray[id] = space) : null;
+    });
+
+    return spaceDataArray;
+  });
 
 export const selectSpacesByIds = (ids: string[]) =>
-  createSelector(
-    selectSpaceEntities,
-    selectContentEntities,
-    selectFollowedSpaceIdsByCurrentAccount,
-    (spaceEntities, contentEntities, followedSpaceIds) => {
-      const spaceDataArray: KeyValuePair<SpaceListItemData> = {};
-      ids.forEach((id) => {
-        const struct = spaceEntities[id];
-        if (struct?.contentId) {
-          const content = contentEntities[
-            struct.contentId
-          ] as SpaceContentExtend;
-          if (content) {
-            const spaceListData: SpaceListItemData = {
-              struct,
-              content,
-              id: struct.id,
-            };
-
-            spaceDataArray[struct.id] = spaceListData;
-          }
-        }
-      });
-
-      return spaceDataArray;
-    }
-  );
-
-export const selectSpaceWithContent = (start: number, end: number) =>
-  createSelector(
-    selectAllSpaces,
-    selectContentEntities,
-    (spacesArray, contentEntities) => {
-      const spaceData: SpaceListItemData[] = [];
-
-      spacesArray.slice(start, end).map((struct) => {
-        if (struct.contentId) {
-          const content = contentEntities[
-            struct.contentId
-          ] as SpaceContentExtend;
-          content ? spaceData.push({ struct, content, id: struct.id }) : null;
-        }
-      });
-
-      return spaceData;
-    }
-  );
+  createSelector(selectSpaceEntities, (spaceEntities) =>
+    dictionaryToArray<Space>(spaceEntities, ids))

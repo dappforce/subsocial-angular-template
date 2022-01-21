@@ -1,19 +1,19 @@
-<ng-container *ngIf="profileData">
+<ng-container *ngIf="(profileData$ | async) as profileData">
   <mat-card>
 
       <app-column class="w100">
 
         <app-row>
-          <app-profile-info [address]="profileData.address"
+          <app-profile-info [address]="profileData.id"
                             [profileName]="profileData.name"
                             [avatarSrc]="profileData.avatar"
                             [followersCount]="profileData.followersCount"
-                            [followingCount]="profileData.followingCount"
+                            [followingCount]="profileData.followingAccountsCount"
                             [type]="(device.isMobile$ | async) ? 'small' : 'medium'"
                             class="w100"
           ></app-profile-info>
 
-          <app-option-button></app-option-button>
+          <app-profile-menu></app-profile-menu>
         </app-row>
 
         <app-column [margin]="'14px 0 0 0'">
@@ -25,26 +25,37 @@
             <app-address size="medium"
                          [showIcon]="true"
                          [showCopyButton]="true"
-                         [address]="profileData.address"
+                         [address]="profileData.id"
             ></app-address>
 
-            <app-qr-button [address]="profileData.address"></app-qr-button>
+            <app-qr-button [address]="profileData.id"></app-qr-button>
 
           </app-row>
 
-          <app-tokens size="medium" [tokens]="tokens" [showIcon]="true"></app-tokens>
+          <app-tokens size="medium" [tokens]="tokens$ | async" [showIcon]="true"></app-tokens>
 
 
           <app-row class="buttons-wp w100">
 
-            <app-send-tokens-button width="full"></app-send-tokens-button>
+            <ng-container *ngIf="isMyProfile$ | async; else sendTipsBtn">
+              <app-create-space-button width="full"
+                                       [color]="(spaceService.myOwnSpaceIds$ | async) ? 'gray' : 'primary'"
+              ></app-create-space-button>
 
-            <app-follow-button [entityId]="profileData.address"
+              <app-write-post-button [width]="'full'" [disabled]="!(spaceService.myOwnSpaceIds$ | async)"></app-write-post-button>
+            </ng-container>
+
+            <ng-template #sendTipsBtn>
+              <app-send-tips-button [width]="'full'"></app-send-tips-button>
+
+            <app-follow-button [entityId]="profileData.id"
                                [isFollow]="isFollow$ | async"
                                size="large"
                                type="profile"
                                width="full"
             ></app-follow-button>
+            </ng-template>
+
 
           </app-row>
 
@@ -62,27 +73,27 @@
   </mat-card>
 
     <ng-container *ngIf="activeTab.tabName === 'posts'">
-      <ng-container *ngIf="postIds && postIds.length > 0; else noPost">
+      <ng-container *ngIf="(postIds$ | async) as postIds; else noPost">
         <app-post-list [ids]="postIds"></app-post-list>
       </ng-container>
 
       <ng-template #noPost>
-        <app-no-content [text]="'No posts yet'"></app-no-content>
+        <app-no-content [text]="'content.noPosts' | transloco"></app-no-content>
       </ng-template>
     </ng-container>
 
     <ng-container *ngIf="activeTab.tabName === 'spaces'">
-      <ng-container *ngIf="spaceIds && spaceIds.length > 0; else noSpaces">
-        <app-space-list [ids]="spaceIds"></app-space-list>
+      <ng-container *ngIf="(spaceIds$ | async) as spaceIds; else noSpaces">
+        <app-space-list [showHidden]="true" [ids]="spaceIds"></app-space-list>
       </ng-container>
 
       <ng-template #noSpaces>
-        <app-no-content [text]="'No spaces yet'"></app-no-content>
+        <app-no-content [text]="'content.noSpaces' | transloco"></app-no-content>
       </ng-template>
     </ng-container>
 
 </ng-container>
 
-<ng-container *ngIf="!profileData">
+<ng-container *ngIf="!(profileData$ | async)">
   <app-spinner [showSpinner]="true"></app-spinner>
 </ng-container>

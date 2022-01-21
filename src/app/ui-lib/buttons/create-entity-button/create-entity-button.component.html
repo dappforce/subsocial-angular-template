@@ -1,0 +1,10 @@
+<button *ngIf="type"
+        mat-ripple
+        [ngClass]="type"
+        (click)="onClick()"
+>
+  <span>+</span>
+  <span *transloco="let t; read: 'buttons'">
+    {{type === 'post' ? t('newPost') : t('createSpace') }}
+  </span>
+</button>

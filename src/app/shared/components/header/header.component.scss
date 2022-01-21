@@ -3,39 +3,88 @@
 
 header {
   background: #FFFFFF;
-  box-shadow: $header-shadow;
-  @include fixed(0, 0, 0, 1);
+  //box-shadow: $header-shadow;
+  @include fixed(0, 0, 0, 2);
+  border-bottom: 1px solid $color_light_border;
+
 
   .header-wp {
     position: relative;
-    height: 56px;
+    height: $header_height;
   }
 
   app-icon-button {
     margin: 0 $space_large 0 $space_small;
   }
+
+  app-header-menu-button {
+    margin-left: 12px;
+  }
+
+  app-notification-icon-button {
+    margin: 0 10px;
+  }
 }
 
-
-
-.header-tabs-wp {
-  position: absolute;
+.tabs-wp {
   width: $container-width;
-  top: -2px;
-  margin: 0 auto;
-  right: 0;
-  left: 0;
+  margin: 1px auto;
+  @include fixed($header_height, 0, 0, 1);
+  padding: 16px 16px 0;
+  background-color: #F2F2F2;
 
-  .mat-tab-link  {
-    height: 56px !important;
+  app-tabs {
+    ::ng-deep {
+      .mat-tab-link  {
+        height: $header_height !important;
+      }
+
+      .mat-tab-link-container {
+        background: white;
+        border-radius: 4px 4px 0 0;
+      }
+
+      .mat-tab-header {
+        box-shadow: $tabs-shadow;
+        border: none !important;
+      }
+    }
   }
 }
 
 @media only screen and (max-width: 768px) {
-  .header-tabs-wp {
-    position: relative;
+  header {
+    border-bottom: none;
+  }
+
+  .tabs-wp {
     width: 100%;
-    top: 0;
+    margin: 0;
+    position: relative;
+    top: 53px;
+    right: 0;
+    padding: 0;
+    left: 0;
+    z-index: 1;
+    background-color: #F2F2F2;
+
+    app-tabs {
+      ::ng-deep {
+        .mat-tab-link  {
+          height: 48px !important;
+          font-size: 14px;
+        }
+
+        .mat-tab-link-container {
+          background: white;
+          border-radius: 0;
+        }
+
+        .mat-tab-header {
+          box-shadow: $tabs-shadow;
+          border: none !important;
+        }
+      }
+    }
   }
 }
-

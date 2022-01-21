@@ -1,50 +1,73 @@
 <section class="edit-post-container">
   <mat-card>
-    <h2>{{type === 'edit' ? 'Edit' : 'New'}} post</h2>
-    <app-tabs [tabLinks]="tabs" [activeLink]="activeTab" (tabClick)="setActiveTab($event)"></app-tabs>
+    <h2 class="title-medium" *transloco="let t; read: 'general'">
+      {{ t(type) }} {{ t('post') }}
+    </h2>
+    <app-tabs [tabLinks]="tabs"
+              [activeLink]="activeTab"
+              (tabClick)="setActiveTab($event)"
+    ></app-tabs>
 
-    <form [formGroup]="postForm" action="">
+    <form [formGroup]="postForm" action="" *transloco="let t; read: 'forms.placeholder'">
+
+      <app-space-select *ngIf="type === 'new'"
+                        formControlName="spaceId"
+                        [spaceId]="initialSpaceId"
+      ></app-space-select>
+
       <ng-container [ngSwitch]="activeTab.tabName">
 
         <ng-template ngSwitchCase="article">
           <div class="image-wp">
-            <app-image-loader type="square"></app-image-loader>
+
+            <app-image-loader type="square"
+                              formControlName="image"
+            ></app-image-loader>
+
           </div>
         </ng-template>
 
         <ng-template ngSwitchCase="video">
           <div class="input-wp">
-            <app-text-input
-              formControlName="videoUrl"
-              [isRequired]="true"
-              [label]="'Video URL'"
-              (blur)="onVideoUrlBlur()"
+            <app-text-input formControlName="link"
+                            [isRequired]="true"
+                            [label]="t('vireoUrl')"
+                            (blur)="onVideoUrlBlur()"
+                            [error]="postFormErrors.link"
             ></app-text-input>
           </div>
           <app-embed-video [videoUrl]="videoUrl"></app-embed-video>
         </ng-template>
       </ng-container>
 
-      <app-text-input
-        [label]="'Post title'"
-        formControlName="postTitle"
+      <app-text-input [label]="t('postTitle')"
+                      formControlName="title"
       ></app-text-input>
 
-      <app-text-area
-        [label]="'Post body'"
-        formControlName="postBody"
-        [isRequired]="true"
-      ></app-text-area>
+      <app-mde-editor [isToolbarHidden]="false"
+                      formControlName="body"
+                      [height]="160"
+                      [autoFocus]="true"
+                      [placeholder]="t('postBody')"
+                      [isRequired]="isBodyRequired"
+                      [error]="postFormErrors.body"
+      ></app-mde-editor>
 
-      <app-tag-input
-        formControlName="tags"
-        [placeholder]="'Press \'Enter\' or \'Tab\' key to add tags'"
+      <app-tag-input formControlName="tags"
+                     [placeholder]="t('tags')"
       ></app-tag-input>
 
-      <div class="button-wp">
-        <button mat-stroked-button>{{ type === 'edit' ? 'Cancel' : 'Reset form'}}</button>
-        <button mat-raised-button color="primary">{{ type === 'edit' ? 'Save' : 'Create post'}}</button>
+      <div class="button-wp" *transloco="let t; read: 'buttons'">
+        <button (click)="resetForm()" mat-stroked-button>
+          {{ type === 'edit' ? t('cancel') : t('resetForm')}}
+        </button>
+
+        <app-tx-button [name]="type === 'edit' ? t('save') : t('createPost')"
+                       (click)="onEditPost()"
+                       [isSending]="isSending"
+        ></app-tx-button>
       </div>
+
     </form>
 
   </mat-card>

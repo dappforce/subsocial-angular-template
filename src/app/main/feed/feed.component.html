@@ -1,0 +1,34 @@
+<ng-container *ngIf="loadMethod === 'blockchain'">
+  <ng-container *ngIf="(postIds$ | async) as postIds; else noFeed">
+    <app-post-list [ids]="postIds"></app-post-list>
+  </ng-container>
+</ng-container>
+
+<ng-container *ngIf="loadMethod === 'offchain'">
+  <ng-container *ngIf="!!feedCount; else noFeed">
+    <div
+      infinite-scroll
+      [infiniteScrollThrottle]="50"
+      [infiniteScrollDistance]="scrollDistance"
+      (scrolled)="onScrollDown()"
+      [infiniteScrollDisabled]="isBlockInfinityScroll"
+    >
+      <div class="post-item-wp" *ngFor="let post of (post$ | async); trackBy: trackPostById">
+        <ng-container *ngIf="!post.isSharedPost">
+          <app-post-item [postItemData]="post"
+          ></app-post-item>
+        </ng-container>
+        <ng-container *ngIf="post.isSharedPost">
+          <app-shared-post-item [postItemData]="post"></app-shared-post-item>
+        </ng-container>
+      </div>
+    </div>
+
+    <app-spinner [showSpinner]="loading"></app-spinner>
+  </ng-container>
+</ng-container>
+
+<ng-template #noFeed>
+  <app-no-content [text]="'content.noFeed' | transloco"></app-no-content>
+</ng-template>
+

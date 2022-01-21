@@ -20,8 +20,6 @@ export const selectFollowedSpaceIdsByCurrentAccount = createSelector(
   selectFollowedSpaceIdsEntities,
   selectMyAccountAddress,
   (entities, address) => {
-    console.log(entities, address);
-
     return entities ? entities[address]?.followingSpaceIds || [] : [];
   }
 );

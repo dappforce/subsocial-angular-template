@@ -4,13 +4,13 @@
        class="profile-button-wp"
   >
     <app-avatar [src]="profileData.avatar"
-                [jdentityValue]="profileData.address"
-                [size]="30"
+                [jdentityValue]="profileData.id"
+                [size]="36"
     ></app-avatar>
 
-    <app-column [margin]="'0 0 0 10px'">
+    <app-column [margin]="'0 0 0 8px'">
 
-      <span>{{profileData.name || (profileData.address | addressHidden)}}</span>
+      <span class="profile-name">{{profileData.name || (profileData.id | addressHidden)}}</span>
 
       <app-tokens type="primary" [tokens]="accountService.balance$ | async"></app-tokens>
 
@@ -25,7 +25,7 @@
           (click)="accountService.openSignInModal()"
           class="sign-in-btn"
           color="primary">
-    Sign in
+    {{ 'buttons.signIn' | transloco }}
   </button>
 
 </ng-container>

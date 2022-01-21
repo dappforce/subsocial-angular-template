@@ -1,0 +1,130 @@
+<ng-container>
+  <app-column [padding]="'16px 16px 0 16px'">
+
+    <section class="modal-header">
+
+      <app-close-button class="close-btn"
+                        (onClose)="dialogRef.close()"
+      ></app-close-button>
+
+      <div class="header-title title-large">{{ 'modals.login.title' | transloco }}</div>
+
+    </section>
+
+    <ng-container [ngSwitch]="data.status">
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.EXTENSION_NOT_FOUND">
+        <app-column class="ext-not-found" *transloco="let t; read: 'modals.login.noExtension'">
+          <span class="message normal">
+            <span>
+              <a class="link"
+                 target="_blank"
+                 href="{{LINKS.polkadotExt}}">
+                Polkadot Extension
+              </a>
+
+              <span>{{ t('wasNotFound') }}</span>
+            </span>
+            <br>
+            <span>{{ t('installExt') }}</span>
+          </span>
+
+          <app-column class="link-wp">
+            <a matRipple
+               target="_blank"
+               href="{{LINKS.chromeExt}}"
+            >
+              <img src="../../../../assets/img/chrome.png" alt="">
+              <span>{{ t('installForChrome') }}</span>
+            </a>
+
+            <a matRipple
+               class="mt-16"
+               target="_blank"
+               href="{{LINKS.firefoxExt}}"
+            >
+              <img src="../../../../assets/img/firefox.png" alt="">
+              <span>{{ t('installForFirefox') }}</span>
+            </a>
+          </app-column>
+
+          <div class="footer-not-ext-wp">
+            <span>
+              {{ t('needHelp') }}
+              <a class="link"> {{ t('signInGuide') }}</a>
+            </span>
+          </div>
+        </app-column>
+
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.ACCOUNTS_NOT_FOUND">
+        <div class="account-not-found" *transloco="let t; read: 'modals.login.noAccountScreen'">
+          <p>
+            {{ t('noAccountFound') }}
+            <br>
+            <b>Polkadot extension</b>
+            {{ t('createNew') }}
+            <br>
+            {{ t('importExisting') }}
+          </p>
+
+          <div class="footer-wp">
+            <a href="">{{ t('privacyPolicy') }}</a>
+            <a href="">{{ t('termOfUse') }}</a>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template [ngSwitchCase]="ACCOUNT_STATUS.UNAUTHORIZED">
+
+        <app-column v="center" class="unauthorized" *transloco="let t; read: 'modals.login.accountScreen'">
+
+          <span>{{ t('message') }}</span>
+
+          <app-scroll class="account-list">
+
+            <app-row v="center"
+                     (click)="selectAccount(account)"
+                     class="account-item"
+                     *ngFor="let account of data.accounts"
+            >
+
+              <app-avatar [size]="40"
+                          [jdentityValue]="account.id"
+                          [src]="account.avatar">
+              </app-avatar>
+
+              <app-row h="space-between" class="account-info-wp">
+
+                <app-column>
+
+                  <span class="name">{{account.name}}</span>
+
+                  <app-tokens [size]="'small'"
+                              [showIcon]="false"
+                              [tokens]="account.balance"
+                  ></app-tokens>
+
+                </app-column>
+
+                <app-address size="small"
+                             [address]="account.id"
+                ></app-address>
+
+              </app-row>
+
+            </app-row>
+          </app-scroll>
+
+          <app-row h="center" class="footer-wp" *transloco="let t; read: 'modals.login.noAccountScreen'">
+            <a href="">{{ t('privacyPolicy') }}</a>
+            <a href="">{{ t('termOfUse') }}</a>
+          </app-row>
+        </app-column>
+
+      </ng-template>
+
+    </ng-container>
+  </app-column>
+</ng-container>

@@ -1,16 +1,16 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   Input,
   OnInit,
 } from '@angular/core';
-import { Store } from '@ngrx/store';
-import { SpaceListItemData } from '../../../core/models/space/space-list-item.model';
-import { AppState } from '../../../state/state';
-import { selectFollowedSpaceIdsByCurrentAccount } from '../../../state/followed-space-ids/followed-space-ids.selectors';
-import { Observable, Subject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { combineLatest, Observable } from 'rxjs';
 import { FollowerService } from '../../../shared/services/follower.service';
+import { AccountService } from '../../../shared/services/account.service';
+import { Space } from '../../../state/space/space.state';
+import { SpaceFacade } from '../../../state/space/space.facade';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-space-item',
@@ -19,16 +19,37 @@ import { FollowerService } from '../../../shared/services/follower.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SpaceItemComponent implements OnInit {
-  @Input() spaceItemData: SpaceListItemData | undefined;
+  @Input() space: Space | undefined | null;
   @Input() isEdit: boolean;
   @Input() itemType: 'list' | 'single' = 'list';
+  @Input() showHidden: boolean | undefined;
   isFollowed$: Observable<boolean>;
+  isHidden: boolean;
+  skip$: Observable<boolean>;
 
-  constructor(private followerService: FollowerService) {}
+  constructor(
+    private followerService: FollowerService,
+    private cd: ChangeDetectorRef,
+    private accountService: AccountService,
+    private spaceFacade: SpaceFacade
+  ) {}
 
   ngOnInit(): void {
-    this.isFollowed$ = this.followerService.checkIfFollowSpace(
-      this.spaceItemData?.struct.id
+    this.isFollowed$ = this.followerService.checkIfFollowSpace(this.space?.id);
+
+    this.skip$ = combineLatest([
+      this.accountService.currentAccount$,
+      this.spaceFacade.getSpace(this.space!.id),
+    ]).pipe(
+      filter(([account, space]) => !!account && !!space),
+      map(([account, space]) => {
+        const isOwner = account!.id === space!.ownerId;
+        return space!.isHidden
+          ? isOwner
+            ? !this.showHidden
+            : true
+          : space!.isHidden;
+      })
     );
   }
 }

@@ -7,6 +7,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class SendButtonComponent implements OnInit {
   @Input() isDisabled: boolean;
+  @Input() type: 'edit' | 'create';
   @Output() onSendBtnClick = new EventEmitter();
 
   constructor() {}

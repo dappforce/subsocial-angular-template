@@ -1,0 +1,9 @@
+<app-icon-button *ngIf="account.currentAccount$ | async"
+                 matBadge="{{notificationService.notificationCount$ | async}}"
+                 matBadgeColor="warn"
+                 [matBadgeHidden]="!(notificationService.notificationCount$ | async)"
+                 [iconSize]="24"
+                 [buttonSize]="26"
+                 [iconName]="'bell-icon'"
+                 [routerLink]="['/notifications']"
+></app-icon-button>

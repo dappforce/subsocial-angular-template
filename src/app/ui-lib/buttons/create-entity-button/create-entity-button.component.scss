@@ -1,0 +1,36 @@
+@import "var";
+@import "mixins";
+
+:host {
+  display: flex;
+  align-items: center;
+}
+
+button {
+  @include font($font_normal, 500, 34px);
+  margin: auto 0;
+  padding: 0 $space_normal 0 38px;
+  border-radius: $space_mini;
+
+  span:first-child {
+    font-size: 26px;
+    position: absolute;
+    font-weight: 400;
+    top: 0;
+    left: 14px;
+  }
+
+  &:active {
+    border: 1px solid $color_gray_light;
+  }
+}
+
+.post {
+  border: 1px solid $color_gray_light;
+}
+
+.space {
+  border: 1px solid $color_primary;
+  color: $color_primary;
+}
+

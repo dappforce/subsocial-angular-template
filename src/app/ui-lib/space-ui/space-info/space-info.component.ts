@@ -10,7 +10,7 @@ import { Subject } from 'rxjs';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DeviceService } from '../../../shared/services/device.service';
 import { takeUntil } from 'rxjs/operators';
-import { FollowersModalDialogComponent } from '../../../shared/modal-dialogs/followers-modal-dialog/followers-modal-dialog.component';
+import { FollowersModalDialogComponent } from '../../modal-dialogs/followers-modal-dialog/followers-modal-dialog.component';
 import { isPlatformBrowser } from '@angular/common';
 import { AVATAR_SIZE } from '../../../core/constants/size.const';
 

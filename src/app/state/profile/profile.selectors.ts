@@ -1,14 +1,10 @@
-import { profileAdapter, ProfileState } from './profile.state';
+import { Profile, profileAdapter, ProfileState } from './profile.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectMyAccountAddress } from '../my-account/my-account.selectors';
-import { selectContentEntities } from '../content/content.selectors';
-import { ProfileComponentData } from '../../core/types/profile-component-data.type';
-import { ProfileContent } from '@subsocial/api/flat-subsocial/dto';
-import { environment } from '../../../environments/environment';
-import { Content } from '../../core/types/content.type';
 import { UserInfo } from '../../core/models/user-info.model';
 import { KeyValuePair } from '../../core/models/key-value-pair.model';
 import { selectFollowedAccountIdsByCurrentAccount } from '../followed-account-ids/followed-account-ids.selectors';
+import { dictionaryToArray } from '../../core/utils';
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   profileAdapter.getSelectors();
@@ -29,71 +25,39 @@ export const selectProfileEntities = createSelector(
 export const selectMyAccountProfileData = createSelector(
   selectMyAccountAddress,
   selectProfileEntities,
-  selectContentEntities,
-  (address, profileEntities, contentEntities) =>
-    extractProfileData(profileEntities, contentEntities, address)
+  (address, profileEntities) => profileEntities[address]
 );
 
-export const selectProfileDataById = (id: string) =>
+export const selectProfileById = (id: string) =>
   createSelector(
     selectProfileEntities,
-    selectContentEntities,
-    (profileEntities, contentEntities) =>
-      extractProfileData(profileEntities, contentEntities, id)
+    (profileEntities) => profileEntities[id]
+  );
+
+export const selectProfilesByIds = (ids: string[]) =>
+  createSelector(selectProfileEntities, (profileEntities) =>
+    dictionaryToArray<Profile>(profileEntities, ids)
   );
 
 export const selectUserInfoByIds = (ids: string[]) =>
   createSelector(
     selectProfileEntities,
-    selectContentEntities,
     selectFollowedAccountIdsByCurrentAccount,
-    (profileEntities, contentEntities, followedAccountsId) => {
-      const usersInfo: KeyValuePair<UserInfo> = {};
+    (profileEntities, followedAccountsIds) => {
+      const usersInfo: UserInfo[] = [];
       ids.forEach((id) => {
         const profile = profileEntities[id];
         if (profile) {
-          let content: ProfileContent | undefined;
-          if (profile.contentId) {
-            content = contentEntities[profile.contentId] as ProfileContent;
-          }
-
-          usersInfo[profile.id] = {
-            userName: content?.name,
+          usersInfo.push({
+            userName: profile?.name,
             address: profile.id,
-            avatarSrc: content?.avatar,
+            avatarSrc: profile?.avatar,
             id: profile.id,
-            isFollowing: followedAccountsId.indexOf(profile.id) >= 0,
-          };
+            isFollowing: followedAccountsIds.indexOf(profile.id) >= 0,
+          });
         }
       });
 
       return usersInfo;
     }
   );
-
-const extractProfileData = (
-  profileEntities: any,
-  contentEntities: any,
-  id: string
-) => {
-  const struct = profileEntities[id];
-  if (struct) {
-    const profileComponentData: ProfileComponentData = {
-      address: id,
-      followersCount: struct.followersCount,
-      followingCount: struct.followingAccountsCount,
-    };
-    if (struct?.contentId) {
-      const content = contentEntities[struct.contentId] as ProfileContent;
-      if (content) {
-        profileComponentData.avatar = content.avatar;
-        profileComponentData.name = content.name;
-        profileComponentData.summary = content.summary;
-      }
-    }
-
-    return profileComponentData;
-  }
-
-  return undefined;
-};

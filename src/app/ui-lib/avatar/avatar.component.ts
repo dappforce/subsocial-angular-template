@@ -19,7 +19,7 @@ export class AvatarComponent {
   @Input() size = 40;
   @Input() jdentityValue = '';
   @Input() name: string | undefined;
-  @Input() set src(value: string | undefined) {
+  @Input() set src(value: string | undefined | null) {
     this.showJdentity = !value && isPlatformBrowser(this.platformId);
     this.url = environment.ipfsUrl + value;
   }

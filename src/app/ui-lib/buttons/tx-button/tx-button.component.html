@@ -1,0 +1,8 @@
+<button [ngClass]="[type, size, width]"
+        mat-ripple
+        [disabled]="isSending || isDisabled"
+>
+  <mat-spinner *ngIf="isSending" [diameter]="15"></mat-spinner>
+  <span>{{name}}</span>
+
+</button>

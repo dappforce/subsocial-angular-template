@@ -2,17 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { SideNavService } from '../../../shared/services/side-nav.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/state';
-import { ProfileComponentData } from '../../../core/types/profile-component-data.type';
 import { Observable } from 'rxjs';
 import { selectMyAccountProfileData } from '../../../state/profile/profile.selectors';
-import {
-  ACCOUNT_STATUS,
-  AccountService,
-} from '../../../shared/services/account.service';
-import { MatDialog } from '@angular/material/dialog';
-import { SignInModalDialogComponent } from '../../../shared/modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
-import { SignInModalData } from '../../../core/types/dialog-modal-data.types';
+import { AccountService } from '../../../shared/services/account.service';
 import { map } from 'rxjs/operators';
+import { Profile } from '../../../state/profile/profile.state';
 
 @Component({
   selector: 'app-profile-button',
@@ -23,13 +17,12 @@ export class ProfileButtonComponent implements OnInit {
   constructor(
     public sideNavService: SideNavService,
     private store: Store<AppState>,
-    public accountService: AccountService,
-    private dialog: MatDialog
+    public accountService: AccountService
   ) {}
 
   isAuthorized$: Observable<boolean>;
 
-  profileData$: Observable<ProfileComponentData | undefined>;
+  profileData$: Observable<Profile | undefined>;
 
   ngOnInit(): void {
     this.profileData$ = this.store.select(selectMyAccountProfileData);

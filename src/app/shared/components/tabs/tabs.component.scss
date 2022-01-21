@@ -11,3 +11,12 @@
 nav {
   top: 2px;
 }
+
+@media only screen and (max-width: 768px) {
+  ::ng-deep {
+    .mat-tab-link {
+      height: 48px !important;
+      font-size: 14px !important;
+    }
+  }
+}

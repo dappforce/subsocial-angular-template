@@ -1,0 +1,27 @@
+@import "var";
+
+.share-post {
+  padding: 16px;
+
+  .modal-header {
+    margin-bottom: 20px;
+  }
+
+  .share-post-body {
+    &>* {
+      display: block;
+      margin-bottom: 16px;
+    }
+  }
+}
+
+.button-wp {
+  display: flex;
+  justify-content: flex-end;
+  gap: $space_normal;
+  margin-top: $space_normal;
+
+  button {
+    font-size: $font_normal;
+  }
+}

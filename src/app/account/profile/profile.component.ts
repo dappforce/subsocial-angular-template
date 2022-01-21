@@ -7,20 +7,22 @@ import {
 } from '@angular/core';
 import { TabLinkData } from '../../core/models/tab-link-data.model';
 import { DeviceService } from '../../shared/services/device.service';
-import {
-  loadProfile,
-  saveProfilesSuccess,
-} from '../../state/profile/profile.actions';
 import { ActivatedRoute } from '@angular/router';
-import { map, take, takeUntil } from 'rxjs/operators';
-import { selectProfileDataById } from '../../state/profile/profile.selectors';
-import { Observable, Subject } from 'rxjs';
-import { ProfileComponentData } from '../../core/types/profile-component-data.type';
+import {
+  filter,
+  map,
+  mergeMap,
+  skipWhile,
+  switchMap,
+  tap,
+} from 'rxjs/operators';
+import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { SpaceService } from '../../space/services/space.service';
 import { PostService } from '../../post/services/post.service';
 import { AccountService } from '../../shared/services/account.service';
-import { StoreService } from '../../state/store.service';
 import { FollowerService } from '../../shared/services/follower.service';
+import { Profile } from '../../state/profile/profile.state';
+import { ProfileFacade } from '../../state/profile/profile.facade';
 
 @Component({
   selector: 'app-profile',
@@ -35,74 +37,74 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ];
 
   activeTab = this.tabLinks[0];
-  spaceIds: string[] = [];
-  postIds: string[] = [];
-  tokens: string;
-  profileData: ProfileComponentData | undefined;
+  spaceIds$: Observable<string[]>;
+  postIds$: Observable<string[]>;
+  tokens$: Observable<string>;
+  profileData$: Observable<Profile | undefined>;
   isFollow$: Observable<boolean>;
+  isMyProfile$: Observable<boolean>;
 
   private destroy$ = new Subject<void>();
 
   constructor(
     public device: DeviceService,
-    private route: ActivatedRoute,
-    private spaceService: SpaceService,
-    private postService: PostService,
+    public spaceService: SpaceService,
     private cd: ChangeDetectorRef,
+    private route: ActivatedRoute,
+    private postService: PostService,
+    private profileFacade: ProfileFacade,
     private accountService: AccountService,
-    private storeService: StoreService,
     private followerService: FollowerService
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap
-      .pipe(
-        map((params) => params.get('userId') as string),
-        takeUntil(this.destroy$)
-      )
-      .subscribe((userId) => {
-        this.loadProfileData(userId).then();
-      });
-  }
+    this.spaceService.myOwnSpaceIds$.subscribe(console.log);
 
-  private async loadProfileData(userId: string) {
-    this.profileData = await this.storeService.getOrLoadEntities(
-      selectProfileDataById,
-      loadProfile,
-      saveProfilesSuccess,
-      userId,
-      { id: userId }
+    const userId$ = this.route.paramMap.pipe(
+      map((params) => params.get('userId') as string),
+      tap((id) => this.profileFacade.loadProfile(id))
     );
 
-    const address = this.profileData?.address!;
+    this.profileData$ = userId$.pipe(
+      mergeMap((id) => this.profileFacade.getProfileOnce(id))
+    );
 
-    this.tokens = await this.accountService.loadFormattedBalance(address);
+    this.tokens$ = this.profileData$.pipe(
+      switchMap((profile) =>
+        from(this.accountService.loadFormattedBalance(profile!.id))
+      )
+    );
 
-    this.clearIds();
+    this.spaceIds$ = this.profileData$.pipe(
+      switchMap((profile) =>
+        from(this.spaceService.getSpaceIdsByAccount(profile!.id))
+      ),
+      filter((ids) => ids.length > 0)
+    );
 
-    this.spaceIds = await this.spaceService.getSpaceIdsByAccount(address);
+    this.postIds$ = this.spaceIds$.pipe(
+      switchMap((spaceIds) => this.postService.getPostIdsBySpaceIds(spaceIds)),
+      filter((ids) => ids.length > 0)
+    );
 
-    this.postIds = await this.postService
-      .getPostIdsBySpaceIds(this.spaceIds)
-      .pipe(take(1))
-      .toPromise();
+    this.isMyProfile$ = combineLatest([
+      this.profileData$,
+      this.accountService.currentAccount$,
+    ]).pipe(
+      filter(([profile, account]) => !!profile && !!account),
+      map(([profile, account]) => profile!.id === account!.id)
+    );
 
-    this.isFollow$ = this.followerService
-      .checkIfFollowAccount(address)
-      .pipe(takeUntil(this.destroy$));
-
-    this.cd.markForCheck();
+    this.isFollow$ = this.profileData$.pipe(
+      switchMap((profile) =>
+        this.followerService.checkIfFollowAccount(profile?.id)
+      )
+    );
   }
 
   onTabClick(tabData: TabLinkData) {
     this.activeTab = tabData;
     this.cd.markForCheck();
-  }
-
-  clearIds() {
-    this.postIds = [];
-    this.spaceIds = [];
-    this.cd.detectChanges();
   }
 
   ngOnDestroy(): void {

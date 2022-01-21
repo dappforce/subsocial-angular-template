@@ -1,20 +1,24 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NavigationService } from '../../shared/services/navigation.service';
 import { environment } from '../../../environments/environment';
 import { PostService } from '../../post/services/post.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Activity } from '@subsocial/types';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MainComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
@@ -23,7 +27,9 @@ export class MainComponent implements OnInit, OnDestroy {
   constructor(
     public navService: NavigationService,
     private route: ActivatedRoute,
-    private postService: PostService
+    private postService: PostService,
+    private cd: ChangeDetectorRef,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
@@ -39,7 +45,16 @@ export class MainComponent implements OnInit, OnDestroy {
     this.postService
       .getSuggestedPostsIds()
       .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((ids) => (this.postIds = ids));
+      .subscribe((ids) => {
+        this.postIds = ids;
+        this.cd.markForCheck();
+      });
+
+    // this.http
+    //   .get<Activity[]>(
+    //     'https://app.subsocial.network/offchain/v1/offchain/feed/3t8GGfcxxXiTUmGiTKp2jS611wucGs4K7zvr2UmXrawoWYLD?offset=0&limit=20'
+    //   )
+    //   .subscribe(console.log);
   }
 
   ngOnDestroy(): void {

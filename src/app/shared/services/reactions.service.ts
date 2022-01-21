@@ -4,7 +4,7 @@ import { SubsocialApiService } from './subsocial-api.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { AnyReactionId } from '@subsocial/types';
 import { filter, skipWhile, take } from 'rxjs/operators';
-import { MyPostReactionsStruct } from '../../state/my-post-reactions/my-post-reactions.state';
+import { MyPostReactions } from '../../state/my-post-reactions/my-post-reactions.state';
 import BN from 'bn.js';
 
 @Injectable({
@@ -59,7 +59,7 @@ export class ReactionsService {
           reactionIdByPostIds.get(id),
         reactionId: id,
         kind: reactionRaw.kind.isUpvote ? 'Upvote' : 'Downvote',
-      } as MyPostReactionsStruct;
+      } as MyPostReactions;
     });
   }
 }

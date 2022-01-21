@@ -1,3 +1,5 @@
+@import "var";
+
 .tags-wp {
   .mat-chip-list-wrapper .mat-standard-chip {
     margin: 0;
@@ -12,8 +14,8 @@
   }
 
   .mat-chip.mat-standard-chip {
-    background: rgba(33, 33, 33, 0.08);
-    color: rgba(0, 0, 0, 0.6);
+    background: $color_border_list;
+    color: $color_gray_dark;
     font-size: 14px;
     line-height: 20px;
     font-weight: normal;

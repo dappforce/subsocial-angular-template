@@ -14,6 +14,7 @@ export class NavigationService {
   private isShowTabSource = new BehaviorSubject<boolean>(false);
   public isShowTab$ = this.isShowTabSource.asObservable();
   public tabLinks: TabLinkData[] = [
+    { tabName: 'feed' },
     { tabName: 'posts' },
     { tabName: 'spaces' },
   ];

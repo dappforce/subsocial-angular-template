@@ -9,19 +9,9 @@ import { ScrollProps } from '../classes/scroll-props.class';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { HasId } from '@subsocial/api/flat-subsocial/flatteners';
 import { AppState } from '../../state/state';
-import { ActionCreator, Store } from '@ngrx/store';
-import { KeyValuePair } from '../models/key-value-pair.model';
-import {
-  delay,
-  filter,
-  map,
-  mergeMap,
-  take,
-  takeUntil,
-  tap,
-  withLatestFrom,
-} from 'rxjs/operators';
-import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { delay, filter, map, switchMap, tap } from 'rxjs/operators';
+import { Actions } from '@ngrx/effects';
 
 @Component({
   template: '',
@@ -30,18 +20,21 @@ import { Actions, ofType } from '@ngrx/effects';
 export class BaseInfinityScrollComponent<T extends HasId> implements OnDestroy {
   @Input() ids: string[] | null;
   @Input() type: 'public' | 'all' = 'public';
-  public listData: Array<T> = [];
-  public listDataIds: Array<string> = [];
+  @Input() showHiddenContent: boolean | null;
+
+  public items$: Observable<T[]>;
   public scrollDistance = 1;
   public scrollProps = new ScrollProps(20);
   public isBlockInfinityScroll = false;
+  public isLoading: boolean;
+
+  private idsSet = new Set<string>();
 
   private scrollDownEventSource = new BehaviorSubject<ScrollProps>(
     this.scrollProps
   );
-  public scrollDownEvent$ = this.scrollDownEventSource.asObservable();
 
-  public isLoading: boolean;
+  scrollDownEvent$ = this.scrollDownEventSource.asObservable();
 
   private unsubscribe$: Subject<void> = new Subject();
 
@@ -52,85 +45,58 @@ export class BaseInfinityScrollComponent<T extends HasId> implements OnDestroy {
   ) {}
 
   onScrollDown() {
-    this.scrollEvent();
-  }
-
-  scrollEvent() {
     if (!this.isBlockInfinityScroll) {
       this.scrollProps.next();
       this.scrollDownEventSource.next(this.scrollProps);
     }
   }
 
-  getScrollableData(
-    dispatchAction: Function,
-    selector: Function,
-    selectAction: ActionCreator
-  ) {
-    if (!this.ids) {
+  getScrollableData(dispatchAction: Function, selector: Function) {
+    if (!this.ids || this.ids?.length === 0) {
       return;
     }
 
     this.scrollProps.max = this.ids.length;
-    const loadData$ = this.scrollDownEvent$.pipe(
+
+    this.items$ = this.scrollDownEvent$.pipe(
       filter((props) => !props.isFinish),
       tap((_) => this.loadStart()),
       map((props) => this.sliceIds(this.ids!, props)),
-      tap((ids) =>
+      tap((slicedIds) =>
         this.store.dispatch(
-          dispatchAction({ payload: { ids, type: this.type } })
+          dispatchAction({ payload: { ids: slicedIds, type: this.type } })
         )
-      )
+      ),
+      map((ids) => this.getUniqueIds(ids)),
+      switchMap((ids) => this.store.select(selector(ids)).pipe(delay(300))),
+      filter((items) => items.length > 0),
+      tap((_) => this.loadFinish())
     );
-
-    this.action$
-      .pipe(
-        ofType(selectAction),
-        withLatestFrom(loadData$),
-        mergeMap(([, ids]) =>
-          this.store.select(selector(ids)).pipe(take(1), delay(500))
-        ),
-        takeUntil(this.unsubscribe$)
-      )
-      .subscribe((items) => this.addUniqueDataToListDataArray(items));
   }
 
-  addUniqueDataToListDataArray(itemDictionary: KeyValuePair<T>) {
-    const newListDataIds: string[] = [];
-    for (let id in itemDictionary) {
-      if (
-        itemDictionary.hasOwnProperty(id) &&
-        !this.listDataIds?.includes(id)
-      ) {
-        newListDataIds.push(id);
-      }
-    }
-    const newItems = newListDataIds
-      .sort((a, b) => Number.parseInt(b) - Number.parseInt(a))
-      .map((id) => itemDictionary[id])
-      .filter((post) => post !== undefined);
-    this.listData.push(...newItems);
-    this.listDataIds.push(...newListDataIds);
-    this.loadFinish();
-    this.cd.markForCheck();
-  }
-
-  private sliceIds(arr: Array<string>, props: ScrollProps): string[] {
-    return arr.slice(props.startIndex, props.endIndex).map((e) => e.toString());
+  getUniqueIds(ids: string[]) {
+    ids.forEach((id) => this.idsSet.add(id));
+    return Array.from(this.idsSet);
   }
 
   trackById(index: number, item: T) {
     return item.id;
   }
 
+  private sliceIds(arr: Array<string>, props: ScrollProps): string[] {
+    return arr.slice(props.startIndex, props.endIndex).map((e) => e.toString());
+  }
+
   private loadStart() {
     this.isLoading = true;
     this.isBlockInfinityScroll = true;
+    this.cd.markForCheck();
   }
 
   private loadFinish() {
     this.isLoading = false;
     this.isBlockInfinityScroll = false;
+    this.cd.markForCheck();
   }
 
   ngOnDestroy(): void {

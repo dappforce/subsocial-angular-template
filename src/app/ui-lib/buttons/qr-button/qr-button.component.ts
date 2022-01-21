@@ -5,7 +5,7 @@ import {
   OnInit,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { QrModalDialogComponent } from '../../../shared/modal-dialogs/qr-modal-dialog/qr-modal-dialog.component';
+import { QrModalDialogComponent } from '../../modal-dialogs/qr-modal-dialog/qr-modal-dialog.component';
 
 @Component({
   selector: 'app-qr-button',

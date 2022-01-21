@@ -1,7 +1,15 @@
+@import "var";
+
 .full {
   width: 100%;
 }
 
 button {
   font-size: 17px;
+  color: $color_black;
+  border: $border_light;
+
+  &:active {
+    border: $border_light;
+  }
 }

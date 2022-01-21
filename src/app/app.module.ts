@@ -30,6 +30,9 @@ import { MyPostReactionsEffects } from './state/my-post-reactions/my-post-reacti
 import { PostModule } from './post/post.module';
 import { FollowedSpaceIdsEffects } from './state/followed-space-ids/followed-space-ids.effects';
 import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed-account-ids.effects';
+import { TranslocoRootModule } from './transloco-root.module';
+import { MenuModule } from './ui-lib/menu/menu.module';
+import { ModalDialogModule } from './ui-lib/modal-dialogs/modal-dialog.module';
 
 @NgModule({
   declarations: [AppComponent, BaseControlValueAccessorComponent],
@@ -45,7 +48,7 @@ import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed
     RouterModule,
     StoreModule.forRoot(appReducers, {}),
     StoreDevtoolsModule.instrument({
-      maxAge: 25,
+      maxAge: 40,
       logOnly: environment.production,
     }),
     EffectsModule.forRoot([
@@ -59,6 +62,9 @@ import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed
       FollowedAccountIdsEffects,
     ]),
     SharedModule,
+    TranslocoRootModule,
+    MenuModule,
+    ModalDialogModule,
   ],
   providers: [
     IconRegistryService,

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { MyPostReactionsStruct } from './my-post-reactions.state';
+import { MyPostReactions } from './my-post-reactions.state';
 
 export const getGetMyPostReactionsByPostIds = createAction(
   '[My Post Reactions] My Post Reactions By Post Ids',
@@ -8,5 +8,5 @@ export const getGetMyPostReactionsByPostIds = createAction(
 
 export const upsertMyPostReactions = createAction(
   '[My Post Reactions] Upsert My Post Reactions',
-  props<{ payload: Array<MyPostReactionsStruct> }>()
+  props<{ payload: Array<MyPostReactions> }>()
 );

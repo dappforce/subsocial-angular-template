@@ -3,13 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  baseUrl: 'http://localhost:4200',
   production: false,
   ipfsUrl: 'https://app.subsocial.network/ipfs/ipfs/',
   domainUrl: 'http://localhost:4200/',
   appName: 'Subsocial Angular',
-  substrateNodeUrl: 'wss://rpc.subsocial.network',
-  // substrateNodeUrl: 'ws://127.0.0.1:9944',
+  substrateNodeUrl:  'wss://rpc.subsocial.network',
   offchainUrl: 'https://app.subsocial.network/offchain',
+  offchainWs: `wss://app.subsocial.network/notif-ws`,
+  addFileUrl: `https://app.subsocial.network/offchain/v1/ipfs/addFile`,
   ipfsNodeUrl: 'https://staging.subsocial.network/ipfs-1',
   currency: 'SUB',
   decimals: 11,
@@ -45,6 +47,8 @@ export const environment = {
     '4306',
     '4544',
   ],
+  loadImageLimitMb: 2,
+  enableSessionKey: true,
 };
 
 /*

@@ -3,6 +3,7 @@ import {
   ProfileStruct,
   SpaceStruct,
 } from '@subsocial/api/flat-subsocial/flatteners';
+import { Space } from '../../state/space/space.state';
 import { Content } from './content.type';
 
 export type TransformDataArray = {
@@ -17,7 +18,7 @@ export type TransformData = {
 
 export type TransformPostWithAllDetails = {
   posts: Array<PostStruct>;
-  spaces: Array<SpaceStruct>;
+  spaces: Array<Space>;
   profiles: Array<ProfileStruct>;
   contents: Array<Content>;
 };

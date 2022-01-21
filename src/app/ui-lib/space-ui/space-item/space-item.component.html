@@ -1,15 +1,19 @@
-<div *ngIf="spaceItemData" class="space-item-wp">
+<div *ngIf="space && !(skip$ | async)" class="space-item-wp">
   <mat-card>
+    <app-hidden-content [id]="space.id"
+                        [type]="'space'"
+    ></app-hidden-content>
+
     <app-row [v]="'start'"
              [h]="'space-between'"
     >
-      <app-space-info [spaceName]="spaceItemData.content.name"
-                      [avatarSrc]="spaceItemData.content.image"
-                      [followersCount]="spaceItemData.struct.followersCount"
-                      [postsCount]="spaceItemData.struct.postsCount"
-                      [link]="spaceItemData.content.handle ? '/@' + spaceItemData.content.handle : '/' + spaceItemData.struct.id"
+      <app-space-info [spaceName]="space.name"
+                      [avatarSrc]="space.image"
+                      [followersCount]="space.followersCount"
+                      [postsCount]="space.postsCount"
+                      [link]="space.spaceLink"
                       [itemType]="itemType"
-                      [spaceId]="spaceItemData.struct.id"
+                      [spaceId]="space.id"
       ></app-space-info>
 
       <app-row [v]="'center'">
@@ -18,30 +22,31 @@
                            ifDesktop
                            [isFollow]="isFollowed$ | async"
                            [style.margin-right]="'9px'"
-                           [entityId]="spaceItemData.struct.id"
+                           [entityId]="space.id"
         ></app-follow-button>
 
-        <app-option-button type="space"></app-option-button>
+        <app-space-menu [spaceId]="space.id"
+        ></app-space-menu>
 
       </app-row>
 
     </app-row>
 
     <app-paragraph [marginTop]="10"
-                   [link]="spaceItemData.content.handle ? '/@' + spaceItemData.content.handle : '/' + spaceItemData.struct.id"
-                   [text]="spaceItemData.content.summary"
+                   [link]="space.spaceLink"
+                   [text]="space.summary"
                    [isAutoExpand]="true"
-                   [isShowMore]="spaceItemData.content.isShowMore"
+                   [isShowMore]="space.isShowMore"
     ></app-paragraph>
 
-    <app-tag *ngFor="let tag of spaceItemData.content.tags" [tagName]="tag"></app-tag>
+    <app-tag *ngFor="let tag of space.tags" [tagName]="tag"></app-tag>
 
     <app-follow-button width="full"
                        size="large"
                        ifMobile
                        [style.margin-top]="'16px'"
-                       [isFollow]="false"
-                       [entityId]="spaceItemData.struct.id"
+                       [isFollow]="isFollowed$ | async"
+                       [entityId]="space.id"
     ></app-follow-button>
   </mat-card>
 </div>

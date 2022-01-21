@@ -1,8 +1,10 @@
-<a *ngIf="type === 'link'" (click)="goToSpacePage()">
-  <span>See&nbsp;More</span>
-</a>
+<ng-container *transloco="let t; read: 'general'">
+  <a *ngIf="type === 'link'" (click)="goToSpacePage()">
+    <span>{{ t('seeMore') }}</span>
+  </a>
 
-<span *ngIf="type === 'expand'" (click)="onSwitch()">
-  {{ isMore ? 'See&nbsp;More' : 'See&nbsp;Less'  }}
-</span>
+  <span *ngIf="type === 'expand'" (click)="onSwitch()" >
+    {{ isMore ? t('seeMore') : t('seeLess')  }}
+  </span>
+</ng-container>
 

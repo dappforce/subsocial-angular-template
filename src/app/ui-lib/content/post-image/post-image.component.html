@@ -1,5 +1,7 @@
 <ng-container *ngIf="imageSrc">
+
   <ng-container [ngSwitch]="type">
+
     <ng-template ngSwitchCase="square">
       <a [routerLink]="link">
         <div class="post-image"
@@ -9,6 +11,7 @@
         ></div>
       </a>
     </ng-template>
+
     <ng-template ngSwitchCase="notification">
       <a [routerLink]="link">
         <div class="post-image-notification"
@@ -18,12 +21,15 @@
         ></div>
       </a>
     </ng-template>
+
     <ng-template ngSwitchCase="full">
       <a [routerLink]="link">
         <img class="post-image-full" [src]="imageSrc">
       </a>
     </ng-template>
+
   </ng-container>
+
 </ng-container>
 
 

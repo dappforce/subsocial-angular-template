@@ -39,11 +39,24 @@ export class IconRegistryService {
     'remove-white',
     'coin',
     'option-hor',
+    'option-gray',
     'info',
     'arrow',
     'info-yellow',
     'error',
     'success',
+    'react',
+    'documents',
+    'question',
+    'subsocial-logo',
+    'vue',
+    'world',
+    'github-ls',
+    'ipfs',
+    'view-reaction',
+    'hide',
+    'visible',
+    'bell',
   ];
 
   SOCIAL_ICONS_NAMES = [
@@ -56,6 +69,8 @@ export class IconRegistryService {
     'youtube',
     'reddit',
     'facebook',
+    'megaphone',
+    'discord',
   ];
 
   init() {

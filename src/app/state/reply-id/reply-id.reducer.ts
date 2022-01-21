@@ -4,13 +4,20 @@ import {
   ReplyIdState,
 } from './reply-id.state';
 import { Action, createReducer, on } from '@ngrx/store';
-import { getReplyIdsByParentPostId, upsertReplyIds } from './reply-id.actions';
+import {
+  loadReplyIdsByParentPostId,
+  updateReplyIds,
+  upsertReplyIds,
+} from './reply-id.actions';
 
 const replyIdsReducers = createReducer(
   initialReplyIdState,
-  on(getReplyIdsByParentPostId, (state) => state),
+  on(loadReplyIdsByParentPostId, (state) => state),
   on(upsertReplyIds, (state, { payload }) => {
     return replyIdAdapter.upsertOne(payload, state);
+  }),
+  on(updateReplyIds, (state, { payload }) => {
+    return replyIdAdapter.updateOne(payload, state);
   })
 );
 

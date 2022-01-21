@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SubsocialApiService } from '../../shared/services/subsocial-api.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
-import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
-import { Content } from '../../core/types/content.type';
+import { mapProfileDTOToProfile } from '../../core/mapper/profile.map';
 
 @Injectable({
   providedIn: 'root',
@@ -26,20 +25,13 @@ export class ProfileService {
     });
   }
 
-  async getProfilesByIds(ids: string[]) {
-    const profileData = await this.api.api.findProfiles(ids);
-    const structs: ProfileStruct[] = [];
-    const contents: Content[] = [];
+  async fetchProfilesByIds(ids: string[]) {
+    const profilesData = await this.api.api.findProfiles(ids);
+    return profilesData.map((profile) => mapProfileDTOToProfile(profile));
+  }
 
-    profileData.forEach((data) => {
-      structs.push(data.struct);
-      if (data.content && data.struct.contentId) {
-        const content = data.content as Content;
-        content['id'] = data.struct.contentId;
-        contents.push(content);
-      }
-    });
-
-    return { structs, contents };
+  public async fetchProfileById(id: string) {
+    const profileData = await this.api.api.findProfile(id);
+    return mapProfileDTOToProfile(profileData, id);
   }
 }

@@ -1,50 +1,62 @@
-<ng-container *ngIf="postData">
+<ng-container *ngIf="(post$ | async) as post">
     <mat-card>
 
-      <app-hidden-content *ngIf="postData.hidden && postData.isMyPost"
+      <app-hidden-content [id]="post.id"
                           [type]="'post'"
       ></app-hidden-content>
 
-      <app-column >
+      <app-column  [margin]="'0 0 16px 0'">
         <app-row [h]="'space-between'"
                  [v]="'center'"
                  [margin]="'0 0 16px 0'"
         >
 
-          <app-post-info [userName]="postData.ownerName"
-                         [spaceName]="postData.spaceName"
-                         [imageUrl]="postData.ownerImageUrl"
-                         [createdAtTime]="postData.createdAtTime"
-                         [ownerId]="postData.ownerId"
-                         [spaceLink]="postData.spaceLink"
+          <app-post-info [userName]="post.ownerName"
+                         [spaceName]="post.spaceName"
+                         [imageUrl]="post.ownerImageUrl"
+                         [createdAtTime]="post.createdAtTime"
+                         [ownerId]="post.ownerId"
+                         [spaceLink]="post.spaceLink"
           ></app-post-info>
 
-          <app-option-button></app-option-button>
+          <app-post-menu [post]="post"
+                         (onClickViewReaction)="onViewReaction()"
+          ></app-post-menu>
 
         </app-row>
 
-        <app-embed-video [videoUrl]="postData.link"></app-embed-video>
+        <app-embed-video [videoUrl]="post.link"></app-embed-video>
 
-        <app-title *ngIf="!postData.isComment" type="large" [text]="postData.title"></app-title>
+        <app-title *ngIf="!post.isComment && post.title" type="large" [text]="post.title"></app-title>
 
-        <app-comment-post-title *ngIf="postData.isComment"
+        <app-comment-post-title *ngIf="post.isComment"
                                 [postTitle]="commentPostData?.postTitle"
                                 [link]="commentPostData?.link"
         ></app-comment-post-title>
 
         <app-post-image class="post-image"
                         type="full"
-                        *ngIf="postData.imageUrl"
-                        [imageSrc]="postData.imageUrl"
+                        *ngIf="post.imageUrl"
+                        [image]="post.imageUrl"
         ></app-post-image>
 
         <markdown class="markdown-body" ngPreserveWhitespaces>
-          {{postData.body}}
+          {{post.body}}
         </markdown>
 
-        <app-row [margin]="'4px 0 16px 0'">
-          <app-tag [tagName]="tag" *ngFor="let tag of postData.tags"></app-tag>
+        <app-row *ngIf="post.tags && post.tags.length > 0" [margin]="'4px 0 16px 0'">
+          <app-tag [tagName]="tag" *ngFor="let tag of post.tags"></app-tag>
         </app-row>
+
+        <ng-container *ngIf="(sharedPost$ | async) as sharedPost">
+          <app-post-item [isSharedPost]="true"
+                         [postItemData]="sharedPost">
+          </app-post-item>
+        </ng-container>
+
+        <ng-container *ngIf="isSharedPostHidden">
+          <div class="post-not-found">{{'content.postNotFound' | transloco}}</div>
+        </ng-container>
 
       </app-column>
 
@@ -53,21 +65,20 @@
       <app-action-panel class="action-panel-wp"
                         [isShowShare]="true"
                         [isShowLabel]="true"
-                        [upvoteCount]="postData.upvotesCount"
-                        [downvoteCount]="postData.downvotesCount"
-                        [commentCount]="postData.repliesCount"
-                        [isDownvoteActive]="postData.downvoteActive"
-                        [isUpvoteActive]="postData.upvoteActive"
-                        [postId]="postData.id"
-                        [reactionId]="postData.reactionId"
+                        [upvoteCount]="post.upvotesCount"
+                        [downvoteCount]="post.downvotesCount"
+                        [commentCount]="post.repliesCount"
+                        [postId]="post.id"
       ></app-action-panel>
 
     </mat-card>
 
-    <app-space-item [spaceItemData]="spaceData"></app-space-item>
+    <ng-container *ngIf="(space$ | async) as space">
+      <app-space-item [space]="space"></app-space-item>
+    </ng-container>
 
     <mat-card class="comment-card">
-      <app-comments [commentListData]="commentData"></app-comments>
+      <app-comments [repliesCount]="post.repliesCount" [rootPost]="post"></app-comments>
     </mat-card>
 
 </ng-container>

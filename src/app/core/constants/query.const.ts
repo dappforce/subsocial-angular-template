@@ -2,6 +2,9 @@ export const PALLETS = {
   profileFollows: 'profileFollows',
   spaceFollows: 'spaceFollows',
   reactions: 'reactions',
+  posts: 'posts',
+  spaces: 'spaces',
+  profiles: 'profiles',
 };
 
 export const METHODS = {
@@ -17,6 +20,12 @@ export const METHODS = {
   createPostReaction: 'createPostReaction',
   deletePostReaction: 'deletePostReaction',
   updatePostReaction: 'updatePostReaction',
+  createPost: 'createPost',
+  updatePost: 'updatePost',
+  createSpace: 'createSpace',
+  updateSpace: 'updateSpace',
+  createProfile: 'createProfile',
+  updateProfile: 'updateProfile',
 };
 
 export enum KIND {

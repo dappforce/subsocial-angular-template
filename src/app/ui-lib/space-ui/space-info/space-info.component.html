@@ -11,18 +11,18 @@
              [link]="'/' + link"
   ></app-title>
 
-  <app-row [ngClass]="[itemType, 'info']">
+  <app-row [ngClass]="[itemType, 'info']" *transloco="let t; read: 'general'">
 
     <span [style.margin-right]="itemType === 'single' ? '12px' : '4px'">
       <span class="count">{{postsCount | numeral}}</span>
-      <span>{{postsCount | pluralize:  'Post'}}</span>
+      <span>{{postsCount | pluralize:  t('Post')}}</span>
     </span>
 
     <span  *ngIf="itemType === 'list'" class="dot">·</span>
 
     <a (click)="onOpenModal()">
       <span class="count">{{followersCount | numeral}}</span>
-      <span>{{followersCount | pluralize: 'Follower'}}</span>
+      <span>{{followersCount | pluralize: t('follower')}}</span>
     </a>
 
   </app-row>

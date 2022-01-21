@@ -1,4 +1,5 @@
 @import '_var.scss';
+@import "mixins";
 
 .profile-button-wp {
   display: flex;
@@ -12,4 +13,8 @@
 }
 .mat-stroked-button {
   border: $border_primary !important;
+}
+
+.profile-name {
+  @include font($font_small, 500)
 }

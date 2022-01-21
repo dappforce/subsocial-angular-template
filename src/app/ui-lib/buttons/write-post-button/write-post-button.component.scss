@@ -1,6 +1,4 @@
-.mat-stroked-button {
-  border: 1px solid #EB2F96 !important;
-}
+@import "var";
 
 .static {
 
@@ -12,5 +10,15 @@
 
 .write-post-button {
   cursor: pointer;
-  font-size: 17px;
+  font-size: $font_normal;
+}
+
+.disabled {
+  background: $color_shadow !important;
+  color: #B3B3B3 !important;
+  cursor: auto;
+}
+
+.tooltip {
+  font-size: 14px;
 }

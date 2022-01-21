@@ -1,0 +1,45 @@
+@import 'src/app/shared/styles/var';
+@import "src/app/shared/styles/mixins";
+
+app-close-button {
+  margin-right: -5px;
+}
+
+.address-wp {
+  display: flex;
+
+  span {
+    @include font(14px, 500);
+    word-break: break-all;
+    text-align: center;
+  }
+}
+.button-wp {
+  display: flex;
+  justify-content: space-between;
+  gap: $space_normal;
+  margin-top: $space_normal;
+
+  button {
+    width: 100%;
+    font-size: $font_normal;
+  }
+
+  button[mat-stroked-button] {
+    color: $color_primary;
+  }
+
+  button[mat-flat-button] {
+
+    mat-icon {
+      width: 16px;
+      margin-right: 12px;
+    }
+  }
+}
+
+.mat-stroked-button {
+  border: $border_primary !important;
+
+}
+

@@ -36,12 +36,27 @@ export class StoreService {
       .pipe(take(1))
       .toPromise();
 
-    if (!entitiesFromStore || entitiesFromStore?.length === 0) {
+    if (
+      !entitiesFromStore ||
+      entitiesFromStore?.length === 0 ||
+      Object.keys(entitiesFromStore).length === 0
+    ) {
       this.store.dispatch(loadAction(loadProps));
 
       return await this.getValueFromStore(selector, successAction, getProps);
     }
 
     return entitiesFromStore;
+  }
+
+  public async reloadEntity(
+    selector: Function,
+    loadAction: Function,
+    successAction: ActionCreator,
+    getProps: any,
+    loadProps: any
+  ) {
+    this.store.dispatch(loadAction(loadProps));
+    return await this.getValueFromStore(selector, successAction, getProps);
   }
 }

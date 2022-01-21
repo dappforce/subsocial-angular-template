@@ -5,7 +5,7 @@ import {
   Input,
   OnInit,
 } from '@angular/core';
-import { TxButtonComponent } from '../../../core/base-component/tx-button.component';
+import { BaseTxComponent } from '../../../core/base-component/base-tx.component';
 import { TransactionService } from '../../../shared/services/transaction.service';
 import { AccountService } from '../../../shared/services/account.service';
 import { SubmittableResult } from '@polkadot/api';
@@ -31,7 +31,7 @@ type FollowButtonWidth = 'full' | 'static';
   styleUrls: ['./follow-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FollowButtonComponent extends TxButtonComponent implements OnInit {
+export class FollowButtonComponent extends BaseTxComponent implements OnInit {
   @Input() type: FollowButtonType = 'space';
   @Input() size: FollowButtonSize = 'medium';
   @Input() width: FollowButtonWidth = 'static';
@@ -41,8 +41,12 @@ export class FollowButtonComponent extends TxButtonComponent implements OnInit {
     this._isFollow = !!value;
   }
 
+  get isFollow() {
+    return this._isFollow;
+  }
+
   label: string = STATUS.FOLLOW;
-  _isFollow: boolean = false;
+  private _isFollow: boolean = false;
 
   constructor(
     public transaction: TransactionService,

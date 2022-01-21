@@ -1,0 +1,59 @@
+@import "_var";
+
+.init {
+  .editor-toolbar {
+    display: none;
+  }
+
+  .CodeMirror {
+    padding: 4px 10px;
+    border-radius: $space_mini;
+
+    &:hover {
+      border-color: $color_primary;
+    }
+  }
+}
+
+.editor-toolbar {
+  opacity: 1;
+  border: 1px solid #ddd;
+  border-bottom: none;
+
+  a {
+    color: $color_black !important;
+  }
+}
+
+.CodeMirror .CodeMirror-placeholder {
+  opacity: 1;
+  color: $color_gray_dark;
+}
+
+.CodeMirror {
+  z-index: 0;
+
+  &:hover {
+    border-color: $color_primary;
+  }
+}
+
+.CodeMirror-fullscreen {
+ z-index: 9 !important;
+}
+
+.required {
+  .CodeMirror-placeholder {
+    &::before {
+      content: "*";
+      color: $color_red;
+      font-weight: 500;
+      font-size: 17px;
+      margin-right: 2px;
+  }
+  }
+}
+
+.mde-error {
+  top: 5px;
+}

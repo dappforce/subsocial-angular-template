@@ -1,0 +1,26 @@
+@import "src/app/shared/styles/var";
+
+.space-list {
+  margin: 6px 16px 16px;
+
+  li {
+    border-bottom: 1px solid $color_border_list;
+    padding: 11px 0;
+    cursor: pointer;
+
+    app-avatar {
+      margin-right: $space_normal;
+      margin-left: $space_tiny;
+    }
+
+    &:hover {
+      background-color: $hover_color_light;
+    }
+  }
+
+}
+
+.modal-body-spaces {
+  max-height: 550px;
+  margin-bottom: -16px;
+}

@@ -4,7 +4,6 @@
 
 @include mat-core();
 
-
 $subsocial-palette: (
   50: #f6a3d1,
   100: #f48cc5,
@@ -67,6 +66,10 @@ $subsocial-ng-app-theme: mat-light-theme((
     }
   }
 
+  //.mat-tab-nav-bar, .mat-tab-header {
+  //  border-bottom: none!important;
+  //}
+
   .mat-tab-links {
     justify-content: center;
   }
@@ -78,6 +81,7 @@ $subsocial-ng-app-theme: mat-light-theme((
   .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
     display: none !important;
   }
+
 }
 
 @mixin custom-buttons-theme() {
@@ -95,7 +99,7 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 
   .mat-form-field-wrapper {
-    padding-bottom: $space_normal;
+    padding-bottom: 0;
   }
 
   .mat-input-element::-webkit-input-placeholder {
@@ -187,6 +191,24 @@ button, button:hover {
   &:focus {
     outline: 0;
   }
+}
+
+.secondary-button {
+  @include font($font_normal, 500, 34px);
+  margin: auto 0;
+  padding: 0 $space_normal;
+  border-radius: $space_mini;
+  border: 1px solid $color_gray_light;
+
+  &:active, &:hover {
+    border: 1px solid $color_gray_light;
+  }
+}
+
+.tx-is-loading-btn {
+  background-color: $color_white !important;
+  color: $color_gray_secondary;
+  border: 1px solid $color_gray_secondary;
 }
 
 strong {
@@ -325,16 +347,20 @@ markdown {
 }
 
 .if-desktop {
-  display: block;
+  display: block !important;
 }
 
 .if-mobile {
-  display: none;
+  display: none !important;
 }
 
 .white-snackbar {
   background-color: white;
   color: $color_black;
+}
+
+.modal-overflow {
+  overflow-y: auto;
 }
 
 .action-panel-label {
@@ -350,21 +376,37 @@ markdown {
   }
 }
 
+.error-wp {
+  color: $color_red;
+  font-size: 12px;
+  position: relative;
+  left: $space_normal;
+}
+
+.post-not-found {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #666666;
+  border: $shared_post_border;
+  border-radius: 4px;
+  padding: 21px;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .container {
     width: 100%;
     box-sizing: border-box;
     padding: 0 14px;
-    margin: 131px 0 0;
   }
 
   .if-desktop {
-    display: none;
+    display: none !important;
   }
 
   .if-mobile {
-    display: block;
+    display: block !important;
   }
 
   .mat-drawer.mat-drawer-end {

@@ -6,13 +6,15 @@
 
         <div (click)="openFile()" class="image-loader center-column">
           <mat-icon svgIcon="photo-icon"></mat-icon>
-          <span class="label">Upload</span>
+          <span class="label">{{ 'buttons.upload' | transloco }}</span>
         </div>
 
       </ng-container>
 
       <div class="loader-alert">
-        <span class="secondary-text">Image should be less than 2 MB</span>
+        <span class="secondary-text">
+          {{ 'imageShouldBeLessThan' | transloco: { limit: fileSizeLimit } }}
+        </span>
       </div>
     </div>
     <ng-template #isLoaded>
@@ -32,10 +34,12 @@
       <div class="image-loader-wp">
         <div class="image-loader center-column">
           <mat-icon svgIcon="photo-icon"></mat-icon>
-          <span class="label">Upload cover image</span>
+          <span class="label">{{ 'buttons.uploadImage' | transloco }}</span>
         </div>
         <div class="loader-alert">
-          <span class="secondary-text">Image should be less than 2 MB</span>
+          <span class="secondary-text">
+            {{ 'imageShouldBeLessThan' | transloco: { limit: fileSizeLimit } }}
+          </span>
         </div>
 
       </div>

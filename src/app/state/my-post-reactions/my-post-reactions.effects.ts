@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as MyPostReactionsActions from './my-post-reactions.actions';
-import { filter, map, switchMap, tap } from 'rxjs/operators';
+import { filter, map, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
-import { CommentService } from '../../shared/services/comment.service';
 import { ReactionsService } from '../../shared/services/reactions.service';
 
 @Injectable()

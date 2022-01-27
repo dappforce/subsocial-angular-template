@@ -40,7 +40,7 @@ export class DeviceService {
   }
 
   getResponsiveModalData() {
-    return this.isMobile$.pipe(
+    return this.isMobile$?.pipe(
       concatMap((isMobile) => {
         return isMobile ? of(MODAL_CONFIG.MOBILE) : of(MODAL_CONFIG.DESKTOP);
       })

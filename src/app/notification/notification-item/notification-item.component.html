@@ -12,7 +12,7 @@
 
       <app-column [margin]="'0 0 0 8px'" h="space-between">
 
-        <app-row class="description" *transloco="let t; read: 'notifications'">
+        <div class="description" *transloco="let t; read: 'notifications'">
 
           <a [routerLink]="notification.profileLink">
             {{notification.profileName || (notification.profileId | addressHidden)}}
@@ -30,7 +30,7 @@
             </a>
           </div>
 
-        </app-row>
+        </div>
 
 
         <div class="date">{{notification.date | day}}</div>

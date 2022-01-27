@@ -22,7 +22,7 @@
 <ng-container *ngIf="!(isAuthorized$ | async)">
 
   <button mat-stroked-button
-          (click)="accountService.openSignInModal()"
+          (click)="openSignInModal()"
           class="sign-in-btn"
           color="primary">
     {{ 'buttons.signIn' | transloco }}

@@ -10,6 +10,7 @@ import { TransactionService } from '../../../shared/services/transaction.service
 import { AccountService } from '../../../shared/services/account.service';
 import { SubmittableResult } from '@polkadot/api';
 import { METHODS, PALLETS } from '../../../core/constants/query.const';
+import { SignInModalService } from '../../modal-dialogs/services/sign-in-modal.service';
 
 const STATUS = {
   FOLLOW: 'follow',
@@ -46,14 +47,15 @@ export class FollowButtonComponent extends BaseTxComponent implements OnInit {
   }
 
   label: string = STATUS.FOLLOW;
-  private _isFollow: boolean = false;
+  _isFollow: boolean = false;
 
   constructor(
     public transaction: TransactionService,
     public account: AccountService,
-    public cd: ChangeDetectorRef
+    public cd: ChangeDetectorRef,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   async ngOnInit() {}

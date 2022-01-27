@@ -13,7 +13,18 @@
                             class="w100"
           ></app-profile-info>
 
-          <app-profile-menu></app-profile-menu>
+          <app-row [v]="'center'">
+
+            <app-edit-button [id]="profileData.id"
+                             [type]="'profile'"
+                             ifDesktop
+                             *ngIf="isMyProfile$ | async"
+            ></app-edit-button>
+
+            <app-profile-menu></app-profile-menu>
+
+          </app-row>
+
         </app-row>
 
         <app-column [margin]="'14px 0 0 0'">

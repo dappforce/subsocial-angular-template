@@ -18,6 +18,7 @@ import { SubmittableResult } from '@polkadot/api';
 import { MyPostReactions } from '../../state/my-post-reactions/my-post-reactions.state';
 import { MyPostReactionFacade } from '../../state/my-post-reactions/my-post-reaction.facade';
 import { filter, mergeMap, switchMap } from 'rxjs/operators';
+import { SignInModalService } from '../modal-dialogs/services/sign-in-modal.service';
 
 type OperationType = {
   update?: boolean;
@@ -61,9 +62,10 @@ export class ActionPanelComponent extends BaseTxComponent implements OnInit {
     public transaction: TransactionService,
     public account: AccountService,
     public cd: ChangeDetectorRef,
-    private reactionFacade: MyPostReactionFacade
+    private reactionFacade: MyPostReactionFacade,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   ngOnInit(): void {

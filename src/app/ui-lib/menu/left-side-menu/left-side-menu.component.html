@@ -1,4 +1,4 @@
-<aside #aside class="close">
+<aside #aside class="close" [ngClass]="{'shadow': type === 'hover'}">
   <app-column class="links">
     <ng-container *ngFor="let item of menuItems">
       <ng-container *ngIf="item.type === 'item'; else divider">
@@ -26,3 +26,4 @@
   </section>
 </aside>
 
+<div *ngIf="type === 'switch'" (click)="backdropClick.emit()" class="backdrop"></div>

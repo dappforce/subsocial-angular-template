@@ -20,11 +20,9 @@ import { filter, map } from 'rxjs/operators';
 })
 export class SpaceItemComponent implements OnInit {
   @Input() space: Space | undefined | null;
-  @Input() isEdit: boolean;
   @Input() itemType: 'list' | 'single' = 'list';
   @Input() showHidden: boolean | undefined;
   isFollowed$: Observable<boolean>;
-  isHidden: boolean;
   skip$: Observable<boolean>;
 
   constructor(

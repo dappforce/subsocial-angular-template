@@ -9,11 +9,43 @@
     <span>{{ 'buttons.editMyProfile' | transloco }}</span>
   </button>
 
+
+  <button mat-ripple
+          [matMenuTriggerFor]="langMenu"
+          class="lang-btn"
+          (menuOpened)="isLangMenuOpen = true"
+          (menuClosed)="isLangMenuOpen = false"
+  >
+    <mat-icon class="world-icon" svgIcon="world-icon"></mat-icon>
+    <span>{{ 'buttons.Language' | transloco }}: </span>
+    <span>{{ currentLanguage}}</span>
+    <mat-icon class="arrow"
+              svgIcon="arrow-icon"
+              [ngClass]="{
+                'arrow-up': isLangMenuOpen,
+                'arrow-down': !isLangMenuOpen
+              }"
+    ></mat-icon>
+  </button>
+
+  <mat-menu #langMenu="matMenu" xPosition="before">
+    <button mat-menu-item
+            *ngFor="let lang of availableLanguage"
+            class="lang-list-item"
+            [ngClass]="{'lang-list-item-active': lang.isActive }"
+            (click)="selectMenu(lang)"
+    >
+      <mat-icon svgIcon="check-icon" *ngIf="lang.isActive"></mat-icon>
+      <span>{{ lang.label }}</span>
+    </button>
+  </mat-menu>
+
   <button mat-ripple (click)="onSettings()">
     <mat-icon svgIcon="setting-icon"></mat-icon>
     <span>{{ 'buttons.settings' | transloco }}</span>
   </button>
 </app-column>
+
 
 
 

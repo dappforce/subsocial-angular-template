@@ -2,12 +2,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  Inject,
 } from '@angular/core';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { skipWhile, take } from 'rxjs/operators';
 import { SubmittableResult } from '@polkadot/api';
 import { CommonContent, IpfsCid } from '@subsocial/types';
+import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 export type ExtrinsicProps = {
   pallet: string;
@@ -36,6 +38,7 @@ export abstract class BaseTxComponent {
   protected constructor(
     public transactionService: TransactionService,
     public accountService: AccountService,
+    public signIn: SignInModalService,
     public cd: ChangeDetectorRef
   ) {}
 
@@ -80,7 +83,7 @@ export abstract class BaseTxComponent {
 
     if (txType === 'unsigned') {
       if (this.isAuthRequired && !this.isFreeTx) {
-        await this.accountService.openSignInModal();
+        await this.signIn.openModal(true);
         return this.setIsSending(false);
       }
       await this.sendUnsignedTx();

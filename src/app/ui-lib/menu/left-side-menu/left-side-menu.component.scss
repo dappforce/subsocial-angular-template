@@ -43,7 +43,6 @@ aside{
   height: calc(100vh - #{$header_height});
   background: $color_white;
   top: $header_height;
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 
   .links {
     overflow: hidden;
@@ -77,6 +76,10 @@ aside{
         color: $color_icon;
       }
     }
+  }
+
+  .shadow {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
   }
 
   mat-divider {
@@ -140,6 +143,15 @@ aside{
       margin-bottom: $space_normal;
     }
   }
+}
+
+.backdrop {
+  position: fixed;
+  top: $header_height;
+  left: 0;
+  right: 0;
+  height: calc(100vh - #{$header_height});
+  background-color: rgba(0, 0, 0, 0.6);
 }
 
 @keyframes fadeIn {

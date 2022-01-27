@@ -1,7 +1,7 @@
 {
   "imageShouldBeLessThan": "Image should be less than {{limit}} MB",
   "general": {
-    "title": "Subsocial Angular",
+    "title": "ngSubsocial",
     "post": "post",
     "Post": "Post",
     "space": "space",
@@ -69,7 +69,8 @@
     "uploadImage": "Upload cover image",
     "myProfile": "My profile",
     "editMyProfile": "Edit my profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "Language": "Language"
   },
   "modals": {
     "tips": {
@@ -94,6 +95,7 @@
     },
     "login": {
       "title": "Sign In",
+      "title-wait": "Wait a sec...",
       "accountScreen": {
         "message": "Click on your account to sign in:"
       },

@@ -1,0 +1,8 @@
+<app-icon-button [iconSize]="19"
+                 [buttonSize]="36"
+                 [iconName]="'menu-icon'"
+                 (click)="isOpen = !isOpen"
+>
+</app-icon-button>
+
+<app-left-side-menu (backdropClick)="isOpen = false" *ngIf="isOpen" [type]="'switch'"></app-left-side-menu>

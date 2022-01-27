@@ -4,6 +4,7 @@ import { AccountData } from './account.types';
 export type SignInModalData = {
   status: ACCOUNT_STATUS;
   accounts?: Array<AccountData>;
+  isTx?: boolean;
 };
 
 export type ConnectionModalData = {

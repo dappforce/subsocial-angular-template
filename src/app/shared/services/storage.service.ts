@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 
 export const STORAGE_KEYS = {
   accountId: 'accountId',
+  lang: 'lang',
 };
 
 @Injectable({
@@ -20,6 +21,14 @@ export class StorageService {
 
   removeAccountId() {
     localStorage.removeItem(STORAGE_KEYS.accountId);
+  }
+
+  setLang(lang: string) {
+    this.set(STORAGE_KEYS.lang, lang);
+  }
+
+  getLang() {
+    return this.get(STORAGE_KEYS.lang);
   }
 
   get(key: string) {

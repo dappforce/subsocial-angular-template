@@ -84,7 +84,7 @@ export class PostService {
     if (postsData[0]) {
       const { post, space, owner } = postsData[0];
 
-      return mapPostDTOToPost(post, space, owner.content);
+      return mapPostDTOToPost(post, space, owner?.content);
     }
 
     return undefined;

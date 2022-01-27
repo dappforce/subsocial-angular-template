@@ -1,9 +1,14 @@
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
+  EventEmitter,
   HostListener,
+  Input,
   OnInit,
+  Output,
   Renderer2,
   ViewChild,
 } from '@angular/core';
@@ -22,10 +27,12 @@ type MenuItem = {
   styleUrls: ['./left-side-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LeftSideMenuComponent implements OnInit {
+export class LeftSideMenuComponent implements OnInit, AfterViewInit {
+  @Input() type: 'hover' | 'switch' = 'hover';
+  @Output() backdropClick = new EventEmitter();
   @ViewChild('aside') aside: ElementRef;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, private cd: ChangeDetectorRef) {}
 
   menuItems: MenuItem[] = [
     {
@@ -100,17 +107,35 @@ export class LeftSideMenuComponent implements OnInit {
 
   isOpen: boolean;
 
-  //TODO: use angular animation
-
   @HostListener('mouseenter') onEnter() {
+    if (this.type === 'hover') {
+      this.openMenu();
+    }
+  }
+
+  @HostListener('mouseleave') onLeave() {
+    if (this.type === 'hover') {
+      this.closeMenu();
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (this.type === 'switch') {
+      this.openMenu();
+    }
+  }
+
+  openMenu() {
     this.renderer.removeClass(this.aside.nativeElement, 'close');
     this.renderer.addClass(this.aside.nativeElement, 'open');
   }
 
-  @HostListener('mouseleave') onLeave() {
+  closeMenu() {
     this.renderer.removeClass(this.aside.nativeElement, 'open');
     this.renderer.addClass(this.aside.nativeElement, 'close');
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isOpen = this.type === 'hover';
+  }
 }

@@ -31,7 +31,6 @@ import { CreateEntityButtonComponent } from './create-entity-button/create-entit
 import { NotificationIconButtonComponent } from './notification-icon-button/notification-icon-button.component';
 import { MatBadgeModule } from '@angular/material/badge';
 import { TranslocoModule } from '@ngneat/transloco';
-import { HeaderMenuButtonComponent } from './header-menu-button/header-menu-button.component';
 import { CreateSpaceButtonComponent } from './create-space-button/create-space-button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -55,7 +54,6 @@ const components = [
   TxButtonComponent,
   CreateEntityButtonComponent,
   NotificationIconButtonComponent,
-  HeaderMenuButtonComponent,
   CreateSpaceButtonComponent,
 ];
 

@@ -7,22 +7,16 @@ import {
 } from '@angular/core';
 import { TabLinkData } from '../../core/models/tab-link-data.model';
 import { DeviceService } from '../../shared/services/device.service';
-import { ActivatedRoute } from '@angular/router';
-import {
-  filter,
-  map,
-  mergeMap,
-  skipWhile,
-  switchMap,
-  tap,
-} from 'rxjs/operators';
-import { combineLatest, from, Observable, Subject } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, EMPTY, from, Observable, Subject } from 'rxjs';
 import { SpaceService } from '../../space/services/space.service';
 import { PostService } from '../../post/services/post.service';
 import { AccountService } from '../../shared/services/account.service';
 import { FollowerService } from '../../shared/services/follower.service';
 import { Profile } from '../../state/profile/profile.state';
 import { ProfileFacade } from '../../state/profile/profile.facade';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -37,8 +31,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
   ];
 
   activeTab = this.tabLinks[0];
-  spaceIds$: Observable<string[]>;
-  postIds$: Observable<string[]>;
+  spaceIds$: Observable<string[] | null>;
+  postIds$: Observable<string[] | null>;
   tokens$: Observable<string>;
   profileData$: Observable<Profile | undefined>;
   isFollow$: Observable<boolean>;
@@ -54,19 +48,19 @@ export class ProfileComponent implements OnInit, OnDestroy {
     private postService: PostService,
     private profileFacade: ProfileFacade,
     private accountService: AccountService,
-    private followerService: FollowerService
+    private followerService: FollowerService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
-    this.spaceService.myOwnSpaceIds$.subscribe(console.log);
-
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     const userId$ = this.route.paramMap.pipe(
       map((params) => params.get('userId') as string),
       tap((id) => this.profileFacade.loadProfile(id))
     );
 
     this.profileData$ = userId$.pipe(
-      mergeMap((id) => this.profileFacade.getProfileOnce(id))
+      mergeMap((id) => this.profileFacade.getProfile(id))
     );
 
     this.tokens$ = this.profileData$.pipe(
@@ -83,7 +77,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
     );
 
     this.postIds$ = this.spaceIds$.pipe(
-      switchMap((spaceIds) => this.postService.getPostIdsBySpaceIds(spaceIds)),
+      filter((ids) => !!ids),
+      switchMap((spaceIds) => this.postService.getPostIdsBySpaceIds(spaceIds!)),
       filter((ids) => ids.length > 0)
     );
 

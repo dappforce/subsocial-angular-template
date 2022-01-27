@@ -12,14 +12,18 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditButtonComponent implements OnInit {
-  @Input() spaceId: string;
+  @Input() id: string;
   @Input() handle: string;
+  @Input() type: 'space' | 'profile' = 'space';
 
   route: string[];
 
   constructor() {}
 
   ngOnInit(): void {
-    this.route = ['/spaces', this.spaceId, 'edit'];
+    this.route =
+      this.type === 'space'
+        ? ['/spaces', this.id, 'edit']
+        : ['/accounts', this.id, 'profile', 'edit'];
   }
 }

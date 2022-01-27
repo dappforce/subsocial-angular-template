@@ -26,6 +26,7 @@ import { Post } from '../../../core/models/post/post-list-item.model';
 import { PostFacade } from '../../../state/post/post.facade';
 import { ReplyFacade } from '../../../state/reply-id/reply.facade';
 import { Update } from '@ngrx/entity';
+import { SignInModalService } from '../../modal-dialogs/services/sign-in-modal.service';
 
 @Component({
   selector: 'app-comment-input',
@@ -71,9 +72,10 @@ export class CommentInputComponent extends BaseTxComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private postService: PostService,
     private replyFacade: ReplyFacade,
-    private postFacade: PostFacade
+    private postFacade: PostFacade,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   ngOnInit(): void {

@@ -19,6 +19,8 @@ import { getFollowedSpaceIds } from './state/followed-space-ids/followed-space-i
 import { Subject } from 'rxjs';
 import { getFollowedAccountIds } from './state/followed-account-ids/followed-account-ids.actions';
 import { MyPostReactionFacade } from './state/my-post-reactions/my-post-reaction.facade';
+import { TranslocoService } from '@ngneat/transloco';
+import { StorageService } from './shared/services/storage.service';
 
 @Component({
   selector: 'app-root',
@@ -30,11 +32,13 @@ export class AppComponent implements OnInit, OnDestroy {
   private unsubscribe$: Subject<void> = new Subject();
 
   constructor(
-    private deviceService: DeviceService,
     private route: ActivatedRoute,
     private store: Store<AppState>,
     private api: SubsocialApiService,
     private spaceService: SpaceService,
+    private transloco: TranslocoService,
+    private deviceService: DeviceService,
+    private storageService: StorageService,
     private accountService: AccountService,
     private reactionFacade: MyPostReactionFacade,
     @Inject(PLATFORM_ID) private platformId: Object
@@ -45,6 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.deviceService.init();
       await this.accountService.initAccount();
       this.getAccountAdditionalData();
+      this.setLanguage();
     }
   }
 
@@ -64,6 +69,11 @@ export class AppComponent implements OnInit, OnDestroy {
         takeUntil(this.unsubscribe$)
       )
       .subscribe((_) => null);
+  }
+
+  setLanguage() {
+    const savedLang = this.storageService.getLang();
+    savedLang && this.transloco.setActiveLang(savedLang);
   }
 
   ngOnDestroy(): void {

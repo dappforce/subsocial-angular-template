@@ -4,11 +4,10 @@ import { BehaviorSubject, forkJoin, from, Observable } from 'rxjs';
 import { SubsocialApiService } from './subsocial-api.service';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
-import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { MyAccountState } from '../../state/my-account/my-account.state';
 import { loadMyProfile } from '../../state/profile/profile.actions';
 import { asAccountId } from '@subsocial/api';
-import { filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import {
   AccountData,
   AccountRawData,
@@ -18,9 +17,7 @@ import {
 import { formatBalance } from '@polkadot/util';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
-import { ProfileData } from '@subsocial/api/flat-subsocial/dto';
-import { SignInModalDialogComponent } from '../../ui-lib/modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';
-import { MatDialog } from '@angular/material/dialog';
+import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 export enum ACCOUNT_STATUS {
   INIT,
@@ -52,8 +49,7 @@ export class AccountService {
   constructor(
     private api: SubsocialApiService,
     private store: Store<AppState>,
-    private storage: StorageService,
-    private dialog: MatDialog
+    private storage: StorageService
   ) {
     const { decimals, currency: unit } = environment;
     formatBalance.setDefaults({ decimals, unit });
@@ -168,20 +164,14 @@ export class AccountService {
     return this.getFormattedBalance(balance);
   }
 
-  public async openSignInModal() {
+  public async getSignInData() {
     const status = this.statusSource.value;
     let accounts: AccountData[] = [];
     if (status === ACCOUNT_STATUS.UNAUTHORIZED) {
       accounts = await this.getAccountsData().pipe(take(1)).toPromise();
     }
 
-    this.dialog.open(SignInModalDialogComponent, {
-      maxWidth: '430px',
-      data: {
-        status: this.statusSource.value,
-        accounts,
-      },
-    });
+    return { accounts, status };
   }
 
   private async subscribeOnBalance(address: string) {

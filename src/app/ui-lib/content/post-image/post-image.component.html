@@ -5,9 +5,7 @@
     <ng-template ngSwitchCase="square">
       <a [routerLink]="link">
         <div class="post-image"
-             [ngStyle]="{
-                'background-image':  'url(' + imageSrc +')'
-             }"
+             [ngStyle]="style"
         ></div>
       </a>
     </ng-template>
@@ -15,9 +13,7 @@
     <ng-template ngSwitchCase="notification">
       <a [routerLink]="link">
         <div class="post-image-notification"
-             [ngStyle]="{
-                'background-image':  'url(' + imageSrc +')'
-             }"
+             [ngStyle]="style"
         ></div>
       </a>
     </ng-template>

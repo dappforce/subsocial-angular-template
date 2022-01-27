@@ -19,3 +19,49 @@ button {
   }
 }
 
+.lang-list-item {
+  mat-icon {
+    position: absolute;
+    left: 13px;
+    width: 24px;
+    height: 24px;
+  }
+
+  padding-right: 55px;
+  padding-left: 55px;
+
+  &-active {
+    color: $color_primary;
+  }
+}
+
+.lang-btn {
+  ::ng-deep {
+    .arrow{
+      position: absolute;
+      right: 0;
+
+      svg {
+        path {
+          fill: $color_gray_dark;
+        }
+      }
+    }
+
+    .world-icon {
+      svg {
+        path {
+          fill: $color_black;
+        }
+      }
+    }
+  }
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+.arrow-down {
+  transform: rotate(0deg);
+}

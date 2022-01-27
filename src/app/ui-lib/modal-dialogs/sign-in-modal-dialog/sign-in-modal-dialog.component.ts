@@ -14,6 +14,7 @@ import { SignInModalData } from '../../../core/types/dialog-modal-data.types';
 import { environment } from '../../../../environments/environment';
 import { AccountData } from '../../../core/types/account.types';
 import { LINKS } from '../../../core/constants/links.const';
+import { SignInModalService } from '../services/sign-in-modal.service';
 
 @Component({
   selector: 'app-sign-in-modal-dialog',
@@ -30,15 +31,13 @@ export class SignInModalDialogComponent implements OnInit {
   LINKS = LINKS;
 
   constructor(
-    private accountService: AccountService,
     public dialogRef: MatDialogRef<SignInModalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: SignInModalData
   ) {}
 
   ngOnInit(): void {}
 
-  async selectAccount(account: AccountData) {
-    await this.accountService.setCurrentAccount(account);
-    this.dialogRef.close();
+  selectAccount(account: AccountData) {
+    this.dialogRef.close(account);
   }
 }

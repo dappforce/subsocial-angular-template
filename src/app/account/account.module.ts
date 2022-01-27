@@ -17,6 +17,7 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { InputModule } from '../ui-lib/input/input.module';
 import { TranslocoModule } from '@ngneat/transloco';
 import { MenuModule } from '../ui-lib/menu/menu.module';
+import { DirectivesModule } from '../shared/directives/directives.module';
 
 @NgModule({
   declarations: [ProfileComponent, AccountComponent, EditProfileComponent],
@@ -36,6 +37,7 @@ import { MenuModule } from '../ui-lib/menu/menu.module';
     InputModule,
     TranslocoModule,
     MenuModule,
+    DirectivesModule,
   ],
 })
 export class AccountModule {}

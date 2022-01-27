@@ -19,6 +19,7 @@ import { Router } from '@angular/router';
 import { pipe, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 import { takeValueOnce } from '../../../core/rxjs-custom/operators';
+import { SignInModalService } from '../services/sign-in-modal.service';
 
 @Component({
   selector: 'app-share-post-modal-dialog',
@@ -36,9 +37,10 @@ export class SharePostModalDialogComponent
     public account: AccountService,
     public cd: ChangeDetectorRef,
     private postFacade: PostFacade,
-    private router: Router
+    private router: Router,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   sharedPostForm = new FormGroup({

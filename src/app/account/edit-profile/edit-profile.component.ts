@@ -18,6 +18,7 @@ import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProfileFacade } from '../../state/profile/profile.facade';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
 import { TranslocoService } from '@ngneat/transloco';
+import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 type Type = 'edit' | 'new';
 
@@ -52,9 +53,10 @@ export class EditProfileComponent
     public transaction: TransactionService,
     public account: AccountService,
     public cd: ChangeDetectorRef,
-    private profileFacade: ProfileFacade
+    private profileFacade: ProfileFacade,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   titleKey = 'general.new';
@@ -62,7 +64,7 @@ export class EditProfileComponent
   unsubscribe$ = new Subject();
 
   get isNew() {
-    return this.type === 'edit';
+    return this.type === 'new';
   }
 
   async ngOnInit() {
@@ -91,6 +93,7 @@ export class EditProfileComponent
   onFailed(result: SubmittableResult | null): void {}
 
   async onSuccess(result: SubmittableResult) {
+    this.profileFacade.loadProfile(this.userId);
     await this.router.navigate(['/accounts', this.userId]);
   }
 
@@ -115,6 +118,8 @@ export class EditProfileComponent
     const params = this.isNew
       ? [{ IPFS: this.contentCid }]
       : [{ content: { IPFS: this.contentCid } }];
+
+    console.log(pallet, params, method);
 
     await this.initExtrinsic({ pallet, params, method });
 

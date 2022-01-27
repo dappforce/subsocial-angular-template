@@ -260,6 +260,14 @@ p {
   padding-bottom: $space_normal;
 }
 
+.sb-container {
+  width: $container-width;
+  margin: 72px auto;
+  background: white;
+  border-radius: 4px;
+  padding: $space_normal;
+}
+
 .mat-dialog-container {
   padding: 0 !important;
 }

@@ -9,6 +9,9 @@ import { AccountService } from '../../../shared/services/account.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NotificationIconButtonComponent {
+  notificationCount$ = this.notificationService.notificationCount$;
+  currentAccount$ = this.account.currentAccount$;
+
   constructor(
     public notificationService: NotificationService,
     public account: AccountService

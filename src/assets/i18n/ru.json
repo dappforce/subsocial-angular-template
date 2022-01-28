@@ -1,7 +1,7 @@
 {
   "imageShouldBeLessThan": "Image should be less than {{limit}} MB",
   "general": {
-    "title": "ngSubsocial",
+    "title": "ngSocial",
     "post": "пост",
     "Post": "Пост",
     "space": "Спейс",

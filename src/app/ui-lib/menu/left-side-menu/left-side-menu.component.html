@@ -1,14 +1,14 @@
-<aside #aside class="close" [ngClass]="{'shadow': type === 'hover'}">
+<aside #aside class="close" [ngClass]="{'shadow': type === 'hover', 'border-top': type === 'switch'}">
   <app-column class="links">
     <ng-container *ngFor="let item of menuItems">
       <ng-container *ngIf="item.type === 'item'; else divider">
-        <a href="{{item.href}}" target="_blank">
+        <a href="{{item.href}}" target="_blank" [ngClass]="item.className">
           <mat-icon svgIcon="{{item.icon}}"></mat-icon>
           <span>{{item.title}}</span>
         </a>
       </ng-container>
       <ng-template #divider>
-        <mat-divider></mat-divider>
+        <mat-divider class="divider"></mat-divider>
       </ng-template>
     </ng-container>
   </app-column>
@@ -20,10 +20,11 @@
           <mat-icon svgIcon="{{icon.icon}}"></mat-icon>
         </a>
       </ng-container>
-
-      <mat-icon class="option-icon" svgIcon="option-gray-icon"></mat-icon>
     </div>
   </section>
 </aside>
 
-<div *ngIf="type === 'switch'" (click)="backdropClick.emit()" class="backdrop"></div>
+<div *ngIf="type === 'switch'"
+     (click)="backdropClick.emit()"
+     class="backdrop border-top"
+></div>

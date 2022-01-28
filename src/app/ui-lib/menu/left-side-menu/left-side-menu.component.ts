@@ -16,6 +16,7 @@ import { LINKS } from '../../../core/constants/links.const';
 
 type MenuItem = {
   type: 'item' | 'divider' | 'icon';
+  className: string;
   title?: string;
   icon?: string;
   href?: string;
@@ -40,45 +41,53 @@ export class LeftSideMenuComponent implements OnInit, AfterViewInit {
       title: 'React app',
       icon: 'react-icon',
       href: LINKS.reactApp,
+      className: '',
     },
     {
       type: 'item',
       title: 'Vue app',
       icon: 'vue-icon',
       href: LINKS.vueApp,
+      className: '',
     },
     {
       type: 'divider',
+      className: '',
     },
     {
       type: 'item',
       title: 'Subsocial app',
       icon: 'subsocial-logo-icon',
       href: LINKS.subsocialApp,
+      className: '',
     },
     {
       type: 'item',
       title: 'Landing page',
       icon: 'world-icon',
       href: LINKS.vueApp,
+      className: 'icon-primary-hover',
     },
     {
       type: 'item',
       title: 'Legal Documents',
       icon: 'documents-icon',
       href: LINKS.github,
+      className: 'icon-primary-hover',
     },
     {
       type: 'item',
       title: 'Github',
       icon: 'github-ls-icon',
       href: LINKS.github,
+      className: 'icon-primary-hover',
     },
     {
       type: 'item',
       title: 'What is Subsocial?',
       icon: 'question-icon',
       href: '',
+      className: 'icon-primary-hover',
     },
   ];
 
@@ -87,21 +96,25 @@ export class LeftSideMenuComponent implements OnInit, AfterViewInit {
       type: 'icon',
       icon: 'twitter-icon',
       href: LINKS.twitter,
+      className: '',
     },
     {
       type: 'icon',
       icon: 'discord-icon',
       href: LINKS.discord,
+      className: '',
     },
     {
       type: 'icon',
       icon: 'telegram-icon',
       href: LINKS.telegram,
+      className: '',
     },
     {
       type: 'icon',
       icon: 'megaphone-icon',
       href: LINKS.megaphone,
+      className: '',
     },
   ];
 

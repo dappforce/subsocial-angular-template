@@ -3594,12 +3594,12 @@
         },
         {
             "name": "IconRegistryService",
-            "id": "injectable-IconRegistryService-e717eeaff599699d53b25e5d8f1c8a3e",
+            "id": "injectable-IconRegistryService-394e44563850985bfceef4987c945ed2",
             "file": "src/app/shared/services/icon-registry.service.ts",
             "properties": [
                 {
                     "name": "ICON_NAMES",
-                    "defaultValue": "[\n    'option',\n    'copy',\n    'copy-white',\n    'menu',\n    'upvote-default',\n    'downvote-default',\n    'upvote-active',\n    'downvote-active',\n    'comment',\n    'share',\n    'purse',\n    'qr',\n    'close',\n    'profile',\n    'setting',\n    'reply',\n    'edit',\n    'photo',\n    'photo-white',\n    'remove',\n    'remove-white',\n    'coin',\n    'option-hor',\n    'option-gray',\n    'info',\n    'arrow',\n    'info-yellow',\n    'error',\n    'success',\n    'react',\n    'documents',\n    'question',\n    'subsocial-logo',\n    'vue',\n    'world',\n    'github-ls',\n    'ipfs',\n    'view-reaction',\n    'hide',\n    'visible',\n    'bell',\n    'check',\n  ]",
+                    "defaultValue": "[\n    'option',\n    'copy',\n    'copy-white',\n    'menu',\n    'upvote-default',\n    'downvote-default',\n    'upvote-active',\n    'downvote-active',\n    'comment',\n    'share',\n    'purse',\n    'qr',\n    'close',\n    'profile',\n    'setting',\n    'reply',\n    'edit',\n    'photo',\n    'photo-white',\n    'remove',\n    'remove-white',\n    'coin',\n    'option-hor',\n    'option-gray',\n    'info',\n    'arrow',\n    'info-yellow',\n    'error',\n    'success',\n    'react',\n    'documents',\n    'question',\n    'subsocial-logo',\n    'vue',\n    'world',\n    'github-ls',\n    'ipfs',\n    'view-reaction',\n    'hide',\n    'visible',\n    'bell',\n    'check',\n    'angular',\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
@@ -3615,7 +3615,7 @@
                     "type": "[]",
                     "optional": false,
                     "description": "",
-                    "line": 63
+                    "line": 64
                 }
             ],
             "methods": [
@@ -3625,7 +3625,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 77,
+                    "line": 78,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -3648,7 +3648,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 87,
+                    "line": 88,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "modifierKind": [
@@ -3680,7 +3680,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { isPlatformServer } from '@angular/common';\nimport { PLATFORM_ID } from '@angular/core';\nimport { Inject, Injectable } from '@angular/core';\nimport { MatIconRegistry } from '@angular/material/icon';\nimport { DomSanitizer } from '@angular/platform-browser';\nimport { environment } from '../../../environments/environment';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class IconRegistryService {\n  constructor(\n    private iconRegistry: MatIconRegistry,\n    private sanitizer: DomSanitizer,\n    @Inject(PLATFORM_ID) private platformId: Object\n  ) {}\n\n  ICON_NAMES = [\n    'option',\n    'copy',\n    'copy-white',\n    'menu',\n    'upvote-default',\n    'downvote-default',\n    'upvote-active',\n    'downvote-active',\n    'comment',\n    'share',\n    'purse',\n    'qr',\n    'close',\n    'profile',\n    'setting',\n    'reply',\n    'edit',\n    'photo',\n    'photo-white',\n    'remove',\n    'remove-white',\n    'coin',\n    'option-hor',\n    'option-gray',\n    'info',\n    'arrow',\n    'info-yellow',\n    'error',\n    'success',\n    'react',\n    'documents',\n    'question',\n    'subsocial-logo',\n    'vue',\n    'world',\n    'github-ls',\n    'ipfs',\n    'view-reaction',\n    'hide',\n    'visible',\n    'bell',\n    'check',\n  ];\n\n  SOCIAL_ICONS_NAMES = [\n    'github',\n    'linkedin',\n    'medium',\n    'telegram',\n    'twitter',\n    'web',\n    'youtube',\n    'reddit',\n    'facebook',\n    'megaphone',\n    'discord',\n  ];\n\n  init() {\n    let url = 'assets/icons/';\n    if (isPlatformServer(this.platformId)) {\n      url = environment.domainUrl + url;\n    }\n\n    this.registryIcons(url, this.ICON_NAMES);\n    this.registryIcons(url + 'links/', this.SOCIAL_ICONS_NAMES);\n  }\n\n  private registryIcons(url: string, iconNames: string[]): void {\n    for (const name of iconNames) {\n      this.iconRegistry.addSvgIcon(\n        name + '-icon',\n        this.sanitizer.bypassSecurityTrustResourceUrl(url + name + '.svg')\n      );\n    }\n  }\n}\n",
+            "sourceCode": "import { isPlatformServer } from '@angular/common';\nimport { PLATFORM_ID } from '@angular/core';\nimport { Inject, Injectable } from '@angular/core';\nimport { MatIconRegistry } from '@angular/material/icon';\nimport { DomSanitizer } from '@angular/platform-browser';\nimport { environment } from '../../../environments/environment';\n\n@Injectable({\n  providedIn: 'root',\n})\nexport class IconRegistryService {\n  constructor(\n    private iconRegistry: MatIconRegistry,\n    private sanitizer: DomSanitizer,\n    @Inject(PLATFORM_ID) private platformId: Object\n  ) {}\n\n  ICON_NAMES = [\n    'option',\n    'copy',\n    'copy-white',\n    'menu',\n    'upvote-default',\n    'downvote-default',\n    'upvote-active',\n    'downvote-active',\n    'comment',\n    'share',\n    'purse',\n    'qr',\n    'close',\n    'profile',\n    'setting',\n    'reply',\n    'edit',\n    'photo',\n    'photo-white',\n    'remove',\n    'remove-white',\n    'coin',\n    'option-hor',\n    'option-gray',\n    'info',\n    'arrow',\n    'info-yellow',\n    'error',\n    'success',\n    'react',\n    'documents',\n    'question',\n    'subsocial-logo',\n    'vue',\n    'world',\n    'github-ls',\n    'ipfs',\n    'view-reaction',\n    'hide',\n    'visible',\n    'bell',\n    'check',\n    'angular',\n  ];\n\n  SOCIAL_ICONS_NAMES = [\n    'github',\n    'linkedin',\n    'medium',\n    'telegram',\n    'twitter',\n    'web',\n    'youtube',\n    'reddit',\n    'facebook',\n    'megaphone',\n    'discord',\n  ];\n\n  init() {\n    let url = 'assets/icons/';\n    if (isPlatformServer(this.platformId)) {\n      url = environment.domainUrl + url;\n    }\n\n    this.registryIcons(url, this.ICON_NAMES);\n    this.registryIcons(url + 'links/', this.SOCIAL_ICONS_NAMES);\n  }\n\n  private registryIcons(url: string, iconNames: string[]): void {\n    for (const name of iconNames) {\n      this.iconRegistry.addSvgIcon(\n        name + '-icon',\n        this.sanitizer.bypassSecurityTrustResourceUrl(url + name + '.svg')\n      );\n    }\n  }\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -10161,7 +10161,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".side-wp {\r\n  position: relative;\r\n  width: 393px;\r\n\r\n  .close-btn {\r\n    position: absolute;\r\n    right: 0;\r\n    top: 13px;\r\n  }\r\n}\r\n\r\napp-scroll {\r\n  height: calc(100vh - 424px);\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  .side-wp {\r\n    width: auto;\r\n  }\r\n}\r\n\r\n::ng-deep {\r\n  .mat-drawer-container {\r\n    z-index: 5 !important;\r\n  }\r\n}\r\n",
+                    "data": ".side-wp {\r\n  position: relative;\r\n  width: 393px;\r\n\r\n  .close-btn {\r\n    position: absolute;\r\n    right: 0;\r\n    top: 13px;\r\n  }\r\n}\r\n\r\napp-scroll {\r\n  height: calc(100vh - 424px);\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  .side-wp {\r\n    width: auto;\r\n  }\r\n\r\n  app-scroll {\r\n    height: calc(100vh - 525px);\r\n  }\r\n}\r\n\r\n::ng-deep {\r\n  .mat-drawer-container {\r\n    z-index: 5 !important;\r\n  }\r\n}\r\n",
                     "styleUrl": "./account-sidenav.component.scss"
                 }
             ],
@@ -23563,7 +23563,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"_var.scss\";\r\n@import \"_mixins.scss\";\r\n\r\nheader {\r\n  background: #FFFFFF;\r\n  //box-shadow: $header-shadow;\r\n  @include fixed(0, 0, 0, 2);\r\n  border-bottom: 1px solid $color_light_border;\r\n\r\n\r\n  .header-wp {\r\n    position: relative;\r\n    height: $header_height;\r\n  }\r\n\r\n  app-icon-button {\r\n    margin: 0 $space_large 0 $space_small;\r\n  }\r\n\r\n  app-notification-icon-button {\r\n    margin: 0 10px;\r\n  }\r\n}\r\n\r\n.tabs-wp {\r\n  width: $container-width;\r\n  margin: 1px auto;\r\n  @include fixed($header_height, 0, 0, 1);\r\n  padding: 16px 16px 0;\r\n  background-color: #F2F2F2;\r\n\r\n  app-tabs {\r\n    ::ng-deep {\r\n      .mat-tab-link  {\r\n        height: $header_height !important;\r\n      }\r\n\r\n      .mat-tab-link-container {\r\n        background: white;\r\n        border-radius: 4px 4px 0 0;\r\n      }\r\n\r\n      .mat-tab-header {\r\n        box-shadow: $tabs-shadow;\r\n        border: none !important;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  header {\r\n    border-bottom: none;\r\n  }\r\n\r\n  .tabs-wp {\r\n    width: 100%;\r\n    margin: 0;\r\n    position: relative;\r\n    top: 53px;\r\n    right: 0;\r\n    padding: 0;\r\n    left: 0;\r\n    z-index: 1;\r\n    background-color: #F2F2F2;\r\n\r\n    app-tabs {\r\n      ::ng-deep {\r\n        .mat-tab-link  {\r\n          height: 48px !important;\r\n          font-size: 14px;\r\n        }\r\n\r\n        .mat-tab-link-container {\r\n          background: white;\r\n          border-radius: 0;\r\n        }\r\n\r\n        .mat-tab-header {\r\n          box-shadow: $tabs-shadow;\r\n          border: none !important;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
+                    "data": "@import \"_var.scss\";\r\n@import \"_mixins.scss\";\r\n\r\nheader {\r\n  background: #FFFFFF;\r\n  //box-shadow: $header-shadow;\r\n  @include fixed(0, 0, 0, 2);\r\n  border-bottom: 1px solid $color_light_border;\r\n\r\n\r\n  .header-wp {\r\n    position: relative;\r\n    height: $header_height;\r\n  }\r\n\r\n  app-icon-button {\r\n    margin: 0 $space_large 0 $space_small;\r\n  }\r\n\r\n  app-notification-icon-button {\r\n    margin: 0 10px;\r\n  }\r\n}\r\n\r\n.tabs-wp {\r\n  width: $container-width;\r\n  margin: 1px auto;\r\n  @include fixed($header_height, 0, 0, 1);\r\n  padding: 16px 16px 0;\r\n  background-color: #F2F2F2;\r\n\r\n  app-tabs {\r\n    ::ng-deep {\r\n      .mat-tab-link  {\r\n        height: $header_height !important;\r\n      }\r\n\r\n      .mat-tab-link-container {\r\n        background: white;\r\n        border-radius: 4px 4px 0 0;\r\n      }\r\n\r\n      .mat-tab-header {\r\n        box-shadow: $tabs-shadow;\r\n        border: none !important;\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.framework-logo {\r\n  width: 30px;\r\n  height: 30px;\r\n  margin-left: 12px;\r\n  cursor: pointer;\r\n}\r\n\r\n@media only screen and (max-width: 768px) {\r\n  header {\r\n    border-bottom: none;\r\n  }\r\n\r\n  .tabs-wp {\r\n    width: 100%;\r\n    margin: 0;\r\n    position: relative;\r\n    top: 53px;\r\n    right: 0;\r\n    padding: 0;\r\n    left: 0;\r\n    z-index: 1;\r\n    background-color: #F2F2F2;\r\n\r\n    app-tabs {\r\n      ::ng-deep {\r\n        .mat-tab-link  {\r\n          height: 48px !important;\r\n          font-size: 14px;\r\n        }\r\n\r\n        .mat-tab-link-container {\r\n          background: white;\r\n          border-radius: 0;\r\n        }\r\n\r\n        .mat-tab-header {\r\n          box-shadow: $tabs-shadow;\r\n          border: none !important;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./header.component.scss"
                 }
             ],
@@ -23612,7 +23612,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<header>\r\n  <app-row [padding]=\"'0 16px 0 0'\"\r\n           [h]=\"'space-between'\"\r\n           [v]=\"'center'\"\r\n           class=\"header-wp\"\r\n  >\r\n    <app-row [v]=\"'center'\">\r\n      <app-header-menu-button ifMobile></app-header-menu-button>\r\n      <app-title type=\"medium\"\r\n                 [link]=\"'/'\"\r\n                 [text]=\"'general.title' | transloco\"\r\n                 [style.margin-left]=\"(device.isMobile$ | async) ? '10px' : '34px'\"\r\n      ></app-title>\r\n    </app-row>\r\n\r\n    <app-row [h]=\"'center'\" [v]=\"'center'\">\r\n      <app-create-entity-button ifDesktop></app-create-entity-button>\r\n      <app-notification-icon-button></app-notification-icon-button>\r\n      <app-profile-button></app-profile-button>\r\n    </app-row>\r\n\r\n  </app-row>\r\n</header>\r\n\r\n<div class=\"tabs-wp\" *ngIf=\"navService.isShowTab$ | async\">\r\n  <app-tabs [tabLinks]=\"navService.tabLinks\"\r\n            (tabClick)=\"onTabLinkClick($event)\"\r\n            [activeLink]=\"(navService.activeTab$ | async)!\"\r\n  ></app-tabs>\r\n</div>\r\n\r\n<app-left-side-menu ifDesktop></app-left-side-menu>\r\n"
+            "templateData": "<header>\r\n  <app-row [padding]=\"'0 16px 0 0'\"\r\n           [h]=\"'space-between'\"\r\n           [v]=\"'center'\"\r\n           class=\"header-wp\"\r\n  >\r\n    <app-row [v]=\"'center'\">\r\n      <app-header-menu-button ifMobile></app-header-menu-button>\r\n\r\n      <mat-icon [routerLink]=\"['/']\"\r\n                class=\"framework-logo\"\r\n                ifDesktop\r\n                svgIcon=\"angular-icon\"\r\n      ></mat-icon>\r\n\r\n      <app-title type=\"medium\"\r\n                 [link]=\"'/'\"\r\n                 [text]=\"'general.title' | transloco\"\r\n                 [style.margin-left]=\"(device.isMobile$ | async) ? '10px' : '12px'\"\r\n      ></app-title>\r\n    </app-row>\r\n\r\n    <app-row [h]=\"'center'\" [v]=\"'center'\">\r\n      <app-create-entity-button ifDesktop></app-create-entity-button>\r\n      <app-notification-icon-button></app-notification-icon-button>\r\n      <app-profile-button></app-profile-button>\r\n    </app-row>\r\n\r\n  </app-row>\r\n</header>\r\n\r\n<div class=\"tabs-wp\" *ngIf=\"navService.isShowTab$ | async\">\r\n  <app-tabs [tabLinks]=\"navService.tabLinks\"\r\n            (tabClick)=\"onTabLinkClick($event)\"\r\n            [activeLink]=\"(navService.activeTab$ | async)!\"\r\n  ></app-tabs>\r\n</div>\r\n\r\n<app-left-side-menu ifDesktop></app-left-side-menu>\r\n"
         },
         {
             "name": "HeaderMenuButtonComponent",
@@ -23668,7 +23668,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "app-icon-button {\r\n  padding-left: 16px;\r\n  display: block;\r\n}\r\n",
+                    "data": "@import \"var\";\r\n\r\n.menu-icon {\r\n  padding-left: 16px;\r\n  display: block;\r\n\r\n  ::ng-deep {\r\n    svg {\r\n      path {\r\n        fill: $color_black;\r\n      }\r\n    }\r\n  }\r\n}\r\n",
                     "styleUrl": "./header-menu-button.component.scss"
                 }
             ],
@@ -23684,7 +23684,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<app-icon-button [iconSize]=\"19\"\n                 [buttonSize]=\"36\"\n                 [iconName]=\"'menu-icon'\"\n                 (click)=\"isOpen = !isOpen\"\n>\n</app-icon-button>\n\n<app-left-side-menu (backdropClick)=\"isOpen = false\" *ngIf=\"isOpen\" [type]=\"'switch'\"></app-left-side-menu>\n"
+            "templateData": "<app-icon-button [iconSize]=\"isOpen ? 16 : 19\"\n                 [buttonSize]=\"36\"\n                 [iconName]=\"isOpen ? 'close-icon' : 'menu-icon'\"\n                 (click)=\"isOpen = !isOpen\"\n                 class=\"menu-icon\"\n>\n</app-icon-button>\n\n<app-left-side-menu (backdropClick)=\"isOpen = false\" *ngIf=\"isOpen\" [type]=\"'switch'\"></app-left-side-menu>\n"
         },
         {
             "name": "HiddenContentComponent",
@@ -25131,7 +25131,7 @@
         },
         {
             "name": "LeftSideMenuComponent",
-            "id": "component-LeftSideMenuComponent-24a450a5485d86c0a9112d9b641c3ef8",
+            "id": "component-LeftSideMenuComponent-c74124e7f9b031a1d3fe212072f3bc1e",
             "file": "src/app/ui-lib/menu/left-side-menu/left-side-menu.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
@@ -25154,7 +25154,7 @@
                     "defaultValue": "'hover'",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 31,
+                    "line": 32,
                     "type": "\"hover\" | \"switch\""
                 }
             ],
@@ -25164,7 +25164,7 @@
                     "defaultValue": "new EventEmitter()",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 32,
+                    "line": 33,
                     "type": "EventEmitter"
                 }
             ],
@@ -25176,7 +25176,7 @@
                     "type": "ElementRef",
                     "optional": false,
                     "description": "",
-                    "line": 33,
+                    "line": 34,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -25186,13 +25186,13 @@
                 },
                 {
                     "name": "iconItems",
-                    "defaultValue": "[\r\n    {\r\n      type: 'icon',\r\n      icon: 'twitter-icon',\r\n      href: LINKS.twitter,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'discord-icon',\r\n      href: LINKS.discord,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'telegram-icon',\r\n      href: LINKS.telegram,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'megaphone-icon',\r\n      href: LINKS.megaphone,\r\n    },\r\n  ]",
+                    "defaultValue": "[\r\n    {\r\n      type: 'icon',\r\n      icon: 'twitter-icon',\r\n      href: LINKS.twitter,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'discord-icon',\r\n      href: LINKS.discord,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'telegram-icon',\r\n      href: LINKS.telegram,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'megaphone-icon',\r\n      href: LINKS.megaphone,\r\n      className: '',\r\n    },\r\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "MenuItem[]",
                     "optional": false,
                     "description": "",
-                    "line": 85
+                    "line": 94
                 },
                 {
                     "name": "isOpen",
@@ -25201,17 +25201,17 @@
                     "type": "boolean",
                     "optional": false,
                     "description": "",
-                    "line": 108
+                    "line": 121
                 },
                 {
                     "name": "menuItems",
-                    "defaultValue": "[\r\n    {\r\n      type: 'item',\r\n      title: 'React app',\r\n      icon: 'react-icon',\r\n      href: LINKS.reactApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Vue app',\r\n      icon: 'vue-icon',\r\n      href: LINKS.vueApp,\r\n    },\r\n    {\r\n      type: 'divider',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Subsocial app',\r\n      icon: 'subsocial-logo-icon',\r\n      href: LINKS.subsocialApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Landing page',\r\n      icon: 'world-icon',\r\n      href: LINKS.vueApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Legal Documents',\r\n      icon: 'documents-icon',\r\n      href: LINKS.github,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Github',\r\n      icon: 'github-ls-icon',\r\n      href: LINKS.github,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'What is Subsocial?',\r\n      icon: 'question-icon',\r\n      href: '',\r\n    },\r\n  ]",
+                    "defaultValue": "[\r\n    {\r\n      type: 'item',\r\n      title: 'React app',\r\n      icon: 'react-icon',\r\n      href: LINKS.reactApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Vue app',\r\n      icon: 'vue-icon',\r\n      href: LINKS.vueApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'divider',\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Subsocial app',\r\n      icon: 'subsocial-logo-icon',\r\n      href: LINKS.subsocialApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Landing page',\r\n      icon: 'world-icon',\r\n      href: LINKS.vueApp,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Legal Documents',\r\n      icon: 'documents-icon',\r\n      href: LINKS.github,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Github',\r\n      icon: 'github-ls-icon',\r\n      href: LINKS.github,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'What is Subsocial?',\r\n      icon: 'question-icon',\r\n      href: '',\r\n      className: 'icon-primary-hover',\r\n    },\r\n  ]",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "MenuItem[]",
                     "optional": false,
                     "description": "",
-                    "line": 37
+                    "line": 38
                 }
             ],
             "methodsClass": [
@@ -25221,7 +25221,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 133,
+                    "line": 146,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -25231,7 +25231,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 122,
+                    "line": 135,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -25241,7 +25241,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 138,
+                    "line": 151,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -25251,7 +25251,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 110,
+                    "line": 123,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -25267,7 +25267,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 129,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "decorators": [
@@ -25283,7 +25283,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 128,
+                    "line": 141,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -25298,7 +25298,7 @@
                     "argsDecorator": [],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 110
+                    "line": 123
                 },
                 {
                     "name": "mouseleave",
@@ -25306,17 +25306,17 @@
                     "argsDecorator": [],
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 116
+                    "line": 129
                 }
             ],
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import {\r\n  AfterViewInit,\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  Component,\r\n  ElementRef,\r\n  EventEmitter,\r\n  HostListener,\r\n  Input,\r\n  OnInit,\r\n  Output,\r\n  Renderer2,\r\n  ViewChild,\r\n} from '@angular/core';\r\nimport { LINKS } from '../../../core/constants/links.const';\r\n\r\ntype MenuItem = {\r\n  type: 'item' | 'divider' | 'icon';\r\n  title?: string;\r\n  icon?: string;\r\n  href?: string;\r\n};\r\n\r\n@Component({\r\n  selector: 'app-left-side-menu',\r\n  templateUrl: './left-side-menu.component.html',\r\n  styleUrls: ['./left-side-menu.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class LeftSideMenuComponent implements OnInit, AfterViewInit {\r\n  @Input() type: 'hover' | 'switch' = 'hover';\r\n  @Output() backdropClick = new EventEmitter();\r\n  @ViewChild('aside') aside: ElementRef;\r\n\r\n  constructor(private renderer: Renderer2, private cd: ChangeDetectorRef) {}\r\n\r\n  menuItems: MenuItem[] = [\r\n    {\r\n      type: 'item',\r\n      title: 'React app',\r\n      icon: 'react-icon',\r\n      href: LINKS.reactApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Vue app',\r\n      icon: 'vue-icon',\r\n      href: LINKS.vueApp,\r\n    },\r\n    {\r\n      type: 'divider',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Subsocial app',\r\n      icon: 'subsocial-logo-icon',\r\n      href: LINKS.subsocialApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Landing page',\r\n      icon: 'world-icon',\r\n      href: LINKS.vueApp,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Legal Documents',\r\n      icon: 'documents-icon',\r\n      href: LINKS.github,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Github',\r\n      icon: 'github-ls-icon',\r\n      href: LINKS.github,\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'What is Subsocial?',\r\n      icon: 'question-icon',\r\n      href: '',\r\n    },\r\n  ];\r\n\r\n  iconItems: MenuItem[] = [\r\n    {\r\n      type: 'icon',\r\n      icon: 'twitter-icon',\r\n      href: LINKS.twitter,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'discord-icon',\r\n      href: LINKS.discord,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'telegram-icon',\r\n      href: LINKS.telegram,\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'megaphone-icon',\r\n      href: LINKS.megaphone,\r\n    },\r\n  ];\r\n\r\n  isOpen: boolean;\r\n\r\n  @HostListener('mouseenter') onEnter() {\r\n    if (this.type === 'hover') {\r\n      this.openMenu();\r\n    }\r\n  }\r\n\r\n  @HostListener('mouseleave') onLeave() {\r\n    if (this.type === 'hover') {\r\n      this.closeMenu();\r\n    }\r\n  }\r\n\r\n  ngAfterViewInit(): void {\r\n    if (this.type === 'switch') {\r\n      this.openMenu();\r\n    }\r\n  }\r\n\r\n  openMenu() {\r\n    this.renderer.removeClass(this.aside.nativeElement, 'close');\r\n    this.renderer.addClass(this.aside.nativeElement, 'open');\r\n  }\r\n\r\n  closeMenu() {\r\n    this.renderer.removeClass(this.aside.nativeElement, 'open');\r\n    this.renderer.addClass(this.aside.nativeElement, 'close');\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.isOpen = this.type === 'hover';\r\n  }\r\n}\r\n",
+            "sourceCode": "import {\r\n  AfterViewInit,\r\n  ChangeDetectionStrategy,\r\n  ChangeDetectorRef,\r\n  Component,\r\n  ElementRef,\r\n  EventEmitter,\r\n  HostListener,\r\n  Input,\r\n  OnInit,\r\n  Output,\r\n  Renderer2,\r\n  ViewChild,\r\n} from '@angular/core';\r\nimport { LINKS } from '../../../core/constants/links.const';\r\n\r\ntype MenuItem = {\r\n  type: 'item' | 'divider' | 'icon';\r\n  className: string;\r\n  title?: string;\r\n  icon?: string;\r\n  href?: string;\r\n};\r\n\r\n@Component({\r\n  selector: 'app-left-side-menu',\r\n  templateUrl: './left-side-menu.component.html',\r\n  styleUrls: ['./left-side-menu.component.scss'],\r\n  changeDetection: ChangeDetectionStrategy.OnPush,\r\n})\r\nexport class LeftSideMenuComponent implements OnInit, AfterViewInit {\r\n  @Input() type: 'hover' | 'switch' = 'hover';\r\n  @Output() backdropClick = new EventEmitter();\r\n  @ViewChild('aside') aside: ElementRef;\r\n\r\n  constructor(private renderer: Renderer2, private cd: ChangeDetectorRef) {}\r\n\r\n  menuItems: MenuItem[] = [\r\n    {\r\n      type: 'item',\r\n      title: 'React app',\r\n      icon: 'react-icon',\r\n      href: LINKS.reactApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Vue app',\r\n      icon: 'vue-icon',\r\n      href: LINKS.vueApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'divider',\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Subsocial app',\r\n      icon: 'subsocial-logo-icon',\r\n      href: LINKS.subsocialApp,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Landing page',\r\n      icon: 'world-icon',\r\n      href: LINKS.vueApp,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Legal Documents',\r\n      icon: 'documents-icon',\r\n      href: LINKS.github,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'Github',\r\n      icon: 'github-ls-icon',\r\n      href: LINKS.github,\r\n      className: 'icon-primary-hover',\r\n    },\r\n    {\r\n      type: 'item',\r\n      title: 'What is Subsocial?',\r\n      icon: 'question-icon',\r\n      href: '',\r\n      className: 'icon-primary-hover',\r\n    },\r\n  ];\r\n\r\n  iconItems: MenuItem[] = [\r\n    {\r\n      type: 'icon',\r\n      icon: 'twitter-icon',\r\n      href: LINKS.twitter,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'discord-icon',\r\n      href: LINKS.discord,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'telegram-icon',\r\n      href: LINKS.telegram,\r\n      className: '',\r\n    },\r\n    {\r\n      type: 'icon',\r\n      icon: 'megaphone-icon',\r\n      href: LINKS.megaphone,\r\n      className: '',\r\n    },\r\n  ];\r\n\r\n  isOpen: boolean;\r\n\r\n  @HostListener('mouseenter') onEnter() {\r\n    if (this.type === 'hover') {\r\n      this.openMenu();\r\n    }\r\n  }\r\n\r\n  @HostListener('mouseleave') onLeave() {\r\n    if (this.type === 'hover') {\r\n      this.closeMenu();\r\n    }\r\n  }\r\n\r\n  ngAfterViewInit(): void {\r\n    if (this.type === 'switch') {\r\n      this.openMenu();\r\n    }\r\n  }\r\n\r\n  openMenu() {\r\n    this.renderer.removeClass(this.aside.nativeElement, 'close');\r\n    this.renderer.addClass(this.aside.nativeElement, 'open');\r\n  }\r\n\r\n  closeMenu() {\r\n    this.renderer.removeClass(this.aside.nativeElement, 'open');\r\n    this.renderer.addClass(this.aside.nativeElement, 'close');\r\n  }\r\n\r\n  ngOnInit(): void {\r\n    this.isOpen = this.type === 'hover';\r\n  }\r\n}\r\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"var\";\r\n@import \"mixins\";\r\n\r\n$color_icon: #888;\r\n\r\n.open {\r\n  width: 230px;\r\n  transition: width 0.4s;\r\n\r\n  .option-icon {\r\n    display: none;\r\n  }\r\n}\r\n\r\n.close {\r\n  width: 90px;\r\n  transition: width 0.4s;\r\n\r\n  .links a span {\r\n    opacity: 0;\r\n    transition: opacity 0.5s;\r\n  }\r\n\r\n  .social-links {\r\n    .title {\r\n      display: none;\r\n      animation: fadeOut 0.5s linear;\r\n    }\r\n\r\n    a:not(:first-child) {\r\n      display: none;\r\n      animation: fadeOut 0.5s linear;\r\n    }\r\n  }\r\n}\r\n\r\naside{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n  position: fixed;\r\n  z-index: 1;\r\n  height: calc(100vh - #{$header_height});\r\n  background: $color_white;\r\n  top: $header_height;\r\n\r\n  .links {\r\n    overflow: hidden;\r\n    margin-top: 8px;\r\n\r\n    a {\r\n      display: flex;\r\n      align-items: center;\r\n      padding: 13px 0;\r\n      cursor: pointer;\r\n      position: relative;\r\n\r\n      &:hover {\r\n        background-color: #f0f0f0;\r\n        transition: background-color 0.3s;\r\n      }\r\n\r\n      span {\r\n        @include font($font_small, 500);\r\n        color: $color_icon;\r\n        white-space: nowrap;\r\n        position: absolute;\r\n        left: 70px;\r\n        opacity: 1;\r\n        transition: opacity 0.5s;\r\n      }\r\n\r\n      mat-icon {\r\n        width: 20px;\r\n        margin: 0 16px 0 34px;\r\n        color: $color_icon;\r\n      }\r\n    }\r\n  }\r\n\r\n  .shadow {\r\n    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);\r\n  }\r\n\r\n  mat-divider {\r\n    margin: 8px 20px;\r\n  }\r\n\r\n  .social-links {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    margin-bottom: 30px;\r\n\r\n    .title {\r\n      animation: fadeIn 0.5s linear;\r\n      white-space: nowrap;\r\n    }\r\n\r\n    div {\r\n      display: flex;\r\n      align-items: center;\r\n      gap: $space_normal;\r\n      overflow: hidden;\r\n\r\n      a {\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n        width: 30px;\r\n        height: 30px;\r\n        border-radius: 50%;\r\n        background-color: #f0f0f0;\r\n        animation: fadeIn 0.5s linear;\r\n        border: 1px solid #f0f0f0;\r\n\r\n        &:hover {\r\n          background-color: #eaeaea;\r\n          border: 1px solid #d9d9d9;\r\n          transition: background-color 0.3s;\r\n        }\r\n\r\n\r\n\r\n        mat-icon {\r\n          width: 18px;\r\n          height: 18px;\r\n          color: $color-icon;\r\n        }\r\n      }\r\n    }\r\n\r\n    .option-icon {\r\n      position: relative;\r\n      width: 3px;\r\n      height: 15px;\r\n      left: -8px;\r\n    }\r\n\r\n    span {\r\n      @include font($font_small);\r\n      color: $color_gray_secondary;\r\n      margin-bottom: $space_normal;\r\n    }\r\n  }\r\n}\r\n\r\n.backdrop {\r\n  position: fixed;\r\n  top: $header_height;\r\n  left: 0;\r\n  right: 0;\r\n  height: calc(100vh - #{$header_height});\r\n  background-color: rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n@keyframes fadeIn {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes fadeOut {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  50% {\r\n    display: none;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n  }\r\n}\r\n",
+                    "data": "@import \"var\";\r\n@import \"mixins\";\r\n\r\n$color_icon: #888;\r\n\r\n.open {\r\n  width: 230px;\r\n  transition: width 0.4s;\r\n\r\n  .option-icon {\r\n    display: none;\r\n  }\r\n}\r\n\r\n.close {\r\n  width: 54px;\r\n  transition: width 0.4s;\r\n\r\n  .links a span {\r\n    opacity: 0;\r\n    transition: opacity 0.5s;\r\n  }\r\n\r\n  .social-links {\r\n    .title {\r\n      display: none;\r\n      animation: fadeOut 0.5s linear;\r\n    }\r\n\r\n    a:not(:first-child) {\r\n      display: none;\r\n      animation: fadeOut 0.5s linear;\r\n    }\r\n  }\r\n}\r\n\r\naside{\r\n  display: flex;\r\n  flex-direction: column;\r\n  justify-content: space-between;\r\n  position: fixed;\r\n  z-index: 1;\r\n  height: calc(100vh - #{$header_height});\r\n  background: $color_white;\r\n  top: $header_height;\r\n  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\r\n\r\n  .links {\r\n    overflow: hidden;\r\n    margin-top: 8px;\r\n\r\n    a {\r\n      display: flex;\r\n      align-items: center;\r\n      padding: 14px 0;\r\n      cursor: pointer;\r\n      position: relative;\r\n      color: $color_icon;\r\n\r\n      &:hover {\r\n        background-color: $color_hover_primary;\r\n        transition: background-color 0.3s;\r\n        color: $color_primary;\r\n      }\r\n\r\n      span {\r\n        @include font($font_small, 500);\r\n        white-space: nowrap;\r\n        position: absolute;\r\n        left: 54px;\r\n        opacity: 1;\r\n        transition: opacity 0.5s;\r\n      }\r\n\r\n      mat-icon {\r\n        height: 20px;\r\n        width: 20px;\r\n        margin: 0 17px;\r\n        color: $color_icon;\r\n      }\r\n    }\r\n  }\r\n\r\n\r\n  mat-divider {\r\n    margin: 8px 16px;\r\n  }\r\n\r\n  .social-links {\r\n    display: flex;\r\n    flex-direction: column;\r\n    align-items: center;\r\n    margin-bottom: 30px;\r\n\r\n    .title {\r\n      animation: fadeIn 0.5s linear;\r\n      white-space: nowrap;\r\n    }\r\n\r\n    div {\r\n      display: flex;\r\n      align-items: center;\r\n      gap: $space_normal;\r\n      overflow: hidden;\r\n\r\n      a {\r\n        display: flex;\r\n        align-items: center;\r\n        justify-content: center;\r\n        width: 28px;\r\n        height: 28px;\r\n        border-radius: 50%;\r\n        background-color: #f0f0f0;\r\n        animation: fadeIn 0.5s linear;\r\n        border: 1px solid #f0f0f0;\r\n\r\n        &:hover {\r\n          background-color: #eaeaea;\r\n          border: 1px solid #d9d9d9;\r\n          transition: background-color 0.3s;\r\n        }\r\n\r\n\r\n        mat-icon {\r\n          width: 18px;\r\n          height: 18px;\r\n          color: $color-icon;\r\n        }\r\n      }\r\n    }\r\n\r\n    .option-icon {\r\n      position: relative;\r\n      width: 3px;\r\n      height: 15px;\r\n      left: -8px;\r\n    }\r\n\r\n    span {\r\n      @include font($font_small);\r\n      color: $color_gray_secondary;\r\n      margin-bottom: $space_normal;\r\n    }\r\n  }\r\n}\r\n\r\n.icon-primary-hover {\r\n  &:hover {\r\n    ::ng-deep {\r\n      svg {\r\n        path {\r\n          fill: $color_primary;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.backdrop {\r\n  position: fixed;\r\n  top: $header_height;\r\n  left: 0;\r\n  right: 0;\r\n  height: calc(100vh - #{$header_height});\r\n  background-color: rgba(0, 0, 0, 0.6);\r\n}\r\n\r\n.border-top {\r\n  border-top: $border_light;\r\n}\r\n\r\n@keyframes fadeIn {\r\n  0% {\r\n    opacity: 0;\r\n  }\r\n  100% {\r\n    opacity: 1;\r\n  }\r\n}\r\n\r\n@keyframes fadeOut {\r\n  0% {\r\n    opacity: 1;\r\n  }\r\n  50% {\r\n    display: none;\r\n  }\r\n  100% {\r\n    opacity: 0;\r\n  }\r\n}\r\n",
                     "styleUrl": "./left-side-menu.component.scss"
                 }
             ],
@@ -25340,7 +25340,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 33,
+                "line": 34,
                 "jsdoctags": [
                     {
                         "name": "renderer",
@@ -25366,7 +25366,7 @@
                 "OnInit",
                 "AfterViewInit"
             ],
-            "templateData": "<aside #aside class=\"close\" [ngClass]=\"{'shadow': type === 'hover'}\">\n  <app-column class=\"links\">\n    <ng-container *ngFor=\"let item of menuItems\">\n      <ng-container *ngIf=\"item.type === 'item'; else divider\">\n        <a href=\"{{item.href}}\" target=\"_blank\">\n          <mat-icon svgIcon=\"{{item.icon}}\"></mat-icon>\n          <span>{{item.title}}</span>\n        </a>\n      </ng-container>\n      <ng-template #divider>\n        <mat-divider></mat-divider>\n      </ng-template>\n    </ng-container>\n  </app-column>\n  <section class=\"social-links\">\n    <span class=\"title\">Our social links:</span>\n    <div>\n      <ng-container *ngFor=\"let icon of iconItems\">\n        <a href=\"{{icon.href}}\"  target=\"_blank\">\n          <mat-icon svgIcon=\"{{icon.icon}}\"></mat-icon>\n        </a>\n      </ng-container>\n\n      <mat-icon class=\"option-icon\" svgIcon=\"option-gray-icon\"></mat-icon>\n    </div>\n  </section>\n</aside>\n\n<div *ngIf=\"type === 'switch'\" (click)=\"backdropClick.emit()\" class=\"backdrop\"></div>\n"
+            "templateData": "<aside #aside class=\"close\" [ngClass]=\"{'shadow': type === 'hover', 'border-top': type === 'switch'}\">\n  <app-column class=\"links\">\n    <ng-container *ngFor=\"let item of menuItems\">\n      <ng-container *ngIf=\"item.type === 'item'; else divider\">\n        <a href=\"{{item.href}}\" target=\"_blank\" [ngClass]=\"item.className\">\n          <mat-icon svgIcon=\"{{item.icon}}\"></mat-icon>\n          <span>{{item.title}}</span>\n        </a>\n      </ng-container>\n      <ng-template #divider>\n        <mat-divider class=\"divider\"></mat-divider>\n      </ng-template>\n    </ng-container>\n  </app-column>\n  <section class=\"social-links\">\n    <span class=\"title\">Our social links:</span>\n    <div>\n      <ng-container *ngFor=\"let icon of iconItems\">\n        <a href=\"{{icon.href}}\"  target=\"_blank\">\n          <mat-icon svgIcon=\"{{icon.icon}}\"></mat-icon>\n        </a>\n      </ng-container>\n    </div>\n  </section>\n</aside>\n\n<div *ngIf=\"type === 'switch'\"\n     (click)=\"backdropClick.emit()\"\n     class=\"backdrop border-top\"\n></div>\n"
         },
         {
             "name": "LinkIconsComponent",
@@ -33057,7 +33057,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import \"../../../shared/styles/_var.scss\";\r\n\r\nbutton {\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\r\n  height: 40px;\r\n  font-size: 17px;\r\n  line-height: 125%;\r\n\r\n  mat-icon {\r\n    width: 16px;\r\n    height: 16px;\r\n    margin: 0 28px 0 7px;\r\n  }\r\n\r\n  &:hover {\r\n    background-color: $hover_color_light;\r\n  }\r\n}\r\n\r\n.lang-list-item {\r\n  mat-icon {\r\n    position: absolute;\r\n    left: 13px;\r\n    width: 24px;\r\n    height: 24px;\r\n  }\r\n\r\n  padding-right: 55px;\r\n  padding-left: 55px;\r\n\r\n  &-active {\r\n    color: $color_primary;\r\n  }\r\n}\r\n\r\n.lang-btn {\r\n  ::ng-deep {\r\n    .arrow{\r\n      position: absolute;\r\n      right: 0;\r\n\r\n      svg {\r\n        path {\r\n          fill: $color_gray_dark;\r\n        }\r\n      }\r\n    }\r\n\r\n    .world-icon {\r\n      svg {\r\n        path {\r\n          fill: $color_black;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.arrow-up {\r\n  transform: rotate(180deg);\r\n}\r\n\r\n.arrow-down {\r\n  transform: rotate(0deg);\r\n}\r\n",
+                    "data": "@import \"../../../shared/styles/_var.scss\";\r\n\r\nbutton {\r\n  display: flex;\r\n  align-items: center;\r\n  width: 100%;\r\n  height: 40px;\r\n  font-size: 17px;\r\n  line-height: 125%;\r\n\r\n\r\n  mat-icon {\r\n    width: 16px;\r\n    height: 16px;\r\n    margin: 0 30px 0 5px;\r\n  }\r\n\r\n  &:hover {\r\n    background-color: $hover_color_light;\r\n  }\r\n}\r\n\r\n.lang-name {\r\n  padding-left: 4px;\r\n}\r\n\r\n.lang-list-item {\r\n  mat-icon {\r\n    position: absolute;\r\n    left: 13px;\r\n    width: 24px;\r\n    height: 24px;\r\n  }\r\n\r\n  padding-right: 55px;\r\n  padding-left: 55px;\r\n\r\n  &-active {\r\n    color: $color_primary;\r\n  }\r\n}\r\n\r\n.lang-btn {\r\n  ::ng-deep {\r\n    .arrow{\r\n      position: absolute;\r\n      right: 0;\r\n\r\n      svg {\r\n        path {\r\n          fill: $color_gray_dark;\r\n        }\r\n      }\r\n    }\r\n\r\n    .world-icon {\r\n      svg {\r\n        path {\r\n          fill: $color_black;\r\n        }\r\n      }\r\n    }\r\n  }\r\n}\r\n\r\n.arrow-up {\r\n  transform: rotate(180deg);\r\n}\r\n\r\n.arrow-down {\r\n  transform: rotate(0deg);\r\n}\r\n",
                     "styleUrl": "./sidenav-menu.component.scss"
                 }
             ],
@@ -33121,7 +33121,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<app-column [v]=\"'start'\" [padding]=\"'14px 0'\">\r\n  <button mat-ripple [routerLink]=\"['/accounts', profileId]\">\r\n    <mat-icon svgIcon=\"profile-icon\"></mat-icon>\r\n    <span>{{ 'buttons.myProfile' | transloco }}</span>\r\n  </button>\r\n\r\n  <button mat-ripple [routerLink]=\"['/accounts', profileId, 'profile','edit']\">\r\n    <mat-icon svgIcon=\"edit-icon\"></mat-icon>\r\n    <span>{{ 'buttons.editMyProfile' | transloco }}</span>\r\n  </button>\r\n\r\n\r\n  <button mat-ripple\r\n          [matMenuTriggerFor]=\"langMenu\"\r\n          class=\"lang-btn\"\r\n          (menuOpened)=\"isLangMenuOpen = true\"\r\n          (menuClosed)=\"isLangMenuOpen = false\"\r\n  >\r\n    <mat-icon class=\"world-icon\" svgIcon=\"world-icon\"></mat-icon>\r\n    <span>{{ 'buttons.Language' | transloco }}: </span>\r\n    <span>{{ currentLanguage}}</span>\r\n    <mat-icon class=\"arrow\"\r\n              svgIcon=\"arrow-icon\"\r\n              [ngClass]=\"{\r\n                'arrow-up': isLangMenuOpen,\r\n                'arrow-down': !isLangMenuOpen\r\n              }\"\r\n    ></mat-icon>\r\n  </button>\r\n\r\n  <mat-menu #langMenu=\"matMenu\" xPosition=\"before\">\r\n    <button mat-menu-item\r\n            *ngFor=\"let lang of availableLanguage\"\r\n            class=\"lang-list-item\"\r\n            [ngClass]=\"{'lang-list-item-active': lang.isActive }\"\r\n            (click)=\"selectMenu(lang)\"\r\n    >\r\n      <mat-icon svgIcon=\"check-icon\" *ngIf=\"lang.isActive\"></mat-icon>\r\n      <span>{{ lang.label }}</span>\r\n    </button>\r\n  </mat-menu>\r\n\r\n  <button mat-ripple (click)=\"onSettings()\">\r\n    <mat-icon svgIcon=\"setting-icon\"></mat-icon>\r\n    <span>{{ 'buttons.settings' | transloco }}</span>\r\n  </button>\r\n</app-column>\r\n\r\n\r\n\r\n\r\n"
+            "templateData": "<app-column [v]=\"'start'\" [padding]=\"'14px 0'\">\r\n  <button mat-ripple [routerLink]=\"['/accounts', profileId]\">\r\n    <mat-icon svgIcon=\"profile-icon\"></mat-icon>\r\n    <span>{{ 'buttons.myProfile' | transloco }}</span>\r\n  </button>\r\n\r\n  <button mat-ripple [routerLink]=\"['/accounts', profileId, 'profile','edit']\">\r\n    <mat-icon svgIcon=\"edit-icon\"></mat-icon>\r\n    <span>{{ 'buttons.editMyProfile' | transloco }}</span>\r\n  </button>\r\n\r\n\r\n  <button mat-ripple\r\n          [matMenuTriggerFor]=\"langMenu\"\r\n          class=\"lang-btn\"\r\n          (menuOpened)=\"isLangMenuOpen = true\"\r\n          (menuClosed)=\"isLangMenuOpen = false\"\r\n  >\r\n    <mat-icon class=\"world-icon\" svgIcon=\"world-icon\"></mat-icon>\r\n    <span>{{ 'buttons.Language' | transloco }}:</span>\r\n    <span class=\"lang-name\">{{ currentLanguage}}</span>\r\n    <mat-icon class=\"arrow\"\r\n              svgIcon=\"arrow-icon\"\r\n              [ngClass]=\"{\r\n                'arrow-up': isLangMenuOpen,\r\n                'arrow-down': !isLangMenuOpen\r\n              }\"\r\n    ></mat-icon>\r\n  </button>\r\n\r\n  <mat-menu #langMenu=\"matMenu\" xPosition=\"before\">\r\n    <button mat-menu-item\r\n            *ngFor=\"let lang of availableLanguage\"\r\n            class=\"lang-list-item\"\r\n            [ngClass]=\"{'lang-list-item-active': lang.isActive }\"\r\n            (click)=\"selectMenu(lang)\"\r\n    >\r\n      <mat-icon svgIcon=\"check-icon\" *ngIf=\"lang.isActive\"></mat-icon>\r\n      <span>{{ lang.label }}</span>\r\n    </button>\r\n  </mat-menu>\r\n\r\n  <button mat-ripple (click)=\"onSettings()\">\r\n    <mat-icon svgIcon=\"setting-icon\"></mat-icon>\r\n    <span>{{ 'buttons.settings' | transloco }}</span>\r\n  </button>\r\n</app-column>\r\n\r\n\r\n\r\n\r\n"
         },
         {
             "name": "SignInModalDialogComponent",
@@ -41423,7 +41423,7 @@
                 "name": "baseNodeAddress",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
+                "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "string",
@@ -41433,7 +41433,7 @@
                 "name": "baseNodeAddress",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
+                "file": "src/environments/environment.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "string",
@@ -41443,7 +41443,7 @@
                 "name": "baseNodeUrl",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
+                "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -41453,7 +41453,7 @@
                 "name": "baseNodeUrl",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.prod.ts",
+                "file": "src/environments/environment.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
@@ -41573,21 +41573,21 @@
                 "name": "control",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/containers/column/column.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  control: {\n    type: 'select',\n    options: ['start', 'end', 'center', 'normal', 'space-between'],\n  },\n}"
-            },
-            {
-                "name": "control",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/ui-lib/containers/row/row.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\r\n  control: {\r\n    type: 'select',\r\n    options: ['start', 'end', 'center', 'normal', 'space-between'],\r\n  },\r\n}"
+            },
+            {
+                "name": "control",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/containers/column/column.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  control: {\n    type: 'select',\n    options: ['start', 'end', 'center', 'normal', 'space-between'],\n  },\n}"
             },
             {
                 "name": "CreateEntityButton",
@@ -41633,20 +41633,20 @@
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/tx-button/tx-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/upvote-button/upvote-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<TxButtonComponent>",
+                "type": "Story<UpvoteButtonComponent>",
                 "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Default",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/upvote-button/upvote-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/tx-button/tx-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<UpvoteButtonComponent>",
+                "type": "Story<TxButtonComponent>",
                 "defaultValue": "Template.bind({})"
             },
             {
@@ -41723,21 +41723,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  baseUrl: 'http://localhost:4200',\n  production: false,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4200/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n    '1022',\n    '1023',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  baseUrl: 'https://dev-subsocial-angular.codebridge.tech',\n  production: true,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4000/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  baseUrl: 'http://localhost:4200',\n  production: false,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4200/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n    '1022',\n    '1023',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n}"
             },
             {
                 "name": "flatReaction",
@@ -42403,11 +42403,11 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/content/hidden-content/hidden-content.stories.ts",
+                "file": "src/app/ui-lib/containers/row/row.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['hidden$', 'type', 'spaceHidden$'],\r\n  },\r\n}"
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['alignItem', 'justifyContent', 'margin', 'padding', 'v', 'h'],\r\n  },\r\n}"
             },
             {
                 "name": "params",
@@ -42433,11 +42433,11 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/containers/row/row.stories.ts",
+                "file": "src/app/ui-lib/comment/comment-item/comment-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['alignItem', 'justifyContent', 'margin', 'padding', 'v', 'h'],\r\n  },\r\n}"
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['comment', 'isEdit'],\r\n  },\r\n}"
             },
             {
                 "name": "params",
@@ -42453,11 +42453,11 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/comment/comment-item/comment-item.stories.ts",
+                "file": "src/app/ui-lib/content/hidden-content/hidden-content.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['comment', 'isEdit'],\r\n  },\r\n}"
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['hidden$', 'type', 'spaceHidden$'],\r\n  },\r\n}"
             },
             {
                 "name": "params",
@@ -42493,6 +42493,26 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['space', 'isEdit', 'itemType', 'showHidden', 'isFollowed$'],\r\n  },\r\n}"
+            },
+            {
+                "name": "params",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['spaces', 'selectedSpace', 'isShowSpaceList'],\r\n  },\r\n}"
+            },
+            {
+                "name": "params",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/ui-lib/input/text-input/text-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -42513,41 +42533,11 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/profile/account-list-item/account-list-item.stories.ts",
+                "file": "src/app/ui-lib/post-ui/shared-post-item/shared-post-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['accountData', 'tagCtrl'],\r\n  },\r\n}"
-            },
-            {
-                "name": "params",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['space', 'isEdit', 'itemType', 'showHidden', 'isFollowed$'],\r\n  },\r\n}"
-            },
-            {
-                "name": "params",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/profile/profile-info/profile-info.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: [\r\n      'avatarSrc',\r\n      'profileName',\r\n      'type',\r\n      'followingCount',\r\n      'followersCount',\r\n      'profileId',\r\n      'link',\r\n      'address',\r\n    ],\r\n  },\r\n}"
-            },
-            {
-                "name": "params",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\r\n  controls: {\r\n    include: ['spaces', 'selectedSpace', 'isShowSpaceList'],\r\n  },\r\n}"
+                "defaultValue": "{\n  controls: {\n    include: ['postItemData', 'sharedPostItemData', 'isSharedPostHidden'],\n  },\n}"
             },
             {
                 "name": "params",
@@ -42563,11 +42553,21 @@
                 "name": "params",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/post-ui/shared-post-item/shared-post-item.stories.ts",
+                "file": "src/app/ui-lib/profile/account-list-item/account-list-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  controls: {\n    include: ['postItemData', 'sharedPostItemData', 'isSharedPostHidden'],\n  },\n}"
+                "defaultValue": "{\r\n  controls: {\r\n    include: ['accountData', 'tagCtrl'],\r\n  },\r\n}"
+            },
+            {
+                "name": "params",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/profile/profile-info/profile-info.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\r\n  controls: {\r\n    include: [\r\n      'avatarSrc',\r\n      'profileName',\r\n      'type',\r\n      'followingCount',\r\n      'followersCount',\r\n      'profileId',\r\n      'link',\r\n      'address',\r\n    ],\r\n  },\r\n}"
             },
             {
                 "name": "path",
@@ -43032,21 +43032,21 @@
                 "name": "selectFollowedSpaceIdsEntities",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/state/followed-account-ids/followed-account-ids.selectors.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createSelector(\r\n  selectFollowedAccountIdsState,\r\n  selectEntities\r\n)"
-            },
-            {
-                "name": "selectFollowedSpaceIdsEntities",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/state/followed-space-ids/followed-space-ids.selectors.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createSelector(\n  selectFollowedSpaceIdsState,\n  selectEntities\n)"
+            },
+            {
+                "name": "selectFollowedSpaceIdsEntities",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/followed-account-ids/followed-account-ids.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createSelector(\r\n  selectFollowedAccountIdsState,\r\n  selectEntities\r\n)"
             },
             {
                 "name": "selectFollowedSpaceIdsState",
@@ -43682,41 +43682,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/close-button/close-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<CloseButtonComponent>",
-                "defaultValue": "(args: CloseButtonComponent) => ({\r\n  component: CloseButtonComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/ui-lib/buttons/comment-button/comment-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<CommentButtonComponent>",
                 "defaultValue": "(\r\n  args: CommentButtonComponent\r\n) => ({\r\n  component: CommentButtonComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/create-space-button/create-space.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<CreateSpaceButtonComponent>",
-                "defaultValue": "(\r\n  args: CreateSpaceButtonComponent\r\n) => ({\r\n  component: CreateSpaceButtonComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/edit-button/edit-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<EditButtonComponent>",
-                "defaultValue": "(args: EditButtonComponent) => ({\r\n  component: EditButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43732,21 +43702,31 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/follow-button/follow-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<FollowButtonComponent>",
-                "defaultValue": "(\r\n  args: FollowButtonComponent\r\n) => ({\r\n  component: FollowButtonComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/ui-lib/buttons/downvote-button/downvote-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<DownvoteButtonComponent>",
                 "defaultValue": "(\r\n  args: DownvoteButtonComponent\r\n) => ({\r\n  component: DownvoteButtonComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/buttons/close-button/close-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CloseButtonComponent>",
+                "defaultValue": "(args: CloseButtonComponent) => ({\r\n  component: CloseButtonComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/buttons/create-space-button/create-space.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CreateSpaceButtonComponent>",
+                "defaultValue": "(\r\n  args: CreateSpaceButtonComponent\r\n) => ({\r\n  component: CreateSpaceButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43762,31 +43742,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/notification-icon-button/notification-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/edit-button/edit-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<NotificationIconButtonComponent>",
-                "defaultValue": "(\r\n  args: NotificationIconButtonComponent\r\n) => ({\r\n  component: NotificationIconButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<EditButtonComponent>",
+                "defaultValue": "(args: EditButtonComponent) => ({\r\n  component: EditButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/reply-button/reply-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/follow-button/follow-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<ReplyButtonComponent>",
-                "defaultValue": "(args: ReplyButtonComponent) => ({\r\n  component: ReplyButtonComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/qr-button/qr-button.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<QrButtonComponent>",
-                "defaultValue": "(args: QrButtonComponent) => ({\r\n  component: QrButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<FollowButtonComponent>",
+                "defaultValue": "(\r\n  args: FollowButtonComponent\r\n) => ({\r\n  component: FollowButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43802,11 +43772,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/shared-button/shared-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/qr-button/qr-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<SharedButtonComponent>",
-                "defaultValue": "(\r\n  args: SharedButtonComponent\r\n) => ({\r\n  component: SharedButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<QrButtonComponent>",
+                "defaultValue": "(args: QrButtonComponent) => ({\r\n  component: QrButtonComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/buttons/notification-icon-button/notification-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<NotificationIconButtonComponent>",
+                "defaultValue": "(\r\n  args: NotificationIconButtonComponent\r\n) => ({\r\n  component: NotificationIconButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43822,21 +43802,31 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/send-tokens-button/send-tokens-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/shared-button/shared-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<SendTokensButtonComponent>",
-                "defaultValue": "(\r\n  args: SendTokensButtonComponent\r\n) => ({\r\n  component: SendTokensButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<SharedButtonComponent>",
+                "defaultValue": "(\r\n  args: SharedButtonComponent\r\n) => ({\r\n  component: SharedButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/tx-button/tx-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/reply-button/reply-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<TxButtonComponent>",
-                "defaultValue": "(args: TxButtonComponent) => ({\r\n  component: TxButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<ReplyButtonComponent>",
+                "defaultValue": "(args: ReplyButtonComponent) => ({\r\n  component: ReplyButtonComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/buttons/send-tokens-button/send-tokens-button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SendTokensButtonComponent>",
+                "defaultValue": "(\r\n  args: SendTokensButtonComponent\r\n) => ({\r\n  component: SendTokensButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43862,11 +43852,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
+                "file": "src/app/ui-lib/buttons/tx-button/tx-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<WritePostButtonComponent>",
-                "defaultValue": "(\r\n  args: WritePostButtonComponent\r\n) => ({\r\n  component: WritePostButtonComponent,\r\n  props: args,\r\n})"
+                "type": "Story<TxButtonComponent>",
+                "defaultValue": "(args: TxButtonComponent) => ({\r\n  component: TxButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43882,61 +43872,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/content/no-content/no-content.stories.ts",
+                "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<NoContentComponent>",
-                "defaultValue": "(args: NoContentComponent) => ({\r\n  component: NoContentComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/content/hidden-content/hidden-content.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<HiddenContentComponent>",
-                "defaultValue": "(\r\n  args: HiddenContentComponent\r\n) => ({\r\n  component: HiddenContentComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/containers/column/column.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ColumnComponent>",
-                "defaultValue": "(args: ColumnComponent) => ({\n  component: ColumnComponent,\n  props: args,\n  template: `\n    <app-column style=\"height: 100%\">\n      <div>Element1</div>\n      <div>Element2</div>\n      <div>Element3</div>\n    </app-column>`,\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/content/post-image/post-image.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<PostImageComponent>",
-                "defaultValue": "(args: PostImageComponent) => ({\r\n  component: PostImageComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/containers/scroll/scroll-container.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ScrollComponent>",
-                "defaultValue": "(args: ScrollComponent) => ({\r\n  component: ScrollComponent,\r\n  props: args,\r\n  template: `\r\n    <app-scroll style=\"max-height: 95px; display: block;\" class=\"w100\">\r\n      <div>Element1</div>\r\n      <div>Element2</div>\r\n      <div>Element3</div>\r\n      <div>Element4</div>\r\n      <div>Element5</div>\r\n      <div>Element6</div>\r\n      <div>Element7</div>\r\n      <div>Element8</div>\r\n      <div>Element9</div>\r\n      <div>Element10</div>\r\n    </app-scroll>`,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/comment/comment-input/comment-input.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<CommentInputComponent>",
-                "defaultValue": "(\r\n  args: CommentInputComponent\r\n) => ({\r\n  component: CommentInputComponent,\r\n  props: args,\r\n})"
+                "type": "Story<WritePostButtonComponent>",
+                "defaultValue": "(\r\n  args: WritePostButtonComponent\r\n) => ({\r\n  component: WritePostButtonComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -43952,11 +43892,31 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/comment/comment-list/comment-list.stories.ts",
+                "file": "src/app/ui-lib/containers/column/column.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<CommentListComponent>",
-                "defaultValue": "(args: CommentListComponent) => ({\r\n  component: CommentListComponent,\r\n  props: args,\r\n})"
+                "type": "Story<ColumnComponent>",
+                "defaultValue": "(args: ColumnComponent) => ({\n  component: ColumnComponent,\n  props: args,\n  template: `\n    <app-column style=\"height: 100%\">\n      <div>Element1</div>\n      <div>Element2</div>\n      <div>Element3</div>\n    </app-column>`,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/comment/comment-input/comment-input.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CommentInputComponent>",
+                "defaultValue": "(\r\n  args: CommentInputComponent\r\n) => ({\r\n  component: CommentInputComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/containers/scroll/scroll-container.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ScrollComponent>",
+                "defaultValue": "(args: ScrollComponent) => ({\r\n  component: ScrollComponent,\r\n  props: args,\r\n  template: `\r\n    <app-scroll style=\"max-height: 95px; display: block;\" class=\"w100\">\r\n      <div>Element1</div>\r\n      <div>Element2</div>\r\n      <div>Element3</div>\r\n      <div>Element4</div>\r\n      <div>Element5</div>\r\n      <div>Element6</div>\r\n      <div>Element7</div>\r\n      <div>Element8</div>\r\n      <div>Element9</div>\r\n      <div>Element10</div>\r\n    </app-scroll>`,\r\n})"
             },
             {
                 "name": "Template",
@@ -43977,6 +43937,46 @@
                 "deprecationMessage": "",
                 "type": "Story<CommentsComponent>",
                 "defaultValue": "(args: CommentsComponent) => ({\r\n  component: CommentsComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/comment/comment-list/comment-list.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<CommentListComponent>",
+                "defaultValue": "(args: CommentListComponent) => ({\r\n  component: CommentListComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/content/hidden-content/hidden-content.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<HiddenContentComponent>",
+                "defaultValue": "(\r\n  args: HiddenContentComponent\r\n) => ({\r\n  component: HiddenContentComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/content/post-image/post-image.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<PostImageComponent>",
+                "defaultValue": "(args: PostImageComponent) => ({\r\n  component: PostImageComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/content/no-content/no-content.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<NoContentComponent>",
+                "defaultValue": "(args: NoContentComponent) => ({\r\n  component: NoContentComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "Template",
@@ -44022,6 +44022,26 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SpaceItemComponent>",
+                "defaultValue": "(args: SpaceItemComponent) => ({\r\n  component: SpaceItemComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SpaceSelectComponent>",
+                "defaultValue": "(args: SpaceSelectComponent) => ({\r\n  component: SpaceSelectComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/app/ui-lib/input/text-input/text-input.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -44042,56 +44062,6 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/profile/account-list-item/account-list-item.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<AccountListItemComponent>",
-                "defaultValue": "(\r\n  args: AccountListItemComponent\r\n) => ({\r\n  component: AccountListItemComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<SpaceItemComponent>",
-                "defaultValue": "(args: SpaceItemComponent) => ({\r\n  component: SpaceItemComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/profile/profile-info/profile-info.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ProfileInfoComponent>",
-                "defaultValue": "(args: ProfileInfoComponent) => ({\r\n  component: ProfileInfoComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<SpaceSelectComponent>",
-                "defaultValue": "(args: SpaceSelectComponent) => ({\r\n  component: SpaceSelectComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/text/paragraph/paragraph.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<ParagraphComponent>",
-                "defaultValue": "(args: ParagraphComponent) => ({\r\n  component: ParagraphComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/app/ui-lib/post-ui/post-info/post-info.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -44102,21 +44072,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/text/title/title.stories.ts",
+                "file": "src/app/ui-lib/post-ui/shared-post-item/shared-post-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<TitleComponent>",
-                "defaultValue": "(args: TitleComponent) => ({\r\n  component: TitleComponent,\r\n  props: args,\r\n})"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/ui-lib/text/see-more/see-more.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<SeeMoreComponent>",
-                "defaultValue": "(args: SeeMoreComponent) => ({\r\n  component: SeeMoreComponent,\r\n  props: args,\r\n})"
+                "type": "Story<SharedPostItemComponent>",
+                "defaultValue": "(\n  args: SharedPostItemComponent\n) => ({\n  component: SharedPostItemComponent,\n  props: args,\n})"
             },
             {
                 "name": "Template",
@@ -44132,11 +44092,51 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/ui-lib/post-ui/shared-post-item/shared-post-item.stories.ts",
+                "file": "src/app/ui-lib/profile/account-list-item/account-list-item.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<SharedPostItemComponent>",
-                "defaultValue": "(\n  args: SharedPostItemComponent\n) => ({\n  component: SharedPostItemComponent,\n  props: args,\n})"
+                "type": "Story<AccountListItemComponent>",
+                "defaultValue": "(\r\n  args: AccountListItemComponent\r\n) => ({\r\n  component: AccountListItemComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/profile/profile-info/profile-info.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ProfileInfoComponent>",
+                "defaultValue": "(args: ProfileInfoComponent) => ({\r\n  component: ProfileInfoComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/text/paragraph/paragraph.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<ParagraphComponent>",
+                "defaultValue": "(args: ParagraphComponent) => ({\r\n  component: ParagraphComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/text/see-more/see-more.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<SeeMoreComponent>",
+                "defaultValue": "(args: SeeMoreComponent) => ({\r\n  component: SeeMoreComponent,\r\n  props: args,\r\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/ui-lib/text/title/title.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<TitleComponent>",
+                "defaultValue": "(args: TitleComponent) => ({\r\n  component: TitleComponent,\r\n  props: args,\r\n})"
             },
             {
                 "name": "TextInput",
@@ -44228,16 +44228,6 @@
                 "defaultValue": "contentAdapter.getSelectors()"
             },
             {
-                "name": "upsertFollowedAccountIds",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/followed-account-ids/followed-account-ids.actions.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createAction(\r\n  '[Followed Account Ids] Upsert Followed Account Ids',\r\n  props<{ payload: FollowedAccountIdsStruct }>()\r\n)"
-            },
-            {
                 "name": "upsertFollowedSpaceIds",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -44246,25 +44236,6 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createAction(\r\n  '[Followed Space Ids] Upsert Followed Space Ids',\r\n  props<{ payload: FollowedSpaceIdsStruct }>()\r\n)"
-            },
-            {
-                "name": "win",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "server.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "domino.createWindow(template)"
-            },
-            {
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/followed-account-ids/followed-account-ids.selectors.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "followedAccountIdsAdapter.getSelectors()"
             },
             {
                 "ctype": "miscellaneous",
@@ -44286,6 +44257,16 @@
                 "defaultValue": "createAction(\r\n  '[My Post Reactions] Upsert My Post Reactions',\r\n  props<{ payload: Array<MyPostReactions> }>()\r\n)"
             },
             {
+                "name": "win",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "server.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "domino.createWindow(template)"
+            },
+            {
                 "ctype": "miscellaneous",
                 "subtype": "variable",
                 "file": "src/app/state/my-post-reactions/my-post-reactions.selectors.ts",
@@ -44303,6 +44284,26 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createAction(\r\n  '[Post] Update Post',\r\n  props<{ payload: Update<Post> }>()\r\n)"
+            },
+            {
+                "name": "updateSpace",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/space/space.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createAction(\r\n  '[Space] Update Space',\r\n  props<{ payload: Update<Space> }>()\r\n)"
+            },
+            {
+                "name": "upsertFollowedAccountIds",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/followed-account-ids/followed-account-ids.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createAction(\r\n  '[Followed Account Ids] Upsert Followed Account Ids',\r\n  props<{ payload: FollowedAccountIdsStruct }>()\r\n)"
             },
             {
                 "name": "upsertPost",
@@ -44334,6 +44335,34 @@
                 "defaultValue": "postAdapter.getSelectors()"
             },
             {
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/followed-account-ids/followed-account-ids.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "followedAccountIdsAdapter.getSelectors()"
+            },
+            {
+                "name": "upsertSpace",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/space/space.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createAction(\r\n  '[Space] Upsert Space',\r\n  props<{ payload: Space | undefined }>()\r\n)"
+            },
+            {
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/space/space.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "spaceAdapter.getSelectors()"
+            },
+            {
                 "name": "updateReplyIds",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -44342,6 +44371,25 @@
                 "deprecationMessage": "",
                 "type": "",
                 "defaultValue": "createAction(\r\n  '[Reply Ids] Update Reply Ids',\r\n  props<{ payload: Update<ReplyIds> }>()\r\n)"
+            },
+            {
+                "name": "upsertReplyIds",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/reply-id/reply-id.actions.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "createAction(\r\n  '[Reply Ids] Upsert Reply Ids',\r\n  props<{ payload: ReplyIds }>()\r\n)"
+            },
+            {
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/state/reply-id/reply-id.selectors.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "replyIdAdapter.getSelectors()"
             },
             {
                 "name": "upsertProfile",
@@ -44364,54 +44412,6 @@
                 "defaultValue": "createAction(\r\n  '[Profile] Upsert Profiles',\r\n  props<{ payload: Array<Profile> }>()\r\n)"
             },
             {
-                "name": "upsertReplyIds",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/reply-id/reply-id.actions.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createAction(\r\n  '[Reply Ids] Upsert Reply Ids',\r\n  props<{ payload: ReplyIds }>()\r\n)"
-            },
-            {
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/profile/profile.selectors.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "profileAdapter.getSelectors()"
-            },
-            {
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/reply-id/reply-id.selectors.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "replyIdAdapter.getSelectors()"
-            },
-            {
-                "name": "updateSpace",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/space/space.actions.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createAction(\r\n  '[Space] Update Space',\r\n  props<{ payload: Update<Space> }>()\r\n)"
-            },
-            {
-                "name": "upsertSpace",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/app/state/space/space.actions.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "",
-                "defaultValue": "createAction(\r\n  '[Space] Upsert Space',\r\n  props<{ payload: Space | undefined }>()\r\n)"
-            },
-            {
                 "name": "upsertSpaces",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -44424,11 +44424,11 @@
             {
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/app/state/space/space.selectors.ts",
+                "file": "src/app/state/profile/profile.selectors.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "spaceAdapter.getSelectors()"
+                "defaultValue": "profileAdapter.getSelectors()"
             },
             {
                 "name": "WithoutImage",
@@ -46166,38 +46166,6 @@
                     "defaultValue": "{\n  MOBILE: {\n    width: '95%',\n    maxWidth: 'none',\n  },\n  DESKTOP: {\n    width: '500px',\n    maxWidth: '80vh',\n  },\n}"
                 }
             ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "baseNodeAddress",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "string",
-                    "defaultValue": "'dev-subsocial.codebridge.tech/'"
-                },
-                {
-                    "name": "baseNodeUrl",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "'https://' + baseNodeAddress"
-                },
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  baseUrl: 'http://localhost:4200',\n  production: false,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4200/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n    '1022',\n    '1023',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n}"
-                }
-            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "baseNodeAddress",
@@ -46228,6 +46196,38 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  baseUrl: 'https://dev-subsocial-angular.codebridge.tech',\n  production: true,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4000/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "baseNodeAddress",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "defaultValue": "'dev-subsocial.codebridge.tech/'"
+                },
+                {
+                    "name": "baseNodeUrl",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "'https://' + baseNodeAddress"
+                },
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  baseUrl: 'http://localhost:4200',\n  production: false,\n  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,\n  domainUrl: 'http://localhost:4200/',\n  appName: 'Subsocial Angular',\n  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,\n  offchainUrl: `${baseNodeUrl}offchain`,\n  offchainWs: `wss://${baseNodeUrl}notif-ws`,\n  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,\n  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,\n  currency: 'SUB',\n  decimals: 11,\n  recommendedSpaceIds: [\n    '1001',\n    '1002',\n    '1003',\n    '1004',\n    '1005',\n    '1006',\n    '1017',\n    '1018',\n    '1022',\n    '1023',\n  ],\n  loadImageLimitMb: 2,\n  enableSessionKey: true,\n}"
                 }
             ],
             "src/app/core/constants/storybook.const.ts": [
@@ -47867,6 +47867,80 @@
                     "defaultValue": "(args: TagInputComponent) => ({\r\n  component: TagInputComponent,\r\n  props: args,\r\n})"
                 }
             ],
+            "src/app/ui-lib/space-ui/space-item/space-item.stories.ts": [
+                {
+                    "name": "params",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  controls: {\r\n    include: ['space', 'isEdit', 'itemType', 'showHidden', 'isFollowed$'],\r\n  },\r\n}"
+                },
+                {
+                    "name": "SpaceItem",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SpaceItemComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SpaceItemComponent>",
+                    "defaultValue": "(args: SpaceItemComponent) => ({\r\n  component: SpaceItemComponent,\r\n  props: args,\r\n})"
+                }
+            ],
+            "src/app/ui-lib/space-ui/space-select/space-select.stories.ts": [
+                {
+                    "name": "params",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\r\n  controls: {\r\n    include: ['spaces', 'selectedSpace', 'isShowSpaceList'],\r\n  },\r\n}"
+                },
+                {
+                    "name": "spaces",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "defaultValue": "new Array(5).fill(null).map((_, i) => {\r\n  const space = JSON.parse(JSON.stringify(SpaceTemplate));\r\n  const index = (i + 1).toString();\r\n  space.id = index;\r\n  space.name = space.name + ' ' + index;\r\n  return space;\r\n})"
+                },
+                {
+                    "name": "SpaceSelect",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SpaceSelectComponent>",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<SpaceSelectComponent>",
+                    "defaultValue": "(args: SpaceSelectComponent) => ({\r\n  component: SpaceSelectComponent,\r\n  props: args,\r\n})"
+                }
+            ],
             "src/app/ui-lib/input/text-input/text-input.stories.ts": [
                 {
                     "name": "params",
@@ -47941,36 +48015,36 @@
                     "defaultValue": "(args: SpaceInfoComponent) => ({\r\n  component: SpaceInfoComponent,\r\n  props: args,\r\n})"
                 }
             ],
-            "src/app/ui-lib/space-ui/space-item/space-item.stories.ts": [
+            "src/app/ui-lib/post-ui/post-item/post-item.stories.ts": [
                 {
                     "name": "params",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\r\n  controls: {\r\n    include: ['space', 'isEdit', 'itemType', 'showHidden', 'isFollowed$'],\r\n  },\r\n}"
+                    "defaultValue": "{\r\n  controls: {\r\n    include: ['postItemData', 'tagCtrl'],\r\n  },\r\n}"
                 },
                 {
-                    "name": "SpaceItem",
+                    "name": "PostItem",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<SpaceItemComponent>",
+                    "type": "Story<PostItemComponent>",
                     "defaultValue": "Template.bind({})"
                 },
                 {
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-item/space-item.stories.ts",
+                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<SpaceItemComponent>",
-                    "defaultValue": "(args: SpaceItemComponent) => ({\r\n  component: SpaceItemComponent,\r\n  props: args,\r\n})"
+                    "type": "Story<PostItemComponent>",
+                    "defaultValue": "(args: PostItemComponent) => ({\r\n  component: PostItemComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/ui-lib/profile/profile-info/profile-info.stories.ts": [
@@ -48003,80 +48077,6 @@
                     "deprecationMessage": "",
                     "type": "Story<ProfileInfoComponent>",
                     "defaultValue": "(args: ProfileInfoComponent) => ({\r\n  component: ProfileInfoComponent,\r\n  props: args,\r\n})"
-                }
-            ],
-            "src/app/ui-lib/space-ui/space-select/space-select.stories.ts": [
-                {
-                    "name": "params",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\r\n  controls: {\r\n    include: ['spaces', 'selectedSpace', 'isShowSpaceList'],\r\n  },\r\n}"
-                },
-                {
-                    "name": "spaces",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "defaultValue": "new Array(5).fill(null).map((_, i) => {\r\n  const space = JSON.parse(JSON.stringify(SpaceTemplate));\r\n  const index = (i + 1).toString();\r\n  space.id = index;\r\n  space.name = space.name + ' ' + index;\r\n  return space;\r\n})"
-                },
-                {
-                    "name": "SpaceSelect",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<SpaceSelectComponent>",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/space-ui/space-select/space-select.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<SpaceSelectComponent>",
-                    "defaultValue": "(args: SpaceSelectComponent) => ({\r\n  component: SpaceSelectComponent,\r\n  props: args,\r\n})"
-                }
-            ],
-            "src/app/ui-lib/post-ui/post-item/post-item.stories.ts": [
-                {
-                    "name": "params",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\r\n  controls: {\r\n    include: ['postItemData', 'tagCtrl'],\r\n  },\r\n}"
-                },
-                {
-                    "name": "PostItem",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<PostItemComponent>",
-                    "defaultValue": "Template.bind({})"
-                },
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/post-ui/post-item/post-item.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<PostItemComponent>",
-                    "defaultValue": "(args: PostItemComponent) => ({\r\n  component: PostItemComponent,\r\n  props: args,\r\n})"
                 }
             ],
             "src/app/ui-lib/content/post-image/post-image.stories.ts": [
@@ -49063,28 +49063,6 @@
                     "defaultValue": "(args: TagComponent) => ({\r\n  component: TagComponent,\r\n  props: args,\r\n})"
                 }
             ],
-            "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts": [
-                {
-                    "name": "Template",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<WritePostButtonComponent>",
-                    "defaultValue": "(\r\n  args: WritePostButtonComponent\r\n) => ({\r\n  component: WritePostButtonComponent,\r\n  props: args,\r\n})"
-                },
-                {
-                    "name": "WritePostButton",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "Story<WritePostButtonComponent>",
-                    "defaultValue": "Template.bind(\r\n  {}\r\n)"
-                }
-            ],
             "src/app/ui-lib/balance/tokens/tokens.stories.ts": [
                 {
                     "name": "Template",
@@ -49105,6 +49083,28 @@
                     "deprecationMessage": "",
                     "type": "Story<TokensComponent>",
                     "defaultValue": "Template.bind({})"
+                }
+            ],
+            "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts": [
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<WritePostButtonComponent>",
+                    "defaultValue": "(\r\n  args: WritePostButtonComponent\r\n) => ({\r\n  component: WritePostButtonComponent,\r\n  props: args,\r\n})"
+                },
+                {
+                    "name": "WritePostButton",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/ui-lib/buttons/write-post-button/write-post-button.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<WritePostButtonComponent>",
+                    "defaultValue": "Template.bind(\r\n  {}\r\n)"
                 }
             ],
             "src/app/ui-lib/text/title/title.stories.ts": [

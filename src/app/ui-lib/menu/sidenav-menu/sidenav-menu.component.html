@@ -17,8 +17,8 @@
           (menuClosed)="isLangMenuOpen = false"
   >
     <mat-icon class="world-icon" svgIcon="world-icon"></mat-icon>
-    <span>{{ 'buttons.Language' | transloco }}: </span>
-    <span>{{ currentLanguage}}</span>
+    <span>{{ 'buttons.Language' | transloco }}:</span>
+    <span class="lang-name">{{ currentLanguage}}</span>
     <mat-icon class="arrow"
               svgIcon="arrow-icon"
               [ngClass]="{

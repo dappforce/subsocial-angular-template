@@ -1,7 +1,8 @@
-<app-icon-button [iconSize]="19"
+<app-icon-button [iconSize]="isOpen ? 16 : 19"
                  [buttonSize]="36"
-                 [iconName]="'menu-icon'"
+                 [iconName]="isOpen ? 'close-icon' : 'menu-icon'"
                  (click)="isOpen = !isOpen"
+                 class="menu-icon"
 >
 </app-icon-button>
 

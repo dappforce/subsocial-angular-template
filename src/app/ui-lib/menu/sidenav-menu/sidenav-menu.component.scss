@@ -8,15 +8,20 @@ button {
   font-size: 17px;
   line-height: 125%;
 
+
   mat-icon {
     width: 16px;
     height: 16px;
-    margin: 0 28px 0 7px;
+    margin: 0 30px 0 5px;
   }
 
   &:hover {
     background-color: $hover_color_light;
   }
+}
+
+.lang-name {
+  padding-left: 4px;
 }
 
 .lang-list-item {

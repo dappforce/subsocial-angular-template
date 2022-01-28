@@ -48,6 +48,13 @@ header {
   }
 }
 
+.framework-logo {
+  width: 30px;
+  height: 30px;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 768px) {
   header {
     border-bottom: none;

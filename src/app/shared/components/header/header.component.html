@@ -6,10 +6,17 @@
   >
     <app-row [v]="'center'">
       <app-header-menu-button ifMobile></app-header-menu-button>
+
+      <mat-icon [routerLink]="['/']"
+                class="framework-logo"
+                ifDesktop
+                svgIcon="angular-icon"
+      ></mat-icon>
+
       <app-title type="medium"
                  [link]="'/'"
                  [text]="'general.title' | transloco"
-                 [style.margin-left]="(device.isMobile$ | async) ? '10px' : '34px'"
+                 [style.margin-left]="(device.isMobile$ | async) ? '10px' : '12px'"
       ></app-title>
     </app-row>
 

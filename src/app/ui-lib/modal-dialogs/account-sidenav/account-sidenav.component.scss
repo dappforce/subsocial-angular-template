@@ -17,6 +17,10 @@ app-scroll {
   .side-wp {
     width: auto;
   }
+
+  app-scroll {
+    height: calc(100vh - 525px);
+  }
 }
 
 ::ng-deep {

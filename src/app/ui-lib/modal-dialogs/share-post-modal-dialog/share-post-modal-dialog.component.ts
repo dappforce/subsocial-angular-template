@@ -16,8 +16,6 @@ import { SharedPostContent } from '@subsocial/types';
 import { METHODS, PALLETS } from '../../../core/constants/query.const';
 import { PostFacade } from '../../../state/post/post.facade';
 import { Router } from '@angular/router';
-import { pipe, Subject } from 'rxjs';
-import { filter, takeUntil } from 'rxjs/operators';
 import { takeValueOnce } from '../../../core/rxjs-custom/operators';
 import { SignInModalService } from '../services/sign-in-modal.service';
 

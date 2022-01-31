@@ -246,9 +246,17 @@ p {
   @include font($font_normal)
 }
 
+.small {
+  @include font($font_small)
+}
+
 .secondary-text {
   @include font($font_small);
   color: $color_gray_secondary;
+}
+
+.text-gray {
+  color: $color_gray;
 }
 
 .button-text {

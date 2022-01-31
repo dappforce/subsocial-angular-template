@@ -76,7 +76,9 @@
     "tips": {
       "title": "Send tips to",
       "availableBalance": "Available Balance",
-      "inputPlaceholder": "Enter amount"
+      "inputPlaceholder": "Enter amount",
+      "recipient": "Recipient",
+      "error": "The amount must be less than the available balance"
     },
     "adblock": {
       "title": "Uh oh, it looks like you are using an ad blocker.",

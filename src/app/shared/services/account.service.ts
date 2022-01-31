@@ -82,6 +82,10 @@ export class AccountService {
     }
   }
 
+  public getCurrentBalance() {
+    return this.balanceSource.value;
+  }
+
   public getAccountsData(): Observable<AccountData[]> {
     return this.accounts$.pipe(
       switchMap((accounts) =>

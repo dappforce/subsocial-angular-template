@@ -1,0 +1,60 @@
+<app-column padding="16px">
+  <app-row [margin]="'-6px 0 0 0'"
+           [h]="'space-between'"
+           [v]="'center'"
+  >
+
+    <span class="title-medium">{{ 'modals.tips.title' | transloco }}</span>
+
+    <app-close-button (onClose)="dialogRef.close()"></app-close-button>
+
+  </app-row>
+
+  <app-row [h]="'space-between'"
+           [margin]="'14px 0 16px 0'"
+  >
+    <span class="text-gray">{{ 'modals.tips.recipient' | transloco }}:</span>
+
+    <app-row>
+
+      <app-column [v]="'end'" [padding]="'0 8px 0 0'">
+
+        <span class="name">{{data.profile.name || (data.profile.id | addressHidden)}}</span>
+
+        <app-address [address]="data.profile.id"></app-address>
+
+      </app-column>
+
+      <app-avatar [jdentityValue]="data.profile.id"
+                  [src]="data.profile.avatar"
+      ></app-avatar>
+
+    </app-row>
+
+  </app-row>
+
+  <app-send-tips-input [balance]="account.balance$ | async"
+                       [formControl]="amountControl"
+                       [errorKey]="errorKey$ | async"
+  ></app-send-tips-input>
+
+  <app-row *transloco="let t; read: 'buttons'"
+           [h]="'end'"
+           [margin]="'10px 0 0 0'"
+  >
+
+    <button mat-stroked-button
+            (click)="dialogRef.close()"
+            class="cancel-btn"
+    >
+      {{ t('cancel') }}
+    </button>
+
+    <app-tx-button [isSending]="isSending"
+                   (click)="onSendTips()"
+                   [name]="t('sendTips')"
+    ></app-tx-button>
+
+  </app-row>
+
+</app-column>

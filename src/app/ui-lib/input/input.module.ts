@@ -12,6 +12,8 @@ import { MatInputModule } from '@angular/material/input';
 import { ImageLoaderComponent } from './image-loader/image-loader.component';
 import { MdeEditorComponent } from './mde-editor/mde-editor.component';
 import { TranslocoModule } from '@ngneat/transloco';
+import { SendTipsInputComponent } from './send-tips-input/send-tips-input.component';
+import { ContainersModule } from '../containers/containers.module';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     TextInputComponent,
     ImageLoaderComponent,
     MdeEditorComponent,
+    SendTipsInputComponent,
   ],
   exports: [
     TagComponent,
@@ -29,6 +32,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     TextInputComponent,
     ImageLoaderComponent,
     MdeEditorComponent,
+    SendTipsInputComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +43,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     FormsModule,
     MatInputModule,
     TranslocoModule,
+    ContainersModule,
   ],
 })
 export class InputModule {}

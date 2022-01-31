@@ -1,0 +1,29 @@
+@import "mixins";
+@import "var";
+
+.send-tip-input-wp {
+  position: relative;
+
+  .token {
+    position: absolute;
+    right: 0;
+    top: 9px;
+  }
+
+}
+
+.balance {
+  @include font($font_small);
+  margin-left: 4px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}

@@ -47,6 +47,7 @@
                           [commentCount]="postItemData.repliesCount"
                           [isShowShare]="true"
                           (commentClick)="onCommentButtonClick()"
+                          (shareClick)="onSharedClick()"
         ></app-action-panel>
 
         <ng-container *ngIf="isCommentOpen">

@@ -57,7 +57,9 @@
             </ng-container>
 
             <ng-template #sendTipsBtn>
-              <app-send-tips-button [width]="'full'"></app-send-tips-button>
+              <app-send-tips-button [profile]="profileData"
+                                    [width]="'full'"
+              ></app-send-tips-button>
 
             <app-follow-button [entityId]="profileData.id"
                                [isFollow]="isFollow$ | async"

@@ -111,7 +111,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
           );
         }),
         tap((activities) => this.loadActivitiesEntityData(activities)),
-        tap((activities) => this.clearNotificationsCount(activities)),
+        // tap((activities) => this.clearNotificationsCount(activities)),
         switchMap((activities) =>
           forkJoin(activities.map((activity) => this.getNotification(activity)))
         ),

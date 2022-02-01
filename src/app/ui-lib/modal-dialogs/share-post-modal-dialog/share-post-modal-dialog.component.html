@@ -21,7 +21,11 @@
   </form>
 
   <div class="button-wp" *transloco="let t; read: 'buttons'">
-    <button mat-stroked-button (click)="dialogRef.close()">{{ t('cancel') }}</button>
+    <button mat-stroked-button
+            (click)="dialogRef.close()"
+    >
+      {{ t('cancel') }}
+    </button>
 
     <app-tx-button [isSending]="isSending"
                    (click)="createSharePost()"

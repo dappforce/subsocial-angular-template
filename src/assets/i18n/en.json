@@ -1,7 +1,7 @@
 {
   "imageShouldBeLessThan": "Image should be less than {{limit}} MB",
   "general": {
-    "title": "Subsocial Angular",
+    "title": "ngSocial",
     "post": "post",
     "Post": "Post",
     "space": "space",
@@ -69,13 +69,16 @@
     "uploadImage": "Upload cover image",
     "myProfile": "My profile",
     "editMyProfile": "Edit my profile",
-    "settings": "Settings"
+    "settings": "Settings",
+    "Language": "Language"
   },
   "modals": {
     "tips": {
       "title": "Send tips to",
       "availableBalance": "Available Balance",
-      "inputPlaceholder": "Enter amount"
+      "inputPlaceholder": "Enter amount",
+      "recipient": "Recipient",
+      "error": "The amount must be less than the available balance"
     },
     "adblock": {
       "title": "Uh oh, it looks like you are using an ad blocker.",
@@ -94,6 +97,7 @@
     },
     "login": {
       "title": "Sign In",
+      "title-wait": "Wait a sec...",
       "accountScreen": {
         "message": "Click on your account to sign in:"
       },

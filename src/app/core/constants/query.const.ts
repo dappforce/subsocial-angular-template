@@ -5,6 +5,7 @@ export const PALLETS = {
   posts: 'posts',
   spaces: 'spaces',
   profiles: 'profiles',
+  balances: 'balances',
 };
 
 export const METHODS = {
@@ -26,6 +27,7 @@ export const METHODS = {
   updateSpace: 'updateSpace',
   createProfile: 'createProfile',
   updateProfile: 'updateProfile',
+  transfer: 'transfer',
 };
 
 export enum KIND {

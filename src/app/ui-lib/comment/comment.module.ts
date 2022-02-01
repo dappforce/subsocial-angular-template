@@ -48,6 +48,11 @@ import { TranslocoModule } from '@ngneat/transloco';
     ContentModule,
     TranslocoModule,
   ],
-  exports: [CommentInputComponent, CommentsComponent],
+  exports: [
+    CommentInputComponent,
+    CommentsComponent,
+    CommentItemComponent,
+    CommentListComponent,
+  ],
 })
 export class CommentModule {}

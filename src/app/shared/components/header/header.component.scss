@@ -17,10 +17,6 @@ header {
     margin: 0 $space_large 0 $space_small;
   }
 
-  app-header-menu-button {
-    margin-left: 12px;
-  }
-
   app-notification-icon-button {
     margin: 0 10px;
   }
@@ -50,6 +46,13 @@ header {
       }
     }
   }
+}
+
+.framework-logo {
+  width: 30px;
+  height: 30px;
+  margin-left: 12px;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 768px) {

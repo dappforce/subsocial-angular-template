@@ -10,6 +10,7 @@ import { VisibilityService } from '../../../shared/services/visibility.service';
 import { filter, mergeMap } from 'rxjs/operators';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { Observable } from 'rxjs';
+import { SignInModalService } from '../../modal-dialogs/services/sign-in-modal.service';
 
 @Component({
   selector: 'app-hidden-content',
@@ -27,9 +28,10 @@ export class HiddenContentComponent
     public transaction: TransactionService,
     public account: AccountService,
     public cd: ChangeDetectorRef,
-    public visibility: VisibilityService
+    public visibility: VisibilityService,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd, visibility);
+    super(transaction, account, cd, signIn, visibility);
   }
 
   hidden$: Observable<boolean>;

@@ -1,0 +1,14 @@
+@import "var";
+@import "mixins";
+
+.name {
+  @include font($font_normal, 500);
+  display: block;
+  padding-bottom: $space_mini;
+}
+
+.cancel-btn {
+  font-size: $font_normal;
+  color: $color_black;
+  margin-right: $space_normal;
+}

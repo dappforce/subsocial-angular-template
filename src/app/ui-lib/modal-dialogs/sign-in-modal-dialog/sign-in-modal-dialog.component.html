@@ -7,7 +7,9 @@
                         (onClose)="dialogRef.close()"
       ></app-close-button>
 
-      <div class="header-title title-large">{{ 'modals.login.title' | transloco }}</div>
+      <div class="header-title title-large" *transloco="let t; read: 'modals.login'">
+        {{ data.isTx ? t('title-wait') : t('title') }}
+      </div>
 
     </section>
 
@@ -99,7 +101,7 @@
 
                 <app-column>
 
-                  <span class="name">{{account.name}}</span>
+                  <span class="name">{{account.name || (account.id | addressHidden)}}</span>
 
                   <app-tokens [size]="'small'"
                               [showIcon]="false"

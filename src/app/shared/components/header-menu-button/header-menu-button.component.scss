@@ -1,0 +1,14 @@
+@import "var";
+
+.menu-icon {
+  padding-left: 16px;
+  display: block;
+
+  ::ng-deep {
+    svg {
+      path {
+        fill: $color_black;
+      }
+    }
+  }
+}

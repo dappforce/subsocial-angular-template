@@ -199,6 +199,7 @@ button, button:hover {
   padding: 0 $space_normal;
   border-radius: $space_mini;
   border: 1px solid $color_gray_light;
+  color: $color_black;
 
   &:active, &:hover {
     border: 1px solid $color_gray_light;
@@ -245,9 +246,17 @@ p {
   @include font($font_normal)
 }
 
+.small {
+  @include font($font_small)
+}
+
 .secondary-text {
   @include font($font_small);
   color: $color_gray_secondary;
+}
+
+.text-gray {
+  color: $color_gray;
 }
 
 .button-text {
@@ -258,6 +267,14 @@ p {
   width: $container-width;
   margin: 72px auto;
   padding-bottom: $space_normal;
+}
+
+.sb-container {
+  width: $container-width;
+  margin: 72px auto;
+  background: white;
+  border-radius: 4px;
+  padding: $space_normal;
 }
 
 .mat-dialog-container {

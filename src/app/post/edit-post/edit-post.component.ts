@@ -17,6 +17,7 @@ import { PostService } from '../services/post.service';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { Location } from '@angular/common';
 import { PostFacade } from '../../state/post/post.facade';
+import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 type PostFormErrors = {
   body: string;
@@ -64,9 +65,10 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
     public cd: ChangeDetectorRef,
     private postService: PostService,
     private location: Location,
-    private postFacade: PostFacade
+    private postFacade: PostFacade,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   async ngOnInit() {
@@ -97,7 +99,9 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
     this.videoUrl = this.postForm.value.link;
   }
 
-  onFailed(result: SubmittableResult | null): void {}
+  onFailed(result: SubmittableResult | null): void {
+    console.log(result?.toHuman());
+  }
 
   async onSuccess(result: SubmittableResult) {
     let newPost: Post | null = null;
@@ -171,6 +175,8 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
     } else {
       params = [spaceId, { RegularPost: null }, { IPFS: this.contentCid }];
     }
+
+    console.log(params);
 
     await this.initExtrinsic({ pallet, params, method });
 

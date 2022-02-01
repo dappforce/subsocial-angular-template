@@ -9,6 +9,8 @@ import { PostId } from '@subsocial/types/substrate/interfaces';
 export class ConvertService {
   constructor() {}
 
+  balanceMultiplier = 100_000_000_000;
+
   public convertToBN(value: string) {
     return new BN(value);
   }
@@ -31,5 +33,10 @@ export class ConvertService {
 
   public idToBn(id: AnyId): BN {
     return BN.isBN(id) ? id : new BN(id);
+  }
+
+  public convertBalance(value: string) {
+    const balance = Number.parseFloat(value);
+    return balance * this.balanceMultiplier;
   }
 }

@@ -20,6 +20,11 @@
     ></app-space-info>
 
     <app-row [v]="'center'">
+      <app-edit-button [type]="'space'"
+                       [id]="space.id"
+                       ifDesktop
+                       *ngIf="isMySpace"
+      ></app-edit-button>
 
       <app-space-menu (switchHidden)="onSwitchHidden()"
                       [spaceId]="space.id"

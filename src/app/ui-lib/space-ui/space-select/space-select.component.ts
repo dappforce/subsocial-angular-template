@@ -9,9 +9,8 @@ import {
 } from '@angular/core';
 import { BaseControlValueAccessorComponent } from '../../../core/base-component/base-value-accessor';
 import { SpaceService } from '../../../space/services/space.service';
-import { from, Observable, Subject } from 'rxjs';
-import { SpaceListItemData } from '../../../core/models/space/space-list-item.model';
-import { filter, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { delay, filter, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SpaceFacade } from '../../../state/space/space.facade';
@@ -62,14 +61,14 @@ export class SpaceSelectComponent
     this.spaceService.myOwnSpaceIds$
       .pipe(
         filter((ids) => !!ids),
-        switchMap((ids) => this.spaceFacade.fetchSpaces(ids!))
+        switchMap((ids) => this.spaceFacade.fetchSpaces(ids!).pipe(delay(100)))
       )
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((spaces) => {
         const space = this.spaceId
-          ? spaces.find((space) => space.id === this.spaceId)
+          ? spaces.find((space) => space.id === this.spaceId) || spaces[0]
           : spaces[0];
-        this.selectSpace(space || spaces[0]);
+        this.selectSpace(space);
         this.spaces = spaces;
         this.cd.markForCheck();
       });
@@ -77,7 +76,7 @@ export class SpaceSelectComponent
 
   selectSpace(space: Space) {
     this.selectedSpace = space;
-    this.value = space.id;
+    this.writeValue(space.id);
     this.isShowSpaceList = false;
   }
 

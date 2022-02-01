@@ -16,6 +16,7 @@ import { Observable } from 'rxjs';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { filter, mergeMap } from 'rxjs/operators';
 import { VisibilityService } from '../../../shared/services/visibility.service';
+import { SignInModalService } from '../../modal-dialogs/services/sign-in-modal.service';
 
 @Component({
   selector: 'app-post-menu',
@@ -37,9 +38,10 @@ export class PostMenuComponent
     public account: AccountService,
     public cd: ChangeDetectorRef,
     public visibility: VisibilityService,
-    private permission: PermissionsService
+    private permission: PermissionsService,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd, visibility);
+    super(transaction, account, cd, signIn, visibility);
   }
 
   ngOnInit(): void {

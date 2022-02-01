@@ -38,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AdblockDetectComponent } from './components/adblock-detect/adblock-detect.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { DirectivesModule } from './directives/directives.module';
+import { HeaderMenuButtonComponent } from './components/header-menu-button/header-menu-button.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { DirectivesModule } from './directives/directives.module';
     VoteUserListComponent,
     SimpleSnackBarComponent,
     AdblockDetectComponent,
+    HeaderMenuButtonComponent,
   ],
   exports: [
     VoteUserListItemComponent,

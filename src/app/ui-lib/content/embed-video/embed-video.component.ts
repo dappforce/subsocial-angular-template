@@ -1,26 +1,27 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 
 @Component({
   selector: 'app-embed-video',
   templateUrl: './embed-video.component.html',
   styleUrls: ['./embed-video.component.scss'],
 })
-export class EmbedVideoComponent implements OnInit {
-  @Input() set videoUrl(value: string | undefined) {
-    this._videoUrl = value;
-    if (value) {
-      this.videoId = this.extractVideoId(value);
-    }
-  }
-
-  get videoUrl() {
-    return this._videoUrl;
-  }
-  private _videoUrl: string | undefined;
-
+export class EmbedVideoComponent implements OnInit, OnChanges {
+  @Input() videoUrl: string | undefined;
   videoId: string | false = '';
 
   constructor() {}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.videoUrl && changes.videoUrl.currentValue) {
+      this.videoId = this.extractVideoId(changes.videoUrl.currentValue);
+    }
+  }
 
   ngOnInit(): void {}
 

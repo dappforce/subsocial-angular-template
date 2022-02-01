@@ -57,6 +57,8 @@ export class IconRegistryService {
     'hide',
     'visible',
     'bell',
+    'check',
+    'angular',
   ];
 
   SOCIAL_ICONS_NAMES = [

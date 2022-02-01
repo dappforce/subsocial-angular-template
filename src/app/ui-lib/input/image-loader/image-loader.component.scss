@@ -71,6 +71,10 @@
       border-radius: 50%;
       border: 1px dashed rgba(0, 0, 0, 0.38);
       cursor: pointer;
+
+      &:hover {
+        outline: 1px solid $color_primary;
+      }
     }
 
     .loaded {

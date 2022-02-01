@@ -7,9 +7,10 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { filter, takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { combineLatest, Subject, Subscription } from 'rxjs';
 import { DeviceService } from '../../../shared/services/device.service';
 import { SpaceService } from '../../../space/services/space.service';
+import { AccountService } from '../../../shared/services/account.service';
 
 @Component({
   selector: 'app-create-entity-button',
@@ -20,24 +21,31 @@ import { SpaceService } from '../../../space/services/space.service';
 export class CreateEntityButtonComponent implements OnInit {
   type: 'space' | 'post' | null = null;
 
-  private unsubscribe$: Subject<void> = new Subject();
+  subscription = new Subscription();
 
   constructor(
     public dialog: MatDialog,
     private router: Router,
     private deviceService: DeviceService,
     private spaceService: SpaceService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private account: AccountService
   ) {}
 
   ngOnInit(): void {
-    this.spaceService.myOwnSpaceIds$
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((ids) => {
-        console.log(ids);
-        this.type = ids && ids.length > 0 ? 'post' : 'space';
+    this.subscription.add(
+      combineLatest([
+        this.spaceService.myOwnSpaceIds$,
+        this.account.currentAccount$,
+      ]).subscribe(([ids, account]) => {
+        if (account) {
+          this.type = ids && ids.length > 0 ? 'post' : 'space';
+        } else {
+          this.type = null;
+        }
         this.cd.markForCheck();
-      });
+      })
+    );
   }
 
   async onClick() {
@@ -53,7 +61,6 @@ export class CreateEntityButtonComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+    this.subscription.unsubscribe();
   }
 }

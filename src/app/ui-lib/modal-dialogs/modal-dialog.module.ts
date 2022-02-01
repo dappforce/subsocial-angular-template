@@ -23,6 +23,7 @@ import { SpaceUiModule } from '../space-ui/space-ui.module';
 import { InputModule } from '../input/input.module';
 import { AdblockConflictModalDialogComponent } from './adblock-conflict-modal-dialog/adblock-conflict-modal-dialog.component';
 import { TranslocoModule } from '@ngneat/transloco';
+import { SendTipsModalDialogComponent } from './send-tips-modal-dialog/send-tips-modal-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     SignInModalDialogComponent,
     VoteModalDialogComponent,
     AdblockConflictModalDialogComponent,
+    SendTipsModalDialogComponent,
   ],
   imports: [
     CommonModule,

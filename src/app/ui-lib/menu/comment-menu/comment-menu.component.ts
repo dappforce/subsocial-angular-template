@@ -17,6 +17,7 @@ import { PermissionsService } from '../../../shared/services/permissions.service
 import { filter, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { VisibilityService } from '../../../shared/services/visibility.service';
+import { SignInModalService } from '../../modal-dialogs/services/sign-in-modal.service';
 
 @Component({
   selector: 'app-comment-menu',
@@ -40,9 +41,10 @@ export class CommentMenuComponent
     public account: AccountService,
     public cd: ChangeDetectorRef,
     public visibility: VisibilityService,
-    private permission: PermissionsService
+    private permission: PermissionsService,
+    public signIn: SignInModalService
   ) {
-    super(transaction, account, cd, visibility);
+    super(transaction, account, cd, signIn, visibility);
   }
 
   ngOnInit(): void {

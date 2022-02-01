@@ -14,6 +14,8 @@ import { AppState } from '../../../state/state';
 import { filter, takeUntil } from 'rxjs/operators';
 import { CommentService } from '../../../shared/services/comment.service';
 import { PostService } from '../../../post/services/post.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { SharePostModalDialogComponent } from '../../modal-dialogs/share-post-modal-dialog/share-post-modal-dialog.component';
 
 @Component({
   selector: 'app-shared-post-item',
@@ -35,7 +37,8 @@ export class SharedPostItemComponent implements OnInit, OnChanges {
     private store: Store<AppState>,
     private commentService: CommentService,
     private postService: PostService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private dialog: MatDialog
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -69,6 +72,18 @@ export class SharedPostItemComponent implements OnInit, OnChanges {
 
   onSwitchHidden() {
     this.isHidden = !this.isHidden;
+  }
+
+  onSharedClick() {
+    if (this.sharedPostItemData) {
+      const config: MatDialogConfig = {
+        data: this.sharedPostItemData,
+        width: '780px',
+        panelClass: 'modal-overflow',
+      };
+
+      this.dialog.open(SharePostModalDialogComponent, config);
+    }
   }
 
   ngOnDestroy(): void {

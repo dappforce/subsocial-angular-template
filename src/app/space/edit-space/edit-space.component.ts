@@ -14,6 +14,8 @@ import { AccountService } from '../../shared/services/account.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { SpaceService } from '../services/space.service';
 import { SpaceFacade } from '../../state/space/space.facade';
+import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { FollowedSpaceIdsFacade } from '../../state/followed-space-ids/followed-space-ids.facade';
 
 type EditSpaceFormErrors = {
   name: string;
@@ -52,9 +54,11 @@ export class EditSpaceComponent extends BaseTxComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private spaceService: SpaceService,
-    private spaceFacade: SpaceFacade
+    private spaceFacade: SpaceFacade,
+    public signIn: SignInModalService,
+    private followedSpaceIdsFacade: FollowedSpaceIdsFacade
   ) {
-    super(transaction, account, cd);
+    super(transaction, account, signIn, cd);
   }
 
   async ngOnInit() {
@@ -74,6 +78,7 @@ export class EditSpaceComponent extends BaseTxComponent implements OnInit {
       if (ids?.length > 0) {
         this.spaceId = ids[0];
         await this.spaceService.getMyOwnSpaceIds();
+        this.followedSpaceIdsFacade.loadMyFollowedSpaceIds();
       }
     }
 

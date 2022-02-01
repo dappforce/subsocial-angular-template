@@ -1,9 +1,10 @@
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Profile } from '../../../state/profile/profile.state';
 import {
-  ChangeDetectionStrategy,
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
+  SendTipsDialogData,
+  SendTipsModalDialogComponent,
+} from '../../modal-dialogs/send-tips-modal-dialog/send-tips-modal-dialog.component';
 
 @Component({
   selector: 'app-send-tips-button',
@@ -13,4 +14,18 @@ import {
 })
 export class SendTipsButtonComponent {
   @Input() width: 'full' | 'static' = 'static';
+  @Input() profile: Profile;
+
+  constructor(private dialog: MatDialog) {}
+
+  onClick() {
+    const data: SendTipsDialogData = {
+      profile: this.profile,
+    };
+
+    this.dialog.open(SendTipsModalDialogComponent, {
+      width: '500px',
+      data,
+    });
+  }
 }

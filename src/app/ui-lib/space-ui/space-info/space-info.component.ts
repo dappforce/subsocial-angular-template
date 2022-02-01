@@ -48,11 +48,8 @@ export class SpaceInfoComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    //check for storybook
-    if (typeof this.unsubscribe$ !== 'string') {
-      this.unsubscribe$?.next();
-      this.unsubscribe$?.complete();
-    }
+    this.unsubscribe$?.next();
+    this.unsubscribe$?.complete();
   }
 
   private configModalDialog() {

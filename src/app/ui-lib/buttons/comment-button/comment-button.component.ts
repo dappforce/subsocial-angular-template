@@ -7,7 +7,6 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class CommentButtonComponent implements OnInit {
   @Output() onClick = new EventEmitter();
-  @Input() isShowLabel: boolean;
   @Input() count: number;
 
   constructor() {}

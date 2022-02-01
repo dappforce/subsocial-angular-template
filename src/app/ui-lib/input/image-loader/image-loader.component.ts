@@ -73,8 +73,6 @@ export class ImageLoaderComponent
 
     const mimeType = file.type;
 
-    console.log(file);
-
     if (mimeType.match(/image\/*/) == null) {
       return;
     }

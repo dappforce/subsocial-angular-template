@@ -3,6 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 export const STORAGE_KEYS = {
   accountId: 'accountId',
   lang: 'lang',
+  lastSpaceId: 'lsId',
 };
 
 @Injectable({
@@ -29,6 +30,14 @@ export class StorageService {
 
   getLang() {
     return this.get(STORAGE_KEYS.lang);
+  }
+
+  setLastSpaceId(id: string) {
+    this.set(STORAGE_KEYS.lastSpaceId, id);
+  }
+
+  getLastSpaceId() {
+    return this.get(STORAGE_KEYS.lastSpaceId);
   }
 
   get(key: string) {

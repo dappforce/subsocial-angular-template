@@ -15,14 +15,14 @@
 
     <span [style.margin-right]="itemType === 'single' ? '12px' : '4px'">
       <span class="count">{{postsCount | numeral}}</span>
-      <span>{{postsCount | pluralize:  t('Post')}}</span>
+      <span>{{ t('Post', {count: postsCount}) }}</span>
     </span>
 
     <span  *ngIf="itemType === 'list'" class="dot">·</span>
 
     <a (click)="onOpenModal()">
       <span class="count">{{followersCount | numeral}}</span>
-      <span>{{followersCount | pluralize: t('follower')}}</span>
+      <span>{{ t('follower', {count: followersCount}) }}</span>
     </a>
 
   </app-row>

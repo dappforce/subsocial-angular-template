@@ -1,4 +1,7 @@
+@import "var";
+
 button:disabled {
-  background: #F597CA !important;
+  background: $color_primary !important;
+  opacity: 0.5;
   color: white !important;
 }

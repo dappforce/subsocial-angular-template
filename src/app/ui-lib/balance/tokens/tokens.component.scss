@@ -2,7 +2,7 @@
 
 .tokens-wp {
   line-height: 24px;
-  color: $color_gray;
+  color: $text_color_dark_gray;
   display: flex;
   align-items: center;
 
@@ -26,14 +26,14 @@
 
 .secondary {
   .strong{
-    color: #222222;
+    color: $color_normal;
     font-weight: 500;
   }
 }
 
 .primary {
   .strong{
-    color: $color_gray;
+    color: $text_color_dark_gray;
     font-weight: 400;
   }
 }

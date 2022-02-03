@@ -21,7 +21,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { SpaceEffects } from './state/space/space.effects';
 import { appReducers } from './state/state';
 import { SubsocialApiService } from './shared/services/subsocial-api.service';
-import { ContentEffects } from './state/content/content.effects';
 import { PostEffects } from './state/post/post.effects';
 import { ReplyIdEffects } from './state/reply-id/reply-id.effects';
 import { ProfileEffects } from './state/profile/profile.effects';
@@ -33,9 +32,10 @@ import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed
 import { TranslocoRootModule } from './transloco-root.module';
 import { MenuModule } from './ui-lib/menu/menu.module';
 import { ModalDialogModule } from './ui-lib/modal-dialogs/modal-dialog.module';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 @NgModule({
-  declarations: [AppComponent, BaseControlValueAccessorComponent],
+  declarations: [AppComponent],
   imports: [
     CommonModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
@@ -53,7 +53,6 @@ import { ModalDialogModule } from './ui-lib/modal-dialogs/modal-dialog.module';
     }),
     EffectsModule.forRoot([
       SpaceEffects,
-      ContentEffects,
       PostEffects,
       ReplyIdEffects,
       ProfileEffects,
@@ -65,6 +64,7 @@ import { ModalDialogModule } from './ui-lib/modal-dialogs/modal-dialog.module';
     TranslocoRootModule,
     MenuModule,
     ModalDialogModule,
+    TranslocoMessageFormatModule.forRoot(),
   ],
   providers: [
     IconRegistryService,

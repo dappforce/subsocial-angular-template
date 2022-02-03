@@ -1,9 +1,11 @@
+@import "var";
+
 :host {
   display: flex;
   align-items: center;
 }
 
 .active {
-  color: #3BB356 !important;
+  color: $color_green !important;
 }
 

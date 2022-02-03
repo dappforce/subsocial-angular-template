@@ -8,6 +8,7 @@ import {
 import { DeviceService } from '../../../shared/services/device.service';
 import { Post } from '../../../core/models/post/post-list-item.model';
 import { PostFacade } from '../../../state/post/post.facade';
+import { AccountService } from '../../../shared/services/account.service';
 
 @Component({
   selector: 'app-comment-item',
@@ -24,15 +25,20 @@ export class CommentItemComponent implements OnInit {
   isEdit: boolean;
   showCommentText: boolean = true;
   hidden: boolean;
+  skipComment: boolean;
 
   constructor(
     public device: DeviceService,
     private cd: ChangeDetectorRef,
-    private postFacade: PostFacade
+    private postFacade: PostFacade,
+    private account: AccountService
   ) {}
 
   ngOnInit(): void {
     this.hidden = this.comment.hidden;
+    this.skipComment =
+      this.hidden &&
+      this.account.getCurrentAccountId() !== this.comment.ownerId;
   }
 
   onOpenReactions() {}

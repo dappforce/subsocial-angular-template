@@ -2,7 +2,7 @@
 
 span {
   font-size: $font_normal;
-  color: $color_gray_dark;
+  color: $text_color_dark_gray;
 }
 
 button {
@@ -10,7 +10,7 @@ button {
     mat-icon {
       svg {
         path {
-          fill: $color_gray_dark;
+          fill: $text_color_dark_gray;
         }
       }
     }

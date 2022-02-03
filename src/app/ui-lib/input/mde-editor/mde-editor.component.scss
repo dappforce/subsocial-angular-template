@@ -17,17 +17,17 @@
 
 .editor-toolbar {
   opacity: 1;
-  border: 1px solid #ddd;
+  border: 1px solid $color_input_outline;
   border-bottom: none;
 
   a {
-    color: $color_black !important;
+    color: $color_normal !important;
   }
 }
 
 .CodeMirror .CodeMirror-placeholder {
   opacity: 1;
-  color: $color_gray_dark;
+  color: $text_color_dark_gray;
 }
 
 .CodeMirror {

@@ -1,6 +1,11 @@
 <a [routerLink]="link">
   <span
-    [ngClass]="'title-' + type"
+    [ngClass]="{
+      'title-small': type === 'small',
+      'title-medium': type === 'medium',
+      'title-large': type === 'large',
+      'title-overflow': isEllipsis
+      }"
   >{{text}}</span>
 </a>
 

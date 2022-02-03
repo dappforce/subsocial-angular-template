@@ -15,6 +15,7 @@
 
         <app-title [text]="accountData.name || (accountData.id | addressHidden)"
                    type="small"
+                   [isEllipsis]="true"
         ></app-title>
 
         <app-address [address]="accountData.id"

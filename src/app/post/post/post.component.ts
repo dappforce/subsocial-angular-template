@@ -7,7 +7,7 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LinkService } from '../../shared/services/link.service';
 import {
   concatMap,
@@ -15,12 +15,10 @@ import {
   map,
   shareReplay,
   switchMap,
-  takeUntil,
   tap,
-  withLatestFrom,
 } from 'rxjs/operators';
 import { Post } from '../../core/models/post/post-list-item.model';
-import { EMPTY, Observable, Subject } from 'rxjs';
+import { EMPTY, from, Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
 import { CommentItemData } from '../../core/types/comment-data.type';
@@ -28,6 +26,9 @@ import { CommentService } from '../../shared/services/comment.service';
 import { Space } from '../../state/space/space.state';
 import { PostFacade } from '../../state/post/post.facade';
 import { SpaceFacade } from '../../state/space/space.facade';
+import { SSRLoadData } from 'src/app/core/decorators/ssr-load-data.decorator';
+import { isPlatformBrowser } from '@angular/common';
+import { of } from 'rxjs';
 
 type CommentPostData = {
   postTitle: string;
@@ -44,7 +45,6 @@ export class PostComponent implements OnInit, OnDestroy {
   post$: Observable<Post | undefined>;
   space$: Observable<Space | undefined>;
   sharedPost$: Observable<Post | undefined>;
-
   commentData: CommentItemData[] = [];
   commentPostData: CommentPostData;
   isSharedPostHidden: boolean;
@@ -61,45 +61,76 @@ export class PostComponent implements OnInit, OnDestroy {
     private commentService: CommentService,
     private postFacade: PostFacade,
     private spaceFacade: SpaceFacade,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object
   ) {}
 
   async ngOnInit() {
-    const ids$ = this.route.params.pipe(
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadDataBrowserPlatform();
+    } else {
+      await this.loadDataServerPlatform();
+    }
+  }
+
+  loadDataBrowserPlatform() {
+    const id$ = this.route.params.pipe(
       map((params) => {
-        const slug = params['slug'];
-        const spaceId = params['spaceId'];
-        return [this.linkService.getPostIdFromLink(slug), spaceId];
+        return this.linkService.getPostIdFromLink(params['slug']);
       }),
       shareReplay(1)
     );
 
-    this.post$ = ids$.pipe(
-      tap(([postId]) => this.postFacade.loadPost(postId)),
-      switchMap(([postId]) => this.postFacade.getPost(postId)),
-      filter((post) => !!post)
+    this.post$ = id$.pipe(
+      tap((postId) => this.postFacade.loadPost(postId)),
+      switchMap((postId) => this.postFacade.getPost(postId)),
+      filter((post) => !!post),
+      switchMap((post) => from(this.handleIfPostIsComment(post!)))
     );
 
-    this.space$ = ids$.pipe(
-      tap(([, spaceId]) => this.spaceFacade.loadSpace(spaceId)),
-      switchMap(([, spaceId]) => this.spaceFacade.getSpace(spaceId))
+    this.space$ = this.post$.pipe(
+      map((post) => post!.spaceId),
+      tap((spaceId) => this.spaceFacade.loadSpace(spaceId)),
+      switchMap((spaceId) => this.spaceFacade.getSpace(spaceId))
     );
 
     this.handleSharedPost();
   }
 
-  private async handleIfPostIsComment() {
-    // if (this.postData.isComment && this.postData.rootPostId) {
-    //   const parentPostData = (await this.postService.getOrLoadPost(
-    //     this.postData.rootPostId
-    //   )) as Post;
-    //   this.commentPostData = {
-    //     postTitle: parentPostData.title,
-    //     link: parentPostData.postLink,
-    //   };
-    //   this.postData.spaceName = parentPostData.spaceName;
-    //   this.postData.spaceId = parentPostData.spaceId;
-    // }
+  @SSRLoadData()
+  async loadDataServerPlatform() {
+    const { slug, spaceId } = this.route.snapshot.params;
+    const postId = this.linkService.getPostIdFromLink(slug);
+
+    this.postFacade.loadPost(postId);
+    this.spaceFacade.loadSpace(spaceId);
+
+    const post = await this.postFacade.getPostOnce(postId).toPromise();
+    const space = await this.spaceFacade.getSpaceOnce(spaceId).toPromise();
+
+    this.post$ = of(post);
+    this.space$ = of(space);
+
+    this.cd.markForCheck();
+  }
+
+  private async handleIfPostIsComment(post: Post) {
+    if (post.isComment && post.rootPostId) {
+      const parentPostData = await this.postFacade
+        .fetchPost(post.rootPostId)
+        .toPromise();
+      this.commentPostData = {
+        postTitle: parentPostData.title,
+        link: parentPostData.postLink,
+      };
+      this.cd.markForCheck();
+      const copyPost = { ...post, spaceId: parentPostData.spaceId };
+      return copyPost;
+    }
+
+    return post;
   }
 
   ngOnDestroy(): void {

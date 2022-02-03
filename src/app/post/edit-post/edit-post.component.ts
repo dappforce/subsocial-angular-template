@@ -18,6 +18,7 @@ import { Post } from '../../core/models/post/post-list-item.model';
 import { Location } from '@angular/common';
 import { PostFacade } from '../../state/post/post.facade';
 import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { StorageService } from '../../shared/services/storage.service';
 
 type PostFormErrors = {
   body: string;
@@ -66,7 +67,8 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
     private postService: PostService,
     private location: Location,
     private postFacade: PostFacade,
-    public signIn: SignInModalService
+    public signIn: SignInModalService,
+    private storage: StorageService
   ) {
     super(transaction, account, signIn, cd);
   }
@@ -173,10 +175,9 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
 
       params = [this.postId, update];
     } else {
+      this.storage.setLastSpaceId(spaceId);
       params = [spaceId, { RegularPost: null }, { IPFS: this.contentCid }];
     }
-
-    console.log(params);
 
     await this.initExtrinsic({ pallet, params, method });
 

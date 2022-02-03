@@ -1,4 +1,4 @@
-<app-column class="w100">
+<app-column class="w100" [padding]="'7px 0 0'" *ngIf="!skipComment">
 
   <app-row class="w100" [style.display]="isEdit ? 'none' : 'flex'">
 
@@ -18,6 +18,7 @@
                             [type]="'comment'"
                             [id]="comment.id"
                             (switchHidden)="onSwitchHidden()"
+                            [style.margin-top]="'8px'"
         ></app-hidden-content>
 
         <app-row [v]="'center'">
@@ -25,11 +26,12 @@
           <app-title [text]="comment.ownerName || (comment.ownerId | addressHidden)"
                      [link]="'/accounts/' + comment.ownerId"
                      type="small"
+                     [isEllipsis]="true"
           ></app-title>
 
           <span class="dot">·</span>
 
-          <span class="date">{{comment.createdAtTime | day}}</span>
+          <span class="date" [routerLink]="comment.postLink">{{comment.createdAtTime | day}}</span>
 
           <app-comment-menu (onClickViewReaction)="onOpenReactions()"
                             (switchHidden)="onSwitchHidden()"
@@ -70,11 +72,11 @@
                      (cancel)="isEdit = false"
   ></app-comment-input>
 
-<!--  <app-comment-list [isShowInput]="isShowReplyInput"-->
-<!--                    [parentPostId]="comment.id"-->
-<!--                    [rootPostId]="rootPostId"-->
-<!--                    (closeReply)="isShowReplyInput = false"-->
-<!--  ></app-comment-list>-->
+  <app-comment-list [isShowInput]="isShowReplyInput"
+                    [parentPostId]="comment.id"
+                    [rootPostId]="rootPostId"
+                    (closeReply)="isShowReplyInput = false"
+  ></app-comment-list>
 
 </app-column>
 

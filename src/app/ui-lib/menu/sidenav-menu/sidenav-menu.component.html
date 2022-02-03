@@ -1,10 +1,14 @@
 <app-column [v]="'start'" [padding]="'14px 0'">
-  <button mat-ripple [routerLink]="['/accounts', profileId]">
+  <button mat-ripple
+          [routerLink]="['/accounts', profileId]"
+          (click)="sideNavService.closeAccountSideNav()">
     <mat-icon svgIcon="profile-icon"></mat-icon>
     <span>{{ 'buttons.myProfile' | transloco }}</span>
   </button>
 
-  <button mat-ripple [routerLink]="['/accounts', profileId, 'profile','edit']">
+  <button mat-ripple
+          [routerLink]="['/accounts', profileId, 'profile','edit']"
+          (click)="sideNavService.closeAccountSideNav()">
     <mat-icon svgIcon="edit-icon"></mat-icon>
     <span>{{ 'buttons.editMyProfile' | transloco }}</span>
   </button>

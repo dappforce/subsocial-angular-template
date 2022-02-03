@@ -10,6 +10,7 @@ import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { KeyValuePair } from '../../../core/models/key-value-pair.model';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { StorageService } from '../../../shared/services/storage.service';
+import { SideNavService } from '../../../shared/services/side-nav.service';
 
 const LANG_LABELS: KeyValuePair<string> = {
   en: 'English',
@@ -37,7 +38,8 @@ export class SidenavMenuComponent implements OnInit {
   constructor(
     private snackBarService: SnackBarService,
     private transloco: TranslocoService,
-    private storageService: StorageService
+    private storageService: StorageService,
+    public sideNavService: SideNavService
   ) {}
 
   ngOnInit(): void {

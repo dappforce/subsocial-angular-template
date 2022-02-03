@@ -1,8 +1,6 @@
 import { ActionReducerMap } from '@ngrx/store';
 import { spaceReducer } from './space/space.reducer';
-import { contentReducer } from './content/content.reducer';
 import { SpaceState } from './space/space.state';
-import { ContentState } from './content/content.state';
 import { postReducer } from './post/post.reducer';
 import { PostState } from './post/post.state';
 import { profileReducer } from './profile/profile.reducer';
@@ -22,7 +20,6 @@ import { followedAccountIdsReducer } from './followed-account-ids/followed-accou
 
 export interface AppState {
   spaces: SpaceState;
-  contents: ContentState;
   posts: PostState;
   profiles: ProfileState;
   replyIds: ReplyIdState;
@@ -35,7 +32,6 @@ export interface AppState {
 
 export const appReducers: ActionReducerMap<AppState> = {
   spaces: spaceReducer,
-  contents: contentReducer,
   posts: postReducer,
   profiles: profileReducer,
   replyIds: replyIdReducer,

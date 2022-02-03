@@ -9,7 +9,7 @@ export function SSRLoadData() {
   ) => {
     const method = descriptor.value;
     descriptor.value = async function (...args: any[]) {
-      const internal = setInterval(() => null, 500);
+      const internal = setInterval(() => null, 50);
       await method?.apply(this, args);
       clearInterval(internal);
     };

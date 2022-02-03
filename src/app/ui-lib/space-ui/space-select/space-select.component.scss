@@ -40,19 +40,19 @@ app-avatar {
   background: $color_white;
   position: absolute;
   z-index: 10;
-  box-shadow: 0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;
+  box-shadow: $select-dropdown-shadow;
 
   .dropdown-item {
     padding: 6px 16px;
 
     &:hover {
-      background-color: $hover_color_light;
+      background-color: $color_hover_primary;
     }
   }
 }
 
 .loading {
-  color: $color_gray_dark;
+  color: $text_color_dark_gray;
   padding: 12px 16px;
   display: block;
 }
@@ -64,5 +64,5 @@ app-avatar {
   padding: 0 5px;
   background-color: $color_white;
   font-size: 12px;
-  color: $color_gray_dark;
+  color: $text_color_dark_gray;
 }

@@ -19,7 +19,7 @@ export const mapPostDTOToPost = (
     repliesCount: post.struct.repliesCount,
     hiddenRepliesCount: post.struct.hiddenRepliesCount,
     visibleRepliesCount: post.struct.visibleRepliesCount,
-    sharesCount: post.struct.visibleRepliesCount,
+    sharesCount: post.struct.sharesCount,
     upvotesCount: post.struct.upvotesCount,
     downvotesCount: post.struct.downvotesCount,
     isSharedPost: post.struct.isSharedPost,

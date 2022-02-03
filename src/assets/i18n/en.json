@@ -3,19 +3,20 @@
   "general": {
     "title": "ngSocial",
     "post": "post",
-    "Post": "Post",
+    "Post": "{count, plural, =0 {Posts} one {Post} other {Posts}}",
     "space": "space",
-    "comment": "comment",
     "edit": "Edit",
     "new": "New",
-    "follower": "Follower",
+    "follower": "{count, plural, =0 {Followers} one {Follower} other {Followers}}",
+    "followerCount": "{count, plural, =0 {0 Followers} one {1 Follower} other {# Followers}}",
     "followers": "Followers",
     "following": "Following",
     "profile": "profile",
     "reply": "reply",
     "seeMore": "See More",
     "seeLess": "See Less",
-    "create": "Create"
+    "create": "Create",
+    "comment": "{count, plural, =0 {0 Comments} one {1 Comment} other {# Comments}}"
   },
   "tabs": {
     "following": "following",
@@ -26,7 +27,7 @@
     "spaces": "spaces",
     "article": "article",
     "video": "video",
-    "feed": "feed"
+    "feed": "my feed"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -44,7 +45,7 @@
     "viewReactions": "View reactions",
     "viewOnIPFS": "View on IPFS",
     "Reply": "Reply",
-    "reply": "reply",
+    "reply": "{count, plural, =0 {0 reply} one {1 reply} other {# replies}}",
     "send": "Send",
     "update": "Update",
     "share": "Share",
@@ -70,7 +71,8 @@
     "myProfile": "My profile",
     "editMyProfile": "Edit my profile",
     "settings": "Settings",
-    "Language": "Language"
+    "Language": "Language",
+    "getTokens": "Get tokens"
   },
   "modals": {
     "tips": {
@@ -90,10 +92,13 @@
     },
     "likes": {
       "reactions": "Reactions",
-      "reaction": "Reaction"
+      "reaction": "{count, plural, =0 {0 Reactions} one {1 Reaction} other {# Reactions}}"
     },
     "qrCode": {
       "title": "Account address"
+    },
+    "getTokens": {
+      "message": "You need some tokens to continue."
     },
     "login": {
       "title": "Sign In",
@@ -143,7 +148,7 @@
       "tags": "Press 'Enter' or 'Tab' key to add tags",
       "profileName": "Profile name",
       "about": "About",
-      "vireoUrl": "Video URL",
+      "videoUrl": "Video URL",
       "postTitle": "Post title",
       "spaceName": "Space name",
       "description": "Description",

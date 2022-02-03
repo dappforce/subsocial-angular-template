@@ -20,17 +20,17 @@ $subsocial-palette: (
   A400: #fde9f4,
   A700: #8d0e53,
   contrast: (
-    50: $color_black,
-    100: $color_black,
-    200: $color_black,
-    300: $color_black,
+    50: $color_normal,
+    100: $color_normal,
+    200: $color_normal,
+    300: $color_normal,
     400: white,
     500: white,
     600: white,
     700: white,
     800: white,
     900: white,
-    A100: $color_black,
+    A100: $color_normal,
     A200: white,
     A400: white,
     A700: white,
@@ -55,7 +55,7 @@ $subsocial-ng-app-theme: mat-light-theme((
 @mixin custom-tabs-theme() {
   .mat-tab-link  {
     font-size: 16px;
-    color: $color_gray_dark;
+    color: $text_color_dark_gray;
     width: 100%;
     letter-spacing: 1.25px;
     text-transform: uppercase;
@@ -86,8 +86,8 @@ $subsocial-ng-app-theme: mat-light-theme((
 
 @mixin custom-buttons-theme() {
   .mat-flat-button.mat-primary.mat-button-disabled {
-    background-color: #EEECEC;
-    color: #B3B3B3;
+    background-color: $tag_bg_gray;
+    color: $text_color_dark_gray;
   }
 
   .mat-form-field-appearance-outline .mat-form-field-infix {
@@ -103,7 +103,7 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 
   .mat-input-element::-webkit-input-placeholder {
-    color: $color_gray_dark;
+    color: $text_color_dark_gray;
   }
 }
 
@@ -120,11 +120,11 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 
   .mat-input-element {
-    caret-color: $color_gray_dark!important;
+    caret-color: $text_color_dark_gray !important;
   }
 
   .mat-form-field.mat-focused .mat-form-field-label {
-    color: $color_gray_dark !important;
+    color: $text_color_dark_gray !important;
     .asterisk {
       display: inline;
     }
@@ -139,8 +139,8 @@ html, body { height: 100%;}
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #F2F2F2;
-  color: $color_black;
+  background-color: $color-bg;
+  color: $color_normal;
 }
 
 li {
@@ -198,18 +198,18 @@ button, button:hover {
   margin: auto 0;
   padding: 0 $space_normal;
   border-radius: $space_mini;
-  border: 1px solid $color_gray_light;
-  color: $color_black;
+  border: 1px solid $button_outline_gray;
+  color: $color_normal;
 
   &:active, &:hover {
-    border: 1px solid $color_gray_light;
+    border: 1px solid $button_outline_gray;
   }
 }
 
 .tx-is-loading-btn {
   background-color: $color_white !important;
-  color: $color_gray_secondary;
-  border: 1px solid $color_gray_secondary;
+  color: $text_color_dark_gray;
+  border: 1px solid $button_outline_gray;
 }
 
 strong {
@@ -252,11 +252,11 @@ p {
 
 .secondary-text {
   @include font($font_small);
-  color: $color_gray_secondary;
+  color: $text_color_dark_gray;
 }
 
 .text-gray {
-  color: $color_gray;
+  color: $text_color_dark_gray;
 }
 
 .button-text {
@@ -281,7 +281,7 @@ p {
   padding: 0 !important;
 }
 
-.scrollable-list-wp {
+.scrollable {
   &::-webkit-scrollbar {
     margin-top: $space_large;
     width: 7px;
@@ -294,7 +294,7 @@ p {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #C1C1C1;
+    background: $scroll_outline_gray;
     border-radius: 18px;
   }
 
@@ -326,7 +326,7 @@ p {
   font-size: $font_normal;
   font-weight: 500;
   top: -3px;
-  color: #B00020;
+  color: $color_red;
 }
 
 .filler {
@@ -341,7 +341,7 @@ markdown {
   }
 
   hr {
-    border-color: rgba(0, 0, 0, 0.12);
+    border-color: $line_outline_gray;
     border-bottom: none;
   }
 
@@ -373,7 +373,7 @@ markdown {
 
 .white-snackbar {
   background-color: white;
-  color: $color_black;
+  color: $color_normal;
 }
 
 .modal-overflow {
@@ -381,8 +381,8 @@ markdown {
 }
 
 .action-panel-label {
-  color: $color_gray_dark;
-  @include font($font_small, 500, 24px);
+  color: $text_color_dark_gray;
+  @include font($font_normal, 400, 24px);
   margin-left: $space_mini;
   letter-spacing: 0.1px;
   text-transform: capitalize;
@@ -410,6 +410,23 @@ markdown {
   padding: 21px;
 }
 
+.title-overflow {
+
+}
+
+.mat-drawer-container {
+  position: initial !important;
+}
+
+.fixed {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow-y: scroll;
+}
+
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */
   .container {
@@ -432,8 +449,11 @@ markdown {
     border-radius: 5px;
   }
 
-  .mat-drawer-container {
-    position: initial !important;
+  .title-overflow {
+    max-width: 130px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
 }
 
@@ -454,7 +474,7 @@ markdown {
     clip-path: inset(2px 0px -15px 0px);
 
     .mat-tab-link  {
-      font-size: 14px !important;
+      font-size: $font_small !important;
     }
   }
 

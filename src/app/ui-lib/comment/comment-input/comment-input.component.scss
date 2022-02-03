@@ -11,37 +11,6 @@
   margin-left: 9px;
   width: 100%;
 
-  .text-area-wp {
-    position: relative;
-
-    .text-area-input {
-      border: $shared_post_border;
-      border-radius: 3.5px;
-      padding: 7px 16px;
-      word-break: break-all;
-
-      &:hover, &:focus {
-        border: $border_primary;
-      }
-    }
-
-    .placeholder {
-      position: absolute;
-      top: 6px;
-      left: 16px;
-      font-size: 16px;
-      line-height: 24px;
-      letter-spacing: 0.25px;
-      color: $color_gray_dark;
-      pointer-events: none;
-    }
-  }
-
-  [contenteditable]:focus {
-    outline: 0px solid transparent;
-    border: 1px solid #bfbfbf;
-  }
-
   .send-btn-wp {
     display: flex;
     gap: 16px;

@@ -163,10 +163,10 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
     const profileIdsSet = new Set<string>();
 
     activities.forEach((activity) => {
-      activity.space_id ? spaceIdsSet.add(activity.space_id) : null;
-      activity.post_id ? postIdsSet.add(activity.post_id) : null;
-      activity.comment_id ? postIdsSet.add(activity.comment_id) : null;
-      activity.account ? profileIdsSet.add(activity.account) : null;
+      activity.space_id && spaceIdsSet.add(activity.space_id);
+      activity.post_id && postIdsSet.add(activity.post_id);
+      activity.comment_id && postIdsSet.add(activity.comment_id);
+      activity.account && profileIdsSet.add(activity.account);
     });
 
     const spaceIds = Array.from(spaceIdsSet);

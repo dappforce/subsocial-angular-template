@@ -10,7 +10,7 @@
 
     <app-column [margin]="'0 0 0 8px'">
 
-      <span class="profile-name">{{profileData.name || (profileData.id | addressHidden)}}</span>
+      <span class="profile-name title-overflow">{{profileData.name || (profileData.id | addressHidden)}}</span>
 
       <app-tokens type="primary" [tokens]="accountService.balance$ | async"></app-tokens>
 

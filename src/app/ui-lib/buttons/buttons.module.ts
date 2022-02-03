@@ -33,6 +33,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { TranslocoModule } from '@ngneat/transloco';
 import { CreateSpaceButtonComponent } from './create-space-button/create-space-button.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DirectivesModule } from '../../shared/directives/directives.module';
 
 const components = [
   QrButtonComponent,
@@ -75,6 +76,7 @@ const components = [
     MatBadgeModule,
     TranslocoModule,
     MatTooltipModule,
+    DirectivesModule,
   ],
 })
 export class ButtonsModule {}

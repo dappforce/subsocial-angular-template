@@ -1,4 +1,4 @@
-<ng-container *ngIf="(post$ | async) as post">
+<ng-container *ngIf="post$ | async as post">
     <mat-card>
 
       <app-hidden-content [id]="post.id"
@@ -68,6 +68,7 @@
                         [upvoteCount]="post.upvotesCount"
                         [downvoteCount]="post.downvotesCount"
                         [commentCount]="post.repliesCount"
+                        [sharesCount]="post.sharesCount"
                         [postId]="post.id"
       ></app-action-panel>
 

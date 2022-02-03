@@ -30,15 +30,15 @@ button {
   &:disabled {
     cursor: default;
     background: $color_white;
-    border: 1px solid $color_gray_light;
-    color: $color_gray_secondary;
+    border: 1px solid $button_outline_gray;
+    color: $text_color_dark_gray;
     padding-left: $space_huge;
     transition: padding-left 300ms;
   }
 
   ::ng-deep {
     .mat-progress-spinner circle, .mat-spinner circle {
-      stroke: $color_gray_secondary !important;
+      stroke: $text_color_dark_gray !important;
     }
   }
 }

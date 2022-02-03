@@ -1,0 +1,33 @@
+<app-column h="center" [padding]="'16px'">
+  <section class="modal-header">
+
+    <app-close-button class="close-btn"
+                      (onClose)="dialogRef.close()"
+    ></app-close-button>
+
+    <div class="header-title title-large" *transloco="let t; read: 'modals.login'">
+      {{ t('title-wait') }}
+    </div>
+
+    <app-paragraph [marginBottom]="16"
+                   [marginTop]="12"
+                   [text]="'modals.getTokens.message' | transloco"
+    ></app-paragraph>
+
+    <button mat-flat-button
+            color="primary"
+    >
+      {{'buttons.getTokens' | transloco}}
+    </button>
+
+  </section>
+  <app-row h="center"
+           margin="15px 0 0 0"
+           class="footer-wp"
+           *transloco="let t; read: 'modals.login.noAccountScreen'"
+  >
+    <a href="">{{ t('privacyPolicy') }}</a>
+    <a href="">{{ t('termOfUse') }}</a>
+  </app-row>
+</app-column>
+

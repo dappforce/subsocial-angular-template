@@ -6,7 +6,7 @@
   align-items: center;
 }
 
-button {
+.add-btn-desktop {
   @include font($font_normal, 500, 34px);
   margin: auto 0;
   padding: 0 $space_normal 0 38px;
@@ -21,12 +21,12 @@ button {
   }
 
   &:active {
-    border: 1px solid $color_gray_light;
+    border: 1px solid $button_outline_gray;
   }
 }
 
 .post {
-  border: 1px solid $color_gray_light;
+  border: 1px solid $button_outline_gray;
 }
 
 .space {
@@ -34,3 +34,9 @@ button {
   color: $color_primary;
 }
 
+
+.add-btn-mobile {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+}

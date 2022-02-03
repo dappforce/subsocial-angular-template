@@ -6,8 +6,7 @@
        *transloco="let t; read: 'buttons'"
        (click)="showMore.emit()" >
       {{ (isShowReplyComments
-             ?  t('hide') : t('show')) + ' ' + replyCommentCount
-             + ' ' + (replyCommentCount | pluralize : t('reply'))
+             ?  t('hide') : t('show')) + ' ' + t('reply', {count: replyCommentCount})
       }}
     </a>
     <mat-icon svgIcon="arrow-icon"

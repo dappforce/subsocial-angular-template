@@ -1,0 +1,35 @@
+@import "var";
+@import "mixins";
+
+.modal-header {
+  position: relative;
+  text-align: center;
+
+  .header-title {
+    color: $text_color_dark_gray;
+    width: 100%;
+    text-align: center;
+  }
+
+  .close-btn {
+    position: absolute;
+    right: -5px;
+    top: -6px;
+  }
+}
+
+.footer-wp {
+  @include font($font_small, 500);
+  padding-top: $space_mini;
+  color: $text_color_dark_gray;
+  text-align: center;
+
+  a {
+    padding: 0 $space_normal;
+
+    &:first-child {
+      border-right: $border_light;
+    }
+  }
+}
+

@@ -7,7 +7,7 @@
 }
 
 .square-container {
-  border: 1px solid rgb(0, 0, 0, 0.12);
+  border: 1px solid $input_outline_gray;
   border-radius: 4px;
   cursor: pointer;
 
@@ -45,7 +45,7 @@
     position: absolute;
     display: flex;
     border-radius: 30px;
-    background: #000000;
+    background: $color_normal;
     opacity: 0.3;
     right: 10px;
     top: 10px;
@@ -69,7 +69,7 @@
       width: 80px;
       height: 80px;
       border-radius: 50%;
-      border: 1px dashed rgba(0, 0, 0, 0.38);
+      border: 1px dashed $color_input_outline;
       cursor: pointer;
 
       &:hover {

@@ -88,6 +88,15 @@ export abstract class BaseTxComponent {
       }
       await this.sendUnsignedTx();
     } else {
+      const balance = Number.parseFloat(
+        this.accountService.getCurrentBalance()
+      );
+
+      if (balance === 0) {
+        this.signIn.openGetTokensModal();
+        return;
+      }
+
       await this.sendSignedTx();
     }
   }

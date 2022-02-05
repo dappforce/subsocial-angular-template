@@ -2,7 +2,7 @@
 
 .vote-item-wp {
   padding: $space_tiny 0;
-  border-bottom: 1px solid  $color_border_list;
+  border-bottom: 1px solid  $line_outline_gray;
   margin-right: $space_mini;
 }
 
@@ -11,7 +11,7 @@
     font-weight: 500;
     font-size: $font_small;
     padding-left: $space_mini;
-    color: #A0A0A0;
+    color: $text_color_dark_gray;
   }
 }
 
@@ -28,6 +28,6 @@
 
 .hover {
   &:hover {
-    background: $hover_color_light;
+    background: $color_hover_primary;
   }
 }

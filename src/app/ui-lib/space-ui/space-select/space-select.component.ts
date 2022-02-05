@@ -15,6 +15,7 @@ import { ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SpaceFacade } from '../../../state/space/space.facade';
 import { Space } from '../../../state/space/space.state';
+import { StorageService } from '../../../shared/services/storage.service';
 
 @Component({
   selector: 'app-space-select',
@@ -52,7 +53,8 @@ export class SpaceSelectComponent
     private spaceService: SpaceService,
     private spaceFacade: SpaceFacade,
     private cd: ChangeDetectorRef,
-    private element: ElementRef
+    private element: ElementRef,
+    private storage: StorageService
   ) {
     super();
   }
@@ -65,9 +67,19 @@ export class SpaceSelectComponent
       )
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((spaces) => {
-        const space = this.spaceId
-          ? spaces.find((space) => space.id === this.spaceId) || spaces[0]
-          : spaces[0];
+        let space: Space;
+
+        if (this.spaceId) {
+          space =
+            spaces.find((space) => space.id === this.spaceId) || spaces[0];
+        } else {
+          const lastSaveId = this.storage.getLastSpaceId();
+          console.log(lastSaveId);
+          space = lastSaveId
+            ? spaces.find((space) => space.id === lastSaveId) || spaces[0]
+            : spaces[0];
+        }
+
         this.selectSpace(space);
         this.spaces = spaces;
         this.cd.markForCheck();

@@ -1,28 +1,30 @@
+@import "var";
+
 .tag {
   display: inline-flex;
   padding: 6px 12px;
-  margin-right: 8px;
-  margin-top: 8px;
-  color: rgba(0, 0, 0, 0.6);
-  background: rgba(33, 33, 33, 0.08);
-  border-radius: 16px;
+  margin-right: $space_tiny;
+  margin-top: $space_tiny;
+  color: $text_color_dark_gray;
+  background: $tag_bg_gray;
+  border-radius: $space_normal;
   letter-spacing: 0.25px;
-  font-size: 14px;
+  font-size: $font_small;
   cursor: pointer;
 }
 
 .small {
-  font-size: 12px;
+  font-size: $font_tiny;
 }
 
 .medium {
-  font-size: 14px;
+  font-size: $font_small;
 }
 
 .large {
-  font-size: 17px;
+  font-size: $font_normal;
 }
 
 .huge {
-  font-size: 20px;
+  font-size: $font_large;
 }

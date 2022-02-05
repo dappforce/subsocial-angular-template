@@ -5,17 +5,17 @@
 }
 
 .info {
-  font-size: 14px;
+  font-size: $font_small;
   line-height: 20px;
   letter-spacing: 0.25px;
-  color: $color_gray_dark;
+  color: $text_color_dark_gray;
 
   &>*:first-child {
     text-transform: capitalize;
   }
 
   a {
-    margin-right: 4px;
+    margin-right: $space_mini;
     &:hover {
       text-decoration: underline;
       cursor: pointer;
@@ -23,7 +23,7 @@
   }
 
   span {
-    margin-right: 4px;
+    margin-right: $space_mini;
   }
 }
 

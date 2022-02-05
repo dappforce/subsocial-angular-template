@@ -1,9 +1,11 @@
+@import "var";
+
 .hidden-wp {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #FEFBE8;
-  border-bottom: 1px solid #F1E8B3;
+  background: $content-hidden-bg;
+  border-bottom: $border-content-hidden;
   border-radius: 4px 4px 0 0;
   height: 40px;
   margin: -16px -16px 8px;
@@ -15,7 +17,7 @@
   .make-visible-btn {
     margin-right: 16px;
     padding: 3px 10px;
-    border: 1px solid #D9D9D9;
+    border: 1px solid $button_outline_gray;
     border-radius: 4px;
     font-weight: 500;
     font-size: 14px;

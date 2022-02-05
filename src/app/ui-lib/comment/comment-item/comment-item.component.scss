@@ -1,15 +1,17 @@
-:host {
-  display: flex;
-  width: 100%;
-  margin-top: 7px;
-}
+@import "var";
 
 app-avatar {
-  margin-right: 8px;
+  margin-right: $space_tiny;
 }
 
 .date {
-  color: #A0A0A0;
+  color: $text_color_dark_gray;
+  white-space: normal;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .dot {
@@ -17,7 +19,7 @@ app-avatar {
 }
 
 .message {
-  background: #F2F2F2;
+  background: $comment_bg_gray;
   border-radius: 4px;
 }
 

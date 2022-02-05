@@ -17,12 +17,12 @@
 
     <div class="profile-stats-wp" [ngClass]="type" *transloco="let t; read: 'general'">
       <span (click)="openConnectionDialog('following')">
-        <strong class="count">{{followingCount | numeral}}</strong>
+        <strong class="count">{{ followingCount | numeral }}</strong>
         <span>{{ t('following') }}</span>
       </span>
       <span (click)="openConnectionDialog('followers')">
         <strong class="count">{{followersCount | numeral}}</strong>
-        <span>{{followersCount | pluralize: t('follower')}}</span>
+        <span>{{ t('follower', {count: followersCount }) }}</span>
       </span>
     </div>
 

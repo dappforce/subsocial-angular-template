@@ -4,7 +4,7 @@
 span {
   letter-spacing: 0.25px;
   @include font($font_normal, 500, 20px);
-  color: #EB2F96;
+  color: $color_primary;
 
   &:hover {
     cursor: pointer;

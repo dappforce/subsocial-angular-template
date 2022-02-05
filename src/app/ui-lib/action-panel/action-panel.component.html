@@ -19,6 +19,7 @@
   <app-shared-button *ngIf="isShowShare"
                      [isShowLabel]="isShowLabel"
                      (click)="shareClick.emit()"
+                     [count]="sharesCount"
   ></app-shared-button>
 
   <app-reply-button *ngIf="isShowReply"

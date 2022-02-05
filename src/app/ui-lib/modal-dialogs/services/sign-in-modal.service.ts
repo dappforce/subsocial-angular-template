@@ -3,6 +3,7 @@ import { SignInModalDialogComponent } from '../sign-in-modal-dialog/sign-in-moda
 import { AccountService } from '../../../shared/services/account.service';
 import { MatDialog } from '@angular/material/dialog';
 import { filter } from 'rxjs/operators';
+import { GetTokensModalDialogComponent } from '../get-tokens-modal-dialog/get-tokens-modal-dialog.component';
 
 @Injectable({
   providedIn: 'root',
@@ -29,5 +30,12 @@ export class SignInModalService {
       .afterClosed()
       .pipe(filter((data) => !!data))
       .subscribe((account) => this.accountService.setCurrentAccount(account!));
+  }
+
+  openGetTokensModal() {
+    this.dialog.open(GetTokensModalDialogComponent, {
+      maxWidth: '432px',
+      width: '80vw',
+    });
   }
 }

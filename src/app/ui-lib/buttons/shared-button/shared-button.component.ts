@@ -8,4 +8,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class SharedButtonComponent {
   @Input() isShowLabel: boolean = false;
+  @Input() count: number = 0;
 }

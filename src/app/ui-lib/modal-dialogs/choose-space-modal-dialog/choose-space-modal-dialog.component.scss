@@ -4,7 +4,7 @@
   margin: 6px 16px 16px;
 
   li {
-    border-bottom: 1px solid $color_border_list;
+    border-bottom: 1px solid $line_outline_gray;
     padding: 11px 0;
     cursor: pointer;
 
@@ -14,7 +14,7 @@
     }
 
     &:hover {
-      background-color: $hover_color_light;
+      background-color: $color_hover_primary;
     }
   }
 

@@ -1,4 +1,4 @@
-@import "../../../shared/styles/_var.scss";
+@import "var";
 
 button {
   display: flex;
@@ -16,7 +16,20 @@ button {
   }
 
   &:hover {
-    background-color: $hover_color_light;
+    background-color: $color_hover_primary;
+    transition: background-color 0.3s;
+    color: $color_primary;
+
+    ::ng-deep {
+      mat-icon, .world-icon {
+
+        svg {
+          path {
+            fill: $color_primary;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -48,7 +61,7 @@ button {
 
       svg {
         path {
-          fill: $color_gray_dark;
+          fill: $text_color_dark_gray;
         }
       }
     }
@@ -56,7 +69,7 @@ button {
     .world-icon {
       svg {
         path {
-          fill: $color_black;
+          fill: $color_normal;
         }
       }
     }

@@ -4,13 +4,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { IconRegistryProviders } from '../../../core/constants/storybook.const';
 import { TranslocoRootModule } from '../../../transloco-root.module';
 import { SendTipsButtonComponent } from './send-tips-button.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export default {
   title: 'Buttons/Send Tips Button',
   component: SendTipsButtonComponent,
   decorators: [
     moduleMetadata({
-      imports: [ButtonsModule, HttpClientModule, TranslocoRootModule],
+      imports: [
+        ButtonsModule,
+        HttpClientModule,
+        TranslocoRootModule,
+        MatDialogModule,
+      ],
       declarations: [],
       providers: [...IconRegistryProviders],
     }),

@@ -1,4 +1,6 @@
-<button *ngIf="type"
+<button ifDesktop
+        class="add-btn-desktop"
+        *ngIf="type"
         mat-ripple
         [ngClass]="type"
         (click)="onClick()"
@@ -7,4 +9,12 @@
   <span *transloco="let t; read: 'buttons'">
     {{type === 'post' ? t('newPost') : t('createSpace') }}
   </span>
+</button>
+
+<button class="add-btn-mobile"
+        ifMobile mat-mini-fab
+        color="primary"
+        (click)="onClick()"
+>
+  <mat-icon>add</mat-icon>
 </button>

@@ -24,6 +24,8 @@ import { InputModule } from '../input/input.module';
 import { AdblockConflictModalDialogComponent } from './adblock-conflict-modal-dialog/adblock-conflict-modal-dialog.component';
 import { TranslocoModule } from '@ngneat/transloco';
 import { SendTipsModalDialogComponent } from './send-tips-modal-dialog/send-tips-modal-dialog.component';
+import { GetTokensModalDialogComponent } from './get-tokens-modal-dialog/get-tokens-modal-dialog.component';
+import { TextModule } from "../text/text.module";
 
 @NgModule({
   declarations: [
@@ -36,6 +38,7 @@ import { SendTipsModalDialogComponent } from './send-tips-modal-dialog/send-tips
     VoteModalDialogComponent,
     AdblockConflictModalDialogComponent,
     SendTipsModalDialogComponent,
+    GetTokensModalDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -54,6 +57,7 @@ import { SendTipsModalDialogComponent } from './send-tips-modal-dialog/send-tips
     SpaceUiModule,
     InputModule,
     TranslocoModule,
+    TextModule
   ],
   exports: [
     AccountSidenavComponent,

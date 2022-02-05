@@ -1,3 +1,5 @@
+@import "var";
+
 :host {
   overflow-y: auto;
 
@@ -13,7 +15,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #C1C1C1;
+    background: $color_scroll_thumb;
     border-radius: 18px;
   }
 

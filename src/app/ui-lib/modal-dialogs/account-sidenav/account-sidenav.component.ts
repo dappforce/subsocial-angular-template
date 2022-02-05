@@ -3,6 +3,9 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  ElementRef,
+  HostListener,
+  Inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -19,6 +22,7 @@ import { AccountData } from '../../../core/types/account.types';
 import { Observable, Subject } from 'rxjs';
 import { filter, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { Profile } from '../../../state/profile/profile.state';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-account-sidenav',
@@ -31,21 +35,22 @@ export class AccountSidenavComponent
 {
   @ViewChild(MatSidenav) sideNav: MatSidenav;
 
-  accounts: AccountData[] = [];
-
-  myProfileData$: Observable<Profile | undefined> = this.store.select(
-    selectMyAccountProfileData
-  );
-  private unsubscribe$: Subject<void> = new Subject();
-
   constructor(
     public accountService: AccountService,
     public sideNavService: SideNavService,
     public deviceService: DeviceService,
     private store: Store<AppState>,
     private storage: StorageService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    @Inject(DOCUMENT) private document: Document
   ) {}
+
+  accounts: AccountData[] = [];
+
+  myProfileData$: Observable<Profile | undefined> = this.store.select(
+    selectMyAccountProfileData
+  );
+  private unsubscribe$: Subject<void> = new Subject();
 
   ngOnInit(): void {
     this.getAccountsData();
@@ -54,6 +59,15 @@ export class AccountSidenavComponent
   ngAfterViewInit(): void {
     this.sideNavService.isShowAccountSideNav$.subscribe((isShow) => {
       isShow ? this.sideNav.open() : this.sideNav.close();
+      this.cd.markForCheck();
+    });
+
+    this.sideNav.openedChange.subscribe((isOpen) => {
+      if (isOpen) {
+        this.document.body.classList.add('fixed');
+      } else {
+        this.document.body.classList.remove('fixed');
+      }
       this.cd.markForCheck();
     });
   }

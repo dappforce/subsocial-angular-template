@@ -10,8 +10,6 @@ import { TransactionService } from '../../../shared/services/transaction.service
 import { AccountService } from '../../../shared/services/account.service';
 import { BaseVisibleTxComponent } from '../../../core/base-component/base-visible-tx.component';
 import { Post } from '../../../core/models/post/post-list-item.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../state/state';
 import { Observable } from 'rxjs';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { filter, mergeMap } from 'rxjs/operators';

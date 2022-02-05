@@ -14,11 +14,11 @@
 }
 
 .disabled {
-  background: $color_shadow !important;
-  color: #B3B3B3 !important;
+  background: $button_outline_gray !important;
+  color: $text_color_dark_gray !important;
   cursor: auto;
 }
 
 .tooltip {
-  font-size: 14px;
+  font-size: $font_small;
 }

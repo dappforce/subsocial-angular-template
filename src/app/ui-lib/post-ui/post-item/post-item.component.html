@@ -30,7 +30,8 @@
 
         <app-embed-video [videoUrl]="postItemData.link"></app-embed-video>
 
-        <app-title [text]="postItemData.title"
+        <app-title *ngIf="postItemData.title"
+                   [text]="postItemData.title"
                    [link]="postItemData.postLink"
                    [style.margin-top]="'7px'"
         ></app-title>
@@ -62,6 +63,7 @@
                       [downvoteCount]="postItemData.downvotesCount"
                       [commentCount]="postItemData.repliesCount"
                       [isShowShare]="true"
+                      [sharesCount]="postItemData.sharesCount"
                       (commentClick)="onCommentButtonClick()"
                       (shareClick)="onShareClick()"
                       *ngIf="!isSharedPost"

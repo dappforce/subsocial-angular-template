@@ -5,4 +5,16 @@
 
 <span [ngClass]="['action-panel-label']"
       *ngIf="isShowLabel"
-> {{ 'buttons.share' | transloco }}</span>
+>
+  {{ 'buttons.share' | transloco }}
+  <span *ngIf="count > 0">
+    ({{count | numeral}})
+  </span>
+</span>
+
+<span
+  class="action-panel-label"
+  *ngIf="!isShowLabel && count > 0"
+>
+  {{count | numeral}}
+</span>

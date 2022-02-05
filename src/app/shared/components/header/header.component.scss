@@ -2,10 +2,10 @@
 @import "_mixins.scss";
 
 header {
-  background: #FFFFFF;
+  background: $color_white;
   //box-shadow: $header-shadow;
   @include fixed(0, 0, 0, 2);
-  border-bottom: 1px solid $color_light_border;
+  border-bottom: 1px solid $line_outline_gray;
 
 
   .header-wp {
@@ -27,7 +27,7 @@ header {
   margin: 1px auto;
   @include fixed($header_height, 0, 0, 1);
   padding: 16px 16px 0;
-  background-color: #F2F2F2;
+  background-color: $color-bg;
 
   app-tabs {
     ::ng-deep {
@@ -69,7 +69,7 @@ header {
     padding: 0;
     left: 0;
     z-index: 1;
-    background-color: #F2F2F2;
+    background-color:$color_white;
 
     app-tabs {
       ::ng-deep {

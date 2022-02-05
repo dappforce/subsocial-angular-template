@@ -1,5 +1,5 @@
 <app-title type="medium"
-           text="{{repliesCount + ' ' + (repliesCount | pluralize : 'Comment')}}"
+           text="{{'general.comment' | transloco: {count: repliesCount} }}"
 ></app-title>
 
 <app-comment-list [rootPostId]="rootPost.id"

@@ -45,6 +45,7 @@ export class ActionPanelComponent extends BaseTxComponent implements OnInit {
   @Input() upvoteCount: number = 0;
   @Input() downvoteCount: number = 0;
   @Input() commentCount: number = 0;
+  @Input() sharesCount: number = 0;
   @Input() isShowLabel = false;
   @Input() isShowReply = false;
   @Input() position: 'center' | 'left' = 'center';

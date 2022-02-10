@@ -13,10 +13,10 @@ import { TransactionService } from '../../../shared/services/transaction.service
 import { SignInModalService } from '../services/sign-in-modal.service';
 import { SubmittableResult } from '@polkadot/api';
 import { FormControl, Validators } from '@angular/forms';
-import { filter, map, tap, withLatestFrom } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { METHODS, PALLETS } from '../../../core/constants/query.const';
 import { ConvertService } from '../../../shared/services/convert.service';
-import { Observable, Subject } from 'rxjs';
+import { ProfileFacade } from '../../../state/profile/profile.facade';
 
 export type SendTipsDialogData = {
   profile: Profile;
@@ -39,7 +39,8 @@ export class SendTipsModalDialogComponent
     public transaction: TransactionService,
     public cd: ChangeDetectorRef,
     public signIn: SignInModalService,
-    private convert: ConvertService
+    private convert: ConvertService,
+    private profileFacade: ProfileFacade
   ) {
     super(transaction, account, signIn, cd);
   }
@@ -62,7 +63,10 @@ export class SendTipsModalDialogComponent
 
   onFailed(result: SubmittableResult): void {}
 
-  onSuccess(result: SubmittableResult): void {}
+  onSuccess(result: SubmittableResult): void {
+    this.profileFacade.loadProfile(this.data.profile.id);
+    this.dialogRef.close();
+  }
 
   validate(): boolean {
     return this.amountControl.valid;

@@ -7,12 +7,19 @@ button {
   height: 40px;
   font-size: 17px;
   line-height: 125%;
+  color: $text_color_dark_gray;
 
-
-  mat-icon {
-    width: 16px;
-    height: 16px;
-    margin: 0 30px 0 5px;
+  ::ng-deep {
+    mat-icon {
+      width: 16px;
+      height: 16px;
+      margin: 0 30px 0 5px;
+      svg {
+        path {
+          fill: $text_color_dark_gray;
+        }
+      }
+    }
   }
 
   &:hover {
@@ -38,11 +45,19 @@ button {
 }
 
 .lang-list-item {
-  mat-icon {
-    position: absolute;
-    left: 13px;
-    width: 24px;
-    height: 24px;
+  ::ng-deep {
+    mat-icon {
+      position: absolute;
+      left: 13px;
+      width: 24px;
+      height: 24px;
+
+      svg {
+        path {
+          fill: $color_primary;
+        }
+      }
+    }
   }
 
   padding-right: 55px;
@@ -54,25 +69,9 @@ button {
 }
 
 .lang-btn {
-  ::ng-deep {
-    .arrow{
-      position: absolute;
-      right: 0;
-
-      svg {
-        path {
-          fill: $text_color_dark_gray;
-        }
-      }
-    }
-
-    .world-icon {
-      svg {
-        path {
-          fill: $color_normal;
-        }
-      }
-    }
+  .arrow{
+    position: absolute;
+    right: 0;
   }
 }
 

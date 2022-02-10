@@ -10,13 +10,10 @@ import {
   selectCommentPostsByPostId,
   selectReplyIdsByPostId,
 } from './reply-id.selectors';
-import {
-  isNotEmptyOrNull,
-  takeValueOnce,
-} from '../../core/rxjs-custom/operators';
+import { isNotEmptyOrNull } from '../../core/rxjs-custom/operators';
 import { filter } from 'rxjs/operators';
-import { Observable } from "rxjs";
-import { Post } from "../../core/models/post/post-list-item.model";
+import { Observable } from 'rxjs';
+import { Post } from '../../core/models/post/post-list-item.model';
 
 @Injectable({
   providedIn: 'root',

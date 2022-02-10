@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { AccountService } from './account.service';
 import { SubsocialApiService } from './subsocial-api.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
-import { AnyReactionId } from '@subsocial/types';
-import { filter, skipWhile, take } from 'rxjs/operators';
+import { skipWhile, take } from 'rxjs/operators';
 import { MyPostReactions } from '../../state/my-post-reactions/my-post-reactions.state';
 import BN from 'bn.js';
 

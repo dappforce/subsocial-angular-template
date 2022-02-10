@@ -1,5 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { ProfileStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { LoadEntitiesProps } from '../types';
 import { Profile } from './profile.state';
 

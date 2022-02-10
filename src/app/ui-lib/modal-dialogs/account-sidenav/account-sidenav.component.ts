@@ -3,8 +3,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  ElementRef,
-  HostListener,
   Inject,
   OnDestroy,
   OnInit,

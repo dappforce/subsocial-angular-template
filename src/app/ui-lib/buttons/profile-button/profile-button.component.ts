@@ -5,7 +5,7 @@ import { AppState } from '../../../state/state';
 import { Observable } from 'rxjs';
 import { selectMyAccountProfileData } from '../../../state/profile/profile.selectors';
 import { AccountService } from '../../../shared/services/account.service';
-import { filter, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Profile } from '../../../state/profile/profile.state';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { SignInModalDialogComponent } from '../../modal-dialogs/sign-in-modal-dialog/sign-in-modal-dialog.component';

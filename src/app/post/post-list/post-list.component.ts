@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   Inject,
-  Input,
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';

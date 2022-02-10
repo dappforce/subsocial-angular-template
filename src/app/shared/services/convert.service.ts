@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as BN from 'bn.js';
-import { AnyId } from '@subsocial/api/flat-subsocial/dto';
+import { environment } from '../../../environments/environment';
+import { AnyId } from '@subsocial/types/dto';
 import { PostId } from '@subsocial/types/substrate/interfaces';
 
 @Injectable({
@@ -8,8 +9,6 @@ import { PostId } from '@subsocial/types/substrate/interfaces';
 })
 export class ConvertService {
   constructor() {}
-
-  balanceMultiplier = 100_000_000_000;
 
   public convertToBN(value: string) {
     return new BN(value);
@@ -37,6 +36,6 @@ export class ConvertService {
 
   public convertBalance(value: string) {
     const balance = Number.parseFloat(value);
-    return balance * this.balanceMultiplier;
+    return balance * Math.pow(10, environment.decimals);
   }
 }

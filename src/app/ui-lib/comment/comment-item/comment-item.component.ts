@@ -23,7 +23,6 @@ export class CommentItemComponent implements OnInit {
 
   isShowReplyInput: boolean;
   isEdit: boolean;
-  showCommentText: boolean = true;
   hidden: boolean;
   skipComment: boolean;
 

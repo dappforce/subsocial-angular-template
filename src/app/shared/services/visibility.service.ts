@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PostFacade } from '../../state/post/post.facade';
 import { SpaceFacade } from '../../state/space/space.facade';
-import { filter, map, mergeMap } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { PermissionsService } from './permissions.service';
 
 @Injectable({

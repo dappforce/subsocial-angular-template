@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
 } from '@angular/core';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
@@ -94,6 +93,7 @@ export abstract class BaseTxComponent {
 
       if (balance === 0) {
         this.signIn.openGetTokensModal();
+        return this.setIsSending(false);
         return;
       }
 

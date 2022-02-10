@@ -19,6 +19,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SpaceUiModule } from '../space-ui.module';
 import { SpaceInfoComponent } from './space-info.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 export default {
   title: 'Space/Space Info',
@@ -34,6 +35,7 @@ export default {
         SbRouterModule,
         SbStoreModules,
         SpaceUiModule,
+        TranslocoMessageFormatModule.forRoot(),
       ],
       declarations: [],
       providers: [...IconRegistryProviders, ...SbDeviceRegistry],

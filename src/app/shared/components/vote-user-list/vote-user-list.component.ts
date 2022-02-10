@@ -8,10 +8,7 @@ import { UserInfo } from '../../../core/models/user-info.model';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/state';
 import { loadProfilesByIds } from '../../../state/profile/profile.actions';
-import {
-  selectProfilesByIds,
-  selectUserInfoByIds,
-} from '../../../state/profile/profile.selectors';
+import { selectUserInfoByIds } from '../../../state/profile/profile.selectors';
 import { Actions } from '@ngrx/effects';
 
 @Component({

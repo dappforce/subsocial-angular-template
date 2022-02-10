@@ -1,4 +1,4 @@
-<div class="shared-post-item-wp">
+<div class="shared-post-item-wp" *ngIf="!(skip$ | async)">
   <mat-card>
 
     <app-hidden-content [type]="'post'"
@@ -46,6 +46,7 @@
                           [downvoteCount]="postItemData.downvotesCount"
                           [commentCount]="postItemData.repliesCount"
                           [isShowShare]="true"
+                          [fontSize]="17"
                           (commentClick)="onCommentButtonClick()"
                           (shareClick)="onSharedClick()"
         ></app-action-panel>

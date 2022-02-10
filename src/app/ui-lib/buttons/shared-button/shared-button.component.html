@@ -4,6 +4,7 @@
 ></app-icon-button>
 
 <span [ngClass]="['action-panel-label']"
+      [style.fontSize]="fontSize + 'px'"
       *ngIf="isShowLabel"
 >
   {{ 'buttons.share' | transloco }}
@@ -14,6 +15,7 @@
 
 <span
   class="action-panel-label"
+  [style.fontSize]="fontSize + 'px'"
   *ngIf="!isShowLabel && count > 0"
 >
   {{count | numeral}}

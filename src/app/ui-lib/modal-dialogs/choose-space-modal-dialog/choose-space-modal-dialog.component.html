@@ -5,7 +5,7 @@
   </div>
   <div class="modal-body-spaces">
     <ul class="space-list">
-      <li *ngFor="let space of spaces" >
+      <li *ngFor="let space of spaces$ | async" >
         <app-row (click)="onClick(space.struct.id)"
                  [v]="'center'"
         >

@@ -55,7 +55,7 @@ export const ProfileTemplate = {
   followingSpacesCount: 9,
   about: 'Test',
   avatar: 'HhQWPkEpXLHFhMAQieAH1wtfVRNHWZ5snhfFeBe',
-  name: 'Subsosial User',
+  name: 'Subsocial User',
   summary: 'Test',
   isShowMore: false,
 };

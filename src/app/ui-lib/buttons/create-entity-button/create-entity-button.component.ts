@@ -6,8 +6,7 @@ import {
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { filter, takeUntil } from 'rxjs/operators';
-import { combineLatest, Subject, Subscription } from 'rxjs';
+import { combineLatest, Subscription } from 'rxjs';
 import { DeviceService } from '../../../shared/services/device.service';
 import { SpaceService } from '../../../space/services/space.service';
 import { AccountService } from '../../../shared/services/account.service';

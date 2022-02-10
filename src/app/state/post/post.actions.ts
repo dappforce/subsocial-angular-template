@@ -1,6 +1,4 @@
 import { createAction, props } from '@ngrx/store';
-import { PostStruct } from '@subsocial/api/flat-subsocial/flatteners';
-import { AnyPostId } from '@subsocial/types';
 import { LoadEntitiesProps } from '../types';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { Update } from '@ngrx/entity';

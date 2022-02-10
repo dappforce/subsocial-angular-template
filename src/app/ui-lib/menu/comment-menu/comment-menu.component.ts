@@ -11,8 +11,6 @@ import { BaseVisibleTxComponent } from '../../../core/base-component/base-visibl
 import { TransactionService } from '../../../shared/services/transaction.service';
 import { AccountService } from '../../../shared/services/account.service';
 import { Post } from '../../../core/models/post/post-list-item.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../../state/state';
 import { PermissionsService } from '../../../shared/services/permissions.service';
 import { filter, mergeMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';

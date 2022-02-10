@@ -138,3 +138,11 @@
     }
   }
 }
+
+@media only screen and (max-width: 768px) {
+  .unauthorized {
+    .account-list {
+      width: 100%;
+    }
+  }
+}

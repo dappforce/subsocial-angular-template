@@ -15,6 +15,7 @@ import {
 export class ReplyButtonComponent {
   @Input() isShowLabel: boolean = false;
   @Output() click = new EventEmitter();
+  @Input() fontSize = 14;
 
   onClick(event: any) {
     event.stopPropagation();

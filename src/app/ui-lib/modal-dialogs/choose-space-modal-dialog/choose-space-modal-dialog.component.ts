@@ -1,13 +1,14 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Inject,
   OnInit,
 } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { SpaceListItemData } from '../../../core/models/space/space-list-item.model';
 import { SpaceService } from '../../../space/services/space.service';
+import { SpaceFacade } from '../../../state/space/space.facade';
+import { Observable } from 'rxjs';
+import { Space } from '../../../state/space/space.state';
 
 export type ChooseSpaceModalData = {
   ids: string[];
@@ -20,18 +21,17 @@ export type ChooseSpaceModalData = {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChooseSpaceModalDialogComponent implements OnInit {
-  spaces: SpaceListItemData[];
+  spaces$: Observable<Space[]>;
 
   constructor(
     public dialogRef: MatDialogRef<ChooseSpaceModalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: ChooseSpaceModalData,
     private spaceService: SpaceService,
-    private cd: ChangeDetectorRef
+    private spaceFacade: SpaceFacade
   ) {}
 
   async ngOnInit() {
-    this.spaces = await this.spaceService.getOrLoadSpacesByIds(this.data.ids);
-    this.cd.markForCheck();
+    this.spaces$ = this.spaceFacade.fetchSpaces(this.data.ids);
   }
 
   onClick(id: string) {

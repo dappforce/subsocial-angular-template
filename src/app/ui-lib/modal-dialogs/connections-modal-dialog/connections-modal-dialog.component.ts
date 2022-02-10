@@ -8,9 +8,9 @@ import {
 import { TabLinkData } from '../../../core/models/tab-link-data.model';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ConnectionModalData } from '../../../core/types/dialog-modal-data.types';
-import { from, Observable } from 'rxjs';
+import { from } from 'rxjs';
 import { ProfileService } from '../../../account/services/profile.service';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-connections-modal-dialog',
@@ -19,7 +19,7 @@ import { first } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ConnectionsModalDialogComponent implements OnInit {
-  public tabLinks: TabLinkData[] = [
+  tabLinks: TabLinkData[] = [
     { tabName: 'following', additionalInfo: this.data.followingCount },
     { tabName: 'followers', additionalInfo: this.data.followerCount },
   ];
@@ -38,19 +38,14 @@ export class ConnectionsModalDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: ConnectionModalData
   ) {}
 
-  ngOnInit(): void {
-    from(this.profileService.getFollowersIds(this.data.address))
-      .pipe(first())
-      .subscribe((ids) => {
-        this.followersIds = ids;
-        this.cd.markForCheck();
-      });
-    from(this.profileService.getFollowingIds(this.data.address))
-      .pipe(first())
-      .subscribe((ids) => {
-        this.followingIds = ids;
-        this.cd.markForCheck();
-      });
+  async ngOnInit() {
+    this.followersIds = await this.profileService.getFollowersIds(
+      this.data.address
+    );
+    this.followingIds = await this.profileService.getFollowingIds(
+      this.data.address
+    );
+    this.cd.markForCheck();
   }
 
   onTabClick(activeTab: TabLinkData) {

@@ -9,15 +9,14 @@ import { TranslocoRootModule } from '../../../transloco-root.module';
 import { MatIconModule } from '@angular/material/icon';
 import {
   IconRegistryProviders,
-  PostTemplate,
   SbDeviceRegistry,
   SbRouterModule,
   SbStoreModules,
-  SbTemplateId,
 } from '../../../core/constants/storybook.const';
 import { ProfileModule } from '../profile.module';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ProfileInfoComponent } from './profile-info.component';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 export default {
   title: 'Profile/Profile Info',
@@ -32,6 +31,7 @@ export default {
         SbRouterModule,
         SbStoreModules,
         ProfileModule,
+        TranslocoMessageFormatModule.forRoot(),
       ],
       declarations: [],
       providers: [...IconRegistryProviders, ...SbDeviceRegistry],

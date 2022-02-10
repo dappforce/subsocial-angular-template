@@ -9,14 +9,13 @@ import { TabLinkData } from '../../core/models/tab-link-data.model';
 import { DeviceService } from '../../shared/services/device.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { filter, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { combineLatest, EMPTY, from, Observable, Subject } from 'rxjs';
+import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { SpaceService } from '../../space/services/space.service';
 import { PostService } from '../../post/services/post.service';
 import { AccountService } from '../../shared/services/account.service';
 import { FollowerService } from '../../shared/services/follower.service';
 import { Profile } from '../../state/profile/profile.state';
 import { ProfileFacade } from '../../state/profile/profile.facade';
-import { of } from 'rxjs';
 
 @Component({
   selector: 'app-profile',

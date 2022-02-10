@@ -39,9 +39,9 @@ export class SpaceItemComponent implements OnInit {
       this.accountService.currentAccount$,
       this.spaceFacade.getSpace(this.space!.id),
     ]).pipe(
-      filter(([account, space]) => !!account && !!space),
+      filter(([account, space]) => !!space),
       map(([account, space]) => {
-        const isOwner = account!.id === space!.ownerId;
+        const isOwner = account?.id === space!.ownerId;
         return space!.isHidden
           ? isOwner
             ? !this.showHidden

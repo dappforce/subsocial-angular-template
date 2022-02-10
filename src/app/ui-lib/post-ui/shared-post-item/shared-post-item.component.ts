@@ -8,14 +8,16 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { Post } from '../../../core/models/post/post-list-item.model';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../state/state';
-import { filter, takeUntil } from 'rxjs/operators';
+import { filter, map, mergeMap, takeUntil } from 'rxjs/operators';
 import { CommentService } from '../../../shared/services/comment.service';
 import { PostService } from '../../../post/services/post.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { SharePostModalDialogComponent } from '../../modal-dialogs/share-post-modal-dialog/share-post-modal-dialog.component';
+import { AccountService } from '../../../shared/services/account.service';
+import { VisibilityService } from '../../../shared/services/visibility.service';
 
 @Component({
   selector: 'app-shared-post-item',
@@ -25,11 +27,12 @@ import { SharePostModalDialogComponent } from '../../modal-dialogs/share-post-mo
 })
 export class SharedPostItemComponent implements OnInit, OnChanges {
   @Input() postItemData: Post;
+  @Input() showHiddenContent: boolean | null;
   sharedPostItemData: Post | undefined;
-  isHidden: boolean;
   isCommentOpen: boolean;
   repliesCount: number;
   isSharedPostHidden: boolean;
+  skip$: Observable<boolean>;
 
   private unsubscribe$: Subject<void> = new Subject();
 
@@ -38,7 +41,9 @@ export class SharedPostItemComponent implements OnInit, OnChanges {
     private commentService: CommentService,
     private postService: PostService,
     private cd: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private account: AccountService,
+    private visibility: VisibilityService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -48,7 +53,18 @@ export class SharedPostItemComponent implements OnInit, OnChanges {
   }
 
   async ngOnInit() {
-    this.isHidden = this.postItemData.hidden;
+    this.skip$ = this.account.currentAccount$.pipe(
+      mergeMap((account) =>
+        this.visibility
+          .getIsPostHidden(this.postItemData!.id)
+          .pipe(
+            map(
+              (hidden) =>
+                (hidden && !account) || (hidden && !this.showHiddenContent)
+            )
+          )
+      )
+    );
 
     const sharedPostId = this.postItemData.sharedPostId;
 
@@ -68,10 +84,6 @@ export class SharedPostItemComponent implements OnInit, OnChanges {
 
   onCommentButtonClick() {
     this.isCommentOpen = !this.isCommentOpen;
-  }
-
-  onSwitchHidden() {
-    this.isHidden = !this.isHidden;
   }
 
   onSharedClick() {

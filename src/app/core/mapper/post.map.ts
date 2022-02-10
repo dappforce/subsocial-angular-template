@@ -1,6 +1,6 @@
+import { ProfileContent, SpaceData } from '@subsocial/types/dto';
 import { Post } from '../models/post/post-list-item.model';
 import { getPostLink } from '../utils';
-import { ProfileContent, SpaceData } from '@subsocial/api/flat-subsocial/dto';
 
 export const mapPostDTOToPost = (
   post: any,

@@ -5,10 +5,9 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { AvailableLangs, TranslocoService } from '@ngneat/transloco';
+import { TranslocoService } from '@ngneat/transloco';
 import { SnackBarService } from '../../../shared/services/snack-bar.service';
 import { KeyValuePair } from '../../../core/models/key-value-pair.model';
-import { MatMenuTrigger } from '@angular/material/menu';
 import { StorageService } from '../../../shared/services/storage.service';
 import { SideNavService } from '../../../shared/services/side-nav.service';
 

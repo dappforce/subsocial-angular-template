@@ -57,12 +57,8 @@ export class NotificationService {
     this.notificationCountSource.next(countNumber);
   }
 
-  getNotificationCount() {
-    return this.accountService.currentAccount$.pipe(
-      filter((account) => !!account),
-      mergeMap((account) =>
-        this.getActivityCount(account!.id, 'notifications')
-      ),
+  getNotificationCount(id: string) {
+    return this.getActivityCount(id, 'notifications').pipe(
       map((count) => Number.parseInt(count))
     );
   }

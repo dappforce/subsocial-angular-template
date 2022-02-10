@@ -17,7 +17,6 @@ import {
 import { formatBalance } from '@polkadot/util';
 import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 export enum ACCOUNT_STATUS {
   INIT,
@@ -119,7 +118,7 @@ export class AccountService {
 
       return {
         id,
-        name: profile?.content?.name || account.name,
+        name: profile?.content?.name || account.meta.name,
         balance: this.getFormattedBalance(balance),
         avatar: profile?.content?.avatar,
       } as AccountData;

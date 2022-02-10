@@ -18,6 +18,7 @@ import { TranslocoRootModule } from '../../../transloco-root.module';
 import { CommentListComponent } from './comment-list.component';
 import { of } from 'rxjs';
 import { MarkdownModule } from 'ngx-markdown';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 export default {
   title: 'Comments/Comment List',
@@ -37,6 +38,7 @@ export default {
         SbRouterModule,
         TranslocoRootModule,
         MarkdownModule.forRoot(),
+        TranslocoMessageFormatModule.forRoot(),
       ],
       declarations: [],
       providers: [...IconRegistryProviders],

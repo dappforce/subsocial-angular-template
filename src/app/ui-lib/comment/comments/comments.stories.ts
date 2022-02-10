@@ -15,6 +15,7 @@ import {
 import { CommentModule } from '../comment.module';
 import { CommentsComponent } from './comments.component';
 import { TranslocoRootModule } from '../../../transloco-root.module';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 export default {
   title: 'Comments/Comments',
@@ -29,6 +30,7 @@ export default {
         CommentModule,
         SbRouterModule,
         TranslocoRootModule,
+        TranslocoMessageFormatModule.forRoot(),
       ],
       declarations: [],
       providers: [...IconRegistryProviders],

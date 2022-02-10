@@ -15,6 +15,7 @@ import {
 export class SendTipsButtonComponent {
   @Input() width: 'full' | 'static' = 'static';
   @Input() profile: Profile;
+  @Input() disabled: boolean;
 
   constructor(private dialog: MatDialog) {}
 

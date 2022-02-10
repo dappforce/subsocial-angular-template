@@ -40,9 +40,7 @@
                         [image]="post.imageUrl"
         ></app-post-image>
 
-        <markdown class="markdown-body" ngPreserveWhitespaces>
-          {{post.body}}
-        </markdown>
+        <div class="markdown-body" markdown [data]="post.body"></div>
 
         <app-row *ngIf="post.tags && post.tags.length > 0" [margin]="'4px 0 16px 0'">
           <app-tag [tagName]="tag" *ngFor="let tag of post.tags"></app-tag>
@@ -70,6 +68,7 @@
                         [commentCount]="post.repliesCount"
                         [sharesCount]="post.sharesCount"
                         [postId]="post.id"
+                        [fontSize]="17"
       ></app-action-panel>
 
     </mat-card>

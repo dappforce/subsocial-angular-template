@@ -9,11 +9,9 @@ import { TranslocoRootModule } from '../../../transloco-root.module';
 import { MatIconModule } from '@angular/material/icon';
 import {
   IconRegistryProviders,
-  PostTemplate,
   SbDeviceRegistry,
   SbRouterModule,
   SbStoreModules,
-  SbTemplateId,
   SpaceTemplate,
 } from '../../../core/constants/storybook.const';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -21,6 +19,7 @@ import { SpaceUiModule } from '../space-ui.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SpaceItemComponent } from './space-item.component';
 import { of } from 'rxjs';
+import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
 
 export default {
   title: 'Space/Space Item',
@@ -36,6 +35,7 @@ export default {
         SbRouterModule,
         SbStoreModules,
         SpaceUiModule,
+        TranslocoMessageFormatModule.forRoot(),
       ],
       declarations: [],
       providers: [...IconRegistryProviders, ...SbDeviceRegistry],

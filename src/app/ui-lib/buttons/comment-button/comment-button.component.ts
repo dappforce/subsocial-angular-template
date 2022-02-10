@@ -8,6 +8,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class CommentButtonComponent implements OnInit {
   @Output() onClick = new EventEmitter();
   @Input() count: number;
+  @Input() fontSize: number = 14;
 
   constructor() {}
 

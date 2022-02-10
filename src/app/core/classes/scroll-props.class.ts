@@ -19,7 +19,13 @@ export class ScrollProps {
     this.endIndex = limit;
   }
 
-  public next() {
+  public setDefault() {
+    this.startIndex = 0;
+    this.endIndex = this.limit;
+    this.isFinish = false;
+  }
+
+  public next(): void {
     this.startIndex += this.limit;
     if (this.startIndex + this.limit > this.max) {
       this.endIndex = this.max;

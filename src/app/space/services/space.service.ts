@@ -1,27 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SubsocialApiService } from '../../shared/services/subsocial-api.service';
-import { SpaceStruct } from '@subsocial/api/flat-subsocial/flatteners';
 import { SpaceId } from '@subsocial/types/substrate/interfaces';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/state';
-import {
-  selectSpaceById,
-  selectSpaceEntitiesByIds,
-} from '../../state/space/space.selectors';
-import {
-  loadSpacesByIds,
-  loadSpaceById,
-  loadSpaceSuccess,
-} from '../../state/space/space.actions';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { ConvertService } from '../../shared/services/convert.service';
 import { StoreService } from '../../state/store.service';
-import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
 import { BehaviorSubject } from 'rxjs';
 import { AccountService } from '../../shared/services/account.service';
 import { mapSpaceDTOToSpace } from '../../core/mapper/space.map';
 import { Space } from '../../state/space/space.state';
+import { SpaceStruct } from '@subsocial/types/dto';
 
 @Injectable({
   providedIn: 'root',
@@ -94,28 +84,6 @@ export class SpaceService {
       method: METHODS.spaceFollowers,
       id,
     });
-  }
-
-  async reloadSpaceById(id: string) {
-    return (await this.storeService.reloadEntity(
-      selectSpaceById,
-      loadSpaceById,
-      loadSpaceSuccess,
-      id,
-      { id }
-    )) as SpaceListItemData;
-  }
-
-  async getOrLoadSpacesByIds(ids: string[] | undefined) {
-    const spaceEntityData = await this.storeService.getOrLoadEntities(
-      selectSpaceEntitiesByIds,
-      loadSpacesByIds,
-      loadSpaceSuccess,
-      ids,
-      { payload: { ids } }
-    );
-
-    return Object.values(spaceEntityData) as SpaceListItemData[];
   }
 
   async getSpaceIdsByAccount(id: string) {

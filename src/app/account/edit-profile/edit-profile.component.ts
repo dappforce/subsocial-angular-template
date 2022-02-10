@@ -17,7 +17,6 @@ import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { ProfileFacade } from '../../state/profile/profile.facade';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { TranslocoService } from '@ngneat/transloco';
 import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
 
 type Type = 'edit' | 'new';

@@ -1,8 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
-  Component,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { VoteButtonComponent } from '../../../core/base-component/vote-button.component';
 
 @Component({

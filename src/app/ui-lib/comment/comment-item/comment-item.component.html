@@ -42,9 +42,7 @@
 
         </app-row>
 
-        <markdown *ngIf="showCommentText" class="markdown-body" ngPreserveWhitespaces>
-          {{ comment.body }}
-        </markdown>
+        <div class="markdown-body" markdown [data]="comment.body"></div>
 
       </app-column>
 

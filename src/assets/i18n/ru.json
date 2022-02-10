@@ -250,6 +250,7 @@
     "morePost": "Loading more posts...",
     "moreSpaces": "Loading more spaces...",
     "moreProfiles": "Loading more profiles...",
-    "loadingSpace": "Loading spaces..."
+    "loadingSpace": "Loading spaces...",
+    "noNotifications": "No notification yet"
   }
 }

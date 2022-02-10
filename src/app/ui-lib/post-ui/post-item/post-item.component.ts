@@ -1,12 +1,9 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
-  SimpleChanges,
 } from '@angular/core';
 import { Post } from '../../../core/models/post/post-list-item.model';
 import { OnViewReaction } from '../../../core/interfaces/on-view-reaction';
@@ -31,7 +28,6 @@ export class PostItemComponent implements OnInit, OnDestroy, OnViewReaction {
   @Input() showHiddenContent: boolean | null;
 
   isCommentOpen: boolean;
-
   skip$: Observable<boolean>;
 
   private unsubscribe$: Subject<void> = new Subject();
@@ -48,10 +44,15 @@ export class PostItemComponent implements OnInit, OnDestroy, OnViewReaction {
     this.prepareModalConfig();
 
     this.skip$ = this.account.currentAccount$.pipe(
-      mergeMap((_) =>
+      mergeMap((account) =>
         this.visibility
           .getIsPostHidden(this.postItemData!.id)
-          .pipe(map((hidden) => hidden && !this.showHiddenContent))
+          .pipe(
+            map(
+              (hidden) =>
+                (hidden && !account) || (hidden && !this.showHiddenContent)
+            )
+          )
       )
     );
   }

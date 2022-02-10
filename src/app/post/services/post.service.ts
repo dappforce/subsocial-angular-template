@@ -5,14 +5,14 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { LinkService } from '../../shared/services/link.service';
 import { SubsocialApiService } from '../../shared/services/subsocial-api.service';
-import { PostId } from '@subsocial/types/substrate/interfaces';
-import { PostWithAllDetails } from '@subsocial/api/flat-subsocial/dto';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { flatReaction } from '../../core/mapper/flatten.map';
 import { ConvertService } from '../../shared/services/convert.service';
 import { StoreService } from '../../state/store.service';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { mapPostDTOToPost } from '../../core/mapper/post.map';
+import { PostId } from '@subsocial/types/substrate/interfaces';
+import { PostWithAllDetails } from '@subsocial/types/dto';
 
 @Injectable({
   providedIn: 'root',

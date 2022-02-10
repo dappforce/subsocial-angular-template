@@ -1,11 +1,10 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
-import { newFlatSubsocialApi, SubsocialSubstrateApi } from '@subsocial/api';
+import { newFlatSubsocialApi } from '@subsocial/api';
 import { environment } from '../../../environments/environment';
 import { FlatSubsocialApi } from '@subsocial/api/flat-subsocial';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AnyId } from '@subsocial/api/flat-subsocial/dto';
 import { SnackBarService } from './snack-bar.service';
-import { ConvertService } from './convert.service';
+import { AnyId } from '@subsocial/types/dto';
 
 type FetchSubstrateProps = {
   pallet: string;
@@ -26,8 +25,7 @@ export class SubsocialApiService {
   constructor(
     @Inject(PLATFORM_ID) private platformId: Object,
     private _snackBar: MatSnackBar,
-    private snackBarService: SnackBarService,
-    private convert: ConvertService
+    private snackBarService: SnackBarService
   ) {}
   public api: FlatSubsocialApi;
 
@@ -56,10 +54,10 @@ export class SubsocialApiService {
   }
 
   async getSubstrateIdsById(props: FetchSubstrateProps) {
-    const readyApi = await this.api.subsocial.substrate.api;
+    const readyApi = await this.api?.subsocial.substrate.api;
     const { pallet, method, id } = props;
-    const ids = await readyApi.query[pallet][method](id);
-    return (ids.toJSON() as Array<any>).map((id) => id.toString());
+    const ids = await readyApi?.query[pallet][method](id);
+    return (ids?.toJSON() as Array<any>).map((id) => id.toString()) || [];
   }
 
   async getSubstrateIdsByMulti(props: FetchSubstrateMultiProps) {

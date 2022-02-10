@@ -18,7 +18,8 @@ export class SignInModalService {
     const { accounts, status } = await this.accountService.getSignInData();
 
     const dialogRef = this.dialog.open(SignInModalDialogComponent, {
-      maxWidth: '430px',
+      maxWidth: '432px',
+      width: '90vw',
       data: {
         status,
         accounts,
@@ -35,7 +36,7 @@ export class SignInModalService {
   openGetTokensModal() {
     this.dialog.open(GetTokensModalDialogComponent, {
       maxWidth: '432px',
-      width: '80vw',
+      width: '90vw',
     });
   }
 }

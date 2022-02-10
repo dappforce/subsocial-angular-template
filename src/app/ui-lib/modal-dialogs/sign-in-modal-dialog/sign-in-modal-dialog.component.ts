@@ -23,10 +23,7 @@ import { SignInModalService } from '../services/sign-in-modal.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignInModalDialogComponent implements OnInit {
-  @Input() status: ACCOUNT_STATUS;
-
   ACCOUNT_STATUS = ACCOUNT_STATUS;
-  ipfsUrl = environment.ipfsUrl;
 
   LINKS = LINKS;
 

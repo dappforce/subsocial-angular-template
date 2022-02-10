@@ -1,4 +1,4 @@
-import { HasId } from '@subsocial/api/flat-subsocial/flatteners';
+import { HasId } from '@subsocial/types/dto';
 
 export type UserInfo = {
   userName?: string;

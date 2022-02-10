@@ -30,12 +30,10 @@ export class FollowersModalDialogComponent implements OnInit {
 
   followersIds: string[] = [];
 
-  ngOnInit(): void {
-    from(this.spaceService.getFollowersIdsBySpaceId(this.data.spaceId))
-      .pipe(take(1))
-      .subscribe((ids) => {
-        this.followersIds = ids;
-        this.cd.markForCheck();
-      });
+  async ngOnInit() {
+    this.followersIds = await this.spaceService.getFollowersIdsBySpaceId(
+      this.data.spaceId
+    );
+    this.cd.markForCheck();
   }
 }

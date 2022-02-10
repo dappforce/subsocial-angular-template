@@ -7,8 +7,6 @@ import { profileReducer } from './profile/profile.reducer';
 import { ProfileState } from './profile/profile.state';
 import { ReplyIdState } from './reply-id/reply-id.state';
 import { replyIdReducer } from './reply-id/reply-id.reducer';
-import { LoaderState } from './notification/loader.state';
-import { loaderReducer } from './notification/loader.reducer';
 import { MyAccountState } from './my-account/my-account.state';
 import { myAccountReducer } from './my-account/my-account.reducer';
 import { MyPostReactionsState } from './my-post-reactions/my-post-reactions.state';
@@ -23,7 +21,6 @@ export interface AppState {
   posts: PostState;
   profiles: ProfileState;
   replyIds: ReplyIdState;
-  loader: LoaderState;
   myAccount: MyAccountState;
   myPostReactions: MyPostReactionsState;
   followedSpaceIds: FollowedSpaceIdsState;
@@ -35,7 +32,6 @@ export const appReducers: ActionReducerMap<AppState> = {
   posts: postReducer,
   profiles: profileReducer,
   replyIds: replyIdReducer,
-  loader: loaderReducer,
   myAccount: myAccountReducer,
   myPostReactions: myPostReactionsReducer,
   followedSpaceIds: followedSpaceIdsReducer,

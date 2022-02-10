@@ -11,13 +11,13 @@
 
   <div class="modal-body">
 
-    <ng-container *ngIf="activeTab.tabName === 'following' && followingIds">
+    <ng-container *ngIf="activeTab?.tabName === 'following' && followingIds">
       <ng-container *ngIf="followingIds.length > 0; else noDownload">
         <app-vote-user-list [ids]="followingIds"></app-vote-user-list>
       </ng-container>
     </ng-container>
 
-    <ng-container *ngIf="activeTab.tabName === 'followers' && followersIds">
+    <ng-container *ngIf="activeTab?.tabName === 'followers' && followersIds">
       <ng-container *ngIf="followersIds.length > 0; else noDownload">
         <app-vote-user-list [ids]="followersIds"></app-vote-user-list>
       </ng-container>

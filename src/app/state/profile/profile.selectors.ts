@@ -2,11 +2,10 @@ import { Profile, profileAdapter, ProfileState } from './profile.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectMyAccountAddress } from '../my-account/my-account.selectors';
 import { UserInfo } from '../../core/models/user-info.model';
-import { KeyValuePair } from '../../core/models/key-value-pair.model';
 import { selectFollowedAccountIdsByCurrentAccount } from '../followed-account-ids/followed-account-ids.selectors';
 import { dictionaryToArray } from '../../core/utils';
 
-const { selectIds, selectEntities, selectAll, selectTotal } =
+const { selectEntities, selectAll, selectTotal } =
   profileAdapter.getSelectors();
 
 export const selectProfileState =

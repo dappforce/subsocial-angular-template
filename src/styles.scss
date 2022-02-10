@@ -105,6 +105,12 @@ $subsocial-ng-app-theme: mat-light-theme((
   .mat-input-element::-webkit-input-placeholder {
     color: $text_color_dark_gray;
   }
+
+  .mat-button-disabled {
+    background: $inactive_btn_bg !important;
+    color: $inactive_btn_text !important;
+    border: 1px solid $inactive_btn_bg !important;
+  }
 }
 
 @mixin custom-input-theme() {
@@ -129,6 +135,10 @@ $subsocial-ng-app-theme: mat-light-theme((
       display: inline;
     }
   }
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgb(0 0 0 / 0%);
 }
 
 @include custom-tabs-theme();
@@ -277,6 +287,18 @@ p {
   padding: $space_normal;
 }
 
+.sb-modal-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+  background-color: rgb(0 0 0 / 60%);
+}
+
+
 .mat-dialog-container {
   padding: 0 !important;
 }
@@ -382,7 +404,7 @@ markdown {
 
 .action-panel-label {
   color: $text_color_dark_gray;
-  @include font($font_normal, 400, 24px);
+  @include font($font_small, 400, 24px);
   margin-left: $space_mini;
   letter-spacing: 0.1px;
   text-transform: capitalize;
@@ -427,7 +449,7 @@ markdown {
   overflow-y: scroll;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 825px) {
   /* For mobile phones: */
   .container {
     width: 100%;
@@ -454,6 +476,10 @@ markdown {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgb(0 0 0 / 60%);
   }
 }
 

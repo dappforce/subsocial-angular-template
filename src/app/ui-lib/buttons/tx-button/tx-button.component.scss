@@ -31,9 +31,7 @@ button {
     cursor: default;
     background: $color_white;
     border: 1px solid $button_outline_gray;
-    color: $text_color_dark_gray;
-    padding-left: $space_huge;
-    transition: padding-left 300ms;
+    color: $inactive_btn_text;
   }
 
   ::ng-deep {
@@ -45,8 +43,10 @@ button {
 
 mat-spinner {
   display: inline;
-  left: -24px;
+  left: -10px;
   top: 2px;
+  padding-left: 16px;
+  transition: padding-left 400ms;
 }
 
 .medium {

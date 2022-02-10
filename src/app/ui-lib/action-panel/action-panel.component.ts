@@ -48,6 +48,7 @@ export class ActionPanelComponent extends BaseTxComponent implements OnInit {
   @Input() sharesCount: number = 0;
   @Input() isShowLabel = false;
   @Input() isShowReply = false;
+  @Input() fontSize: number;
   @Input() position: 'center' | 'left' = 'center';
   @Output() replyClick = new EventEmitter();
   @Output() commentClick = new EventEmitter();

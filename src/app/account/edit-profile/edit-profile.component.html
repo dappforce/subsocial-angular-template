@@ -30,6 +30,7 @@
         <app-tx-button *transloco="let t; read: 'buttons'"
                        [name]="isNew ?  t('createProfile') : t('save')"
                        (click)="onEditProfile()"
+                       [isSending]="isSending"
         ></app-tx-button>
 
       </div>

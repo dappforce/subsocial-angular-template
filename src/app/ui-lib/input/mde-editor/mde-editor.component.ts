@@ -94,7 +94,8 @@ export class MdeEditorComponent
 
   private listenEvents() {
     this.simplemde.codemirror.on('change', () => {
-      this.value = sanitizeHtml(this.simplemde.value());
+      // this.value = sanitizeHtml(this.simplemde.value());
+      this.value = this.simplemde.value();
     });
 
     this.simplemde.codemirror.on('focus', () => {
@@ -139,7 +140,7 @@ export class MdeEditorComponent
       status: false,
       autofocus: this.autoFocus,
       spellChecker: false,
-      previewRender: (text: string) => sanitizeHtml(text),
+      sanitizerFunction: (text: string) => sanitizeHtml(text),
     };
   }
 

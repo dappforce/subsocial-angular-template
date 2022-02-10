@@ -55,7 +55,7 @@ export class PostEffects {
           })
         )
       ),
-      switchMap(({ id }) => from(this.postService.loadPostById(id, 'all'))),
+      concatMap(({ id }) => from(this.postService.loadPostById(id, 'all'))),
       filter((post) => !!post),
       map((post) => PostActions.upsertPost({ payload: post! }))
     )

@@ -22,13 +22,11 @@ import {
   Observable,
   Subject,
 } from 'rxjs';
-import { Activity, AnySpaceId } from '@subsocial/types';
 import { PostId } from '@subsocial/definitions/interfaces/subsocial/types';
 import { ScrollProps } from '../../core/classes/scroll-props.class';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { ActivityService } from '../../shared/services/activity.service';
 import { PostFacade } from '../../state/post/post.facade';
-import { NotificationItem } from '../../notification/notification-page/notification-page.component';
 
 @Component({
   selector: 'app-feed',

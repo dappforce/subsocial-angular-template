@@ -7,9 +7,9 @@ import {
   PLATFORM_ID,
 } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
-import { loadPostsByIds } from '../../state/post/post.actions';
-import { selectPostsByIds } from '../../state/post/post.selectors';
+import { AppState } from '../../store/state';
+import { loadPostsByIds } from '../../store/post/post.actions';
+import { selectPostsByIds } from '../../store/post/post.selectors';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { isPlatformBrowser } from '@angular/common';
 import { BaseInfinityScrollComponent } from '../../core/base-component/base-infinity-scroll.component';

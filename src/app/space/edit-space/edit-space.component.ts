@@ -13,9 +13,9 @@ import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { SpaceService } from '../services/space.service';
-import { SpaceFacade } from '../../state/space/space.facade';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
-import { FollowedSpaceIdsFacade } from '../../state/followed-space-ids/followed-space-ids.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
+import { FollowedSpaceIdsFacade } from '../../store/followed-space-ids/followed-space-ids.facade';
 
 type EditSpaceFormErrors = {
   name: string;
@@ -74,7 +74,7 @@ export class EditSpaceComponent extends BaseTxComponent implements OnInit {
     if (this.type === 'edit') {
       this.spaceFacade.loadSpace(this.spaceId!);
     } else {
-      const ids = this.getNewIdsFromEvent(result);
+      const ids = this.getNewIdsFromResult(result);
       if (ids?.length > 0) {
         this.spaceId = ids[0];
         await this.spaceService.getMyOwnSpaceIds();

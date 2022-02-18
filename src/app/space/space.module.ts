@@ -11,15 +11,15 @@ import { SpaceProfileComponent } from './space-profile/space-profile.component';
 import { PostModule } from '../post/post.module';
 import { MarkdownModule } from 'ngx-markdown';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { ButtonsModule } from '../ui-lib/buttons/buttons.module';
-import { SpaceUiModule } from '../ui-lib/space-ui/space-ui.module';
-import { InputModule } from '../ui-lib/input/input.module';
-import { ContainersModule } from '../ui-lib/containers/containers.module';
-import { TextModule } from '../ui-lib/text/text.module';
-import { ContentModule } from '../ui-lib/content/content.module';
+import { ButtonsModule } from '../components/buttons/buttons.module';
+import { SpaceUiModule } from '../components/space-ui/space-ui.module';
+import { InputModule } from '../components/input/input.module';
+import { ContainersModule } from '../components/containers/containers.module';
+import { TextModule } from '../components/text/text.module';
+import { ContentModule } from '../components/content/content.module';
 import { DirectivesModule } from '../shared/directives/directives.module';
-import { MenuModule } from '../ui-lib/menu/menu.module';
-import { TranslocoModule } from '@ngneat/transloco';
+import { MenuModule } from '../components/menu/menu.module';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     ContentModule,
     DirectivesModule,
     MenuModule,
-    TranslocoModule,
+    I18NextModule,
   ],
   exports: [SpaceListComponent],
 })

@@ -54,7 +54,7 @@ $subsocial-ng-app-theme: mat-light-theme((
 
 @mixin custom-tabs-theme() {
   .mat-tab-link  {
-    font-size: 16px;
+    font-size: $font_normal;
     color: $text_color_dark_gray;
     width: 100%;
     letter-spacing: 1.25px;
@@ -137,6 +137,10 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 }
 
+.mat-drawer-backdrop {
+  position: fixed !important;
+}
+
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgb(0 0 0 / 0%);
 }
@@ -148,6 +152,7 @@ $subsocial-ng-app-theme: mat-light-theme((
 html, body { height: 100%;}
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $color-bg;
   color: $color_normal;
@@ -271,6 +276,10 @@ p {
 
 .button-text {
   @include font($font_normal, 500)
+}
+
+.break-all {
+  word-break: break-all;
 }
 
 .container {
@@ -447,6 +456,10 @@ markdown {
   right: 0;
   left: 0;
   overflow-y: scroll;
+}
+
+.hidden-scroll {
+  overflow-y: hidden;
 }
 
 @media only screen and (max-width: 825px) {

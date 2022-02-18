@@ -16,15 +16,16 @@ import {
   tap,
 } from 'rxjs/operators';
 import { Activity } from '@subsocial/types';
-import { AppState } from '../../state/state';
+import { AppState } from '../../store/state';
 import { Store } from '@ngrx/store';
-import { PostFacade } from '../../state/post/post.facade';
-import { ProfileFacade } from '../../state/profile/profile.facade';
-import { SpaceFacade } from '../../state/space/space.facade';
+import { PostFacade } from '../../store/post/post.facade';
+import { ProfileFacade } from '../../store/profile/profile.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
 import { ScrollProps } from '../../core/classes/scroll-props.class';
 import { BehaviorSubject, combineLatest, forkJoin, Subject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { environment } from '../../../environments/environment';
+import { extractEntityIdsFromActivities } from '@subsocial/api/offchain';
 
 export type NotificationItem = {
   id: string;
@@ -65,7 +66,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
 
   wsSubject: WebSocketSubject<unknown>;
   notifications: NotificationItem[] = [];
-  public scrollProps = new ScrollProps(20);
+  public scrollProps = new ScrollProps(environment.infinityScrollOffset);
   private scrollDownEventSource = new BehaviorSubject<ScrollProps>(
     this.scrollProps
   );
@@ -153,20 +154,8 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
   }
 
   loadActivitiesEntityData(activities: Activity[]) {
-    const spaceIdsSet = new Set<string>();
-    const postIdsSet = new Set<string>();
-    const profileIdsSet = new Set<string>();
-
-    activities.forEach((activity) => {
-      activity.space_id && spaceIdsSet.add(activity.space_id);
-      activity.post_id && postIdsSet.add(activity.post_id);
-      activity.comment_id && postIdsSet.add(activity.comment_id);
-      activity.account && profileIdsSet.add(activity.account);
-    });
-
-    const spaceIds = Array.from(spaceIdsSet);
-    const postIds = Array.from(postIdsSet);
-    const profileIds = Array.from(profileIdsSet);
+    const { postIds, spaceIds, profileIds } =
+      extractEntityIdsFromActivities(activities);
 
     this.postFacade.loadPosts(postIds, 'all');
     this.spaceFacade.loadSpaces(spaceIds);

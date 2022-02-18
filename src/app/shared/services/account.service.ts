@@ -3,9 +3,9 @@ import { web3Enable, web3Accounts } from '@polkadot/extension-dapp';
 import { BehaviorSubject, forkJoin, from, Observable } from 'rxjs';
 import { SubsocialApiService } from './subsocial-api.service';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
-import { MyAccountState } from '../../state/my-account/my-account.state';
-import { loadMyProfile } from '../../state/profile/profile.actions';
+import { AppState } from '../../store/state';
+import { MyAccountState } from '../../store/my-account/my-account.state';
+import { loadMyProfile } from '../../store/profile/profile.actions';
 import { asAccountId } from '@subsocial/api';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import {
@@ -15,8 +15,8 @@ import {
   PolkadotAccount,
 } from '../../core/types/account.types';
 import { formatBalance } from '@polkadot/util';
-import { environment } from '../../../environments/environment';
 import { StorageService } from './storage.service';
+import { firstValueFrom } from 'rxjs';
 
 export enum ACCOUNT_STATUS {
   INIT,
@@ -49,16 +49,19 @@ export class AccountService {
     private api: SubsocialApiService,
     private store: Store<AppState>,
     private storage: StorageService
-  ) {
-    const { decimals, currency: unit } = environment;
-    formatBalance.setDefaults({ decimals, unit });
-  }
-
+  ) {}
   public getCurrentAccountId() {
     return this.currentAccountsSource.value?.id;
   }
 
   public async initAccount() {
+    const { decimals, token: unit } = this.api.metadata;
+
+    formatBalance.setDefaults({
+      decimals,
+      unit,
+    });
+
     const injectedExtensions = await web3Enable('Subsocial');
     const polkadotJs = injectedExtensions.find(
       (extension: any) => extension.name === 'polkadot-js'
@@ -171,7 +174,8 @@ export class AccountService {
     const status = this.statusSource.value;
     let accounts: AccountData[] = [];
     if (status === ACCOUNT_STATUS.UNAUTHORIZED) {
-      accounts = await this.getAccountsData().pipe(take(1)).toPromise();
+      accounts = await firstValueFrom(this.getAccountsData());
+      console.log(accounts);
     }
 
     return { accounts, status };

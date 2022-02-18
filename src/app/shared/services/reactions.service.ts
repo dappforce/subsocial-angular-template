@@ -3,7 +3,7 @@ import { AccountService } from './account.service';
 import { SubsocialApiService } from './subsocial-api.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { skipWhile, take } from 'rxjs/operators';
-import { MyPostReactions } from '../../state/my-post-reactions/my-post-reactions.state';
+import { MyPostReactions } from '../../store/my-post-reactions/my-post-reactions.state';
 import BN from 'bn.js';
 
 @Injectable({

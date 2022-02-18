@@ -1,0 +1,7 @@
+<app-tx-button  (click)="onClick();"
+                [isSending]="isSending"
+                [name]="'buttons.' + label | i18nextEager"
+                [type]="isFollow ? 'stroked' : 'flat'"
+                [width]="width"
+                [size]="size"
+></app-tx-button>

@@ -11,7 +11,7 @@ import { AccountService } from '../../shared/services/account.service';
 import { SubmittableResult } from '@polkadot/api';
 import { METHODS, PALLETS } from '../constants/query.const';
 import { VisibilityService } from '../../shared/services/visibility.service';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
 
 type VisibleOperationType = 'post' | 'space';
 

@@ -1,14 +1,14 @@
 <section class="edit-post-container">
   <mat-card>
-    <h2 class="title-medium" *transloco="let t; read: 'general'">
-      {{ t(type) }} {{ t('post') }}
+    <h2 class="title-medium">
+      {{ (type === 'edit' ? 'forms.titles.editPost' : 'forms.titles.newPost') | i18nextEager }}
     </h2>
     <app-tabs [tabLinks]="tabs"
               [activeLink]="activeTab"
               (tabClick)="setActiveTab($event)"
     ></app-tabs>
 
-    <form [formGroup]="postForm" action="" *transloco="let t; read: 'forms.placeholder'">
+    <form [formGroup]="postForm" action="">
 
       <app-space-select *ngIf="type === 'new'"
                         formControlName="spaceId"
@@ -31,7 +31,7 @@
           <div class="input-wp">
             <app-text-input formControlName="link"
                             [isRequired]="true"
-                            [label]="t('videoUrl')"
+                            [label]="'forms.placeholder.videoUrl' | i18nextEager"
                             (blur)="onVideoUrlBlur()"
                             [error]="postFormErrors.link"
             ></app-text-input>
@@ -40,7 +40,7 @@
         </ng-template>
       </ng-container>
 
-      <app-text-input [label]="t('postTitle')"
+      <app-text-input [label]="'forms.placeholder.postTitle' | i18nextEager"
                       formControlName="title"
       ></app-text-input>
 
@@ -48,21 +48,21 @@
                       formControlName="body"
                       [height]="160"
                       [autoFocus]="true"
-                      [placeholder]="t('postBody')"
+                      [placeholder]="'forms.placeholder.postBody' | i18nextEager"
                       [isRequired]="isBodyRequired"
                       [error]="postFormErrors.body"
       ></app-mde-editor>
 
       <app-tag-input formControlName="tags"
-                     [placeholder]="t('tags')"
+                     [placeholder]="'forms.placeholder.tags' | i18nextEager"
       ></app-tag-input>
 
-      <div class="button-wp" *transloco="let t; read: 'buttons'">
+      <div class="button-wp">
         <button (click)="resetForm()" mat-stroked-button>
-          {{ type === 'edit' ? t('cancel') : t('resetForm')}}
+          {{ (type === 'edit' ? 'buttons.cancel' : 'buttons.resetForm') | i18nextEager}}
         </button>
 
-        <app-tx-button [name]="type === 'edit' ? t('save') : t('createPost')"
+        <app-tx-button [name]="(type === 'edit' ? 'buttons.save' : 'buttons.createPost') | i18nextEager"
                        (click)="onEditPost()"
                        [isSending]="isSending"
         ></app-tx-button>

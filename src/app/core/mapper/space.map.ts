@@ -1,4 +1,4 @@
-import { Space } from '../../state/space/space.state';
+import { Space } from '../../store/space/space.state';
 import { SpaceData } from '@subsocial/types/dto';
 
 export const mapSpaceDTOToSpace = (spaceData: SpaceData) => {

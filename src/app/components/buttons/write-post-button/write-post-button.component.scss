@@ -1,0 +1,24 @@
+@import "var";
+
+.static {
+
+}
+
+.full {
+  width: 100%;
+}
+
+.write-post-button {
+  cursor: pointer;
+  font-size: $font_normal;
+}
+
+.disabled {
+  background: $inactive_btn_bg !important;
+  color: $inactive_btn_text !important;
+  cursor: auto;
+}
+
+.tooltip {
+  font-size: $font_small;
+}

@@ -1,0 +1,20 @@
+<button ifDesktop
+        class="add-btn-desktop"
+        *ngIf="type"
+        mat-ripple
+        [ngClass]="type"
+        (click)="onClick()"
+>
+  <span>+</span>
+  <span *ngIf="isPost">{{ 'buttons.newPost' | i18nextEager }}</span>
+  <span *ngIf="!isPost">{{ 'buttons.createSpace' | i18nextEager  }}</span>
+</button>
+
+<button class="add-btn-mobile"
+        ifMobile mat-mini-fab
+        color="primary"
+        *ngIf="type"
+        (click)="onClick()"
+>
+  <mat-icon>add</mat-icon>
+</button>

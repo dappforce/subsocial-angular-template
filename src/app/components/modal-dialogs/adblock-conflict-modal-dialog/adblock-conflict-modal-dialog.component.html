@@ -1,0 +1,20 @@
+<app-column [v]="'center'" [h]="'space-between'">
+
+  <img width="180"
+       height="40"
+       src="assets/subsocial-logo.png"
+       alt="subsocial-logo"
+  >
+
+  <p class="title-large">{{ 'modals.adblock.title' | i18nextEager}}</p>
+
+  <p>{{'modals.adblock.subtitle' | i18nextEager }}</p>
+
+  <button (click)="reload()"
+          class="w100 normal"
+          mat-flat-button
+          color="primary">
+    {{ 'modals.adblock.button' | i18nextEager }}
+  </button>
+
+</app-column>

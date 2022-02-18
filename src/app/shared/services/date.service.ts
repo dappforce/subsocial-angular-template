@@ -1,43 +1,50 @@
 import { Injectable } from '@angular/core';
-import * as dayjs from 'dayjs';
-import * as relativeTime from 'dayjs/plugin/relativeTime';
-import * as updateLocale from 'dayjs/plugin/updateLocale';
+import {
+  I18N_DAYJS_RELATIVE_TIME_KEY,
+  RelativeTimeProps,
+  relativeTimeUnits,
+  SubDate,
+  SubsocialDateLocaleProps,
+} from '@subsocial/utils';
+import { I18NextPipe } from 'angular-i18next';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DateService {
-  constructor() {
-    dayjs.extend(relativeTime);
-    dayjs.extend(updateLocale);
-    dayjs.updateLocale('en', {
-      relativeTime: {
-        future: 'in %s',
-        past: '%s ago',
-        s: 'a few seconds',
-        m: 'a minute',
-        mm: '%dm',
-        h: 'an hour',
-        hh: '%dh',
-        d: 'a day',
-        dd: '%dd',
-        M: 'a month',
-        MM: '%d months',
-        y: 'a year',
-        yy: '%d years',
-      },
-    });
+  BASE_I18N_KEY = I18N_DAYJS_RELATIVE_TIME_KEY;
+  constructor(private t: I18NextPipe) {}
+
+  getDate(date: string | number) {
+    return SubDate.formatDate(date);
   }
 
-  fromNow(date: string | number) {
-    const diff = dayjs().diff(dayjs(date), 'days');
+  updateLocale(lang: string) {
+    const subDateLocale: SubsocialDateLocaleProps = {
+      localeName: lang,
+      relativeTime: this.fillRelativeTime(),
+    };
 
-    if (diff < 7) {
-      return dayjs(date).fromNow().toLowerCase();
-    } else if (diff > 7 && diff < 365) {
-      return dayjs(date).format('DD MMM');
-    } else {
-      return dayjs(date).format('DD MMM YY');
+    SubDate.updateLocale(subDateLocale);
+  }
+
+  private fillRelativeTime() {
+    const relativeTime = Object.assign({}, relativeTimeUnits);
+
+    for (let key in relativeTimeUnits) {
+      const unit = relativeTimeUnits[key as keyof RelativeTimeProps];
+      relativeTime[key as keyof RelativeTimeProps] = this.t.transform(
+        this.combineI18nKey(key),
+        {
+          unit,
+        }
+      );
     }
+
+    return relativeTime;
+  }
+
+  private combineI18nKey(key: string) {
+    return `${this.BASE_I18N_KEY}.${key}`;
   }
 }

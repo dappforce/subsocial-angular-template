@@ -1,0 +1,10 @@
+<ng-container>
+  <a *ngIf="type === 'link'" (click)="goToSpacePage()">
+    <span>{{ 'general.seeMore' | i18nextEager }}</span>
+  </a>
+
+  <span *ngIf="type === 'expand'" (click)="onSwitch()" >
+    {{ (isMore ? 'general.seeMore' : 'general.seeLess') | i18nextEager  }}
+  </span>
+</ng-container>
+

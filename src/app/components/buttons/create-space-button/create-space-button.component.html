@@ -1,0 +1,7 @@
+<button [ngClass]="[width, color]"
+        mat-stroked-button
+        color="primary"
+        (click)="onClick()"
+>
+  {{ (isCreate ? 'buttons.createSpace' : 'buttons.editSpace') | i18nextEager}}
+</button>

@@ -6,9 +6,9 @@ import {
 import { BaseInfinityScrollComponent } from '../../../core/base-component/base-infinity-scroll.component';
 import { UserInfo } from '../../../core/models/user-info.model';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../state/state';
-import { loadProfilesByIds } from '../../../state/profile/profile.actions';
-import { selectUserInfoByIds } from '../../../state/profile/profile.selectors';
+import { AppState } from '../../../store/state';
+import { loadProfilesByIds } from '../../../store/profile/profile.actions';
+import { selectUserInfoByIds } from '../../../store/profile/profile.selectors';
 import { Actions } from '@ngrx/effects';
 
 @Component({

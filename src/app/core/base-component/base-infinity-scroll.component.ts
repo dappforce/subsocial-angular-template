@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ScrollProps } from '../classes/scroll-props.class';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { AppState } from '../../state/state';
+import { AppState } from '../../store/state';
 import { Store } from '@ngrx/store';
 import { delay, filter, map, switchMap, tap } from 'rxjs/operators';
 import { Actions } from '@ngrx/effects';

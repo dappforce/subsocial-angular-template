@@ -7,9 +7,9 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { SpaceService } from '../services/space.service';
 import { PostService } from '../../post/services/post.service';
-import { Space } from '../../state/space/space.state';
+import { Space } from '../../store/space/space.state';
 import { from, Observable } from 'rxjs';
-import { SpaceFacade } from '../../state/space/space.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
 import {
   filter,
   map,

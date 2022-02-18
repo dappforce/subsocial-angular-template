@@ -1,0 +1,31 @@
+<aside [@slideInOut]="menuStatus" #aside [ngClass]="{'shadow': type === 'hover', 'border-top': type === 'switch'}">
+  <app-column class="links">
+    <ng-container *ngFor="let item of menuItems">
+      <ng-container *ngIf="item.type === 'item'; else divider">
+        <a href="{{item.href}}" target="_blank" [ngClass]="item.className">
+          <mat-icon *ngIf="item.icon" svgIcon="{{item.icon}}"></mat-icon>
+          <img *ngIf="item.image" width="20" height="20" src="{{'assets/icons/' + item.image}}">
+          <span>{{item.title}}</span>
+        </a>
+      </ng-container>
+      <ng-template #divider>
+        <mat-divider class="divider"></mat-divider>
+      </ng-template>
+    </ng-container>
+  </app-column>
+  <section class="social-links" [ngClass]="{'social-links-close': menuStatus === 'desktop-out'}">
+    <span class="title">Our social links:</span>
+    <div>
+      <ng-container *ngFor="let icon of iconItems">
+        <a href="{{icon.href}}"  target="_blank">
+          <mat-icon svgIcon="{{icon.icon}}"></mat-icon>
+        </a>
+      </ng-container>
+    </div>
+  </section>
+</aside>
+
+<div *ngIf="type === 'switch' && isMobileOpen"
+     (click)="onBackdropClick()"
+     class="backdrop border-top"
+></div>

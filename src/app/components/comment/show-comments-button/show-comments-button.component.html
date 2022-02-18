@@ -1,0 +1,20 @@
+<ng-container *ngIf="!!replyCommentCount">
+  <div class="reply-comment-title"
+       [style.margin-bottom]="isShowReplyComments ? '0' : '9px'"
+  >
+    <a class="reply-count"
+       (click)="showMore.emit()" >
+      {{ ((isShowReplyComments
+             ?  'buttons.hide' : 'buttons.show') | i18nextEager)
+              + ' '
+              + replyCommentCount
+              + ' '
+              + ('plural.reply' | i18nextEager: {count: replyCommentCount})
+      }}
+    </a>
+    <mat-icon svgIcon="arrow-icon"
+              [style.width]="'10px'"
+              [ngClass]="{ 'rotate-up': isShowReplyComments, 'rotate-down': !isShowReplyComments }"
+    ></mat-icon>
+  </div>
+</ng-container>

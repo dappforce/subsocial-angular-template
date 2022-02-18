@@ -14,8 +14,8 @@ import { SpaceService } from '../../space/services/space.service';
 import { PostService } from '../../post/services/post.service';
 import { AccountService } from '../../shared/services/account.service';
 import { FollowerService } from '../../shared/services/follower.service';
-import { Profile } from '../../state/profile/profile.state';
-import { ProfileFacade } from '../../state/profile/profile.facade';
+import { Profile } from '../../store/profile/profile.state';
+import { ProfileFacade } from '../../store/profile/profile.facade';
 
 @Component({
   selector: 'app-profile',

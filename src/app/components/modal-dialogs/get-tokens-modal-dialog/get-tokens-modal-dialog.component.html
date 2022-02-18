@@ -1,0 +1,33 @@
+<app-column h="center" [padding]="'16px'">
+  <section class="modal-header">
+
+    <app-close-button class="close-btn"
+                      (onClose)="dialogRef.close()"
+    ></app-close-button>
+
+    <div class="header-title title-large">
+      {{ 'modals.login.title-wait' | i18nextEager }}
+    </div>
+
+    <app-paragraph [marginBottom]="16"
+                   [marginTop]="12"
+                   [text]="'modals.getTokens.message' | i18nextEager"
+    ></app-paragraph>
+
+    <button mat-flat-button
+            color="primary"
+            class="normal"
+    >
+      {{'buttons.getTokens' | i18nextEager}}
+    </button>
+
+  </section>
+  <app-row h="center"
+           margin="15px 0 0 0"
+           class="footer-wp"
+  >
+    <a href="">{{ 'modals.login.noAccountScreen.privacyPolicy' | i18nextEager}}</a>
+    <a href="">{{ 'modals.login.noAccountScreen.termOfUse' | i18nextEager}}</a>
+  </app-row>
+</app-column>
+

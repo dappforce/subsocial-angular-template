@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { SubsocialApiService } from '../../shared/services/subsocial-api.service';
 import { SpaceId } from '@subsocial/types/substrate/interfaces';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
+import { AppState } from '../../store/state';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { ConvertService } from '../../shared/services/convert.service';
-import { StoreService } from '../../state/store.service';
+import { StoreService } from '../../store/store.service';
 import { BehaviorSubject } from 'rxjs';
 import { AccountService } from '../../shared/services/account.service';
 import { mapSpaceDTOToSpace } from '../../core/mapper/space.map';
-import { Space } from '../../state/space/space.state';
+import { Space } from '../../store/space/space.state';
 import { SpaceStruct } from '@subsocial/types/dto';
 
 @Injectable({
@@ -72,7 +72,7 @@ export class SpaceService {
 
   async loadSpaceById(id: string) {
     const spaceData = await this.apiService.api.findSpace({
-      id: this.convert.convertToBN(id),
+      id: this.convert.idToBn(id),
     });
 
     return spaceData ? mapSpaceDTOToSpace(spaceData) : undefined;

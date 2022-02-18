@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { PostFacade } from '../../state/post/post.facade';
+import { PostFacade } from '../../store/post/post.facade';
 import { map } from 'rxjs/operators';
-import { SpaceFacade } from '../../state/space/space.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
 
 @Injectable({
   providedIn: 'root',

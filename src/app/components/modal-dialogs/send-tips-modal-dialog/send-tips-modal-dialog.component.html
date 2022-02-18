@@ -1,0 +1,56 @@
+<app-column padding="16px">
+  <app-row [margin]="'-6px 0 0 0'"
+           [h]="'space-between'"
+           [v]="'center'"
+  >
+
+    <span class="title-medium">{{ 'modals.tips.title' | i18nextEager }}</span>
+
+    <app-close-button (onClose)="dialogRef.close()"></app-close-button>
+
+  </app-row>
+
+  <app-row [h]="'space-between'"
+           [margin]="'14px 0 16px 0'"
+  >
+    <app-avatar [jdentityValue]="data.profile.id"
+                [src]="data.profile.avatar"
+                [size]="60"
+    ></app-avatar>
+
+    <app-column h="space-between" [padding]="'0 8px'">
+
+      <span class="text-gray small">{{ 'modals.tips.recipient' | i18nextEager }}:</span>
+
+      <span class="name">{{data.profile.name || (data.profile.id | addressHidden)}}</span>
+
+      <span class="text-gray small break-all">{{data.profile.id}}</span>
+
+    </app-column>
+
+  </app-row>
+
+  <app-send-tips-input [balance]="account.balance$ | async"
+                       [formControl]="amountControl"
+                       [errorKey]="errorKey$ | async"
+  ></app-send-tips-input>
+
+  <app-row [h]="'end'"
+           [margin]="'10px 0 0 0'"
+  >
+
+    <button mat-stroked-button
+            (click)="dialogRef.close()"
+            class="cancel-btn"
+    >
+      {{ 'buttons.cancel' | i18nextEager }}
+    </button>
+
+    <app-tx-button [isSending]="isSending"
+                   (click)="onSendTips()"
+                   [name]="'buttons.sendTips' | i18nextEager"
+    ></app-tx-button>
+
+  </app-row>
+
+</app-column>

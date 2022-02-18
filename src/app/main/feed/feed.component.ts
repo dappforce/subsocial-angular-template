@@ -26,7 +26,7 @@ import { PostId } from '@subsocial/definitions/interfaces/subsocial/types';
 import { ScrollProps } from '../../core/classes/scroll-props.class';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { ActivityService } from '../../shared/services/activity.service';
-import { PostFacade } from '../../state/post/post.facade';
+import { PostFacade } from '../../store/post/post.facade';
 
 @Component({
   selector: 'app-feed',

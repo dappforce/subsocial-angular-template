@@ -13,26 +13,25 @@ import { CommonModule } from '@angular/common';
 import { SpaceModule } from './space/space.module';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { AppErrorStateMatcher } from './core/errors/error-matcher';
-import { BaseControlValueAccessorComponent } from './core/base-component/base-value-accessor';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { SpaceEffects } from './state/space/space.effects';
-import { appReducers } from './state/state';
+import { SpaceEffects } from './store/space/space.effects';
+import { appReducers } from './store/state';
 import { SubsocialApiService } from './shared/services/subsocial-api.service';
-import { PostEffects } from './state/post/post.effects';
-import { ReplyIdEffects } from './state/reply-id/reply-id.effects';
-import { ProfileEffects } from './state/profile/profile.effects';
+import { PostEffects } from './store/post/post.effects';
+import { ReplyIdEffects } from './store/reply-id/reply-id.effects';
+import { ProfileEffects } from './store/profile/profile.effects';
 import { RouterModule } from '@angular/router';
-import { MyPostReactionsEffects } from './state/my-post-reactions/my-post-reactions.effects';
+import { MyPostReactionsEffects } from './store/my-post-reactions/my-post-reactions.effects';
 import { PostModule } from './post/post.module';
-import { FollowedSpaceIdsEffects } from './state/followed-space-ids/followed-space-ids.effects';
-import { FollowedAccountIdsEffects } from './state/followed-account-ids/followed-account-ids.effects';
-import { TranslocoRootModule } from './transloco-root.module';
-import { MenuModule } from './ui-lib/menu/menu.module';
-import { ModalDialogModule } from './ui-lib/modal-dialogs/modal-dialog.module';
-import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
+import { FollowedSpaceIdsEffects } from './store/followed-space-ids/followed-space-ids.effects';
+import { FollowedAccountIdsEffects } from './store/followed-account-ids/followed-account-ids.effects';
+import { MenuModule } from './components/menu/menu.module';
+import { ModalDialogModule } from './components/modal-dialogs/modal-dialog.module';
+import { I18NextModule } from 'angular-i18next';
+import { I18N_PROVIDERS } from './locale/i18next.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -61,10 +60,9 @@ import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
       FollowedAccountIdsEffects,
     ]),
     SharedModule,
-    TranslocoRootModule,
     MenuModule,
     ModalDialogModule,
-    TranslocoMessageFormatModule.forRoot(),
+    I18NextModule.forRoot(),
   ],
   providers: [
     IconRegistryService,
@@ -82,6 +80,7 @@ import { TranslocoMessageFormatModule } from '@ngneat/transloco-messageformat';
       multi: true,
     },
     { provide: ErrorStateMatcher, useClass: AppErrorStateMatcher },
+    ...I18N_PROVIDERS,
   ],
   bootstrap: [AppComponent],
 })

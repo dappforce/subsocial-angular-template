@@ -1,4 +1,4 @@
-import { Profile } from '../../state/profile/profile.state';
+import { Profile } from '../../store/profile/profile.state';
 import { ProfileData } from '@subsocial/types/dto';
 
 export const mapProfileDTOToProfile = (

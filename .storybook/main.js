@@ -16,13 +16,8 @@ module.exports = {
       new webpack.ProvidePlugin({
         process: "process/browser.js",
       }),
-      new webpack.NormalModuleReplacementPlugin(
-        /src[\\\/]environments[\\\/]environment.ts/,
-        process.env.NODE_ENV === "development"
-          ? "../environments-storybook/environment.ts"
-          : "../environments-storybook/environment.prod.ts"
-      ),
     ];
+
     return config;
   },
 };

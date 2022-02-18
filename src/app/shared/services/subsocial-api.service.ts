@@ -18,6 +18,11 @@ type FetchSubstrateMultiProps = {
   tuples: string[][];
 };
 
+type SubsocialMetadata = {
+  token: string;
+  decimals: number;
+};
+
 @Injectable({
   providedIn: 'root',
 })
@@ -28,6 +33,8 @@ export class SubsocialApiService {
     private snackBarService: SnackBarService
   ) {}
   public api: FlatSubsocialApi;
+
+  public metadata: SubsocialMetadata;
 
   public get substrate() {
     return this.api.subsocial.substrate;
@@ -49,6 +56,12 @@ export class SubsocialApiService {
         httpRequestMethod: 'get',
       },
     });
+
+    const { registry } = await this.api.subsocial.substrate.api;
+    this.metadata = {
+      decimals: registry.chainDecimals[0],
+      token: registry.chainTokens[0],
+    };
 
     snackBar.dismiss();
   }

@@ -9,6 +9,6 @@ export class DayjsPipe implements PipeTransform {
   constructor(private dateService: DateService) {}
 
   transform(value: string | number): string {
-    return this.dateService.fromNow(value);
+    return this.dateService.getDate(value);
   }
 }

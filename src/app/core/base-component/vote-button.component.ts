@@ -16,4 +16,5 @@ export class VoteButtonComponent {
   @Input() count: number = 0;
   @Output() voteClick = new EventEmitter();
   @Input() fontSize = 14;
+  @Input() bold: boolean;
 }

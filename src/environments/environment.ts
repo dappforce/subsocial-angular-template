@@ -1,45 +1,47 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-const baseNodeAddress = 'dev-subsocial.codebridge.tech/';
-const baseNodeUrl = 'https://' + baseNodeAddress;
-
 export const environment = {
   baseUrl: 'http://localhost:4200',
   production: false,
-  ipfsUrl: `${baseNodeUrl}ipfs/read/ipfs/`,
+  ipfsUrl: 'http://127.0.0.1:8080/read/ipfs/',
   domainUrl: 'http://localhost:4200/',
-  appName: 'Subsocial Angular',
-  substrateNodeUrl: `wss://${baseNodeAddress}rpc`,
-  offchainUrl: `${baseNodeUrl}offchain`,
-  offchainWs: `wss://${baseNodeUrl}notif-ws`,
-  addFileUrl: `${baseNodeUrl}offchain/v1/ipfs/addFile`,
-  ipfsNodeUrl: `${baseNodeUrl}ipfs/read`,
-  currency: 'SUB',
-  decimals: 11,
+  appName: 'ngSocial',
+  substrateNodeUrl: 'ws://localhost:9944',
+  offchainUrl: 'http://localhost:3001',
+  offchainWs: 'ws://localhost:3011',
+  addFileUrl: 'http://localhost:3001/v1/ipfs/addFile',
+  ipfsNodeUrl: 'http://127.0.0.1:8080',
   recommendedSpaceIds: [
-    '1001',
+    '1',
+    '1354',
+    '1573',
+    '1599',
+    '1040',
+    '1624',
+    '1625',
+    '2425',
+    '1162',
+    '1141',
+    '1049',
+    '1163',
+    '1036',
+    '1042',
+    '1265',
+    '1224',
+    '1731',
+    '1998',
+    '2984',
+    '1442',
+    '1231',
+    '1273',
+    '1115',
+    '1112',
     '1002',
-    '1003',
-    '1004',
-    '1005',
-    '1006',
-    '1017',
-    '1018',
-    '1022',
-    '1023',
+    '1013',
+    '4306',
+    '4544',
   ],
-  loadImageLimitMb: 2,
+  maxFileSize: 2 * 1024 * 1024,
   enableSessionKey: true,
-  //isOffchainFeed
-  //offset
+  isOffchainFeed: false,
+  infinityScrollOffset: 20,
+  disableSendTips: false,
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

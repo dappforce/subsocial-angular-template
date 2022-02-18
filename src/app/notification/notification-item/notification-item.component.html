@@ -12,17 +12,22 @@
 
       <app-column [margin]="'0 0 0 8px'" h="space-between">
 
-        <div class="description" *transloco="let t; read: 'notifications'">
+        <div class="description">
 
           <a [routerLink]="notification.profileLink">
             {{notification.profileName || (notification.profileId | addressHidden)}}
           </a>
 
           <span *ngIf="notification.aggregate">
-            {{t('aggregate', {count: notification.aggregate.toString()}) }}
+            {{'notifications.aggregate' | i18nextEager:
+              {
+                count: notification.aggregate,
+                message: 'plural.aggregate' | i18nextEager : {count: notification.aggregate}
+              }
+            }}
           </span>
 
-          <span>{{t(notification.event)}}</span>
+          <span>{{'notifications.' + notification.event  | i18nextEager }}</span>
 
           <div class="ellipsis">
             <a [routerLink]="notification.contentLink">

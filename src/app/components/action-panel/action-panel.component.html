@@ -1,0 +1,37 @@
+<div [ngClass]="position">
+  <app-upvote-button [isActive]="!!isUpvoteActive"
+                     [isShowLabel]="isShowLabel"
+                     [count]="upvoteCount"
+                     [fontSize]="fontSize"
+                     (voteClick)="onVoteClick(KIND.UPVOTE)"
+                     [bold]="bold"
+  ></app-upvote-button>
+
+  <app-downvote-button [isActive]="!!isDownvoteActive"
+                       [count]="downvoteCount"
+                       [isShowLabel]="isShowLabel"
+                       [fontSize]="fontSize"
+                       (voteClick)="onVoteClick(KIND.DOWNVOTE)"
+                       [bold]="bold"
+  ></app-downvote-button>
+
+  <app-comment-button *ngIf="isShowComment"
+                      [count]="commentCount"
+                      (onClick)="commentClick.emit()"
+                      [fontSize]="fontSize"
+  ></app-comment-button>
+
+  <app-shared-button *ngIf="isShowShare"
+                     [fontSize]="fontSize"
+                     [isShowLabel]="isShowLabel"
+                     (click)="shareClick.emit()"
+                     [count]="sharesCount"
+  ></app-shared-button>
+
+  <app-reply-button *ngIf="isShowReply"
+                    [fontSize]="fontSize"
+                    (click)="replyClick.emit()"
+                    [isShowLabel]="isShowLabel"
+                    [bold]="bold"
+  ></app-reply-button>
+</div>

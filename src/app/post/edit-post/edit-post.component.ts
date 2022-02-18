@@ -16,9 +16,10 @@ import { PostContent } from '@subsocial/types';
 import { PostService } from '../services/post.service';
 import { Post } from '../../core/models/post/post-list-item.model';
 import { Location } from '@angular/common';
-import { PostFacade } from '../../state/post/post.facade';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { PostFacade } from '../../store/post/post.facade';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
 import { StorageService } from '../../shared/services/storage.service';
+import { lastValueFrom } from 'rxjs';
 
 type PostFormErrors = {
   body: string;
@@ -106,11 +107,11 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
   }
 
   async onSuccess(result: SubmittableResult) {
-    let newPost: Post | null = null;
+    let newPost: Post | undefined = undefined;
     if (this.type === 'edit') {
       newPost = await this.postFacade.fetchPost(this.postId).toPromise();
     } else {
-      const ids = this.getNewIdsFromEvent(result);
+      const ids = this.getNewIdsFromResult(result);
       if (ids?.length > 0) {
         this.postId = ids[0];
         newPost = await this.postFacade.fetchPost(this.postId).toPromise();
@@ -197,7 +198,7 @@ export class EditPostComponent extends BaseTxComponent implements OnInit {
       tags,
       link,
       imageUrl: image,
-    } = await this.postFacade.fetchPost(postId).toPromise();
+    } = await lastValueFrom(this.postFacade.fetchPost(postId));
 
     this.postForm.patchValue({
       title,

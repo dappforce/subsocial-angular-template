@@ -14,7 +14,7 @@ export class CommentService {
 
   public async getPostReplyId(postId: string): Promise<ReplyIds> {
     const ids = await this.api.api.subsocial.substrate.getReplyIdsByPostId(
-      this.convert.convertToBN(postId)
+      this.convert.idToBn(postId)
     );
 
     return { id: postId, replyIds: ids.map((id) => id.toString()) };

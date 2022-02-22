@@ -1,6 +1,5 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -16,4 +15,6 @@ export class VoteButtonComponent {
   @Input() isActive: boolean = false;
   @Input() count: number = 0;
   @Output() voteClick = new EventEmitter();
+  @Input() fontSize = 14;
+  @Input() bold: boolean;
 }

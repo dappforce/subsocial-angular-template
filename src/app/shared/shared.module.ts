@@ -24,19 +24,19 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { VoteUserListComponent } from './components/vote-user-list/vote-user-list.component';
-import { ContainersModule } from '../ui-lib/containers/containers.module';
-import { ButtonsModule } from '../ui-lib/buttons/buttons.module';
-import { MenuModule } from '../ui-lib/menu/menu.module';
-import { AddressModule } from '../ui-lib/address/address.module';
-import { ProfileModule } from '../ui-lib/profile/profile.module';
-import { AvatarModule } from '../ui-lib/avatar/avatar.module';
-import { BalanceModule } from '../ui-lib/balance/balance.module';
-import { TextModule } from '../ui-lib/text/text.module';
+import { ContainersModule } from '../components/containers/containers.module';
+import { ButtonsModule } from '../components/buttons/buttons.module';
+import { MenuModule } from '../components/menu/menu.module';
+import { AddressModule } from '../components/address/address.module';
+import { ProfileModule } from '../components/profile/profile.module';
+import { AvatarModule } from '../components/avatar/avatar.module';
+import { BalanceModule } from '../components/balance/balance.module';
+import { TextModule } from '../components/text/text.module';
 import { PipesModule } from './pipes/pipes.module';
 import { SimpleSnackBarComponent } from './components/simple-snack-bar/simple-snack-bar.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AdblockDetectComponent } from './components/adblock-detect/adblock-detect.component';
-import { TranslocoModule } from '@ngneat/transloco';
+import { I18NextModule } from 'angular-i18next';
 import { DirectivesModule } from './directives/directives.module';
 import { HeaderMenuButtonComponent } from './components/header-menu-button/header-menu-button.component';
 
@@ -100,7 +100,7 @@ import { HeaderMenuButtonComponent } from './components/header-menu-button/heade
     PipesModule,
     ButtonsModule,
     HttpClientModule,
-    TranslocoModule,
+    I18NextModule,
     DirectivesModule,
   ],
 })

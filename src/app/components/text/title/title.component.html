@@ -1,0 +1,13 @@
+<ng-container *ngIf="!!link">
+  <a [routerLink]="link">
+    <span
+      [ngClass]="classObj"
+    >{{text}}</span>
+  </a>
+</ng-container>
+
+<ng-container *ngIf="!link">
+    <span
+      [ngClass]="classObj"
+    >{{text}}</span>
+</ng-container>

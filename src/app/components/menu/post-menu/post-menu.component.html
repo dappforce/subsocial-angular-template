@@ -1,0 +1,37 @@
+
+<app-icon-button [iconSize]="16"
+                 [matMenuTriggerFor]="menu"
+                 [iconName]="'option-icon'"
+></app-icon-button>
+
+<mat-menu #menu="matMenu">
+
+  <app-menu-item *ngIf="isOwner$ | async"
+                 [routerLink]="['/posts', post.id, 'edit']"
+                 [title]="'buttons.editPost' | i18nextEager"
+                 [iconName]="'edit-icon'"
+                 [iconSize]="18"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.makeVisible' | i18nextEager"
+                 [iconName]="'visible-icon'"
+                 (click)="show()"
+                 *ngIf="(isHidden$ | async) && (isOwner$ | async)"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.hidePost' | i18nextEager"
+                 [iconName]="'hide-icon'"
+                 (click)="hide()"
+                 *ngIf="!(isHidden$ | async) && (isOwner$ | async)"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.viewReactions' | i18nextEager"
+                 [iconName]="'view-reaction-icon'"
+                 (click)="onClickViewReaction.emit()"
+  ></app-menu-item>
+
+  <app-menu-item [title]="'buttons.viewOnIPFS' | i18nextEager"
+                 [iconName]="'ipfs-icon'"
+  ></app-menu-item>
+
+</mat-menu>

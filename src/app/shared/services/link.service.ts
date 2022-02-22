@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { getPostIdFromSlug } from '@subsocial/utils';
 import slug from 'slugify';
 
 @Injectable({
@@ -12,6 +13,6 @@ export class LinkService {
   }
 
   getPostIdFromLink(link: string | null) {
-    return link ? link.trim().split('-').pop()! : '';
+    return link ? getPostIdFromSlug(link)! : '';
   }
 }

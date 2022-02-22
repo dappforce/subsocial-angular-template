@@ -54,7 +54,7 @@ $subsocial-ng-app-theme: mat-light-theme((
 
 @mixin custom-tabs-theme() {
   .mat-tab-link  {
-    font-size: 16px;
+    font-size: $font_normal;
     color: $text_color_dark_gray;
     width: 100%;
     letter-spacing: 1.25px;
@@ -105,6 +105,12 @@ $subsocial-ng-app-theme: mat-light-theme((
   .mat-input-element::-webkit-input-placeholder {
     color: $text_color_dark_gray;
   }
+
+  .mat-button-disabled {
+    background: $inactive_btn_bg !important;
+    color: $inactive_btn_text !important;
+    border: 1px solid $inactive_btn_bg !important;
+  }
 }
 
 @mixin custom-input-theme() {
@@ -131,6 +137,14 @@ $subsocial-ng-app-theme: mat-light-theme((
   }
 }
 
+.mat-drawer-backdrop {
+  position: fixed !important;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+  background-color: rgb(0 0 0 / 0%);
+}
+
 @include custom-tabs-theme();
 @include custom-buttons-theme();
 @include custom-input-theme();
@@ -138,6 +152,7 @@ $subsocial-ng-app-theme: mat-light-theme((
 html, body { height: 100%;}
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $color-bg;
   color: $color_normal;
@@ -263,6 +278,10 @@ p {
   @include font($font_normal, 500)
 }
 
+.break-all {
+  word-break: break-all;
+}
+
 .container {
   width: $container-width;
   margin: 72px auto;
@@ -276,6 +295,18 @@ p {
   border-radius: 4px;
   padding: $space_normal;
 }
+
+.sb-modal-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: -1;
+  background-color: rgb(0 0 0 / 60%);
+}
+
 
 .mat-dialog-container {
   padding: 0 !important;
@@ -382,7 +413,7 @@ markdown {
 
 .action-panel-label {
   color: $text_color_dark_gray;
-  @include font($font_normal, 400, 24px);
+  @include font($font_small, 400, 24px);
   margin-left: $space_mini;
   letter-spacing: 0.1px;
   text-transform: capitalize;
@@ -427,7 +458,11 @@ markdown {
   overflow-y: scroll;
 }
 
-@media only screen and (max-width: 768px) {
+.hidden-scroll {
+  overflow-y: hidden;
+}
+
+@media only screen and (max-width: 825px) {
   /* For mobile phones: */
   .container {
     width: 100%;
@@ -454,6 +489,10 @@ markdown {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+  }
+
+  .mat-drawer-backdrop.mat-drawer-shown {
+    background-color: rgb(0 0 0 / 60%);
   }
 }
 

@@ -2,14 +2,14 @@ import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
-  Inject,
 } from '@angular/core';
 import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { skipWhile, take } from 'rxjs/operators';
 import { SubmittableResult } from '@polkadot/api';
 import { CommonContent, IpfsCid } from '@subsocial/types';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
+import { getNewIdsFromEvent } from '@subsocial/api';
 
 export type ExtrinsicProps = {
   pallet: string;
@@ -94,6 +94,7 @@ export abstract class BaseTxComponent {
 
       if (balance === 0) {
         this.signIn.openGetTokensModal();
+        return this.setIsSending(false);
         return;
       }
 
@@ -192,22 +193,8 @@ export abstract class BaseTxComponent {
     this.isFreeTx = value;
   }
 
-  getNewIdsFromEvent(result: SubmittableResult) {
-    const newIds: string[] = [];
-
-    result.events.find((event) => {
-      const {
-        event: { data, method },
-      } = event;
-      if (method.indexOf('Created') >= 0) {
-        const [, /* owner */ ...ids] = data.toArray();
-        newIds.push(...(ids.map((id) => id.toString()) as string[]));
-        return true;
-      }
-      return false;
-    });
-
-    return newIds;
+  getNewIdsFromResult(result: SubmittableResult) {
+    return getNewIdsFromEvent(result).map((id) => id.toString());
   }
 
   async clear() {

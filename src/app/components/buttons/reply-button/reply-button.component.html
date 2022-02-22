@@ -1,0 +1,11 @@
+<app-icon-button [buttonSize]="32"
+                 [iconSize]="22"
+                 [iconName]="'reply-icon'"
+                 (click)="onClick($event)"
+></app-icon-button>
+
+<span [ngClass]="['action-panel-label']"
+      [style.fontSize]="fontSize + 'px'"
+      [style.fontWeight]="bold ? 500 : 400"
+      *ngIf="isShowLabel"
+>{{ 'buttons.Reply' | i18nextEager }}</span>

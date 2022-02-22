@@ -15,10 +15,9 @@ import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { filter, map, switchMap, takeUntil, tap } from 'rxjs/operators';
-import { ProfileFacade } from '../../state/profile/profile.facade';
+import { ProfileFacade } from '../../store/profile/profile.facade';
 import { BehaviorSubject, combineLatest, Subject } from 'rxjs';
-import { TranslocoService } from '@ngneat/transloco';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
 
 type Type = 'edit' | 'new';
 
@@ -135,7 +134,7 @@ export class EditProfileComponent
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
+    this.unsubscribe$.next(null);
     this.unsubscribe$.complete();
   }
 }

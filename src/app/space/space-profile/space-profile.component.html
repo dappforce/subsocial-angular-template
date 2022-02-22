@@ -72,7 +72,9 @@
     </ng-container>
 
     <ng-template #notMySpace>
-      <app-send-tips-button width="full"></app-send-tips-button>
+      <app-send-tips-button [disabled]="true"
+                            width="full"
+      ></app-send-tips-button>
 
       <app-follow-button size="large"
                          width="full"

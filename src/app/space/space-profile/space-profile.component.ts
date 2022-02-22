@@ -6,10 +6,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { FollowerService } from '../../shared/services/follower.service';
-import { AccountService } from '../../shared/services/account.service';
-import { Router } from '@angular/router';
-import { map } from 'rxjs/operators';
-import { Space } from '../../state/space/space.state';
+import { Space } from '../../store/space/space.state';
 
 @Component({
   selector: 'app-space-profile',

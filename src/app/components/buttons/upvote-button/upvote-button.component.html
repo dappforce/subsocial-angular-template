@@ -1,0 +1,29 @@
+<app-icon-button [iconSize]="22"
+                 [buttonSize]="32"
+                 [iconName]="isActive ? 'upvote-active-icon' : 'upvote-default-icon'"
+                 (click)="this.voteClick.emit();"
+></app-icon-button>
+
+<span class="action-panel-label"
+      *ngIf="isShowLabel"
+      [style.fontSize]="fontSize + 'px'"
+      [style.fontWeight]="bold ? 500 : 400"
+>
+  {{ 'buttons.upvote' | i18nextEager }}
+  <span *ngIf="count > 0">
+    ({{count | numeral}})
+  </span>
+</span>
+
+<span
+  class="action-panel-label"
+  [ngClass]="{ 'active': isActive }"
+  [style.fontSize]="fontSize + 'px'"
+  [style.fontWeight]="bold ? 500 : 400"
+  *ngIf="!isShowLabel && count > 0"
+>
+  {{count | numeral}}
+</span>
+
+
+

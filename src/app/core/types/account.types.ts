@@ -1,4 +1,4 @@
-import { ProfileData } from '@subsocial/api/flat-subsocial/dto';
+import { ProfileData } from '@subsocial/types/dto';
 
 export type AccountRawData = {
   accounts: Array<PolkadotAccount>;
@@ -8,7 +8,9 @@ export type AccountRawData = {
 
 export type PolkadotAccount = {
   address: string;
-  name: string;
+  meta: {
+    name: string;
+  };
 };
 
 export type Balance = {

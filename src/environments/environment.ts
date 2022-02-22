@@ -1,20 +1,14 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
-
 export const environment = {
   baseUrl: 'http://localhost:4200',
   production: false,
-  ipfsUrl: 'https://app.subsocial.network/ipfs/ipfs/',
+  ipfsUrl: 'http://127.0.0.1:8080/read/ipfs/',
   domainUrl: 'http://localhost:4200/',
-  appName: 'Subsocial Angular',
-  substrateNodeUrl:  'wss://rpc.subsocial.network',
-  offchainUrl: 'https://app.subsocial.network/offchain',
-  offchainWs: `wss://app.subsocial.network/notif-ws`,
-  addFileUrl: `https://app.subsocial.network/offchain/v1/ipfs/addFile`,
-  ipfsNodeUrl: 'https://staging.subsocial.network/ipfs-1',
-  currency: 'SUB',
-  decimals: 11,
+  appName: 'ngSocial',
+  substrateNodeUrl: 'ws://localhost:9944',
+  offchainUrl: 'http://localhost:3001',
+  offchainWs: 'ws://localhost:3011',
+  addFileUrl: 'http://localhost:3001/v1/ipfs/addFile',
+  ipfsNodeUrl: 'http://127.0.0.1:8080',
   recommendedSpaceIds: [
     '1',
     '1354',
@@ -31,12 +25,10 @@ export const environment = {
     '1036',
     '1042',
     '1265',
-    '1238',
     '1224',
     '1731',
     '1998',
     '2984',
-    '1421',
     '1442',
     '1231',
     '1273',
@@ -47,15 +39,9 @@ export const environment = {
     '4306',
     '4544',
   ],
-  loadImageLimitMb: 2,
+  maxFileSize: 2 * 1024 * 1024,
   enableSessionKey: true,
+  isOffchainFeed: false,
+  infinityScrollOffset: 20,
+  disableSendTips: false,
 };
-
-/*
- * For easier debugging in development mode, you can import the following file
- * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
- *
- * This import should be commented out in production mode because it will have a negative impact
- * on performance if an error is thrown.
- */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.

@@ -1,3 +1,22 @@
+:root {
+  --primary-color: #eb2f96;
+  --seconadry-color: #222;
+  --dark-gray: #888888;
+  --outline-color: #DDDDDD;
+  --bg-color: #f2f2f2;
+  --white-color: #fff;
+  --text-red-color: #d42c19;
+  --text-disabled-color: #BCBCBC;
+  --green-color: #3BB356;
+  --red-color: #EA3323;
+  --yellow-color: #EFB041;
+  --light-yellow-color: #FFFAD5;
+  --warning-light-color: #f3e8ac;
+  --warning-color: #ED6C02;
+  --hover-color: #FCF1F6;
+}
+
+
 /*-------------Font Size-----------*/
 
 $font_tiny: .75rem;
@@ -11,41 +30,43 @@ $font_huge: 2rem;
 
 /*-------------Colors----------*/
 
-$color_primary: #EB2F96;
-$color_normal: #222222;
-$color_yellow-light: #FFFAD5;
+$color_primary: var(--primary-color);
+$color_normal: var(--seconadry-color);
+$color_yellow-light: var(--light-yellow-color);
 $content-hidden-bg: #fefbe8;
 $color_white: #fff;
-$color-bg: #F2F2F2;
-$color_red: #EA3323;
-$color_green: #3BB356;
+$color-bg:  var(--bg-color);
+$color_red: var(--red-color);
+$color_green: var(--green-color);
 
 //Gray:
-$icon_color_dark_gray: #888;
-$color_btn_outline: #ddd;
-$color_input_outline: #ddd;
-$color_scroll_thumb: #ddd;
+$icon_color_dark_gray: var(--dark-gray);
+$color_btn_outline: var(--outline-color);
+$color_input_outline: var(--outline-color);
+$color_scroll_thumb: var(--outline-color);
 
 //Colors background
-$comment_bg_gray: #F2F2F2;
-$icon_bg_gray: #F2F2F2;
-$tag_bg_gray: #F2F2F2;
+$comment_bg_gray: var(--bg-color);
+$icon_bg_gray: var(--bg-color);
+$tag_bg_gray: var(--bg-color);
+$inactive_btn_bg: var(--bg-color);
 
 //Colors text
-$text_color_dark_gray: #888888;
+$text_color_dark_gray: var(--dark-gray);
+$inactive_btn_text: var(--text-disabled-color);
 
 //Colors outline&border
-$button_outline_gray: #DDDDDD;
-$input_outline_gray: #DDDDDD;
-$line_outline_gray: #DDDDDD;
-$photo_outline_gray: #DDDDDD;
-$scroll_outline_gray: #DDDDDD;
+$button_outline_gray: var(--outline-color);
+$input_outline_gray: var(--outline-color);
+$line_outline_gray: var(--outline-color);
+$photo_outline_gray: var(--outline-color);
+$scroll_outline_gray: var(--outline-color);
 
 //Colors icon
-$icon_color_dark_gray: #888888;
+$icon_color_dark_gray: var(--dark-gray);
 
 //Hover
-$color_hover_primary: #FCF1F6;
+$color_hover_primary: var(--hover-color);
 
 //Borders
 $border-content-hidden: 1px solid #F1E8B3;

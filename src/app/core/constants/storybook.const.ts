@@ -5,7 +5,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-import { appReducers } from '../../state/state';
+import { appReducers } from '../../store/state';
 import { DeviceService } from '../../shared/services/device.service';
 
 export const BaseRef = { provide: APP_BASE_HREF, useValue: '/' };
@@ -55,7 +55,7 @@ export const ProfileTemplate = {
   followingSpacesCount: 9,
   about: 'Test',
   avatar: 'HhQWPkEpXLHFhMAQieAH1wtfVRNHWZ5snhfFeBe',
-  name: 'Subsosial User',
+  name: 'Subsocial User',
   summary: 'Test',
   isShowMore: false,
 };

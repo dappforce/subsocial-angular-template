@@ -1,6 +1,8 @@
 <section class="edit-profile-container" *ngIf="hasPermission$ | async; else noPermission">
   <mat-card>
-    <h2 class="title-medium">{{ titleKey | transloco }} {{ 'general.profile' | transloco}}</h2>
+    <h2 class="title-medium">
+      {{ (isNew ? 'forms.titles.newProfile' : 'forms.titles.editProfile') | i18nextEager }}
+    </h2>
 
     <form [formGroup]="editProfileForm" class="profile-form" action="">
 
@@ -10,26 +12,25 @@
 
       <app-text-input formControlName="name"
                       [isRequired]="true"
-                      [label]="'forms.placeholder.profileName' | transloco"
+                      [label]="'forms.placeholder.profileName' | i18nextEager"
       ></app-text-input>
 
       <app-mde-editor [isToolbarHidden]="false"
                       [height]="160"
                       [autoFocus]="true"
                       formControlName="about"
-                      [placeholder]="'forms.placeholder.about' | transloco"
+                      [placeholder]="'forms.placeholder.about' | i18nextEager"
       ></app-mde-editor>
 
       <div class="button-wp">
 
         <button (click)="resetForm()"
                 mat-stroked-button
-                *transloco="let t; read: 'buttons'"
-        >{{ isNew ? t('cancel') : t('resetForm')}}</button>
+        >{{ (isNew ? 'buttons.cancel' : 'buttons.resetForm') | i18nextEager}}</button>
 
-        <app-tx-button *transloco="let t; read: 'buttons'"
-                       [name]="isNew ?  t('createProfile') : t('save')"
+        <app-tx-button [name]="(isNew ?  'buttons.createProfile' : 'buttons.save') | i18nextEager"
                        (click)="onEditProfile()"
+                       [isSending]="isSending"
         ></app-tx-button>
 
       </div>

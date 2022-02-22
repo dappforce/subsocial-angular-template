@@ -3,8 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  Inject,
-  Input,
   Output,
 } from '@angular/core';
 import { BaseTxComponent } from './base-tx.component';
@@ -12,13 +10,8 @@ import { TransactionService } from '../../shared/services/transaction.service';
 import { AccountService } from '../../shared/services/account.service';
 import { SubmittableResult } from '@polkadot/api';
 import { METHODS, PALLETS } from '../constants/query.const';
-import { PostService } from '../../post/services/post.service';
-import { SpaceService } from '../../space/services/space.service';
-import { AppState } from '../../state/state';
-import { Store } from '@ngrx/store';
-import { loadPostById } from '../../state/post/post.actions';
 import { VisibilityService } from '../../shared/services/visibility.service';
-import { SignInModalService } from '../../ui-lib/modal-dialogs/services/sign-in-modal.service';
+import { SignInModalService } from '../../components/modal-dialogs/services/sign-in-modal.service';
 
 type VisibleOperationType = 'post' | 'space';
 

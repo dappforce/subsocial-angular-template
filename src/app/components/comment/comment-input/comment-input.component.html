@@ -1,0 +1,28 @@
+<div class="comment-input-wp">
+  <div class="avatar-wp">
+    <app-avatar [size]="AVATAR_SIZE.MINI" [src]="avatar$ | async"></app-avatar>
+  </div>
+
+  <div class="input-wp" >
+    <div class="text-area-wp">
+      <app-mde-editor [placeholder]="(isReply ? 'forms.placeholder.addReply' : 'forms.placeholder.addComment') | i18nextEager"
+                      (focus)="onFocus()"
+                      [formControl]="commentForm"
+                      [autoFocus]="autofocus"
+      ></app-mde-editor>
+    </div>
+    <ng-container *ngIf="autofocus || showSendButton">
+      <div class="send-btn-wp">
+        <app-tx-button   (click)="sendComments()"
+                         [isDisabled]="disabledButton"
+                         [isSending]="isSending"
+                         [name]="(type === 'edit' ? 'buttons.update' : 'buttons.send') | i18nextEager"
+        ></app-tx-button>
+
+        <button (click)="cancelComment()" class="secondary-button">
+          {{ 'buttons.cancel' | i18nextEager }}
+        </button>
+      </div>
+    </ng-container>
+  </div>
+</div>

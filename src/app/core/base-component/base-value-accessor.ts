@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
-import { KeyValuePair } from '../models/key-value-pair.model';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({

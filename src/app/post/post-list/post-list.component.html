@@ -13,10 +13,12 @@
         ></app-post-item>
       </ng-container>
       <ng-container *ngIf="postData.isSharedPost">
-        <app-shared-post-item [postItemData]="postData"></app-shared-post-item>
+        <app-shared-post-item [postItemData]="postData"
+                              [showHiddenContent]="showHiddenContent"
+        ></app-shared-post-item>
       </ng-container>
     </div>
 
-    <app-spinner [showSpinner]="isLoading" [text]="'content.morePost' | transloco"></app-spinner>
+    <app-spinner [showSpinner]="isLoading" [text]="'content.morePost' | i18nextEager"></app-spinner>
   </div>
 </ng-container>

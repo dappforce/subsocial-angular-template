@@ -10,17 +10,18 @@ import { DeviceService } from './shared/services/device.service';
 import { isPlatformBrowser } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { SubsocialApiService } from './shared/services/subsocial-api.service';
-import { AppState } from './state/state';
+import { AppState } from './store/state';
 import { Store } from '@ngrx/store';
 import { SpaceService } from './space/services/space.service';
 import { AccountService } from './shared/services/account.service';
 import { filter, map, takeUntil, tap } from 'rxjs/operators';
-import { getFollowedSpaceIds } from './state/followed-space-ids/followed-space-ids.actions';
+import { getFollowedSpaceIds } from './store/followed-space-ids/followed-space-ids.actions';
 import { Subject } from 'rxjs';
-import { getFollowedAccountIds } from './state/followed-account-ids/followed-account-ids.actions';
-import { MyPostReactionFacade } from './state/my-post-reactions/my-post-reaction.facade';
-import { TranslocoService } from '@ngneat/transloco';
+import { getFollowedAccountIds } from './store/followed-account-ids/followed-account-ids.actions';
+import { MyPostReactionFacade } from './store/my-post-reactions/my-post-reaction.facade';
 import { StorageService } from './shared/services/storage.service';
+import { I18NEXT_SERVICE, ITranslationService } from 'angular-i18next';
+import { DateService } from './shared/services/date.service';
 
 @Component({
   selector: 'app-root',
@@ -34,14 +35,15 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private store: Store<AppState>,
+    private dateService: DateService,
     private api: SubsocialApiService,
     private spaceService: SpaceService,
-    private transloco: TranslocoService,
     private deviceService: DeviceService,
     private storageService: StorageService,
     private accountService: AccountService,
     private reactionFacade: MyPostReactionFacade,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(I18NEXT_SERVICE) private i18NextService: ITranslationService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -73,7 +75,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   setLanguage() {
     const savedLang = this.storageService.getLang();
-    savedLang && this.transloco.setActiveLang(savedLang);
+    savedLang && this.i18NextService.changeLanguage(savedLang);
+    this.i18NextService.events.languageChanged.subscribe((lang) => {
+      lang && this.dateService.updateLocale(lang);
+    });
   }
 
   ngOnDestroy(): void {

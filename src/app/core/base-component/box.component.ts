@@ -3,7 +3,6 @@ import {
   Component,
   HostBinding,
   Input,
-  OnInit,
 } from '@angular/core';
 
 type AlignType = 'start' | 'end' | 'center' | 'normal' | 'space-between';

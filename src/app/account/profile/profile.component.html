@@ -65,7 +65,7 @@
                                [isFollow]="isFollow$ | async"
                                size="large"
                                type="profile"
-                               width="full"
+                               width="full"s
             ></app-follow-button>
             </ng-template>
 
@@ -91,7 +91,7 @@
       </ng-container>
 
       <ng-template #noPost>
-        <app-no-content [text]="'content.noPosts' | transloco"></app-no-content>
+        <app-no-content [text]="'content.noPosts' | i18nextEager"></app-no-content>
       </ng-template>
     </ng-container>
 
@@ -101,7 +101,7 @@
       </ng-container>
 
       <ng-template #noSpaces>
-        <app-no-content [text]="'content.noSpaces' | transloco"></app-no-content>
+        <app-no-content [text]="'content.noSpaces' | i18nextEager"></app-no-content>
       </ng-template>
     </ng-container>
 

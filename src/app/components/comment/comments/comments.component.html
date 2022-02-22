@@ -1,0 +1,8 @@
+<app-title type="medium"
+           text="{{repliesCount}} {{'plural.comment' | i18nextEager: {count: repliesCount} }}"
+></app-title>
+
+<app-comment-list [rootPostId]="rootPost.id"
+                  [isFirstLevel]="true"
+                  [isShowInput]="true"
+></app-comment-list>

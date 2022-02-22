@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { SubsocialApiService } from './subsocial-api.service';
-import { FollowedSpaceIdsStruct } from '../../state/followed-space-ids/followed-space-ids.state';
-import { selectFollowedSpaceIdsByCurrentAccount } from '../../state/followed-space-ids/followed-space-ids.selectors';
+import { FollowedSpaceIdsStruct } from '../../store/followed-space-ids/followed-space-ids.state';
+import { selectFollowedSpaceIdsByCurrentAccount } from '../../store/followed-space-ids/followed-space-ids.selectors';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
-import { selectFollowedAccountIdsByCurrentAccount } from '../../state/followed-account-ids/followed-account-ids.selectors';
-import { FollowedAccountIdsStruct } from '../../state/followed-account-ids/followed-account-ids.state';
+import { AppState } from '../../store/state';
+import { selectFollowedAccountIdsByCurrentAccount } from '../../store/followed-account-ids/followed-account-ids.selectors';
+import { FollowedAccountIdsStruct } from '../../store/followed-account-ids/followed-account-ids.state';
 
 @Injectable({
   providedIn: 'root',

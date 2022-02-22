@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 require("dotenv").config();
 
+console.log(process.env.NODE_ENV);
+
 module.exports = {
   stories: ["../src/**/*.stories.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: ["@storybook/addon-links", "@storybook/addon-essentials"],
@@ -14,13 +16,8 @@ module.exports = {
       new webpack.ProvidePlugin({
         process: "process/browser.js",
       }),
-      new webpack.NormalModuleReplacementPlugin(
-        /src[\\\/]environments[\\\/]environment.ts/,
-        (process.env.NODE_ENV = "development"
-          ? "../environments-storybook/environment.ts"
-          : "../environments-storybook/environment.prod.ts")
-      ),
     ];
+
     return config;
   },
 };

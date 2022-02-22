@@ -1,11 +1,12 @@
 <section class="edit-space-container">
   <mat-card>
-    <h2 class="title-medium" *transloco="let t; read: 'general'">{{t(type)}} {{t('space')}}</h2>
+    <h2 class="title-medium">
+      {{ (type === 'edit' ? 'forms.titles.editSpace' : 'forms.titles.newSpace') | i18nextEager }}
+    </h2>
 
 
     <form [formGroup]="editSpaceForm"
           class="space-form" action=""
-          *transloco="let t; read: 'forms.placeholder'"
     >
 
       <app-image-loader formControlName="image"
@@ -14,7 +15,7 @@
 
       <app-text-input  formControlName="name"
                        [isRequired]="true"
-                       [label]="t('spaceName')"
+                       [label]="'forms.placeholder.spaceName' | i18nextEager"
                        [error]="errors.name"
       ></app-text-input>
 
@@ -22,21 +23,21 @@
                       formControlName="about"
                       [height]="160"
                       [autoFocus]="true"
-                      [placeholder]="t('description')"
+                      [placeholder]="'forms.placeholder.description' | i18nextEager"
       ></app-mde-editor>
 
-      <app-tag-input [placeholder]="t('tags')"
+      <app-tag-input [placeholder]="'forms.placeholder.tags' | i18nextEager"
                      formControlName="tags"
       ></app-tag-input>
 
-      <div class="button-wp" *transloco="let t; read: 'buttons'">
+      <div class="button-wp">
         <button (click)="resetForm()"
                 mat-stroked-button
         >
-          {{ type === 'edit' ? t('cancel') : t('resetForm') }}
+          {{ (type === 'edit' ? 'buttons.cancel' : 'buttons.resetForm')  | i18nextEager }}
         </button>
 
-        <app-tx-button [name]="type === 'edit' ? t('save') : t('createSpace')"
+        <app-tx-button [name]="(type === 'edit' ? 'buttons.save' : 'buttons.createSpace') | i18nextEager"
                        (click)="onEditSpace()"
                        [isSending]="isSending"
         ></app-tx-button>

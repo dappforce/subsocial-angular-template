@@ -1,0 +1,12 @@
+<app-icon-button [iconSize]="16"
+                 [matMenuTriggerFor]="menu"
+                 [iconName]="'option-icon'"
+></app-icon-button>
+
+<mat-menu #menu="matMenu">
+
+  <app-menu-item [title]="'buttons.viewOnIPFS' | i18nextEager"
+                 [iconName]="'ipfs-icon'"
+  ></app-menu-item>
+
+</mat-menu>

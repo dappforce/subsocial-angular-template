@@ -1,0 +1,16 @@
+<div *ngIf="(hidden$ | async) || (spaceHidden$ | async)" class="hidden-wp">
+  <div class="center-vertical">
+    <mat-icon  svgIcon="info-yellow-icon"></mat-icon>
+    <span *ngIf="!(spaceHidden$ | async)">
+      {{ hiddenMessageKey | i18nextEager }}
+    </span>
+    <span *ngIf="spaceHidden$ | async">
+      {{ "generalMessages.hiddenPostBySpace" | i18nextEager }}
+    </span>
+  </div>
+  <button (click)="show()"
+          *ngIf="!(spaceHidden$ | async)"
+          mat-ripple
+          class="make-visible-btn"
+  >{{'buttons.makeVisible' | i18nextEager}}</button>
+</div>

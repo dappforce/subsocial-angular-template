@@ -7,23 +7,14 @@ import {
   OnInit,
   PLATFORM_ID,
 } from '@angular/core';
-import { SpaceListItemData } from '../../core/models/space/space-list-item.model';
-
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
-
-import {
-  selectSpaceEntitiesByIds,
-  selectSpacesByIds,
-} from '../../state/space/space.selectors';
+import { AppState } from '../../store/state';
+import { selectSpacesByIds } from '../../store/space/space.selectors';
 import { isPlatformBrowser } from '@angular/common';
-import {
-  loadSpacesByIds,
-  loadSpaceSuccess,
-} from '../../state/space/space.actions';
+import { loadSpacesByIds } from '../../store/space/space.actions';
 import { BaseInfinityScrollComponent } from '../../core/base-component/base-infinity-scroll.component';
 import { Actions } from '@ngrx/effects';
-import { Space } from '../../state/space/space.state';
+import { Space } from '../../store/space/space.state';
 
 @Component({
   selector: 'app-space-list',

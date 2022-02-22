@@ -20,12 +20,12 @@ import {
 import { Post } from '../../core/models/post/post-list-item.model';
 import { EMPTY, from, Observable, Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/state';
+import { AppState } from '../../store/state';
 import { CommentItemData } from '../../core/types/comment-data.type';
 import { CommentService } from '../../shared/services/comment.service';
-import { Space } from '../../state/space/space.state';
-import { PostFacade } from '../../state/post/post.facade';
-import { SpaceFacade } from '../../state/space/space.facade';
+import { Space } from '../../store/space/space.state';
+import { PostFacade } from '../../store/post/post.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
 import { SSRLoadData } from 'src/app/core/decorators/ssr-load-data.decorator';
 import { isPlatformBrowser } from '@angular/common';
 import { of } from 'rxjs';
@@ -122,11 +122,11 @@ export class PostComponent implements OnInit, OnDestroy {
         .fetchPost(post.rootPostId)
         .toPromise();
       this.commentPostData = {
-        postTitle: parentPostData.title,
-        link: parentPostData.postLink,
+        postTitle: parentPostData!.title,
+        link: parentPostData!.postLink,
       };
       this.cd.markForCheck();
-      const copyPost = { ...post, spaceId: parentPostData.spaceId };
+      const copyPost = { ...post, spaceId: parentPostData!.spaceId };
       return copyPost;
     }
 

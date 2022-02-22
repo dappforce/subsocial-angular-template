@@ -1,9 +1,9 @@
 <app-icon-button [iconSize]="isOpen ? 16 : 19"
                  [buttonSize]="36"
                  [iconName]="isOpen ? 'close-icon' : 'menu-icon'"
-                 (click)="isOpen = !isOpen"
+                 (click)="switchMenu(!isOpen)"
                  class="menu-icon"
 >
 </app-icon-button>
 
-<app-left-side-menu (backdropClick)="isOpen = false" *ngIf="isOpen" [type]="'switch'"></app-left-side-menu>
+<app-left-side-menu (backdropClick)="switchMenu(false)" [type]="'switch'"></app-left-side-menu>

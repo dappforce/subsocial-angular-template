@@ -8,23 +8,24 @@ import {
 import { NotificationService } from '../services/notification.service';
 import { AccountService } from '../../shared/services/account.service';
 import {
+  concatMap,
   filter,
   map,
-  mergeMap,
   switchMap,
   takeUntil,
   tap,
 } from 'rxjs/operators';
 import { Activity } from '@subsocial/types';
-import { AppState } from '../../state/state';
+import { AppState } from '../../store/state';
 import { Store } from '@ngrx/store';
-import { PostFacade } from '../../state/post/post.facade';
-import { ProfileFacade } from '../../state/profile/profile.facade';
-import { SpaceFacade } from '../../state/space/space.facade';
+import { PostFacade } from '../../store/post/post.facade';
+import { ProfileFacade } from '../../store/profile/profile.facade';
+import { SpaceFacade } from '../../store/space/space.facade';
 import { ScrollProps } from '../../core/classes/scroll-props.class';
-import { BehaviorSubject, forkJoin, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, forkJoin, Subject } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 import { environment } from '../../../environments/environment';
+import { extractEntityIdsFromActivities } from '@subsocial/api/offchain';
 
 export type NotificationItem = {
   id: string;
@@ -65,7 +66,7 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
 
   wsSubject: WebSocketSubject<unknown>;
   notifications: NotificationItem[] = [];
-  public scrollProps = new ScrollProps(20);
+  public scrollProps = new ScrollProps(environment.infinityScrollOffset);
   private scrollDownEventSource = new BehaviorSubject<ScrollProps>(
     this.scrollProps
   );
@@ -74,44 +75,39 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
   loading: boolean;
   isBlockInfinityScroll = false;
   isFirstNotifications: boolean;
+  prevAccountId: string | undefined;
+  noNotification$ = new Subject();
 
   private unsubscribe$: Subject<void> = new Subject();
 
   ngOnInit(): void {
-    this.notificationService.getNotificationCount().subscribe((count) => {
-      this.scrollProps.max = count;
-    });
-
     this.initWebsocketConnection();
 
-    this.scrollProps.max = Number.MAX_SAFE_INTEGER;
-    this.scrollDownEvent$
+    combineLatest([this.scrollDownEvent$, this.accountService.currentAccount$])
       .pipe(
-        mergeMap((props) =>
-          this.accountService.currentAccount$.pipe(
-            filter((account) => !!account),
-            map((account) => {
-              return { id: account!.id, props };
-            }),
-            tap((account) => this.wsSubject.next(account.id))
+        filter(([, account]) => !!account),
+        tap((_) => (this.isBlockInfinityScroll = true)),
+        concatMap(([props, account]) =>
+          this.notificationService.getNotificationCount(account!.id).pipe(
+            map((count) => {
+              this.scrollProps.max = count!;
+              this.checkIfAccountChange(account!.id);
+              return { id: account!.id, props, count };
+            })
           )
         ),
-        filter(({ id, props }) => !props.isFinish),
-        tap((_) => this.setLoading(true)),
-        tap(
-          ({ id, props }) =>
-            (this.isFirstNotifications = props.startIndex === 0)
-        ),
+        filter((_) => !this.scrollProps.isFinish),
+        tap(({ count }) => {
+          count > 0 ? this.setLoading(true) : this.noNotification$.next(true);
+        }),
         switchMap(({ id, props }) => {
-          this.isBlockInfinityScroll = true;
           return this.notificationService.loadNotificationActivity(
             id,
-            props.startIndex,
+            this.scrollProps.startIndex,
             this.scrollProps.limit
           );
         }),
         tap((activities) => this.loadActivitiesEntityData(activities)),
-        // tap((activities) => this.clearNotificationsCount(activities)),
         switchMap((activities) =>
           forkJoin(activities.map((activity) => this.getNotification(activity)))
         ),
@@ -158,20 +154,8 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
   }
 
   loadActivitiesEntityData(activities: Activity[]) {
-    const spaceIdsSet = new Set<string>();
-    const postIdsSet = new Set<string>();
-    const profileIdsSet = new Set<string>();
-
-    activities.forEach((activity) => {
-      activity.space_id && spaceIdsSet.add(activity.space_id);
-      activity.post_id && postIdsSet.add(activity.post_id);
-      activity.comment_id && postIdsSet.add(activity.comment_id);
-      activity.account && profileIdsSet.add(activity.account);
-    });
-
-    const spaceIds = Array.from(spaceIdsSet);
-    const postIds = Array.from(postIdsSet);
-    const profileIds = Array.from(profileIdsSet);
+    const { postIds, spaceIds, profileIds } =
+      extractEntityIdsFromActivities(activities);
 
     this.postFacade.loadPosts(postIds, 'all');
     this.spaceFacade.loadSpaces(spaceIds);
@@ -278,6 +262,16 @@ export class NotificationPageComponent implements OnInit, OnDestroy {
 
   trackById(index: number, item: NotificationItem) {
     return item.id;
+  }
+
+  private checkIfAccountChange(id: string | undefined) {
+    if (id && this.prevAccountId !== id) {
+      this.scrollProps.setDefault();
+      this.noNotification$.next(false);
+      this.notifications = [];
+      this.cd.markForCheck();
+    }
+    this.prevAccountId = id;
   }
 
   ngOnDestroy(): void {

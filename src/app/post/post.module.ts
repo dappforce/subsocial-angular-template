@@ -9,18 +9,18 @@ import { PostComponent } from './post/post.component';
 import { MarkdownModule } from 'ngx-markdown';
 import { EditPostComponent } from './edit-post/edit-post.component';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { TextModule } from '../ui-lib/text/text.module';
-import { ButtonsModule } from '../ui-lib/buttons/buttons.module';
-import { InputModule } from '../ui-lib/input/input.module';
-import { SpaceUiModule } from '../ui-lib/space-ui/space-ui.module';
+import { TextModule } from '../components/text/text.module';
+import { ButtonsModule } from '../components/buttons/buttons.module';
+import { InputModule } from '../components/input/input.module';
+import { SpaceUiModule } from '../components/space-ui/space-ui.module';
 import { PipesModule } from '../shared/pipes/pipes.module';
-import { PostUiModule } from '../ui-lib/post-ui/post-ui.module';
-import { ContentModule } from '../ui-lib/content/content.module';
-import { CommentModule } from '../ui-lib/comment/comment.module';
-import { ActionPanelModule } from '../ui-lib/action-panel/action-panel.module';
-import { ContainersModule } from '../ui-lib/containers/containers.module';
-import { MenuModule } from '../ui-lib/menu/menu.module';
-import { TranslocoModule } from '@ngneat/transloco';
+import { PostUiModule } from '../components/post-ui/post-ui.module';
+import { ContentModule } from '../components/content/content.module';
+import { CommentModule } from '../components/comment/comment.module';
+import { ActionPanelModule } from '../components/action-panel/action-panel.module';
+import { ContainersModule } from '../components/containers/containers.module';
+import { MenuModule } from '../components/menu/menu.module';
+import { I18NextModule } from 'angular-i18next';
 
 @NgModule({
   declarations: [PostListComponent, PostComponent, EditPostComponent],
@@ -43,7 +43,7 @@ import { TranslocoModule } from '@ngneat/transloco';
     ActionPanelModule,
     ContainersModule,
     MenuModule,
-    TranslocoModule,
+    I18NextModule,
   ],
 })
 export class PostModule {}

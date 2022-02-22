@@ -1,8 +1,8 @@
-<nav mat-tab-nav-bar animationDuration="0ms" *transloco="let t; read: 'tabs'">
+<nav mat-tab-nav-bar animationDuration="0ms">
   <a mat-tab-link *ngFor="let link of tabLinks"
      [active]="link.tabName === activeLink?.tabName"
      (click)="onTabClick(link)">
-    {{t(link.tabName)}} <span class="add-info">{{link.additionalInfo}}</span>
+    {{'tabs.' + link.tabName | i18nextEager }} <span class="add-info">{{link.additionalInfo}}</span>
   </a>
 </nav>
 

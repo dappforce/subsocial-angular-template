@@ -10,7 +10,7 @@ import {
 } from '@angular/core';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { AdblockConflictModalDialogComponent } from '../../../ui-lib/modal-dialogs/adblock-conflict-modal-dialog/adblock-conflict-modal-dialog.component';
+import { AdblockConflictModalDialogComponent } from '../../../components/modal-dialogs/adblock-conflict-modal-dialog/adblock-conflict-modal-dialog.component';
 
 @Component({
   selector: 'app-adblock-detect',

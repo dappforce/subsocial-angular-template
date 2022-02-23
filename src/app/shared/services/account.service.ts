@@ -142,13 +142,18 @@ export class AccountService {
     }
 
     await this.subscribeOnBalance(account.id);
-    this.store.dispatch(loadMyProfile({ id: account.id }));
+    this.store.dispatch(loadMyProfile({ payload: account }));
     this.storage.setCurrentAccountId(account.id);
     this.currentAccountsSource.next(account);
   }
 
-  public getMyAccountData(address: string): MyAccountState {
-    return { address, nonce: 0, blocked: false };
+  public getMyAccountData(account: AccountData): MyAccountState {
+    return {
+      address: account.id,
+      nonce: 0,
+      blocked: false,
+      name: account.name,
+    };
   }
 
   public signOut() {
@@ -175,7 +180,6 @@ export class AccountService {
     let accounts: AccountData[] = [];
     if (status === ACCOUNT_STATUS.UNAUTHORIZED) {
       accounts = await firstValueFrom(this.getAccountsData());
-      console.log(accounts);
     }
 
     return { accounts, status };

@@ -9,6 +9,7 @@ export class IconButtonComponent implements OnInit {
   @Input() iconName: string;
   @Input() buttonSize: number = 28;
   @Input() iconSize: number = 16;
+  @Input() color: 'dark' | 'gray' = 'dark';
 
   constructor() {}
 

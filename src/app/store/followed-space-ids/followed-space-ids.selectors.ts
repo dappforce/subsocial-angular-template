@@ -3,7 +3,7 @@ import {
   followedSpaceIdsAdapter,
   FollowedSpaceIdsState,
 } from './followed-space-ids.state';
-import { selectMyAccountAddress } from '../my-account/my-account.selectors';
+import { selectMyAccountData } from '../my-account/my-account.selectors';
 
 const { selectIds, selectEntities, selectAll, selectTotal } =
   followedSpaceIdsAdapter.getSelectors();
@@ -18,8 +18,8 @@ export const selectFollowedSpaceIdsEntities = createSelector(
 
 export const selectFollowedSpaceIdsByCurrentAccount = createSelector(
   selectFollowedSpaceIdsEntities,
-  selectMyAccountAddress,
-  (entities, address) => {
-    return entities ? entities[address]?.followingSpaceIds || [] : [];
+  selectMyAccountData,
+  (entities, account) => {
+    return entities ? entities[account.address]?.followingSpaceIds || [] : [];
   }
 );

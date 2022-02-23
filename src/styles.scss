@@ -102,6 +102,10 @@ $subsocial-ng-app-theme: mat-light-theme((
     padding-bottom: 0;
   }
 
+  .mat-button-focus-overlay {
+    background-color: transparent!important;
+  }
+
   .mat-input-element::-webkit-input-placeholder {
     color: $text_color_dark_gray;
   }
@@ -141,6 +145,10 @@ $subsocial-ng-app-theme: mat-light-theme((
   position: fixed !important;
 }
 
+.mat-drawer:not(.mat-drawer-side) {
+  box-shadow: $menu_shadow;
+}
+
 .mat-drawer-backdrop.mat-drawer-shown {
   background-color: rgb(0 0 0 / 0%);
 }
@@ -149,7 +157,8 @@ $subsocial-ng-app-theme: mat-light-theme((
 @include custom-buttons-theme();
 @include custom-input-theme();
 
-html, body { height: 100%;}
+html, body {
+}
 body {
   margin: 0;
   padding: 0;
@@ -459,7 +468,9 @@ markdown {
 }
 
 .hidden-scroll {
-  overflow-y: hidden;
+  overflow: hidden !important;
+  height: calc(var(--window-inner-height));
+  box-sizing: border-box;
 }
 
 @media only screen and (max-width: 825px) {

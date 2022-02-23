@@ -2,7 +2,7 @@
 @import "mixins";
 
 .name {
-  @include font($font_normal, 500);
+  @include font($font_normal, 500, 0);
   display: block;
   padding-bottom: $space_mini;
 }

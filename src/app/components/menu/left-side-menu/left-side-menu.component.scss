@@ -6,11 +6,11 @@ aside{
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
-  z-index: 1;
-  height: calc(100vh - #{$header_height});
+  z-index: 10;
+  bottom: 0;
   background: $color_white;
   top: $header_height;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: $menu_shadow;
   overflow: hidden;
 
   .links {
@@ -128,8 +128,9 @@ aside{
   top: $header_height;
   left: 0;
   right: 0;
-  height: calc(100vh - #{$header_height});
+  bottom: 0;
   background-color: rgba(0, 0, 0, 0.6);
+  z-index: 2;
 }
 
 .border-top {

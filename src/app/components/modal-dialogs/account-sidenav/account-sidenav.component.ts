@@ -59,15 +59,6 @@ export class AccountSidenavComponent
       isShow ? this.sideNav.open() : this.sideNav.close();
       this.cd.markForCheck();
     });
-    //
-    // this.sideNav.openedChange.subscribe((isOpen) => {
-    //   if (isOpen) {
-    //     this.document.body.classList.add('fixed');
-    //   } else {
-    //     this.document.body.classList.remove('fixed');
-    //   }
-    //   this.cd.markForCheck();
-    // });
   }
 
   signOut() {

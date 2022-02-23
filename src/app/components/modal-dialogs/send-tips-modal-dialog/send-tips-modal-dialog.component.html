@@ -10,15 +10,14 @@
 
   </app-row>
 
-  <app-row [h]="'space-between'"
-           [margin]="'14px 0 16px 0'"
+  <app-row [margin]="'14px 0 16px 0'"
   >
     <app-avatar [jdentityValue]="data.profile.id"
                 [src]="data.profile.avatar"
                 [size]="60"
     ></app-avatar>
 
-    <app-column h="space-between" [padding]="'0 8px'">
+    <app-column h="space-between" [padding]="'0 0 0 11px'">
 
       <span class="text-gray small">{{ 'modals.tips.recipient' | i18nextEager }}:</span>
 

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as MyPostReactionsActions from './my-post-reactions.actions';
-import { filter, map, switchMap } from 'rxjs/operators';
+import { concatMap, filter, map, switchMap } from 'rxjs/operators';
 import { from } from 'rxjs';
 import { ReactionsService } from '../../shared/services/reactions.service';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class MyPostReactionsEffects {
@@ -15,7 +16,7 @@ export class MyPostReactionsEffects {
   loadMyPostReactions$ = createEffect(() =>
     this.action$.pipe(
       ofType(MyPostReactionsActions.getGetMyPostReactionsByPostIds),
-      switchMap(({ ids }) =>
+      concatMap(({ ids }) =>
         from(this.reactionsService.getReactionsIdsByPostIds(ids)).pipe(
           filter(
             (reactions) => reactions !== undefined && reactions.length > 0

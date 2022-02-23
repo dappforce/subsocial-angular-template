@@ -27,7 +27,7 @@
                        [marginBottom]="10"
         ></app-paragraph>
 
-        <ng-container *ngIf="sharedPostItemData;">
+        <ng-container *ngIf="sharedPostItemData && !isSharedPostHidden">
           <app-post-item [isSharedPost]="true"
                          [postItemData]="sharedPostItemData">
           </app-post-item>

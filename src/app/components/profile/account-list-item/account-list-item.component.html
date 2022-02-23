@@ -4,7 +4,9 @@
            [v]="'center'" (click)="onClick.emit()"
            mat-ripple
            [style.height]="'65px'"
-  ><app-row>
+           [padding]="'0 16px'"
+  >
+    <app-row>
 
       <app-avatar [src]="accountData.avatar"
                   [jdentityValue]="accountData.id"

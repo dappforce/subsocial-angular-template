@@ -1,4 +1,8 @@
-<aside [@slideInOut]="menuStatus" #aside [ngClass]="{'shadow': type === 'hover', 'border-top': type === 'switch'}">
+<aside [@slideInOut]="menuStatus"
+       #aside
+       [ngClass]="{'shadow': type === 'hover', 'border-top': type === 'switch'}"
+       [style.height]="innerHeight + 'px'"
+>
   <app-column class="links">
     <ng-container *ngFor="let item of menuItems">
       <ng-container *ngIf="item.type === 'item'; else divider">
@@ -13,6 +17,7 @@
       </ng-template>
     </ng-container>
   </app-column>
+
   <section class="social-links" [ngClass]="{'social-links-close': menuStatus === 'desktop-out'}">
     <span class="title">Our social links:</span>
     <div>
@@ -28,4 +33,5 @@
 <div *ngIf="type === 'switch' && isMobileOpen"
      (click)="onBackdropClick()"
      class="backdrop border-top"
+     [style.height]="innerHeight + 'px'"
 ></div>

@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { LoadEntitiesProps } from '../types';
 import { Profile } from './profile.state';
+import { AccountData } from '../../core/types/account.types';
 
 export const upsertProfiles = createAction(
   '[Profile] Upsert Profiles',
@@ -14,7 +15,7 @@ export const upsertProfile = createAction(
 
 export const loadMyProfile = createAction(
   '[Profile] Load My Profile By Id',
-  props<{ id: string }>()
+  props<{ payload: AccountData }>()
 );
 
 export const loadProfileById = createAction(

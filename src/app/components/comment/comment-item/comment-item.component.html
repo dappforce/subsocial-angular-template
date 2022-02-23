@@ -21,17 +21,21 @@
                             [style.margin-top]="'8px'"
         ></app-hidden-content>
 
-        <app-row [v]="'center'">
+        <app-row [v]="'center'" [h]="'space-between'">
 
-          <app-title [text]="comment.ownerName || (comment.ownerId | addressHidden)"
-                     [link]="'/accounts/' + comment.ownerId"
-                     type="small"
-                     [isEllipsis]="true"
-          ></app-title>
+          <app-row>
 
-          <span class="dot">·</span>
+            <app-title [text]="comment.ownerName || (comment.ownerId | addressHidden)"
+                       [link]="'/accounts/' + comment.ownerId"
+                       type="small"
+                       [isEllipsis]="true"
+            ></app-title>
 
-          <span class="date" [routerLink]="comment.postLink">{{comment.createdAtTime | day}}</span>
+            <span class="dot">·</span>
+
+            <span class="date" [routerLink]="comment.postLink">{{comment.createdAtTime | day}}</span>
+
+          </app-row>
 
           <app-comment-menu (onClickViewReaction)="onOpenReactions()"
                             (switchHidden)="onSwitchHidden()"

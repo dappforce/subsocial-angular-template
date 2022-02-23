@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectMyAccountAddress } from '../my-account/my-account.selectors';
+import { selectMyAccountData } from '../my-account/my-account.selectors';
 import {
   followedAccountIdsAdapter,
   FollowedAccountIdsState,
@@ -18,8 +18,8 @@ export const selectFollowedSpaceIdsEntities = createSelector(
 
 export const selectFollowedAccountIdsByCurrentAccount = createSelector(
   selectFollowedSpaceIdsEntities,
-  selectMyAccountAddress,
-  (entities, address) => {
-    return entities ? entities[address]?.followingAccountIds || [] : [];
+  selectMyAccountData,
+  (entities, account) => {
+    return entities ? entities[account.address]?.followingAccountIds || [] : [];
   }
 );

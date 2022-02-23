@@ -1,5 +1,17 @@
+@import "var";
+
 button, mat-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.icon-gray {
+  ::ng-deep {
+    svg {
+      path {
+        fill: $text_color_dark_gray;
+      }
+    }
+  }
 }

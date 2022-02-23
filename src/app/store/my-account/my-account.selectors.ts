@@ -4,9 +4,7 @@ import { MyAccountState } from './my-account.state';
 export const selectMyAccount =
   createFeatureSelector<MyAccountState>('myAccount');
 
-export const selectMyAccountAddress = createSelector(
+export const selectMyAccountData = createSelector(
   selectMyAccount,
-  (myAccount) => {
-    return myAccount.address;
-  }
+  (myAccount) => myAccount
 );

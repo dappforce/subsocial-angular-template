@@ -34,7 +34,7 @@ function iterate(obj) {
       if (typeof obj[key] === "object") {
         iterate(obj[key]);
       } else {
-        const value = obj[key].replaceAll("{", "{{").replaceAll("}", "}}");
+        const value = obj[key].replace(/{/g, "{{").replace(/}/g, "}}");
         obj[key] = value;
       }
     }

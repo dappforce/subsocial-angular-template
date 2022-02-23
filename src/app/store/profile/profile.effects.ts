@@ -50,12 +50,12 @@ export class ProfileEffects {
   loadMyProfiles$ = createEffect(() =>
     this.action$.pipe(
       ofType(ProfileAction.loadMyProfile),
-      switchMap(({ id }) =>
-        from(this.profileService.fetchProfileById(id)).pipe(
+      switchMap(({ payload }) =>
+        from(this.profileService.fetchProfileById(payload.id)).pipe(
           filter((profile) => !!profile),
           switchMap((profile) => [
             MyAccountAction.setMyAccount({
-              payload: this.accountService.getMyAccountData(profile.id),
+              payload: this.accountService.getMyAccountData(payload),
             }),
             ProfileAction.upsertProfile({
               payload: profile,

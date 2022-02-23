@@ -5,6 +5,7 @@ import { METHODS, PALLETS } from '../../core/constants/query.const';
 import { skipWhile, take } from 'rxjs/operators';
 import { MyPostReactions } from '../../store/my-post-reactions/my-post-reactions.state';
 import BN from 'bn.js';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +17,12 @@ export class ReactionsService {
   ) {}
 
   async getReactionsIdsByPostIds(postIds: string[]) {
-    const account = await this.accountService.currentAccount$
-      .pipe(
+    const account = await firstValueFrom(
+      this.accountService.currentAccount$.pipe(
         skipWhile((account) => !account),
         take(1)
       )
-      .toPromise();
+    );
 
     if (!account) return;
 

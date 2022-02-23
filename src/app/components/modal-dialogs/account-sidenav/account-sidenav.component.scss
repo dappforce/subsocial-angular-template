@@ -29,6 +29,10 @@ app-scroll {
   }
 }
 
+app-scroll {
+  margin: 0 -16px;
+}
+
 @media only screen and (max-width: 768px) {
   app-profile-info {
     width: 260px;

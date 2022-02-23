@@ -1,6 +1,6 @@
 import { Profile, profileAdapter, ProfileState } from './profile.state';
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { selectMyAccountAddress } from '../my-account/my-account.selectors';
+import { selectMyAccountData } from '../my-account/my-account.selectors';
 import { UserInfo } from '../../core/models/user-info.model';
 import { selectFollowedAccountIdsByCurrentAccount } from '../followed-account-ids/followed-account-ids.selectors';
 import { dictionaryToArray } from '../../core/utils';
@@ -22,9 +22,14 @@ export const selectProfileEntities = createSelector(
 );
 
 export const selectMyAccountProfileData = createSelector(
-  selectMyAccountAddress,
+  selectMyAccountData,
   selectProfileEntities,
-  (address, profileEntities) => profileEntities[address]
+  (accountData, profileEntities) => {
+    const profile = profileEntities[accountData.address];
+    if (profile && !profile?.name)
+      return { ...profile, name: accountData.name } as Profile;
+    return profile;
+  }
 );
 
 export const selectProfileById = (id: string) =>

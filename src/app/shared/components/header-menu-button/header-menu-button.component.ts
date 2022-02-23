@@ -16,9 +16,9 @@ export class HeaderMenuButtonComponent implements OnInit {
 
   switchMenu(status: boolean) {
     if (status) {
-      this.document.body.classList.add('hidden-scroll');
+      this.document.documentElement.classList.add('hidden-scroll');
     } else {
-      this.document.body.classList.remove('hidden-scroll');
+      this.document.documentElement.classList.remove('hidden-scroll');
     }
     this.leftMenu.mobileSwitchState(status);
     this.isOpen = status;

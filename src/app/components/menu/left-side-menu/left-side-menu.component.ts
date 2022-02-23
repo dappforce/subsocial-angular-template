@@ -6,9 +6,6 @@ import {
   trigger,
 } from '@angular/animations';
 import {
-  AfterViewInit,
-  ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -66,9 +63,27 @@ export class LeftSideMenuComponent implements OnInit {
   @Output() backdropClick = new EventEmitter();
   @ViewChild('aside') aside: ElementRef;
 
+  innerHeight = window.innerHeight - 56;
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    document.documentElement.style.setProperty(
+      '--window-inner-height',
+      `${event.target.innerHeight}px`
+    );
+    this.innerHeight = event.target.innerHeight - 56;
+  }
+
+  @HostListener('pointermove', ['$event'])
+  pointerMove(event: any) {
+    if (this.isMobileOpen) {
+      event.preventDefault();
+    }
+  }
+
   menuStatus: string;
 
-  constructor(private renderer: Renderer2) {}
+  constructor() {}
 
   menuItems: MenuItem[] = [
     {

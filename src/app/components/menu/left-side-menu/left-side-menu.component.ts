@@ -13,7 +13,6 @@ import {
   Input,
   OnInit,
   Output,
-  Renderer2,
   ViewChild,
 } from '@angular/core';
 import { LINKS } from '../../../core/constants/links.const';
